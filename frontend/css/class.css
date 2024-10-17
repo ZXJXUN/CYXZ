@@ -1,0 +1,143 @@
+:root {
+    --main-color: #007bff;
+    --hover-color: #0056b3;
+    --disabled-color: #ddd;
+    --disabled-text-color: gray;
+    --button-padding: 10px 20px;
+}
+
+.class-selection-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 auto 20px;
+    max-width: 80%;
+}
+
+.class-selection-div .select-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.class-selection-div label {
+    margin-bottom: 5px;
+}
+
+.class-selection-div select {
+    padding: 10px;
+    border: 1px solid var(--disabled-color);
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0 30px;
+}
+
+.button-group button {
+    padding: var(--button-padding);
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: var(--hover-color);
+}
+
+.button-group button:disabled {
+    background-color: var(--disabled-color);
+    color: var(--disabled-text-color);
+    cursor: not-allowed;
+}
+
+.basic-info-div {
+    display: none;
+    float: right;
+    background-color: #ddd;
+}
+
+.class-analysis-table-note {
+    float: right;
+    font-size: 0.8em;
+}
+
+table,
+th,
+td {
+    border: 1px solid #add8e6;
+}
+
+thead tr {
+    background-color: #d4e2f0;
+    color: #000000;
+    font-size: 1.2em;
+}
+
+tbody tr {
+    height: 50px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e6f7ff;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.subject-selection-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.subject-selection-div button {
+    margin-left: 1em;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.subject-selection-div button:hover {
+    background-color: #0056b3;
+}
+
+.subject-selection-div button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.total-chart-container {
+    display: flex;
+}
+
+.first-chart-container {
+    display: flex;
+}
+
+.last-chart-container {
+    display: flex;
+}
+
+.chart-container {
+    flex: 1 1;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}

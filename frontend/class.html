@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-Hans-CN">
+
+<!--头部标签开始-->
+
+<head>
+    <meta charset="UTF-8"> <!--编码-->
+    <title>班级分析 - 学生成绩分析</title> <!--标题-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--移动端适配-->
+    <link rel="icon" href="favicon.svg"> <!--图标-->
+    <link rel="stylesheet" type="text/css" href="css/main.css"> <!--引入css文件-->
+    <link rel="stylesheet" type="text/css" href="css/class.css">
+    <!--脚本标签开始-->
+    <script src="js/jquery-3.7.1.min.js" type="text/javascript" charset="UTF-8"></script> <!--引入jquery文件-->
+    <script src="js/chart-4.4.0.min.js" type="text/javascript" charset="UTF-8"></script> <!--引入chart.js文件-->
+    <script src="js/filepond-4.30.4.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/download.min.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/main.js" type="text/javascript" charset="UTF-8"></script> <!--引入js文件-->
+    <script src="js/class.js" type="text/javascript" charset="UTF-8" defer></script>
+    <!--脚本标签结束-->
+</head>
+
+<!--头部标签结束-->
+
+<!--主体标签开始-->
+
+<body id="class">
+    <noscript>
+        <div
+            style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+            <div style="background-color: yellow; padding: 20px; border-radius: 10px;">
+                你的浏览器似乎禁用了 JavaScript。为了能够正常使用这个网站的所有功能，你需要启用 JavaScript。
+            </div>
+        </div>
+    </noscript>
+    <div id="navbar"></div>
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <div class="title">
+                    <h1>班级成绩分析</h1>
+                </div>
+            </div>
+            <div class="class-selection-div">
+                <div class="select-group">
+                    <label for="grade-selection">年级</label>
+                    <select id="grade-selection">
+                        <!-- options -->
+                    </select>
+                </div>
+                <div class="select-group">
+                    <label for="exam-selection">考试</label>
+                    <select id="exam-selection">
+                        <!-- options -->
+                    </select>
+                </div>
+                <div class="select-group">
+                    <label for="class-selection">班级</label>
+                    <select id="class-selection">
+                        <!-- options -->
+                    </select>
+                </div>
+            </div>
+            <div class="button-group">
+                <button id="class-submit">查询</button>
+            </div>
+            <div class="analysis-table-div"></div>
+            <table class="analysis-table" border="1" width=100% cellpadding="10" rules="all">
+                <caption><b>班级成绩<br></b>
+                    <!--红色通常与警告或者危险相关联，而绿色与安全或者正面的变化相关联-->
+                    <b class="class-analysis-table-note">注：绿色标注表示班级平均分高于年级平均分，红色表示低于年级平均分</b>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>科目</th>
+                        <th>年级平均分</th>
+                        <th>年级最高分</th>
+                        <th>班级平均分</th>
+                        <th>班级平均分排名</th>
+                        <th>班级最高分</th>
+                        <th>班级最高分姓名</th>
+                        <th>班级前十平均分</th>
+                        <th>班级前十平均分排名</th>
+                        <th>班级后十平均分</th>
+                        <th>班级后十平均分排名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="basic-info-div">
+                班级有效人数：<span id="valid-num"></span>
+            </div>
+            <div class="subject-selection-div"></div>
+            <div class="subject-chart-div"></div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</body>
+
+<!--主体标签结束-->
+
+</html>

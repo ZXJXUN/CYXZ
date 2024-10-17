@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-Hans-CN">
+
+<!--头部标签开始-->
+
+<head>
+    <meta charset="UTF-8"> <!--编码-->
+    <title>数据管理 - 学生成绩分析</title> <!--标题-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--移动端适配-->
+    <link rel="icon" href="favicon.svg"> <!--图标-->
+    <link rel="stylesheet" type="text/css" href="css/main.css"> <!--引入css文件-->
+    <link rel="stylesheet" type="text/css" href="css/data.css">
+    <link rel="stylesheet" type="text/css" href="css/filepond.css">
+    <!--脚本标签开始-->
+    <script src="js/jquery-3.7.1.min.js" type="text/javascript" charset="UTF-8"></script> <!--引入jquery文件-->
+    <script src="js/chart-4.4.0.min.js" type="text/javascript" charset="UTF-8"></script> <!--引入chart.js文件-->
+    <script src="js/filepond-plugin-file-validate-size.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/filepond-4.30.4.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/download.min.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/main.js" type="text/javascript" charset="UTF-8"></script> <!--引入js文件-->
+    <script src="js/data.js" type="text/javascript" charset="UTF-8" defer></script>
+    <!--脚本标签结束-->
+</head>
+
+<!--头部标签结束-->
+
+<!--主体标签开始-->
+
+<body id="data">
+    <noscript>
+        <div
+            style="display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+            <div style="background-color: yellow; padding: 20px; border-radius: 10px;">
+                你的浏览器似乎禁用了 JavaScript。为了能够正常使用这个网站的所有功能，你需要启用 JavaScript。
+            </div>
+        </div>
+    </noscript>
+    <div id="navbar"></div>
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <div class="title">
+                    <h1>数据管理</h1>
+                </div>
+            </div>
+            <div class="file-uploader-div">
+                <h3>考试数据上传</h3>
+                <div class="file-uploader-notes">支持文件格式：CSV；编码：UTF-8；文件命名：(序号)(学期)_(考试名称).csv（示例：46高三下_十.csv）</div>
+                <div class="file-uploader-counts-div">已上传文件数量：<span class="file-uploader-counts">0</span></div>
+                <input type="file" id="file-uploader" name="file-uploader" multiple>
+                <button id="load-data-btn" disabled>载入数据</button>
+                <div class="file-uploader-result" hidden>加载成功！</div>
+            </div>
+            <div class="data-download-div">
+                <h3>考试数据下载</h3>
+                <div class="styled-select-div">
+                    <label for="grade-selection">年级</label>
+                    <select id="grade-selection" class="styled-select">
+                        <option>Loading...</option>
+                    </select>
+                </div>
+                <div class="styled-select-div">
+                    <label for="exam-selection">考试</label>
+                    <select id="exam-selection" class="styled-select">
+                        <option>Loading...</option>
+                    </select>
+                </div>
+                <div class="download-button-div">
+                    <button id="download-submit" disabled>下载</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+</body>
+
+<!--主体标签结束-->
+
+</html>

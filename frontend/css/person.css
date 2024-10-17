@@ -1,0 +1,200 @@
+:root {
+    --button-padding: 10px 20px;
+    --button-border-radius: 5px;
+    --button-background-color: #007bff;
+    --button-color: white;
+    --button-cursor: pointer;
+}
+
+.student-selection-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.student-selection-div .select-group,
+.student-selection-div .button-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.student-selection-div label {
+    margin-bottom: 5px;
+}
+
+.student-selection-div select,
+.student-selection-div input,
+.button-group button {
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+    border: 1px solid #ddd;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.button-group button {
+    background-color: var(--button-background-color);
+    color: var(--button-color);
+    border: none;
+    cursor: var(--button-cursor);
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: #0056b3;
+}
+
+.button-group button:disabled {
+    background-color: #ddd;
+    color: gray;
+    cursor: not-allowed;
+}
+
+.student-score-table-note {
+    float: right;
+    font-size: 0.8em;
+}
+
+.chart-container {
+    position: relative;
+    box-sizing: border-box;
+    width: 45%;
+}
+
+.subject-group-div {
+    display: flex;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table,
+th,
+td {
+    border: 1px solid #add8e6;
+}
+
+thead tr {
+    background-color: #d4e2f0;
+    color: #000000;
+    font-size: 1.2em;
+}
+
+tbody tr {
+    height: 50px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e6f7ff;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#student-score-overview-container,
+#student-score-chart-container,
+#student-score-overview-chart-container {
+    display: none;
+    margin-top: 5em;
+    margin-bottom: 5em;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#overview-container-title,
+#chart-container-title {
+    color: #262729;
+    font-size: 1.25em;
+    font-weight: 700;
+    text-align: left;
+    letter-spacing: 0.0625em;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+#student-score-overview-analysis {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+#student-score-overview-analysis span {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.chart-note {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+#student-score-chart-select-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2em;
+}
+
+.subject-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.subject-button:hover {
+    color: #007bff;
+}
+
+.subject-button.selected {
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+}
+
+.subject-button:disabled {
+    opacity: 1;
+    color: #007bff;
+    cursor: not-allowed;
+}
+
+#student-score-overview-chart-div {
+    position: relative;
+    margin: auto;
+    height: 30%;
+    width: 30%;
+}
+
+#student-score-overview-analysis {
+    display: none;
+}
+
+#better-div {
+    display: none;
+}
+
+#worse-div {
+    display: none;
+}
