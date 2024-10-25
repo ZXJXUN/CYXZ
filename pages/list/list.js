@@ -5,7 +5,21 @@ var app = getApp()
 Page({
   data: {
     feed: [],
-    feed_length: 0
+    feed_length: 0,
+    choose: {
+      number:0,
+      list: [{
+          'name': '排序',
+          'item': ['浏览量', '点赞量', '发布时间', '最新回答时间'],
+          'number': 0
+        },
+        {
+          'name': '顺序',
+          'item': ['递增', '递减' ],
+          'number': 0
+        }
+      ]
+    }
   },
   //事件处理函数
   bindItemTap: function() {
@@ -106,6 +120,27 @@ Page({
         duration: 2000
       })
     },3000)
+  },
+  showDrop:function(event){
+    const index = event.currentTarget.dataset.chooseIndex;
+    let choose = this.data.choose;
+    if(choose.number==index){
+      choose.number=-1;
+    }else{
+      choose.number = index;
+    }
+    this.setData({
+      choose: choose
+    });
+  },
+  choose:function(event){
+    let choose=this.data.choose;
+    choose.list[event.currentTarget.dataset.chooseItem].number=event.currentTarget.dataset.chooseItemIndex;
+    console.log(event.currentTarget.dataset.chooseItemIndex)
+    choose.number=-1
+    this.setData({
+      choose:choose
+    })
   }
 
 

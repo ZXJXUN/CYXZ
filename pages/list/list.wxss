@@ -45,3 +45,18 @@
   color: #000;
 }
 /*feed-item part is in app.wxss for multiplexing*/
+
+
+
+.choose-container{
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.choose-drop{
+  border: #000 solid 2px;
+  background-color: #fff;
+  position: absolute;
+}
