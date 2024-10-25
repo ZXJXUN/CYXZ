@@ -193,3 +193,15 @@
 .my .my-item:last-child .myitem-name{
   border-bottom: none;
 }
+.register-button {
+  background-color: #007aff; 
+  color: #ffffff;
+  padding: 12rpx 24rpx; /* 内边距 */
+  border-radius: 6rpx; /* 圆角 */
+  text-align: center; /* 文本居中 */
+  font-size: 36rpx; /* 字体大小 */
+}
+
+.register-button:hover {
+  background-color: #005bb5; /* 悬停时背景颜色 */
+}
