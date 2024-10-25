@@ -6,7 +6,7 @@ Page({
   data: {
     motto: "知乎--微信小程序版",
     userInfo: {},
-    question_imf: "",
+    question_imf: "这是一条问题",
   },
   //事件处理函数
   toQuestion: function () {

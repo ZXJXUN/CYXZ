@@ -22,7 +22,7 @@
   </view>
 
   <view class="answer-content">
-    <text>{{ question_imf }}</text>
+   <text>{{ question_imf }}</text>
     <image src="../../images/1444983318907-_DSC1826.jpg"></image>
   </view>
 
