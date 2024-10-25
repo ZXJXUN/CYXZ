@@ -1,11 +1,12 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/list/list"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "源智答",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "style": "v2",

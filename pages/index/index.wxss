@@ -1,0 +1,57 @@
+/* 主容器样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 20px;
+  background-color: #f7f7f7; /* 淡灰色背景 */
+  font-size: 32rpx;
+}
+
+/* 选择项的外观 */
+.choose {
+  margin-bottom: 15px; /* 选择项之间的间距 */
+  border: 1px solid #ddd; /* 边框样式 */
+  border-radius: 8px; /* 圆角边框 */
+  background-color: #fff; /* 白色背景 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 选择项头部样式 */
+.choose-head {
+  padding: 10px; /* 内边距 */
+  cursor: pointer; /* 鼠标指针样式 */
+  font-weight: bold; /* 加粗字体 */
+  color: #333; /* 文字颜色 */
+  transition: background-color 0.3s; /* 背景色渐变效果 */
+}
+
+/* 鼠标悬停时的效果 */
+.choose-head:hover {
+  background-color: #f0f0f0; /* 悬停背景色 */
+}
+
+/* 下拉列表样式 */
+.choose-drop {
+  padding: 10px; /* 内边距 */
+  border-top: 1px solid #ddd; /* 分隔线 */
+}
+
+/* 下拉项样式 */
+.choose-drop text {
+  display: block; /* 每个项占一行 */
+  padding: 8px 5px; /* 内边距 */
+  color: #555; /* 下拉项文字颜色 */
+  transition: background-color 0.3s; /* 背景色渐变效果 */
+}
+
+/* 鼠标悬停下拉项的效果 */
+.choose-drop text:hover {
+  background-color: #e9e9e9; /* 悬停背景色 */
+}
+
+/* 选择项文本的样式 */
+.choose-head-text {
+  font-size: 16px; /* 字体大小 */
+  line-height: 1.5; /* 行高 */
+}

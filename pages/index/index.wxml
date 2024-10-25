@@ -6,7 +6,8 @@
       </view>
       <view class="choose-drop" wx:if="{{choose[chooseIndex].drop}}">
         <block wx:for="{{choose[chooseIndex].item}}" wx:for-item="chooseItemItem" wx:for-index="chooseItemIndex">
-          <text catch:tap="choose" data-choose-item="{{chooseIndex}}" data-choose-item-index="{{chooseItemIndex}}">{{chooseItemItem}}</text>
+          <text catch:tap="onNavigate" data-choose-item="{{chooseIndex}}" data-choose-item-index="{{chooseItemIndex}}">{{chooseItemItem}}
+          </text>
         </block>
       </view>
     </block>
