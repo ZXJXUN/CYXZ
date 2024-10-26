@@ -35,11 +35,11 @@
       </view>
     </view>
     <view class="que-operate flex-wrp">
-      <view class="invite flex-item">
+      <view class="invite flex-item" bindtap="to_ask_answer">
         <image src="../../images/invite.png"></image>
         <text>邀请回答</text>
       </view>
-      <view class="write flex-item">
+      <view class="write flex-item" bindtap="to_write_answer">
         <image src="../../images/write.png"></image>
         <text>写回答</text>
       </view>

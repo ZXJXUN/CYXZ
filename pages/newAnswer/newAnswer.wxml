@@ -1,0 +1,13 @@
+<!--pages/newAnswer/newAnswer.wxml-->
+<view class="container">
+  <view class="navbor">
+    <view class="back" bindtap="back">取消</view>
+    <view class="push" bindtap="push">发布回答</view>
+  </view>
+  <view class="question_tlitle">{{ question_title }}</view>
+  <view class="answer_content">{{ answer_content }}</view>
+  <view class="answer_else">
+    <button class="upload_image" bindtap="upload_image">上传图片</button>
+    <botton class="upload_file" bindtap="upload_file">上传文件</botton>
+  </view>
+</view>

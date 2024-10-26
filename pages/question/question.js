@@ -13,6 +13,16 @@ Page({
       url: "../answer/answer",
     });
   },
+  to_write_answer: function () {
+    wx.navigateTo({
+      url: "../newAnswer/newAnswer",
+    });
+  },
+  to_ask_answer: function () {
+    wx.navigateTo({
+      url: "../newAnswer/newAnswer",
+    });
+  },
   onLoad: function () {
     console.log("onLoad");
     var that = this;
