@@ -141,7 +141,11 @@ Page({
     this.setData({
       choose:choose
     })
+  },
+
+  publishQuestion() {
+    wx.navigateTo({
+      url: '' // 发帖页面
+    });
   }
-
-
 })
