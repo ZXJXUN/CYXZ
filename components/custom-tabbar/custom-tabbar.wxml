@@ -1,0 +1,8 @@
+<view class="tabbar">
+  <view class="tabbar-item" bindtap="navigateToIndex" data-page="index" data-current="{{currentPage === 'index'}}">
+    首页
+  </view>
+  <view class="tabbar-item" bindtap="navigateToHome" data-page="home" data-current="{{currentPage === 'home'}}">
+    个人
+  </view>
+</view>
