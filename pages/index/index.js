@@ -28,7 +28,7 @@ Page({
     const selectedItem = this.data.choose[chooseIndex].item[chooseItemIndex]; // 获取点击的具体选项
 
     // 如果点击的是 "数学分析"，则跳转到相应页面
-    if (selectedItem === '数学分析') {
+    if (selectedItem === '数学分析'||selectedItem === '高等代数'||selectedItem === '程序设计') {
       wx.navigateTo({
         url: '/pages/list/list', // 替换为实际的页面路径
       });
