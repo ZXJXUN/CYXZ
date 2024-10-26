@@ -163,9 +163,6 @@
   background-color: #fff;
   position: absolute;
 }
-<<<<<<< Updated upstream
-=======
-
 /**app.wxss**/
 .container {
   height: 100%;
@@ -293,4 +290,3 @@
 .container .feed-item .feed-content .answer-actions .dot ::after{
   content: "•";
 }
->>>>>>> Stashed changes
