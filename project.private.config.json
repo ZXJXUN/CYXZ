@@ -3,5 +3,18 @@
   "projectname": "CYXZ",
   "setting": {
     "compileHotReLoad": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/newQuestion/newQuestion",
+          "pathName": "pages/newQuestion/newQuestion",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }

@@ -5,7 +5,8 @@
     "pages/list/list",
     "pages/login/login",
     "pages/answer/answer",
-    "pages/question/question"
+    "pages/question/question",
+    "pages/newQuestion/newQuestion"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -17,7 +18,7 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "tabBar": {
-    "color": "#ffffff",          
+    "color": "#ffffff",
     "selectedColor": "#ffffff",
     "backgroundColor": "#0070f3",
     "borderStyle": "white",
