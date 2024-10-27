@@ -25,24 +25,111 @@
 .back {
   width: 120rpx;
   height: 75rpx;
-  font-size: 30rpx;
+  font-size: 33rpx;
+  color: #0f1010c5;
+  margin-left: 25rpx;
+  margin-top: 25rpx;
 }
 .push {
-  width: 120rpx;
+  width: 140rpx;
   height: 75rpx;
-  font-size: 30rpx;
+  font-size: 33rpx;
+  color: #0f92e4c5;
+  margin-top: 25rpx;
+  margin-right: 25rpx;
 }
 .question_tlitle {
   width: 100%;
   height: 100rpx;
   background: #fff;
   align-items: center;
-  padding: 0 20rpx;
   box-sizing: border-box;
   border-bottom: 1rpx solid #ccc;
+  font-size: 40rpx;
+  border-bottom: 1rpx solid #697171;
+  text-align: center;
+  line-height: 100rpx;
 }
-
 .answer_content {
 }
+.answer_content textarea {
+  font-size: 30rpx;
+  width: 100%;
+  height: 400rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #ccc;
+  border-radius: 20rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
 .answer_else {
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ccc;
+  font-size: 40rpx;
+  border-bottom: 1rpx solid #697171;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.upload_image {
+  width: 120rpx;
+  height: 100rpx;
+  background: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ccc;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #697171;
+  display: flex;
+  flex-direction: row;
+}
+.upload_file {
+  width: 250rpx;
+  height: 100rpx;
+  background: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #ccc;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #697171;
+  display: flex;
+  padding: 0 100rpx;
+}
+
+.choose_upload_view {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.choose_upload_item {
+  margin-left: 38rpx;
+  margin-right: 20rpx;
+  position: relative;
+  width: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.choose_upload_view .choose_upload_img {
+  width: 100rpx;
+  height: 100rpx;
+}
+.choose_upload_view .remove_img_icon {
+  padding: 4rpx;
+  position: absolute;
+  top: -15rpx;
+  right: -13rpx;
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+}
+.other_upload {
+  margin-left: 15rpx;
+  width: 80rpx;
 }

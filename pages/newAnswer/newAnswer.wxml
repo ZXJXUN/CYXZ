@@ -5,9 +5,37 @@
     <view class="push" bindtap="push">发布回答</view>
   </view>
   <view class="question_tlitle">{{ question_title }}</view>
-  <view class="answer_content">{{ answer_content }}</view>
+  <view class="answer_content">
+    <textarea
+      class="textarea"
+      placeholder="请输入回答内容"
+      bindinput="input"
+      bindblur="blur"
+      bindfocus="focus"
+      value="{{ answer_content }}"
+      maxlength="500"
+    ></textarea>
+  </view>
+  <view wx:if="{{ imageList.length }}" class="choose_upload_view">
+    <view wx:for="{{ imageList }}" wx:key="index" class="choose_upload_item">
+      <!-- 图片上传展示 -->
+      <image
+        src="{{ item }}"
+        class="choose_upload_img"
+        data-index="{{ index }}"
+        bindtap="previewBigImage"
+      ></image>
+      <!-- 删除按钮 -->
+      <icon
+        type="clear"
+        class="remove_img_icon"
+        data-index="{{ index }}"
+        catchtap="removeChooseImage"
+      />
+    </view>
+  </view>
   <view class="answer_else">
     <button class="upload_image" bindtap="upload_image">上传图片</button>
-    <botton class="upload_file" bindtap="upload_file">上传文件</botton>
+    <button class="upload_file" bindtap="upload_file">上传文件</button>
   </view>
 </view>

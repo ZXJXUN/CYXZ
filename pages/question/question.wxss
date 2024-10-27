@@ -93,10 +93,6 @@
   margin: 0 20rpx 0 0;
 }
 
-.container {
-  height: 1500rpx;
-}
-
 /*.answer-feed .feed-item{*/
 /*width: 690rpx;*/
 /*padding: 30rpx 30rpx 20rpx;*/
@@ -176,7 +172,7 @@
 /*}*/
 /**app.wxss**/
 .container {
-  height: 100%;
+  height: 1500px;
   display: flex;
   flex-direction: column;
   align-items: center;
