@@ -9,6 +9,8 @@
   scroll-into-view="{{ toView }}"
   scroll-top="{{ scrollTop }}"
 >
+<view class="floating-button" bindtap="publishAnswer">+</view>
+
   <view class="question-wrp">
     <view class="question-item">
       <view class="que-tag">

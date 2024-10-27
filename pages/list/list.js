@@ -22,6 +22,12 @@ Page({
     }
   },
   //事件处理函数
+  publishQuestion: function() {
+    wx.navigateTo({
+        url: '../newQuestion/newQuestion'
+    });
+  },
+
   bindItemTap: function() {
     wx.navigateTo({
       url: '../question/question'
@@ -141,11 +147,5 @@ Page({
     this.setData({
       choose:choose
     })
-  },
-
-  publishQuestion() {
-    wx.navigateTo({
-      url: '' // 发帖页面
-    });
   }
 })

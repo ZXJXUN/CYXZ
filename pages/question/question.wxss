@@ -297,3 +297,20 @@
 .container .feed-item .feed-content .answer-actions .dot ::after {
   content: "•";
 }
+.floating-button {
+  position: fixed;
+  bottom: 70rpx;
+  right: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  padding: 0; /* 确保无额外间距 */
+  background-color: #0070f3;
+  color: #ffffff;
+  font-size: 60rpx;
+  line-height: 95rpx;
+  border-radius: 50%; /* 保持正圆 */
+  text-align: center;
+  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  box-sizing: border-box;
+}
