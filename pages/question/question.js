@@ -8,6 +8,12 @@ Page({
     answer_length: 0,
   },
   //事件处理函数
+  publishAnswer: function() {
+    wx.navigateTo({
+        url: '../newAnswer/newAnswer',
+    });
+  },
+
   bindItemTap: function () {
     wx.navigateTo({
       url: "../answer/answer",

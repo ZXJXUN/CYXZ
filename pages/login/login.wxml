@@ -2,6 +2,15 @@
   <button class="loginwx-button" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
   <button class="loginbh-button" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">北航邮箱登录</button>
 
+  <view class="verification-section">
+    <input class="verification-input" placeholder="输入北航邮箱" bindinput="onInputPhone" />
+    <button class="send-code-button" bindtap="sendVerificationCode">发送验证码</button>
+  </view>
+
+  <view wx:if="{{showCodeInput}}">
+    <input class="code-input" placeholder="输入验证码" bindinput="onInputCode" />
+    <button class="confirm-button" bindtap="confirmCode">确认</button>
+  </view>
 
   <view wx:if="{{userInfo}}" class="welcome-section">
     <text class="welcome-text">欢迎, {{userInfo.nickName}}!</text>

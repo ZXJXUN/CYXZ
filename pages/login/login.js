@@ -1,6 +1,9 @@
 Page({
   data: {
     userInfo: null,
+    showCodeInput: false,
+    email: '',
+    code: ''
   },
 
   // 获取用户信息
@@ -112,5 +115,47 @@ Page({
   // 处理北航邮箱登录按钮点击事件
   onEmailLogin: function () {
     this.loginWithEmail();
+  },
+  onInputPhone: function(e) {
+    this.setData({
+      phone: e.detail.value
+    });
+  },
+
+  sendVerificationCode: function() {
+    if (this.data.phone) {
+      this.setData({ showCodeInput: true });
+      // 此处可以添加发送验证码的逻辑
+      wx.showToast({
+        title: '验证码已发送',
+        icon: 'success'
+      });
+    } else {
+      wx.showToast({
+        title: '请输入正确的邮箱地址',
+        icon: 'none'
+      });
+    }
+  },
+
+  onInputCode: function(e) {
+    this.setData({
+      code: e.detail.value
+    });
+  },
+
+  confirmCode: function() {
+    if (this.data.code) {
+      // 此处可以添加验证验证码的逻辑
+      wx.showToast({
+        title: '验证码验证成功',
+        icon: 'success'
+      });
+    } else {
+      wx.showToast({
+        title: '请输入验证码',
+        icon: 'none'
+      });
+    }
   }
 });
