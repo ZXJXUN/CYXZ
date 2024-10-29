@@ -11,7 +11,17 @@
 }
 
 /* 基本按钮样式 */
-button {
+.loginwx-button {
+  padding: 12px 20px;  /* 内边距 */
+  border-radius: 5px;  /* 圆角边框 */
+  border: none;        /* 去掉默认边框 */
+  cursor: pointer;     /* 鼠标悬停时为手指形状 */
+  font-size: 16px;     /* 字体大小 */
+  font-family: 'Arial', sans-serif; /* 字体 */
+  transition: all 0.3s ease; /* 动画过渡效果 */
+}
+
+.loginbh-button {
   padding: 12px 20px;  /* 内边距 */
   border-radius: 5px;  /* 圆角边框 */
   border: none;        /* 去掉默认边框 */
@@ -71,6 +81,42 @@ button + button {
 /* 为其他部分添加统一的间隔 */
 .section {
   margin-bottom: 20px; /* 各部分之间的间隔 */
+}
+.verification-section {
+  display: flex;
+  margin: 10px 0;
+}
+
+.verification-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.send-code-button {
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.code-input {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.confirm-button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #ff9500;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 

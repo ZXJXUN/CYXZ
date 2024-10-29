@@ -1,6 +1,8 @@
 <!--index.wxml-->
 <scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5"
   bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <!-- 固定的发布按钮 -->
+    <view class="floating-button" bindtap="publishQuestion">+</view>
   <view class="search flex-wrp">
     <view class="search-left flex-item">
       <image src="../../images/search.png"></image>
@@ -62,3 +64,4 @@
     </view>
   </block>
 </scroll-view>
+<custom-tabbar currentPage="index"></custom-tabbar>

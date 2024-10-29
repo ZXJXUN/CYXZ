@@ -7,11 +7,12 @@ Page({
     userInfo: {}
   },
   //事件处理函数
-  bindViewTap: function() {
+  goToLogin() {
     wx.navigateTo({
-      url: ''
-    })
+      url: '../login/login'
+    });
   },
+
   onLoad: function () {
     console.log('onLoad')
     var that = this

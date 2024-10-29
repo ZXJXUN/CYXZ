@@ -22,6 +22,12 @@ Page({
     }
   },
   //事件处理函数
+  publishQuestion: function() {
+    wx.navigateTo({
+        url: '../newQuestion/newQuestion'
+    });
+  },
+
   bindItemTap: function() {
     wx.navigateTo({
       url: '../question/question'
@@ -142,6 +148,4 @@ Page({
       choose:choose
     })
   }
-
-
 })
