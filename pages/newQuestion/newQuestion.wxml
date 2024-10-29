@@ -4,7 +4,7 @@
     <text>题目</text>
     <input type="text" class="new-input-title" value="{{title}}" bindinput="inputTitle" />
   </view>
-  <textarea value="" class="new-input-text" value="{{content}}" bindinput="inputContent" />
+  <textarea class="new-input-text" bindinput="inputContent" value="{{content}}"></textarea>
   <view class="img" >
     <block wx:for="{{imgs}}">
       <image src="{{item}}" alt="" mode="aspectFit"  catch:tap="viewImg" data-img-view-index="{{index}}"/>
