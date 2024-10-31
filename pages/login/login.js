@@ -118,21 +118,48 @@ Page({
   },
   onInputPhone: function(e) {
     this.setData({
-      phone: e.detail.value
+      email
+      : e.detail.value
     });
   },
 
   sendVerificationCode: function() {
-    if (this.data.phone) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@buaa\.edu\.cn$/;//confirm bh email
+    if (this.data.email && emailPattern.test(this.data.email)) {
       this.setData({ showCodeInput: true });
-      // 此处可以添加发送验证码的逻辑
-      wx.showToast({
-        title: '验证码已发送',
-        icon: 'success'
-      });
+      // API
+      wx.request({
+        url: '', // url
+        method: 'POST',
+        data: {
+            email: this.data.email,
+            code: verificationCode
+        },
+        success: (res) => {
+            if (res.data.success) {
+                this.setData({ showCodeInput: true });
+                wx.showToast({
+                    title: '验证码已发送',
+                    icon: 'success'
+                });
+            } else {
+                wx.showToast({
+                    title: '发送失败，请重试',
+                    icon: 'none'
+                });
+            }
+        },
+        fail: () => {
+            wx.showToast({
+                title: '网络错误，请重试',
+                icon: 'none'
+            });
+        }
+    });
+      
     } else {
       wx.showToast({
-        title: '请输入正确的邮箱地址',
+        title: '请输入正确北航邮箱地址',
         icon: 'none'
       });
     }

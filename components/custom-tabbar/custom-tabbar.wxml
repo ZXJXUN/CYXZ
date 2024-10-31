@@ -1,4 +1,4 @@
-<view class="tabbar">
+<view class="tabbar" hidden="true">
   <view class="tabbar-item" bindtap="navigateToIndex" data-page="index" data-current="{{currentPage === 'index'}}">
     首页
   </view>

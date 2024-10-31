@@ -52,11 +52,8 @@
             <view class="like dot">
               <a>{{item.good_num}} 赞同 </a>
             </view>
-            <view class="comments dot">
-              <a>{{item.comment_num}} 评论 </a>
-            </view>
             <view class="follow-it">
-              <a>关注问题</a>
+              <a>收藏问题</a>
             </view>
           </view>
         </view>

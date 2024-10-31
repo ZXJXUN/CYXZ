@@ -30,3 +30,15 @@
   height: 150rpx;
   width: 150rpx;
 }
+.new-input-title{
+  border: 1px solid black;
+  margin: 15px 0;
+}
+.title-container{
+  display: flex;
+  flex-direction: row;
+  height: 50rpx;
+  margin: 20rpx;
+  width: 100%;
+  align-items: center;  
+}
