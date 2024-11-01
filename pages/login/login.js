@@ -97,9 +97,7 @@ Page({
         
         setTimeout(() => {
             console.log('Navigating to home page...');
-            wx.navigateTo({
-                url: '../home/home'//sth wrong
-            });
+            wx.navigateBack();
         }, 500);
     } else {
         wx.showToast({
