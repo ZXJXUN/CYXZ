@@ -11,27 +11,16 @@
 }
 
 /* 基本按钮样式 */
-.loginwx-button {
-  padding: 12px 20px;  /* 内边距 */
-  border-radius: 5px;  /* 圆角边框 */
-  border: none;        /* 去掉默认边框 */
-  cursor: pointer;     /* 鼠标悬停时为手指形状 */
-  font-size: 16px;     /* 字体大小 */
+.button {
+  padding: 12px 20px; /* 内边距 */
+  border-radius: 5px; /* 圆角边框 */
+  border: none; /* 去掉默认边框 */
+  cursor: pointer; /* 鼠标悬停时为手指形状 */
+  font-size: 16px; /* 字体大小 */
   font-family: 'Arial', sans-serif; /* 字体 */
-  transition: all 0.3s ease; /* 动画过渡效果 */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* 动画过渡效果 */
 }
 
-.loginbh-button {
-  padding: 12px 20px;  /* 内边距 */
-  border-radius: 5px;  /* 圆角边框 */
-  border: none;        /* 去掉默认边框 */
-  cursor: pointer;     /* 鼠标悬停时为手指形状 */
-  font-size: 16px;     /* 字体大小 */
-  font-family: 'Arial', sans-serif; /* 字体 */
-  transition: all 0.3s ease; /* 动画过渡效果 */
-}
-
-/* 微信按钮样式 */
 .loginwx-button {
   background-color: #1aad19; /* 微信绿色 */
   color: white; /* 字体颜色 */
@@ -40,10 +29,9 @@
 
 .loginwx-button:hover {
   background-color: #159b14; /* 悬停时颜色变化 */
-
+  transform: scale(1.05); /* 鼠标悬停放大效果 */
 }
 
-/* 北航邮箱按钮样式 */
 .loginbh-button {
   background-color: #0070f3; /* 北航蓝色 */
   color: white; /* 字体颜色 */
@@ -52,11 +40,12 @@
 
 .loginbh-button:hover {
   background-color: #005bb5; /* 悬停时颜色变化 */
+  transform: scale(1.05); /* 鼠标悬停放大效果 */
 }
 
 /* 按钮组的间距 */
 button + button {
-  margin-top: 50px; /* 按钮之间的间距 */
+  margin-top: 20px; /* 按钮之间的间距 */
 }
 
 .welcome-section {
@@ -74,49 +63,79 @@ button + button {
   width: 100px; 
   height: 100px; 
   border-radius: 50%; /* 圆形头像 */
-  margin-top: 10px; /* 上方间距 */
-  margin-bottom: 20px; /* 下方间隔，增加与其他元素的距离 */
+  margin: 10px 0; /* 上下间距 */
 }
 
 /* 为其他部分添加统一的间隔 */
 .section {
   margin-bottom: 20px; /* 各部分之间的间隔 */
 }
+
 .verification-section {
   display: flex;
+  align-items: center; /* 垂直居中对齐 */
   margin: 10px 0;
 }
 
 .verification-input {
-  flex: 1;
+  flex: 1; /* 让输入框占据剩余空间 */
+  min-width: 200px; /* 设置最小宽度 */
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px; /* 圆角处理 */
 }
 
 .send-code-button {
-  margin-left: 10px;
   padding: 10px;
+  width: 100px; /* 设置固定宽度 */
   background-color: #007aff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0; /* 圆角处理 */
+}
+
+/* 验证码输入框样式 */
+
+.input-container {
+  display: flex;
+  align-items: center; /* 垂直居中对齐 */
+  margin: 10px 0;
 }
 
 .code-input {
-  margin-top: 10px;
+  flex: 1; /* 让输入框占据剩余空间 */
+  min-width: 200px; /* 设置最小宽度 */
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px; /* 圆角处理 */
 }
 
 .confirm-button {
-  margin-top: 10px;
   padding: 10px;
-  background-color: #ff9500;
+  width: 100px; /* 设置固定宽度 */
+  background-color: #007aff;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0; /* 圆角处理 */
 }
 
-
+.input-container {
+  display: flex;
+  align-items: center; /* 垂直居中对齐 */
+  margin: 10px 0;
+}
+.key-input {
+  flex: 1; /* 让输入框占据剩余空间 */
+  min-width: 200px; /* 设置最小宽度 */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px; /* 圆角处理 */
+}
+.key-button {
+  padding: 10px;
+  width: 100px; /* 设置固定宽度 */
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 0 5px 5px 0; /* 圆角处理 */
+}
