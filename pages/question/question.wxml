@@ -9,31 +9,37 @@
   scroll-into-view="{{ toView }}"
   scroll-top="{{ scrollTop }}"
 >
-<view class="floating-button" bindtap="publishAnswer">+</view>
+  <view class="floating-button" bindtap="publishAnswer">+</view>
 
   <view class="question-wrp">
     <view class="question-item">
       <view class="que-tag">
-        <text class="tag">阅读</text>
-        <text class="tag">电子书</text>
-        <text class="tag">Kindle</text>
-        <text class="tag">书籍</text>
-        <text class="tag">文学</text>
+        <block
+          wx:for="{{ question.tags }}"
+          wx:for-index="idx"
+          wx:for-item="item"
+          data-item="{{ item }}"
+        >
+          <text class="tag">{{ item }}</text>
+        </block>
       </view>
-      <view class="que-title"> 选择 Kindle 而不是纸质书的原因是什么？ </view>
-      <view class="que-content"> WEB前端*不靠谱天气预报员*想做代码小仙女 </view>
+
+      <view class="que-title"> {{ question.title }} </view>
+      <view class="que-content">{{ question.content }} </view>
       <view class="que-follow">
         <view class="left">
           <view class="watch">
             <image src="../../images/eye.png"></image>
-            <text>3316</text>
+            <text>{{ question.view_num }}</text>
           </view>
           <view class="comment">
             <image src="../../images/comment2.png"></image>
-            <text>27</text>
+            <text>{{ question.answer_num }}</text>
           </view>
         </view>
-        <view class="right"> 关注 </view>
+        <view class="right" bindtap="followQuestion">{{
+          follow ? "已关注" : "关注问题"
+        }}</view>
       </view>
     </view>
     <view class="que-operate flex-wrp">
@@ -58,7 +64,7 @@
         <view class="feed-source">
           <a class="" bindTap="">
             <view class="avatar">
-              <image src="{{ item.answer_image }}"></image>
+              <image src="{{ item.answer_image_path }}"></image>
             </view>
             <text>{{ item.answer_name }}</text>
           </a>
@@ -68,12 +74,13 @@
             <view>
               <text class="answer-txt">{{ item.answer_content }} </text>
             </view>
+
             <view class="answer-actions">
               <view class="like dot">
-                <a>{{ item.like }} 赞同 </a>
+                <a>{{ item.like_num }}赞同 </a>
               </view>
               <view class="comments dot">
-                <a>{{ item.comment }} 评论 </a>
+                <a>{{ item.comment_num }} 评论 </a>
               </view>
               <view class="time">
                 <a>{{ item.time }}</a>

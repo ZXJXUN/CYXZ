@@ -152,9 +152,14 @@
 .answer-feed .feed-item .feed-content .answer-body {
   padding: 0;
   /*height: 10rpx;*/
-  font-size: 24rpx;
+  font-size: 70rpx;
   line-height: 28rpx;
+  overflow: ellipsis;
   color: #5b5b5b;
+}
+.answer-txt {
+  overflow: ellipsis;
+  max-lines: 5;
 }
 /*.answer-feed .feed-item .feed-content .answer-actions{*/
 /*width: 690rpx;*/

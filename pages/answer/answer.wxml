@@ -1,7 +1,7 @@
 <!--answer.wxml-->
 <view class="container">
   <view class="question" bindtap="toQuestion">
-    <text class="question-title">选择 Kindle 而不是纸质书的原因是什么？</text>
+    <text class="question-title">{{ question_title }}</text>
   </view>
   <view class="answerer-wrp">
     <view class="bg-half"></view>
@@ -10,10 +10,8 @@
         <image src="../../images/icon1.jpeg"></image>
       </view>
       <view class="answerer-info flex-item">
-        <text class="answerer-name">Rebecca</text>
-        <text class="answerer-des"
-          >WEB前端*不靠谱天气预报员*想做代码小仙女</text
-        >
+        <text class="answerer-name">{{ answer_imf.answer_name }}</text>
+        <text class="answerer-des">{{ answer_imf.author_tags }}</text>
       </view>
       <view class="follow flex-item">
         <text>十 关注</text>
@@ -22,7 +20,7 @@
   </view>
 
   <view class="answer-content">
-   <text>{{ question_imf }}</text>
+    <text>{{ answer_imf.answer_content }}</text>
     <image src="../../images/1444983318907-_DSC1826.jpg"></image>
   </view>
 
@@ -31,7 +29,7 @@
       <view class="good-bad">
         <image src="../../images/good-bad.png"></image>
       </view>
-      <view class="good-num">2.1k</view>
+      <view class="good-num">{{ answer_imf.like_num }}</view>
     </view>
     <view class="operation-wrp flex-item">
       <view class="operation flex-wrp flex-tab">
@@ -49,7 +47,7 @@
         </view>
         <view class="operation-btn flex-item">
           <image src="../../images/comment.png"></image>
-          <text>302</text>
+          <text>{{ answer_imf.comment_num }}</text>
         </view>
       </view>
     </view>

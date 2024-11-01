@@ -4,15 +4,22 @@ var util = require("../../utils/util.js");
 var app = getApp();
 Page({
   data: {
-    motto: "知乎--微信小程序版",
-    userInfo: {},
-    question_imf: "这是一条问题",
+    question_title: "",
+    answer_imf: {
+      question_id: "",
+      answer_id: "",
+      answer_content: "",
+      answer_image_path: "",
+      answer_name: "",
+      like_num: "",
+      comment_num: "",
+      time: "",
+      author_tags: "",
+    },
   },
   //事件处理函数
   toQuestion: function () {
-    wx.navigateTo({
-      url: "../question/question",
-    });
+    wx.navigateBack();
   },
   /**
    * 生命周期函数--监听页面加载
@@ -20,29 +27,42 @@ Page({
   onLoad: function () {
     console.log("onLoad");
     var that = this;
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo,
-      });
+
+    wx.request({
+      url: "http://localhost:8080/answer/getAnswerById",
+      data: {
+        answer_id: that.data.answer_imf.answer_id,
+      },
+      success: function (res) {
+        console.log(res.data);
+        that.setData({
+          answer_imf: res.data.answer_imf,
+          question_title: res.data.question_title,
+        });
+      },
+      fail: function (res) {
+        console.log("fail");
+        wx.showToast({
+          title: "网络错误",
+          icon: "none",
+          duration: 2000,
+        });
+        that.setData({
+          question_title: "问题标题",
+          answer_imf: {
+            question_id: "1",
+            answer_id: "2",
+            answer_content: "这是第二条解答",
+            answer_image_path: "../../images/icon1.jpeg",
+            answer_name: "义工2",
+            like_num: "2",
+            comment_num: "2",
+            time: "2024-10-25",
+            author_tags: "作者标签",
+          },
+        });
+      },
     });
-    //从后台获取数据
-    // var that = this;
-    // wx.request({
-    //   url: "http:",
-    //   data: { quetion_id: "1" },
-    //   method: "GET",
-    //   success: function (res) {
-    //     console.log(res.data);
-    //     that.setData({
-    //       question_imf: res.data,
-    //     });
-    //   },
-    //   fail: function () {
-    //     wx.showToast({ title: "加载失败" });
-    //   },
-    // });
   },
   tapName: function (event) {
     console.log(event);
