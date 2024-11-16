@@ -2,6 +2,7 @@
 .container {
   height: 1500rpx;
   padding: 0;
+  width: 100%;
   font-size: 14rpx;
   background: #f0f4f3;
   color: #000;
@@ -34,24 +35,25 @@
   width: 140rpx;
   height: 75rpx;
   font-size: 33rpx;
-  color: #0f92e4c5;
+  color: #0f6be4c5;
   margin-top: 25rpx;
   margin-right: 25rpx;
 }
 .question_tlitle {
+  display: flex;
   width: 100%;
-  height: 100rpx;
+  height: 120rpx;
   background: #fff;
   align-items: center;
   box-sizing: border-box;
+  flex-direction: row;
   border-bottom: 1rpx solid #ccc;
   font-size: 40rpx;
   border-bottom: 1rpx solid #697171;
   text-align: center;
   line-height: 100rpx;
 }
-.answer_content {
-}
+
 .answer_content textarea {
   /* font-size: 30rpx;
   width: 100%;
@@ -143,4 +145,86 @@
 .other_upload {
   margin-left: 15rpx;
   width: 80rpx;
+}
+.placeholder_class {
+  font-size: 30rpx;
+}
+.footer {
+  position: fixed;
+  bottom: 0rpx;
+  width: 100%;
+  height: 165rpx;
+  padding-bottom: 45rpx;
+  background: #fff;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 40rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+
+.save {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.image_save_view {
+  display: flex;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  background: #ebf0f3;
+}
+.image_save {
+  margin: auto;
+  height: 45rpx;
+  width: 45rpx;
+}
+.save_text {
+  font-size: 25rpx;
+  color: #697171;
+}
+.submit {
+  flex: 3;
+  background: #0f6be4c5;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #fff;
+  border-radius: 25px;
+  box-shadow: none;
+}
+.clear_content {
+  flex: 1;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.clear_image_view {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 12rpx;
+  background: #ebf0f3;
+}
+.image_clear {
+  margin: auto;
+  height: 50rpx;
+  width: 45rpx;
+}
+.clear_text {
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  margin: auto;
+  font-size: 24rpx;
+  color: #697171;
+}
+.question_title {
+  flex: 8;
 }
