@@ -7,7 +7,6 @@
     "pages/answer/answer",
     "pages/question/question",
     "pages/newQuestion/newQuestion",
-    "pages/newQuestion_old/newQuestion_old",
     "pages/newAnswer/newAnswer"
   ],
   "window": {

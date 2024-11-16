@@ -6,38 +6,14 @@
   <view class="search flex-wrp">
     <view class="search-left flex-item">
       <image src="../../images/search.png"></image>
-      <input placeholder="搜索话题, 问题或人" placeholder-class="search-placeholder" />
+      <input placeholder="搜索问题" placeholder-class="search-placeholder" />
     </view>
     <view class="search-right flex-item" bindtap="upper">
       <image src="../../images/lighting.png"></image>
     </view>
   </view>
-  <view class="choose-container" >
-    <view class="choose" wx:for="{{choose.list}}" wx:for-index="chooseIndex" wx:for-item="chooseItem">
-      <view class="choose-head">
-        <text catch:tap="showDrop" data-choose-index="{{chooseIndex}}"
-          class="choose-head-text">{{choose.list[chooseIndex].name}}{{choose.list[chooseIndex].item[choose.list[chooseIndex].number]}}</text>
-      </view>
-      <view class="choose-drop" wx:if="{{choose.number==chooseIndex}}">
-        <block wx:for="{{choose.list[choose.number].item}}" wx:for-item="chooseItemItem" wx:for-index="chooseItemIndex">
-          <text catch:tap="choose" data-choose-item="{{choose.number}}"
-            data-choose-item-index="{{chooseItemIndex}}">{{chooseItemItem}}
-          </text>
-        </block>
-      </view>
-    </view>
-  </view>
   <block wx:for="{{feed}}" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}">
     <view class="feed-item">
-      <view class="feed-source">
-        <a class="">
-          <view class="avatar">
-            <image src="{{item.feed_source_img}}"></image>
-          </view>
-          <text>{{item.feed_source_name}}{{item.feed_source_txt}}</text>
-        </a>
-        <image class="item-more" mode="aspectFit" src="../../images/more.png"></image>
-      </view>
       <view class="feed-content">
         <view class="question" qid="{{question_id}}" bindtap="bindQueTap">
           <a class="question-link">
@@ -51,9 +27,6 @@
           <view class="answer-actions" bindtap="bindItemTap">
             <view class="like dot">
               <a>{{item.good_num}} 赞同 </a>
-            </view>
-            <view class="follow-it">
-              <a>收藏问题</a>
             </view>
           </view>
         </view>
