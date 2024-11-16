@@ -2,6 +2,7 @@
 .container {
   height: 1500rpx;
   padding: 0;
+  width: 100%;
   font-size: 14rpx;
   background: #f0f4f3;
   color: #000;
