@@ -1,15 +1,91 @@
 // pages/newAnswer/newAnswer.js
+const links = [
+  {
+    text: "首页",
+    url: "/pages/index/index",
+    openType: "switchTab",
+  },
+  {
+    text: "个人",
+    url: "/pages/home/home",
+    openType: "switchTab",
+  },
+];
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    question_title: "如何学好数分？",
+    links,
+    linksNoLinkData: links.map((v) => ({ text: v.text })),
+    question_title: "如何学？",
+    question_id: "123",
     imageList: [],
-    form: {
-      ossUrl: [],
+    content: "",
+    fileList: [],
+    push_loading: false,
+    save_content: 1,
+    save_image: 1,
+    headers: {
+      username: "ab",
+      token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
     },
   },
+  onChange(e) {
+    console.log("onChange", e);
+    const { file, fileList } = e.detail;
+    if (file.status === "uploading") {
+      this.setData({
+        progress: 0,
+      });
+      wx.showLoading();
+    } else if (file.status === "done") {
+      this.setData({
+        imageUrl: file.url,
+      });
+    }
+
+    // Controlled state should set fileList
+    this.setData({ fileList });
+  },
+  onSuccess(e) {
+    console.log("onSuccess", e);
+  },
+  onFail(e) {
+    console.log("onFail", e);
+  },
+  onComplete(e) {
+    console.log("onComplete", e);
+    wx.hideLoading();
+  },
+  onProgress(e) {
+    console.log("onProgress", e);
+    this.setData({
+      progress: e.detail.file.progress,
+    });
+  },
+  onPreview(e) {
+    console.log("onPreview", e);
+    const { file, fileList } = e.detail;
+    wx.previewImage({
+      current: file.url,
+      urls: fileList.map((n) => n.url),
+    });
+  },
+  onRemove(e) {
+    const { file, fileList } = e.detail;
+    wx.showModal({
+      content: "确定删除？",
+      success: (res) => {
+        if (res.confirm) {
+          this.setData({
+            fileList: fileList.filter((n) => n.uid !== file.uid),
+          });
+        }
+      },
+    });
+  },
+
   upload_image() {
     let _this = this;
     wx.showActionSheet({
@@ -68,44 +144,109 @@ Page({
       urls: imgs,
     });
   },
-  push() {
-    wx.showToast({
-      title: "发布成功",
-      icon: "success",
-      duration: 1500,
+  submit() {
+    wx.showLoading({
+      title: "发布中",
     });
-    //等待1.5秒后跳转
+    const child = this.selectComponent("#ans_content");
+    console.log(child);
+    this.setData({
+      content: child.data.inputValue,
+      imageList: this.data.fileList.map((n) => n.url),
+    });
+    for (var i = 0, len = this.data.imageList.length; i < len; i++) {
+      wx.uploadFile({
+        filePath: this.data.imageList[i],
+        name: "file",
+        url: "http://47.120.26.83:8000/oss/upload",
+        header: {
+          username: "ab",
+          token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+        },
 
-    setTimeout(() => {
-      wx.navigateTo({
-        url: "/pages/answer/answer",
+        success: (res) => {
+          console.log(res.data);
+        },
+        fail: (err) => {
+          console.log(err);
+        },
       });
-    }, 1800);
+    }
+    wx.request({
+      url: "http://47.120.26.83:8000/api/answerly/v1/answer",
+      header: {
+        username: "ab",
+        token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      data: {
+        content: this.data.content,
+        question_id: this.data.question_id,
+        pictures: this.data.imageList,
+      },
+      success: (res) => {
+        console.log(res);
+        wx.hideLoading();
+        wx.showToast({
+          title: "发布成功",
+          icon: "success",
+          time: 1500,
+        });
+        setTimeout(() => {
+          wx.navigateTo({
+            url: "/pages/answer/answer",
+          });
+        }, 1800);
+      },
+      fail: (err) => {
+        console.log(err);
+        wx.hideLoading();
+        wx.showToast({
+          title: "发布失败",
+          icon: "error",
+        });
+      },
+    });
   },
   back() {
     wx.navigateBack({
       delta: 1,
     });
   },
-  upload_file() {
-    wx.chooseMessageFile({
-      count: 1,
-      type: "file",
-      success(res) {
-        const tempFilePaths = res.tempFiles[0].path;
-        console.log(tempFilePaths);
-        wx.showToast({
-          title: "上传成功",
-          icon: "success",
-          duration: 1500,
-        });
-      },
-    });
+  onConfirm(e) {
+    console.log("onConfirm", e);
+  },
+  onlinkClick(e) {
+    console.log("onlinkClick", e);
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
+  onLoad(options) {
+    this.setData({
+      question_id: wx.getStorageSync("question_id"),
+      question_title: wx.getStorageSync("question_title"),
+    });
+    console.log(this.data.content.length);
+    console.log(this.data.imageList.length);
+    console.log(this.data.save_content);
+    console.log(this.data.save_image);
+    if (
+      this.data.save_content != this.data.content.length ||
+      this.data.save_image != this.data.imageList.length
+    ) {
+      wx.enableAlertBeforeUnload({
+        message: "您是否需要保存当前内容",
+        success: function (res) {
+          console.log("保存成功：", res);
+        },
+        fail: function (errMsg) {
+          console.log("未保存：", errMsg);
+        },
+      });
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

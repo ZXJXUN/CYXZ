@@ -9,7 +9,7 @@ Page({
     follow: false,
     question: {
       id: 1,
-      title: "",
+      title: "如何学好数分",
       content: "",
       view_num: 0,
       answer_num: 0,
@@ -29,6 +29,8 @@ Page({
     });
   },
   to_write_answer: function () {
+    wx.setStorageSync("question_id", this.data.question.id);
+    wx.setStorageSync("question_title", this.data.question.title);
     wx.navigateTo({
       url: "../newAnswer/newAnswer",
     });

@@ -7,8 +7,8 @@ Page({
         feed_source_img: '../../images/default_avatar.png', // 默认头像
         feed_source_name: '默认用户',
         feed_source_txt: '未知内容',
-        question: '示例问题：如何优化前端性能？',
-        answer_ctnt: '这里是示例答案内容，实际答案将显示在这里。',
+        question: '这是一个问题',
+        answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
@@ -16,8 +16,8 @@ Page({
         feed_source_img: '../../images/default_avatar.png', // 默认头像
         feed_source_name: '默认用户',
         feed_source_txt: '未知内容',
-        question: '示例问题：如何优化前端性能？',
-        answer_ctnt: '这里是示例答案内容，实际答案将显示在这里。',
+        question: '这是一个问题',
+        answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
@@ -25,8 +25,8 @@ Page({
         feed_source_img: '../../images/default_avatar.png', // 默认头像
         feed_source_name: '默认用户',
         feed_source_txt: '未知内容',
-        question: '示例问题：如何优化前端性能？',
-        answer_ctnt: '这里是示例答案内容，实际答案将显示在这里。',
+        question: '这是一个问题',
+        answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
@@ -34,8 +34,8 @@ Page({
         feed_source_img: '../../images/default_avatar.png', // 默认头像
         feed_source_name: '默认用户',
         feed_source_txt: '未知内容',
-        question: '示例问题：如何优化前端性能？',
-        answer_ctnt: '这里是示例答案内容，实际答案将显示在这里。',
+        question: '这是一个问题',
+        answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
@@ -43,8 +43,8 @@ Page({
         feed_source_img: '../../images/default_avatar.png', // 默认头像
         feed_source_name: '默认用户',
         feed_source_txt: '未知内容',
-        question: '示例问题：如何优化前端性能？',
-        answer_ctnt: '这里是示例答案内容，实际答案将显示在这里。',
+        question: '这是一个问题',
+        answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
@@ -52,8 +52,8 @@ Page({
         feed_source_img: '../../images/default_avatar.png', // 默认头像
         feed_source_name: '默认用户',
         feed_source_txt: '未知内容',
-        question: '示例问题：如何优化前端性能？',
-        answer_ctnt: '这里是示例答案内容，实际答案将显示在这里。',
+        question: '这是一个问题',
+        answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       }
@@ -64,23 +64,7 @@ Page({
     // 分类ID，可根据实际需求修改
     category: 0,
     // 是否已解决的标识，0表示未解决
-    solved_flag: 0,
-    // 筛选选择器
-    choose: {
-      number: -1,
-      list: [
-        {
-          name: '排序',
-          item: ['浏览量', '点赞量', '发布时间', '最新回答时间'],
-          number: 0
-        },
-        {
-          name: '顺序',
-          item: ['递增', '递减'],
-          number: 0
-        }
-      ]
-    }
+    solved_flag: 0
   },  
 
   onLoad: function () {
@@ -187,26 +171,6 @@ Page({
   bindQueTap: function() {
     wx.navigateTo({
       url: '../question/question'
-    });
-  },
-
-  // 显示下拉选项
-  showDrop: function(event) {
-    const index = event.currentTarget.dataset.chooseIndex;
-    let choose = this.data.choose;
-    choose.number = choose.number === index ? -1 : index;
-    this.setData({
-      choose: choose
-    });
-  },
-
-  // 选择排序或顺序选项
-  choose: function(event) {
-    let choose = this.data.choose;
-    choose.list[event.currentTarget.dataset.chooseItem].number = event.currentTarget.dataset.chooseItemIndex;
-    choose.number = -1;
-    this.setData({
-      choose: choose
     });
   }
 });
