@@ -1,0 +1,44 @@
+.container{
+  border: 1px solid black;
+  min-height: 100vh;
+  margin: 15px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.new-text{
+  border: 1px solid black;
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+}
+.new-input-text{
+  border: 1px solid black;
+  margin: 15px 0;
+  width: 100%;
+  min-height: 500rpx;
+}
+.img{
+  height: 200rpx;
+  width:  100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+}
+ image{
+  height: 150rpx;
+  width: 150rpx;
+}
+.new-input-title{
+  border: 1px solid black;
+  margin: 15px 0;
+}
+.title-container{
+  display: flex;
+  flex-direction: row;
+  height: 50rpx;
+  margin: 20rpx;
+  width: 100%;
+  align-items: center;  
+}

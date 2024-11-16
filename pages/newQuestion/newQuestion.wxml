@@ -1,16 +1,28 @@
-<view class="container">
-  <text class="new-text">请输入问题</text>
-  <view class="title-container">
-    <text>题目</text>
-    <input type="text" class="new-input-title" value="{{title}}" bindinput="inputTitle" />
-  </view>
-  <textarea class="new-input-text" bindinput="inputContent" value="{{content}}"></textarea>
-  <view class="img" >
-    <block wx:for="{{imgs}}">
-      <image src="{{item}}" alt="" mode="aspectFit"  catch:tap="viewImg" data-img-view-index="{{index}}"/>
-      <icon type="clear" catch:tap="removeImg" data-img-remove-index="{{index}}"/>
-    </block>
-  </view>
-  <button catch:tap="handleChooseImg">选择图片</button>
-  <button catch:tap="pushQuestion">提交问题</button>
-</view>
+<van-notify id="van-notify"></van-notify>
+<van-cell-group>
+
+  <van-cell title="题目"></van-cell>
+  <van-field model:value="{{title}}"></van-field>
+
+  <van-cell title="科目" is-link bind:click="showSubjectPicker" border="{{true}}" value="">{{subjectList[choosedSubject]}}
+  </van-cell>
+  <!-- <van-overlay show="{{isShowSubjectPicker}}">
+    <van-picker columns="{{ subjectList }}" bind:change="subjectChoose" />
+  </van-overlay> -->
+
+
+<van-popup show="{{ isShowSubjectPicker }}" position="bottom">
+  <van-picker columns="{{ subjectList }}" bind:confirm="subjectChoose" show-toolbar>
+  </van-picker>
+</van-popup>
+
+
+
+  <van-cell title="内容"></van-cell>
+  <van-field type="textarea" autosize model:value="{{content}}"></van-field>
+  <van-cell title="图片"></van-cell>
+  <van-uploader file-list="{{ picList }}" bind:after-read="addPic" bind:delete="deletePic" multiple/>
+</van-cell-group>
+<van-cell>
+  <van-button type="info" bind:click="submit">提交</van-button>
+</van-cell>

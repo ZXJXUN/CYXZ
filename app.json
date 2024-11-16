@@ -7,6 +7,7 @@
     "pages/answer/answer",
     "pages/question/question",
     "pages/newQuestion/newQuestion",
+    "pages/newQuestion_old/newQuestion_old",
     "pages/newAnswer/newAnswer"
   ],
   "window": {
@@ -14,7 +15,6 @@
     "navigationBarTitleText": "源智答",
     "navigationBarBackgroundColor": "#0070f3"
   },
-  "style": "v2",
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",

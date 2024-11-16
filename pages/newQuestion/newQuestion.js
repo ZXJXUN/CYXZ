@@ -1,161 +1,89 @@
-// pages/newQuestion/newQuestion.js
+import Notify from '@vant/weapp/notify/notify'
 Page({
-  inputTitle:function(event){
-    this.setData({
-      title:event.detail.value
-    })
+  deletePic:function(event) {
+    const {picList}=this.data
+    picList.splice(event.detail.index,1)
+    this.setData({picList})
   },
-  inputContent:function(event){
-    this.setData({
-      content:event.detail.value
-    })
+  addPic:function(event){
+    const {file:pics}=event.detail
+    const {picList}=this.data
+    for (let i = 0; i < pics.length; i++) {
+      
+      picList.push({url:pics[i].url})
+      
+    }
+    this.setData({picList})
   },
-  pushQuestion: function () {
-    let that=this
-    let uploadPromises = []; // 存储上传的 Promise
-    let imgsUrl = this.data.imgsUrl;
-    this.data.imgs.forEach((v, i) => {
-      const uploadPromise = new Promise((resolve, reject) => {
+  showSubjectPicker:function() {
+    this.setData({isShowSubjectPicker:!this.data.isShowSubjectPicker})
+  },
+  subjectChoose:function(event){
+    this.showSubjectPicker()
+    this.setData({choosedSubject:event.detail.index})
+    console.log(this.data.choosedSubject);
+  },
+  submit:async function(){
+    await Promise.all(this.data.picList.map((pic)=>{
+      return new Promise((resolve,reject)=>{
         wx.uploadFile({
-          filePath: v,
+          filePath: pic.url,
           name: 'file',
-          url: 'http://api.lxzz.top:25251/xcx/imgs',
-          success: function (result) {
-            imgsUrl.push(JSON.parse(result.data).url)
-            that.setData({
-              imgsUrl:imgsUrl
-            })
-            console.log("imgs ok");
-            resolve(); // 上传成功，解决 Promise
+          url: "http://47.120.26.83:8000/oss/upload",
+          header:{
+            'username':'ab',
+            'token':'6927fe4d-a141-47e6-9e11-faf68d2ab601'
           },
-          fail: function (error) {
-            console.log("imgs fail", error);
-            reject(error)
+          success:(res)=>{
+            console.log(res.data)
+            resolve(res)
+          },
+          fail:(err)=>{
+            console.log(err);
+            reject(err)
           }
         })
       })
-      uploadPromises.push(uploadPromise); // 将 Promise 添加到数组中
-    })
-    Promise.all(uploadPromises).then(() => {
+    })).then(()=>{
       wx.request({
-        url: 'http://api.lxzz.top:25251/xcx/newquestion',
-        method: 'POST',
-        data: JSON.stringify({
-          title: this.data.title,
-          content: this.data.content,
-          pictures: this.data.imgsUrl
-        }),
-        header: {
-          'Content-Type': 'application/json'
+        url: 'http://47.120.26.83:8000/api/answerly/v1/question',
+        header:{
+          'username':'ab',
+          'token':'6927fe4d-a141-47e6-9e11-faf68d2ab601',
+          'Content-Type':'application/json'
         },
-        success: function (res) {
-          console.log("newQuetiong ok", res.data)
-          that.setData({
-            imgs:[],
-            imgsUrl:[],
-            title:'',
-            content:''
+        method:'POST',
+        data:{
+          "content": this.data.content,
+          "title": this.data.title,
+          "user_id": 0,
+          "category": this.data.choosedSubject,
+          "pictures": this.data.picList
+        },
+        success:(res)=>{
+          console.log(res.data)
+          Notify({ type: 'success', message: '提交成功',selector:'#van-notify' ,context:this});
+          this.setData({
+            isShowSubjectPicker:false,
+            picList: [],
+            choosedSubject:0,
+            content:'',
+            title:''
           })
         },
-        fail: function (err) {
-          console.log(err)
+        fail:(err)=>{
+          console.log(err);
+          Notify({ type: 'warning', message: '提交失败',selector:'#van-notify',context:this});
         }
       })
     })
-    
   },
-  handleChooseImg: function () {
-    wx.chooseImage({
-      count: 9,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
-      success: (result) => {
-        this.setData({
-          imgs: [...this.data.imgs, ...result.tempFilePaths]
-        })
-      }
-    })
-  },
-  removeImg: function (event) {
-    let imgs = this.data.imgs;
-    imgs.splice(event.currentTarget.dataset.imgRemoveIndex, 1)
-    this.setData({
-      imgs: imgs
-    })
-  },
-  viewImg: function (event) {
-    wx.previewImage({
-      urls: this.data.imgs,
-      current: this.data.imgs[event.currentTarget.dataset.imgViewIndex]
-    })
-  },
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    imgs: [
-
-    ],
-    imgsUrl: [
-    ],
-    title:'',
-    content:''
+    isShowSubjectPicker:false,
+    picList: [],
+    subjectList: ['高等代数', '基础物理', '离散数学', '数据结构', '程序设计'],
+    choosedSubject:0,
+    content:'',
+    title:''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
-})
+});
