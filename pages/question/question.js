@@ -31,8 +31,54 @@ Page({
   to_write_answer: function () {
     wx.setStorageSync("question_id", this.data.question.id);
     wx.setStorageSync("question_title", this.data.question.title);
-    wx.navigateTo({
-      url: "../newAnswer/newAnswer",
+    //以下是校验token部分，检验成功跳转至writeanswer界面
+    wx.request({
+      url: 'http://47.120.26.83:8000/api/answerly/v1/user/check-login',
+      method: 'POST',
+      data: {
+        name: app.globalData.name,
+        token: app.globalData.token,
+      },
+      
+      success: (res) => {
+        if (res.data.code === '0' && res.data.message === null && res.data.success === true) {
+          console.log('检验成功');
+          wx.showToast({
+            title: '已登录',
+            icon: 'success'
+          });
+          setTimeout(() => {
+            console.log('Navigating to new page...');
+            wx.navigateTo({
+              url: '../newAnswer/newAnswer',//验证成功至新问题界面
+            });
+        }, 500);
+        
+        } else {
+          wx.showToast({
+            title: '请先登录哦~',
+            icon: 'none'});
+          console.log('未登录', res.data);
+          setTimeout(() => {
+            console.log('Navigating to login page...');
+            wx.navigateTo({
+              url: '../login/login',
+            });
+        }, 500);
+        }
+      },
+      fail: (error) => {
+        wx.showToast({
+          title: '网络错误',
+          icon: 'none'});
+        console.error('检验时网络发生错误', error);
+        setTimeout(() => {
+          console.log('Navigating to list page...');
+          wx.navigateTo({
+            url: '../question/question',
+          });
+      }, 500);
+      }
     });
   },
   to_ask_answer: function () {
