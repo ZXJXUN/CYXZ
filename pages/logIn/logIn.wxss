@@ -1,0 +1,68 @@
+/* pages/login/login.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.login-header {
+  margin-bottom: 30px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.input-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-label {
+  width: 80px;
+  font-size: 16px;
+}
+
+.input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.password-toggle {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.login-button {
+  width: 200px;
+  height: 40px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.register-link {
+  margin-top: 10px;
+}
+
+.register-link text {
+  color: #007aff;
+  text-decoration: underline;
+}

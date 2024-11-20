@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="login-header">
+    <text class="header-title">登录</text>
+  </view>
+  <view class="input-group">
+    <view class="input-item">
+      <text class="input-label">账号：</text>
+      <input type="number" bindinput="onInputAccount" placeholder="请输入学号" />
+    </view>
+    <view class="input-item">
+      <text class="input-label">密码：</text>
+      <input type="password" bindinput="onInputPassword" placeholder="请输入密码"
+        password="{{!showPassword}}" />
+      <image class="password-toggle" src="{{showPassword? '../../images/eye-open.png' : '../../images/eye-close.png'}}"
+        bindtap="toggleShowPassword" />
+    </view>
+  </view>
+  <button class="login-button" bindtap="onLogin" disabled="{{!isAccountValid ||!password}}">登录</button>
+  <view class="register-link" bindtap="onRegister">
+    <text>没有账号？点击注册</text>
+  </view>
+</view>
