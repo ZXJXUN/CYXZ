@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="title-section">
+    <text class="title">北航邮箱注册</text>
+  </view>
+
+  <view class="verification-section">
+    <input class="verification-input" placeholder="输入北航邮箱" bindinput="onInputEmail" />
+    <button class="send-code-button" bindtap="sendVerificationCode" style="position: relative; left: 0rpx; top: -1rpx">发送验证码</button>
+  </view>
+
+  <view wx:if="{{showCodeInput}}" class="input-container">
+    <input class="code-input" placeholder="输入验证码" bindinput="onInputCode" />
+    <button class="confirm-button" bindtap="confirmCode" style="position: relative; left: 0rpx; top: -1rpx">确认</button>
+  </view>
+
+  <view wx:if="{{showNameInput}}" class="input-container">
+    <input class="name-input" placeholder="注意用户名唯一" bindinput="onInputName" />
+    <button class="name-button" bindtap="confirmName" style="position: relative; left: 0rpx; top: -1rpx">确认</button>
+  </view>
+
+  <view wx:if="{{showKeyInput}}" class="input-container">
+    <input class="key-input" placeholder="输入密码" bindinput="onInputKey" />
+    <button class="key-button" bindtap="confirmKey" style="position: relative; left: 0rpx; top: -1rpx">注册</button>
+  </view>
+  
+  <view wx:if="{{userInfo}}" class="welcome-section">
+    <text class="welcome-text">欢迎, {{userInfo.nickName}}!</text>
+    <image src="{{userInfo.avatarUrl}}" class="avatar-image"></image>
+  </view>
+</view>
