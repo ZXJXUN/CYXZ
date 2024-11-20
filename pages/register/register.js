@@ -91,6 +91,9 @@ Page({
   confirmName: function() {
     if (this.data.name) {//lack of &&Confirm
       this.setData({ showKeyInput: true });
+      wx.showToast({
+        title: '请记住你的用户名哦~',
+        icon: 'none'});
     } else {
       wx.showToast({
         title: '请输入用户名',
@@ -128,7 +131,7 @@ Page({
           setTimeout(() => {
               console.log('Navigating to home page...');
               wx.navigateTo({
-                url: '../logIn/logIn'
+                url: '../login/login'
               });
           }, 500);
             
