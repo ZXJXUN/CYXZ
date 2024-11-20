@@ -1,109 +1,93 @@
+// pages/login/login.js
 Page({
   data: {
-    userInfo: null,
-    showCodeInput: false,
-    showKeyInput: false,
-    email: '',
-    code: '',
-    key: ''
+    account: '',
+    password: '',
+    showPassword: false
   },
 
-  onInputEmail: function(e) {
+  // 监听账号输入框的输入事件
+  onInputAccount: function (e) {
+    const account = e.detail.value;
     this.setData({
-      email: e.detail.value // 确保更新邮箱值
+      account: account
     });
   },
 
-  sendVerificationCode: function() {
-    const emailPattern = /^[0-9]+@buaa\.edu\.cn$/;//confirm bh email
-    if (this.data.email && emailPattern.test(this.data.email)) {
-      this.setData({ showCodeInput: true });
-      // API
+  // 监听密码输入框的输入事件
+  onInputPassword: function (e) {
+    this.setData({
+      password: e.detail.value
+    });
+  },
+
+  // 切换密码显示状态（显示/隐藏）
+  toggleShowPassword: function () {
+    this.setData({
+      showPassword:!this.data.showPassword
+    });
+  },
+
+  // 处理登录按钮点击事件
+  onLogin: function () {
+    if (this.data.password && this.data.account) {
       wx.request({
-        url: '', // url
+        url: 'http://47.120.26.83:8000/api/answerly/v1/user/login',
         method: 'POST',
         data: {
-            email: this.data.email,
-            code: this.data.code
+          username: this.data.account,
+          password: this.data.password,
         },
+        
         success: (res) => {
-            if (res.data.success) {
-                this.setData({ showCodeInput: true });
-                wx.showToast({
-                    title: '验证码已发送',
-                    icon: 'success'
-                });
-            } else {
-                wx.showToast({
-                    title: '发送失败，请重试',
-                    icon: 'none'
-                });
-            }
-        },
-        fail: () => {
+          if (res.data.code === '0' && res.data.message === null && res.data.success === true) {
+            console.log('登录成功');
             wx.showToast({
-                title: '网络错误，请重试',
-                icon: 'none'
+              title: '登录成功',
+              icon: 'success'
             });
+            setTimeout(() => {
+              console.log('Navigating to home page...');
+              wx.navigateBack();
+          }, 500);
+          //token设置
+          // 获取服务器返回的token
+          const token = res.data.data.token;
+
+          // 获取全局应用实例
+          const app = getApp();
+
+          // 将token设置到app.js的全局变量中
+          app.globalData.token = token;  
+          } else {
+            wx.showToast({
+              title: '重复登陆或其他',
+              icon: 'none'});
+            console.log('上传失败，错误信息：', res.data);
+          }
+        },
+        fail: (error) => {
+          wx.showToast({
+            title: '网络错误',
+            icon: 'none'});
+          console.error('上传题目时发生错误：', error);
         }
-    });
+      });
+        console.log('Key is valid, proceeding to registration...');
+        
       
     } else {
       wx.showToast({
-        title: '请输入正确北航邮箱地址',
+        title: '请输入正确格式的账号和密码',
         icon: 'none'
       });
     }
   },
 
-  onInputCode: function(e) {
-    this.setData({
-      code: e.detail.value
+  // 处理注册按钮点击事件，跳转到注册页面
+  onRegister: function () {
+    wx.navigateTo({
+      url: '../register/register'
     });
-  },
-
-  confirmCode: function() {
-    //update Code to server and recieve T or F
-    if (this.data.code) {//lack of &&Confirm
-      this.setData({ showKeyInput: true });
-      // 此处可以添加验证验证码的逻辑
-      wx.showToast({
-        title: '验证码验证成功',
-        icon: 'success'
-      });
-    } else {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none'
-      });
-    }
-  },
-
-
-
-  onInputKey: function(e) {
-    this.setData({
-      key: e.detail.value
-    });
-  },
-
-  confirmKey: function() {
-    if (this.data.key) {
-        console.log('Key is valid, proceeding to registration...');
-        wx.showToast({
-            title: '注册成功！',
-            icon: 'success'
-        });
-        
-        setTimeout(() => {
-            console.log('Navigating to home page...');
-            wx.navigateBack();
-        }, 500);
-    } else {
-        wx.showToast({
-            title: '请输入密码',
-            icon: 'none'
-        });
-    }
   }
-});
+})
