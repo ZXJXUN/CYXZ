@@ -7,7 +7,7 @@
     "pages/answer/answer",
     "pages/question/question",
     "pages/newQuestion/newQuestion",
-    "pages/newAnswer/newAnswer"，
+    "pages/newAnswer/newAnswer",
     "pages/register/register"
   ],
   "window": {
