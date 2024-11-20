@@ -156,8 +156,53 @@ Page({
 
   // 发布问题的跳转
   publishQuestion: function() {
-    wx.navigateTo({
-      url: '../newQuestion/newQuestion'
+    wx.request({
+      url: 'http://47.120.26.83:8000/api/answerly/v1/user/check-login',
+      method: 'POST',
+      data: {
+        name: app.globalData.name,
+        token: app.globalData.token,
+      },
+      
+      success: (res) => {
+        if (res.data.code === '0' && res.data.message === null && res.data.success === true) {
+          console.log('检验成功');
+          wx.showToast({
+            title: '已登录',
+            icon: 'success'
+          });
+          setTimeout(() => {
+            console.log('Navigating to new page...');
+            wx.navigateTo({
+              url: '../newQuestion/newQuestion',//验证成功至新问题界面
+            });
+        }, 500);
+        
+        } else {
+          wx.showToast({
+            title: '请先登录哦~',
+            icon: 'none'});
+          console.log('未登录', res.data);
+          setTimeout(() => {
+            console.log('Navigating to login page...');
+            wx.navigateTo({
+              url: '../login/login',
+            });
+        }, 500);
+        }
+      },
+      fail: (error) => {
+        wx.showToast({
+          title: '网络错误',
+          icon: 'none'});
+        console.error('检验时网络发生错误', error);
+        setTimeout(() => {
+          console.log('Navigating to list page...');
+          wx.navigateTo({
+            url: '../list/list',
+          });
+      }, 500);
+      }
     });
   },
 
