@@ -7,7 +7,8 @@ Page({
     email: '',
     code: '',
     name: '',
-    key: ''
+    key: '',
+    lastSendTime: null, // 上一次发送验证码的时间
   },
 
   onInputEmail: function(e) {
@@ -19,6 +20,18 @@ Page({
   sendVerificationCode: function() {
     const emailPattern = /^[a-zA-Z0-9]+@buaa.edu.cn$/; 
     const that = this;
+    const currentTime = Date.now(); // 当前时间戳
+    const lastSendTime = that.data.lastSendTime || 0; // 上次发送时间，默认为 0
+    const timeDiff = 30000 - (currentTime - lastSendTime); // 剩余时间
+
+    if (timeDiff > 0) {
+      wx.showToast({
+        title: `请${Math.ceil(timeDiff / 1000)}秒后再试`,
+        icon: 'none'
+      });
+      return; // 阻止发送请求
+    }
+
     if (this.data.email && emailPattern.test(this.data.email)) {
       const dataToSend = {
         mail: this.data.email
@@ -34,7 +47,10 @@ Page({
 
         success(res) {
           if (res.statusCode === 200) {
-            that.setData({ showCodeInput: true });
+            that.setData({
+              showCodeInput: true,
+              lastSendTime: Date.now() // 更新最后发送时间
+            });
             wx.showToast({
               title: '发送成功',
               icon: 'success'
