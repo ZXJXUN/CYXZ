@@ -1,4 +1,19 @@
 // app.js
+const initGlobalRequireBlocker = () => {
+  if (typeof global === 'undefined') {
+    global = {};
+  }
+  if (!global.globalRequireBlocker) {
+    global.globalRequireBlocker = {
+      loadedModules: {},
+      require: function(moduleName) {
+        return this.loadedModules[moduleName];
+      }
+    };
+  }
+};
+
+initGlobalRequireBlocker();
 App({
   onLaunch() {
     // 展示本地存储能力
@@ -14,6 +29,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    token: null,
+    name: null
   }
 })

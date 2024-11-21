@@ -1,141 +1,78 @@
+/* pages/login/login.wxss */
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 居中对齐 */
-  padding: 20px;
-  background-color: #f5f5f5; /* 背景颜色 */
-  border-radius: 10px; /* 圆角 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影 */
-  max-width: 400px; /* 最大宽度，保持居中效果 */
-  margin: 0 auto; /* 自动左右边距，居中 */
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
 }
 
-/* 基本按钮样式 */
-.button {
-  padding: 12px 20px; /* 内边距 */
-  border-radius: 5px; /* 圆角边框 */
-  border: none; /* 去掉默认边框 */
-  cursor: pointer; /* 鼠标悬停时为手指形状 */
-  font-size: 16px; /* 字体大小 */
-  font-family: 'Arial', sans-serif; /* 字体 */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* 动画过渡效果 */
+.login-header {
+  margin-bottom: 30px;
 }
 
-.loginwx-button {
-  background-color: #1aad19; /* 微信绿色 */
-  color: white; /* 字体颜色 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007aff;
 }
 
-.loginwx-button:hover {
-  background-color: #159b14; /* 悬停时颜色变化 */
-  transform: scale(1.05); /* 鼠标悬停放大效果 */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
-.loginbh-button {
-  background-color: #0070f3; /* 北航蓝色 */
-  color: white; /* 字体颜色 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+.input-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.loginbh-button:hover {
-  background-color: #005bb5; /* 悬停时颜色变化 */
-  transform: scale(1.05); /* 鼠标悬停放大效果 */
+.input-label {
+  width: 80px;
+  font-size: 16px;
+  color: #007aff;
 }
 
-/* 按钮组的间距 */
-button + button {
-  margin-top: 20px; /* 按钮之间的间距 */
+.input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
 }
 
-.welcome-section {
-  margin-top: 20px; /* 上方间距 */
+.password-toggle {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.login-button {
+  background-color: #007aff; 
+  color: #ffffff;
+  padding: 12rpx 24rpx; /* 内边距 */
+  border-radius: 6rpx; /* 圆角 */
   text-align: center; /* 文本居中 */
+  font-size: 36rpx; /* 字体大小 */
+  margin-top: 30rpx;
 }
 
-.welcome-text {
-  font-size: 18px; /* 字体大小 */
-  color: #333; /* 文本颜色 */
-  margin-bottom: 10px; /* 下方间隔 */
+.register-link {
+  margin-top: 10px;
 }
 
-.avatar-image {
-  width: 100px; 
-  height: 100px; 
-  border-radius: 50%; /* 圆形头像 */
-  margin: 10px 0; /* 上下间距 */
+.register-link text {
+  color: #007aff;
+  text-decoration: underline;
+}
+.Contact-link {
+  margin-top: 10px;
 }
 
-/* 为其他部分添加统一的间隔 */
-.section {
-  margin-bottom: 20px; /* 各部分之间的间隔 */
-}
-
-.verification-section {
-  display: flex;
-  align-items: center; /* 垂直居中对齐 */
-  margin: 10px 0;
-}
-
-.verification-input {
-  flex: 1; /* 让输入框占据剩余空间 */
-  min-width: 200px; /* 设置最小宽度 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px; /* 圆角处理 */
-}
-
-.send-code-button {
-  padding: 10px;
-  width: 100px; /* 设置固定宽度 */
-  background-color: #007aff;
-  color: white;
-  border: none;
-  border-radius: 0 5px 5px 0; /* 圆角处理 */
-}
-
-/* 验证码输入框样式 */
-
-.input-container {
-  display: flex;
-  align-items: center; /* 垂直居中对齐 */
-  margin: 10px 0;
-}
-
-.code-input {
-  flex: 1; /* 让输入框占据剩余空间 */
-  min-width: 200px; /* 设置最小宽度 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px; /* 圆角处理 */
-}
-
-.confirm-button {
-  padding: 10px;
-  width: 100px; /* 设置固定宽度 */
-  background-color: #007aff;
-  color: white;
-  border: none;
-  border-radius: 0 5px 5px 0; /* 圆角处理 */
-}
-
-.input-container {
-  display: flex;
-  align-items: center; /* 垂直居中对齐 */
-  margin: 10px 0;
-}
-.key-input {
-  flex: 1; /* 让输入框占据剩余空间 */
-  min-width: 200px; /* 设置最小宽度 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px 0 0 5px; /* 圆角处理 */
-}
-.key-button {
-  padding: 10px;
-  width: 100px; /* 设置固定宽度 */
-  background-color: #007aff;
-  color: white;
-  border: none;
-  border-radius: 0 5px 5px 0; /* 圆角处理 */
+.Contact-link text {
+  color: #007aff;
+  text-decoration: underline;
 }

@@ -33,7 +33,7 @@
   color: #8CCEFD;
   font-size: 28rpx;
   line-height: 100rpx;
-  box-shadow: 0 2px 2px #bebebe;
+  box-shadow: white;
   margin: 0 0 8rpx 0;
   position: fixed;
   top: 0;
@@ -107,7 +107,8 @@
   /*height: 10rpx;*/
   font-size: 24rpx;
   line-height: 28rpx;
-  color: #5b5b5b;
+  color: white
+  ;
 }
 .container .feed-item .feed-content .answer-actions{
   width: 690rpx;
@@ -160,6 +161,11 @@
   color: #bababa;
   line-height: 34rpx;
 }
+.login{
+  width: 750rpx;
+  background: #ffffff;
+  padding: 0
+}
 
 .my{
   margin: 15rpx 0 0 0;
@@ -198,6 +204,7 @@
   border-radius: 6rpx; /* 圆角 */
   text-align: center; /* 文本居中 */
   font-size: 36rpx; /* 字体大小 */
+  margin-top: 20rpx;
 }
 
 .register-button:hover {

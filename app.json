@@ -7,7 +7,8 @@
     "pages/answer/answer",
     "pages/question/question",
     "pages/newQuestion/newQuestion",
-    "pages/newAnswer/newAnswer"
+    "pages/newAnswer/newAnswer",
+    "pages/register/register"
   ],
   "window": {
     "navigationBarTextStyle": "white",
@@ -33,7 +34,6 @@
         "text": "个人"
       }
     ]
-
   },
-  "appid":"wxc4b91c1b5d199a5b"
+  "appid": "wxc4b91c1b5d199a5b"
 }

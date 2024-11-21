@@ -1,16 +1,13 @@
-
-<view class="container more">
+<view class="container more" style="height: 135rpx; display: flex; box-sizing: border-box">
   <view class="user flex-wrp">
     <view class="avatar flex-item">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
       <text class="userinfo-nickname">userInfo.nickName</text>
     </view>
-    <view class="user-info flex-item">
-      <button class="register-button" bindtap="goToLogin">北航邮箱登录</button>
+    <view class="user-info flex-item"> 
     </view>    
   </view>
-
-  <view class="my">
+  <view class="my" style="height: 945rpx; display: block; box-sizing: border-box">
     <view class="my-item flex-wrp">
       <view class="myitem-icon flex-item" >
         <image src="../../images/eye.png"></image>
@@ -66,6 +63,9 @@
       <view class="myitem-name flex-item">
         <text>我的回答</text>
       </view>
-    </view>
+    </view >
+    <view class="login" style="height: 81rpx; display: block; box-sizing: border-box">
+    <button class="register-button" bindtap="goToLogin">登录 / 注册</button>
+    </view>>
   </view>
 </view>
