@@ -1,71 +1,75 @@
 <view class="container more" style="height: 135rpx; display: flex; box-sizing: border-box">
   <view class="user flex-wrp">
-    <view class="avatar flex-item">
-      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">userInfo.nickName</text>
-    </view>
-    <view class="user-info flex-item"> 
-    </view>    
+      <view class="avatar flex-item">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+
+      </view>
+      <view class="user-info flex-item">
+          <text class="userinfo-nickname" style="position: relative; left: -95rpx; top: -10rpx">{{name}}</text>
+      </view>
   </view>
   <view class="my" style="height: 945rpx; display: block; box-sizing: border-box">
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/eye.png"></image>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/eye.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>我的关注</text>
+          </view>
       </view>
-      <view class="myitem-name flex-item">
-        <text>我的关注</text>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/star.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>我的收藏</text>
+          </view>
       </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/star.png"></image>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/draft.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>我的草稿</text>
+          </view>
       </view>
-      <view class="myitem-name flex-item">
-        <text>我的收藏</text>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/recent.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>最近浏览</text>
+          </view>
       </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/draft.png"></image>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/book.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>我的问题</text>
+          </view>
       </view>
-      <view class="myitem-name flex-item">
-        <text>我的草稿</text>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/live.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>我的消息</text>
+          </view>
       </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/recent.png"></image>
+      <view class="my-item flex-wrp">
+          <view class="myitem-icon flex-item">
+              <image src="../../images/zhi.png"></image>
+          </view>
+          <view class="myitem-name flex-item">
+              <text>我的回答</text>
+          </view>
       </view>
-      <view class="myitem-name flex-item">
-        <text>最近浏览</text>
+      <!-- 登录按钮部分，根据登录状态动态显示 -->
+      <view class="login" style="height: 81rpx; display: block; box-sizing: border-box">
+          <!-- 使用wx:if和wx:else来根据登录状态显示不同按钮内容 -->
+          <button wx:if="{{!isLoggedIn}}" class="register-button" bindtap="goToLogin">登录 / 注册</button>
+          <button wx:else class="register-button" bindtap="logout">退出账号</button>
       </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/book.png"></image>
-      </view>
-      <view class="myitem-name flex-item">
-        <text>我的问题</text>
-      </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/live.png"></image>
-      </view>
-      <view class="myitem-name flex-item">
-        <text>我的消息</text>
-      </view>
-    </view>
-    <view class="my-item flex-wrp">
-      <view class="myitem-icon flex-item" >
-        <image src="../../images/zhi.png"></image>
-      </view>
-      <view class="myitem-name flex-item">
-        <text>我的回答</text>
-      </view>
-    </view >
-    <view class="login" style="height: 81rpx; display: block; box-sizing: border-box">
-    <button class="register-button" bindtap="goToLogin">登录 / 注册</button>
-    </view>>
   </view>
 </view>

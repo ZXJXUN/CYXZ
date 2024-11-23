@@ -1,27 +1,29 @@
-//logs.js
-var util = require('../../utils/util.js')
-var app = getApp()
-Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {}
-  },
-  //事件处理函数
-  goToLogin() {
-    wx.navigateTo({
-      url: '../login/login'
-    });
-  },
+var app = getApp();
 
-  onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    app.getUserInfo(function(userInfo){
-      //更新数据
-      that.setData({
-        userInfo:userInfo
-      })
-    })
-  }
+Page({
+    data: {
+        name: '',
+    },
+    onShow: function () {
+        // 在页面显示时更新name的值为app.js里的name
+        this.setData({
+            name: app.globalData.name
+        });
+    },
+    // 事件处理函数
+    goToLogin() {
+        if (!app.globalData.isLoggedIn) {
+            wx.navigateTo({
+                url: '../login/login'
+            });
+        } else {
+            app.globalData.isLoggedIn = false;
+            this.setData({
+                isLoggedIn: false
+            });
+            wx.reLaunch({
+                url: '../index/index'
+            });
+        }
+    }
 })
