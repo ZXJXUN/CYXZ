@@ -6,21 +6,27 @@ var answer = {
     {
       question_id: "1",
       answer_id: "1",
-      answer_content: "这是第一条解答",
+      answer_content:
+        "这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答",
       answer_name: "义工2",
       like_num: "999",
       comment_num: "10",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
       answer_id: "2",
-      answer_content: "这是第二条解答",
+      answer_content:
+        "这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是第一条解答这是",
       answer_image_path: "../../images/icon1.jpeg",
       answer_name: "义工2",
       like_num: "2",
       comment_num: "2",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -31,6 +37,8 @@ var answer = {
       like_num: "3",
       comment_num: "3",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -41,6 +49,8 @@ var answer = {
       like_num: "4",
       comment_num: "4",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -51,6 +61,8 @@ var answer = {
       like_num: "5",
       comment_num: "5",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -61,6 +73,8 @@ var answer = {
       like_num: "6",
       comment_num: "6",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -70,6 +84,8 @@ var answer = {
       answer_name: "义工7",
       like_num: "7",
       comment_num: "7",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -80,6 +96,8 @@ var answer = {
       like_num: "8",
       comment_num: "8",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -90,6 +108,8 @@ var answer = {
       like_num: "999",
       comment_num: "10",
       time: "2024-10-25",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -100,6 +120,8 @@ var answer = {
       like_num: "1000",
       comment_num: "11",
       time: "2024-10-26",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -110,6 +132,8 @@ var answer = {
       like_num: "1001",
       comment_num: "12",
       time: "2024-10-27",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -120,6 +144,8 @@ var answer = {
       like_num: "1002",
       comment_num: "13",
       time: "2024-10-28",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
   ],
 };

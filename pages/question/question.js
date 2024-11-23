@@ -13,8 +13,12 @@ Page({
       content: "",
       view_num: 0,
       answer_num: 0,
-      tags: ["标签1", "标签2", "标签3"],
+      images: [],
     },
+    show_content:
+      "这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答这是展示的具体回答",
+    isStore: false,
+    store_icon: "../../images/收藏2.png",
   },
   //事件处理函数
   publishAnswer: function () {
@@ -31,54 +35,62 @@ Page({
   to_write_answer: function () {
     wx.setStorageSync("question_id", this.data.question.id);
     wx.setStorageSync("question_title", this.data.question.title);
+    // wx.navigateTo({
+    //   url: "../newAnswer/newAnswer", //验证成功至新问题界面
+    // });
     //以下是校验token部分，检验成功跳转至writeanswer界面
     wx.request({
-      url: 'http://47.120.26.83:8000/api/answerly/v1/user/check-login',
-      method: 'POST',
+      url: "http://47.120.26.83:8000/api/answerly/v1/user/check-login",
+      method: "POST",
       data: {
         name: app.globalData.name,
         token: app.globalData.token,
       },
-      
+
       success: (res) => {
-        if (res.data.code === '0' && res.data.message === null && res.data.success === true) {
-          console.log('检验成功');
+        if (
+          res.data.code === "0" &&
+          res.data.message === null &&
+          res.data.success === true
+        ) {
+          console.log("检验成功");
           wx.showToast({
-            title: '已登录',
-            icon: 'success'
+            title: "已登录",
+            icon: "success",
           });
           setTimeout(() => {
-            console.log('Navigating to new page...');
+            console.log("Navigating to new page...");
             wx.navigateTo({
-              url: '../newAnswer/newAnswer',//验证成功至新问题界面
+              url: "../newAnswer/newAnswer", //验证成功至新问题界面
             });
-        }, 500);
-        
+          }, 500);
         } else {
           wx.showToast({
-            title: '请先登录哦~',
-            icon: 'none'});
-          console.log('未登录', res.data);
+            title: "请先登录哦~",
+            icon: "none",
+          });
+          console.log("未登录", res.data);
           setTimeout(() => {
-            console.log('Navigating to login page...');
+            console.log("Navigating to login page...");
             wx.navigateTo({
-              url: '../login/login',
+              url: "../login/login",
             });
-        }, 500);
+          }, 500);
         }
       },
       fail: (error) => {
         wx.showToast({
-          title: '网络错误',
-          icon: 'none'});
-        console.error('检验时网络发生错误', error);
+          title: "网络错误",
+          icon: "none",
+        });
+        console.error("检验时网络发生错误", error);
         setTimeout(() => {
-          console.log('Navigating to list page...');
+          console.log("Navigating to list page...");
           wx.navigateTo({
-            url: '../question/question',
+            url: "../question/question",
           });
-      }, 500);
-      }
+        }, 500);
+      },
     });
   },
   to_ask_answer: function () {
@@ -88,6 +100,10 @@ Page({
   },
   onLoad: function () {
     console.log("onLoad");
+    this.setData({
+      isStore: false,
+      store_icon: "../../images/收藏2.png",
+    });
     this.getData();
   },
   upper: function () {
@@ -144,10 +160,19 @@ Page({
             id: 1,
             title: "问题标题",
             content:
-              "问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容",
+              "内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容问题具体内容",
             view_num: 0,
             answer_num: 0,
             tags: ["标签1", "标签2", "标签3"],
+            images: [
+              "../../images/源智答小程序.png",
+              "../../images/源智答小程序.png",
+              "../../images/源智答小程序.png",
+              "../../images/源智答小程序.png",
+              "../../images/源智答小程序.png",
+              "../../images/源智答小程序.png",
+              "../../images/源智答小程序.png",
+            ],
           },
           answerList: answer_data,
           answer_length: answer_data.length,
@@ -261,6 +286,56 @@ Page({
       fail: function (res) {
         console.log("fail");
       },
+    });
+  },
+  show(e) {
+    console.log("show");
+    const index = e.currentTarget.dataset.index;
+    const nowanswerList = this.data.answerList;
+    nowanswerList[index].isShow = !nowanswerList[index].isShow;
+    if (nowanswerList[index].isShow == true) {
+      nowanswerList[index].show_icon = "../../images/展开.png";
+    } else {
+      nowanswerList[index].show_icon = "../../images/收起.png";
+    }
+
+    this.setData({
+      answerList: nowanswerList,
+    });
+  },
+  store() {
+    this.setData({
+      isStore: !this.data.isStore,
+    });
+    if (this.data.isStore == true) {
+      this.setData({
+        store_icon: "../../images/收藏1.png",
+      });
+      wx.showToast({
+        title: "收藏成功",
+        icon: "success",
+        duration: 1000,
+      });
+    } else {
+      this.setData({
+        store_icon: "../../images/收藏2.png",
+      });
+      wx.showToast({
+        title: "取消收藏",
+        icon: "none",
+        duration: 1000,
+      });
+    }
+  },
+  preview_que_Image(e) {
+    console.log("preview_que_Image");
+    let index = e.currentTarget.dataset.index;
+
+    console.log(index);
+    console.log(this.data.question.images[index]);
+    wx.previewImage({
+      current: this.data.question.images[index], // 当前显示图片的http链接
+      urls: this.data.question.images, // 需要预览的图片http链接列表
     });
   },
 });
