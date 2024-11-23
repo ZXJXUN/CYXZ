@@ -31,6 +31,7 @@ App({
   globalData: {
     userInfo: null,
     token: null,
-    name: null
+    name: '请先登录',
+    isLoggedIn: false
   }
 })
