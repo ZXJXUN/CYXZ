@@ -1,4 +1,4 @@
-// pages/login/login.js
+const app = getApp();
 Page({
   data: {
     account: '',
@@ -30,6 +30,7 @@ Page({
 
   // 处理登录按钮点击事件
   onLogin: function () {
+    
     if (this.data.password && this.data.account) {
       wx.request({
         url: 'http://47.120.26.83:8000/api/answerly/v1/user/login',
@@ -40,35 +41,37 @@ Page({
         },
         
         success: (res) => {
+          
           if (res.data.code === '0' && res.data.message === null && res.data.success === true) {
             console.log('登录成功');
+            app.globalData.isLoggedIn = true;
             wx.showToast({
               title: '登录成功',
               icon: 'success'
             });
             setTimeout(() => {
-              console.log('Navigating to home page...');
-              wx.navigateBack();
+              wx.navigateBack(
+              );
           }, 500);
-          //token设置
-          // 获取服务器返回的token
+          
           const token = res.data.data.token;
+          const name = this.data.account;
 
-          // 获取全局应用实例
-          const app = getApp();
-
-          // 将token设置到app.js的全局变量中
           app.globalData.token = token;  
+          app.globalData.name = name;
+          console.log(app.globalData.token);
           } else {
             wx.showToast({
-              title: '重复登陆或其他',
+              title: res.data.message,
               icon: 'none'});
+              const app = getApp();
             console.log('上传失败，错误信息：', res.data);
+            console.log(app.globalData.token);
           }
         },
         fail: (error) => {
           wx.showToast({
-            title: '网络错误',
+            title: res.data.message,
             icon: 'none'});
           console.error('上传题目时发生错误：', error);
         }
@@ -78,7 +81,7 @@ Page({
       
     } else {
       wx.showToast({
-        title: '请输入正确格式的账号和密码',
+        title: res.data.message,
         icon: 'none'
       });
     }
