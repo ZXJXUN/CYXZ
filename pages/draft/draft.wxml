@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <block wx:for="{{drafts}}" wx:for-index="index" wx:for-item="item">
+    <view class="draft-item">
+      <view class="draft-title">题目: {{item.draft_title}}</view>
+      <view class="draft-time">保存时间: {{item.draft_time}}</view>
+      <view class="draft-category">科目: {{item.draft_category}}</view>
+      <view class="draft-content">内容: {{item.draft_content}}</view>
+      <view class="draft-pictures" >
+        <image bindtap="previewPicture" data-pictures="{{item.draft_pictures}}" data-picture="{{pictureItem}}" wx:for="{{item.draft_pictures}}" wx:for-item="pictureItem" class="draft-picture" src="{{pictureItem}}" mode="aspectFill">
+        </image>
+      </view>
+      <view class="button">
+        <button class="delete-button" bindtap="delete" data-index="{{index}}">删除</button>
+        <button class="publish-button" bindtap="publish" data-index="{{index}}">发布</button>
+      </view>
+    </view>
+  </block>
+</scroll-view>
+<custom-tabbar currentPage="index"></custom-tabbar>

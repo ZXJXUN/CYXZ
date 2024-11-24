@@ -21,8 +21,18 @@
   <van-cell title="内容"></van-cell>
   <van-field type="textarea" autosize model:value="{{content}}"></van-field>
   <van-cell title="图片"></van-cell>
-  <van-uploader file-list="{{ picList }}" bind:after-read="addPic" bind:delete="deletePic" multiple/>
+  <view class="question-pictures" >
+    <view wx:for="{{tempPictures}}" wx:for-index="pictureIndex" wx:for-item="pictureItem" class="picture-container">
+      <image bindtap="previewPicture" data-pictures="{{tempPictures}}" data-picture="{{pictureItem}}" class="question-picture" src="{{pictureItem}}" mode="aspectFill">
+      </image>
+      <view class="delete-button" bindtap="deletePicture" data-index="{{pictureIndex}}">x</view>
+    </view>
+    <view class="add-button" bindtap="addPicture">+</view>
+    
+    <!-- <van-uploader file-list="{{ tempPictures }}" bind:after-read="addPic" bind:delete="deletePic" multiple/> -->
+  </view>
 </van-cell-group>
-<van-cell>
-  <van-button type="info" bind:click="submit">提交</van-button>
-</van-cell>
+<view class="submit-buttons">
+  <button class="button" type="info" bind:tap="submitToDraft">保存草稿</button>
+  <button class="button" type="info" bind:tap="submit">提交</button>
+</view>

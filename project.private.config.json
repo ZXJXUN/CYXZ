@@ -9,6 +9,34 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/draft/draft",
+          "pathName": "pages/draft/draft",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/list/list",
+          "pathName": "pages/list/list",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/home/home",
+          "pathName": "pages/home/home",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/newQuestion/newQuestion",
           "pathName": "pages/newQuestion/newQuestion",
           "query": "",
