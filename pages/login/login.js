@@ -33,7 +33,7 @@ Page({
     
     if (this.data.password && this.data.account) {
       wx.request({
-        url: 'http://47.120.26.83:8000/api/answerly/v1/user/login',
+        url: 'https://47.120.26.83:8000/api/answerly/v1/user/login',
         method: 'POST',
         data: {
           username: this.data.account,
@@ -42,16 +42,18 @@ Page({
         
         success: (res) => {
           
-          if (res.data.code === '0' && res.data.message === null && res.data.success === true) {
+          if (res.data.success === true) {
             console.log('登录成功');
+            console.log(res.data);
             app.globalData.isLoggedIn = true;
             wx.showToast({
               title: '登录成功',
               icon: 'success'
             });
             setTimeout(() => {
-              wx.navigateBack(
-              );
+              wx.navigateBack({
+                url: '../index/index',
+              });
           }, 500);
           
           const token = res.data.data.token;
@@ -60,7 +62,19 @@ Page({
           app.globalData.token = token;  
           app.globalData.name = name;
           console.log(app.globalData.token);
-          } else {
+          } else if(res.data.code === 'A000203') {
+            app.globalData.isLoggedIn = true;
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success'
+            });
+            setTimeout(() => {
+              wx.navigateBack({
+                url: '../index/index',
+              });
+          }, 500);
+          }
+          else {
             wx.showToast({
               title: res.data.message,
               icon: 'none'});
@@ -73,7 +87,7 @@ Page({
           wx.showToast({
             title: res.data.message,
             icon: 'none'});
-          console.error('上传题目时发生错误：', error);
+          console.error('上传发生错误：', error);
         }
       });
         console.log('Key is valid, proceeding to registration...');

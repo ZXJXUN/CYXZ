@@ -174,7 +174,7 @@ Page({
             title: '提问题请先登录哦~',
             icon: 'none'});
             console.log(app.globalData.name, app.globalData.token)
-          console.log('未登录', res.data);
+          console.log('未登录');
           setTimeout(() => {
             console.log('Navigating to login page...');
             wx.navigateTo({

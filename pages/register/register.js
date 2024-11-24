@@ -38,7 +38,7 @@ Page({
       };
       console.log(this.data);
       wx.request({
-        url: 'http://47.120.26.83:8000/api/answerly/v1/user/send-code', 
+        url: 'https://47.120.26.83:8000/api/answerly/v1/user/send-code', 
         method: 'POST',
         data: dataToSend,
         header: {
@@ -58,7 +58,7 @@ Page({
             console.log('验证码发送请求已成功发送到服务器');
           } else {
             wx.showToast({
-              title: '请重试',
+              title: res.data.message,
               icon: 'none'
             });
             console.log('验证码发送请求失败，状态码：', res.statusCode);
@@ -66,7 +66,7 @@ Page({
         },
         fail(err) {
           wx.showToast({
-            title: '网络错误',
+            title: res.data.message,
             icon: 'none'
           });
           console.log('验证码发送请求失败：', err);
@@ -127,7 +127,7 @@ Page({
   confirmKey: function() {
     if (this.data.key) {
       wx.request({
-        url: 'http://47.120.26.83:8000/api/answerly/v1/user',
+        url: 'https://47.120.26.83:8000/api/answerly/v1/user',
         method: 'POST',
         data: {
           username: this.data.name,
@@ -153,7 +153,7 @@ Page({
             
           } else {
             wx.showToast({
-              title: '验证码错误或用户名重复',
+              title: res.data.message,
               icon: 'none'});
             console.log('上传失败，错误信息：', res.data);
           }
