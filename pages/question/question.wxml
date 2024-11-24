@@ -1,0 +1,120 @@
+<!--question.wxml-->
+<scroll-view
+  scroll-y="true"
+  class="container"
+  bindscrolltoupper="upper"
+  upper-threshold="10"
+  lower-threshold="5"
+  bindscrolltolower="lower"
+  scroll-into-view="{{ toView }}"
+  scroll-top="{{ scrollTop }}"
+>
+  <view class="floating-button" bindtap="to_write_answer">+</view>
+  <view class="question-wrp">
+    <view class="question-item">
+      <view class="que-title"> {{ question.title }} </view>
+      <view class="que-content">{{ question.content }} </view>
+      <view class="que-image-container">
+        <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item" > 
+          <view class="que-image-item" bindtap="preview_que_Image" data-index="{{ index }}">
+            <image   class="que-image" src="{{ item }}" mode="aspectFill"/>
+          </view>
+        </block>
+       
+      </view>>
+      <view class="que-footer">
+        <view class="show-content-footer-time"
+              >编辑于 2024-11-23 16:05:10</view
+            >
+            <view class="que-footer-store" >
+                <image class="que-footer-store-icon" src="{{ store_icon }}"bindtap="store" />       
+            </view>
+      </view>
+    </view>
+  </view>
+  <view class="answer-feed">
+    <block wx:for="{{ answerList }}" wx:for-index="index" wx:for-item="item">
+      <view class="feed-item">
+        <view class="feed-source">
+          <a class="" bindTap="">
+            <view class="avatar">
+              <image src="{{ item.answer_image_path }}"></image>
+            </view>
+            <text>{{ item.answer_name }}</text>
+          </a>
+          <image
+            class="show_icon"
+            src="{{ item.show_icon }}"
+            bindtap="show"
+            data-index="{{ index }}"
+          />
+        </view>
+        <view class="feed-content" hidden="{{ item.isShow == true }}">
+          <view class="answer-body">
+            <view class="answer-content">
+              <text class="answer-txt">{{ item.answer_content }} </text>
+            </view>
+            <view class="answer-actions">
+              <view class="like dot">
+                <a>{{ item.like_num }}赞同 </a>
+              </view>
+              <view class="comments dot">
+                <a>{{ item.comment_num }} 评论 </a>
+              </view>
+              <view class="time">
+                <a>{{ item.time }}</a>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="feed-content-show" hidden="{{ item.isShow == false }}">
+          <view class="show-content-text">
+            {{ item.answer_content }} 
+          </view>
+          <view class="show-content-image">
+             <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item" > 
+          <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}">
+            <image   class="que-image" src="{{ item }}" mode="aspectFill"/>
+          </view>
+        </block>
+          </view>
+          <view class="show-content-footer">
+            <view class="show-content-footer-time"
+              >编辑于 2024-11-23 16:05:10</view
+            >
+            <view class="show-content-footer-main-icon">
+              <view class="show-content-footer-write">
+                <image class="show-content-footer-wirte-icon" src="../../images/agora_写.png"/>
+                <input placeholder="发表你的看法" class="show-content-footer-write-input" bindinput="input" data-index="{{ index }}"></input>
+              </view>
+              <view class="show-content-footer-like">
+                <image class="show-content-footer-like-icon" src="../../images/赞同1.png"/>
+                <view class="like-num">{{item.like_num}}</view>
+                
+              </view>
+              <view class="show-content-footer-comment">
+                <image class="show-content-footer-comment-icon" src="../../images/评论.png"/>
+                <view class="comment-num">{{item.comment_num}}</view>
+              </view>
+              <view class="show-content-footer-store">
+                <image class="show-content-footer-store-icon" src="../../images/收藏2.png"/>
+                <view class="store-num"></view>
+              </view>
+               </view>
+          </view>
+        <view class="show-content-noshow-container">
+          <view class="show-content-noshow">
+            <image
+              class="show-content-noshow-icon"
+              src="{{ item.show_icon }}"
+              bindtap="show"
+              data-index="{{ index }}"
+            />
+            <view class="show-content-noshow-text">收起</view>
+          </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>
