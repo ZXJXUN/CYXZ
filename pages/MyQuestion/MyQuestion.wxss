@@ -1,0 +1,52 @@
+/** index.wxss **/
+
+.container {
+  height: 1500rpx;
+  padding: 0;
+  font-size: 14rpx;
+  background: #F0F4F3;
+  color: #000;
+}
+.draft-item {
+  width: 90%;
+  margin: 20rpx auto;
+  padding: 30rpx;
+  padding-bottom: 15rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.draft-item:hover {
+  transform: scale(1.02); /* 鼠标悬浮时轻微放大 */
+}
+.draft-title{
+  font-size: 32rpx;
+  line-height: 48rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.draft-item{
+  font-size: 30rpx;
+  line-height: 48rpx;
+  color: #666666;
+}
+.button{
+  display: flex;
+  flex-direction: row;
+}
+.delete-button,.publish-button{
+  font-size: 15px;
+  margin:  5px 12px 5px 0 ;
+  width: 60px;
+}
+.draft-picture{
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+}
+.draft-pictures{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
