@@ -48,7 +48,7 @@ Page({
       setTimeout(() => {
         console.log("Navigating to new page...");
         wx.navigateTo({
-          url: "../newAnswer/newAnwer", //验证成功至新问题界面
+          url: "../newAnswer/newAnswer", //验证成功至新问题界面
         });
       }, 500);
     } else {
