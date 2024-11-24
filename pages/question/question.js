@@ -31,33 +31,7 @@ Page({
   to_write_answer: function () {
     wx.setStorageSync("question_id", this.data.question.id);
     wx.setStorageSync("question_title", this.data.question.title);
-    //local-check-login 
-    if (app.globalData.isLoggedIn) {
-      console.log('检验成功');
-      wx.showToast({
-        title: '已登录',
-        icon: 'success'
-      });
-      setTimeout(() => {
-        console.log('Navigating to new page...');
-        wx.navigateTo({
-          url: '../newQuestion/newQuestion',//验证成功至新问题界面
-        });
-    }, 500);
-            
-    } else {
-      wx.showToast({
-        title: '提问题请先登录哦~',
-        icon: 'none'});
-        console.log(app.globalData.name, app.globalData.token)
-      console.log('未登录', res.data);
-      setTimeout(() => {
-        console.log('Navigating to login page...');
-        wx.navigateTo({
-          url: '../login/login',
-        });
-    }, 500);
-  }  
+    //local-check-login
   },
   to_ask_answer: function () {
     wx.navigateTo({
