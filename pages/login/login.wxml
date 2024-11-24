@@ -5,7 +5,7 @@
   <view class="input-group">
     <view class="input-item">
       <text class="input-label">账号：</text>
-      <input type="number" bindinput="onInputAccount" placeholder="请输入用户名" />
+      <input bindinput="onInputAccount" placeholder="请输入用户名" />
     </view>
     <view class="input-item">
       <text class="input-label">密码：</text>

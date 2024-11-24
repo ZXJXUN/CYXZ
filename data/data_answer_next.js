@@ -11,6 +11,8 @@ var next = {
       like_num: "1003",
       comment_num: "14",
       time: "2024-10-29",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -21,6 +23,8 @@ var next = {
       like_num: "1004",
       comment_num: "15",
       time: "2024-10-30",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -31,6 +35,8 @@ var next = {
       like_num: "1005",
       comment_num: "16",
       time: "2024-10-31",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -41,6 +47,8 @@ var next = {
       like_num: "1006",
       comment_num: "17",
       time: "2024-11-01",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -51,6 +59,8 @@ var next = {
       like_num: "1007",
       comment_num: "18",
       time: "2024-11-02",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -61,6 +71,8 @@ var next = {
       like_num: "1008",
       comment_num: "19",
       time: "2024-11-03",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -71,6 +83,8 @@ var next = {
       like_num: "1009",
       comment_num: "20",
       time: "2024-11-04",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -81,6 +95,8 @@ var next = {
       like_num: "1010",
       comment_num: "21",
       time: "2024-11-05",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -91,6 +107,8 @@ var next = {
       like_num: "1011",
       comment_num: "22",
       time: "2024-11-06",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -101,6 +119,8 @@ var next = {
       like_num: "1012",
       comment_num: "23",
       time: "2024-11-07",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -111,6 +131,8 @@ var next = {
       like_num: "1013",
       comment_num: "24",
       time: "2024-11-08",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
     {
       question_id: "1",
@@ -121,6 +143,8 @@ var next = {
       like_num: "1014",
       comment_num: "25",
       time: "2024-11-09",
+      isShow: false,
+      show_icon: "../../images/收起.png",
     },
   ],
 };

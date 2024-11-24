@@ -26,6 +26,7 @@ Page({
     push_loading: false,
     save_content: 1,
     save_image: 1,
+    nowtime: "",
     headers: {
       username: "ab",
       token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
@@ -246,6 +247,45 @@ Page({
         },
       });
     }
+  },
+  clearContent() {
+    var nowtime = this.getNowTime();
+    this.setData({
+      nowtime: nowtime,
+    });
+    wx.showModal({
+      title: "提示",
+      content: "是否保存草稿",
+      success: (res) => {
+        if (res.confirm) {
+          wx.setStorageSync("save_content", this.data.content);
+          wx.setStorageSync("save_image", this.data.imageList);
+          wx.setStorageSync("save_time", nowtime);
+          wx.showToast({
+            title: "已保存",
+          });
+        } else if (res.cancel)
+          wx.showToast("已取消保存，草稿将不会保留", wx.navigateBack);
+      },
+    });
+  },
+
+  getNowTime() {
+    var dataTime;
+    var yy = new Date().getFullYear();
+    var mm = new Date().getMonth() + 1;
+    var dd = new Date().getDate();
+    var hh = new Date().getHours();
+    var mf =
+      new Date().getMinutes() < 10
+        ? "0" + new Date().getMinutes()
+        : new Date().getMinutes();
+    var ss =
+      new Date().getSeconds() < 10
+        ? "0" + new Date().getSeconds()
+        : new Date().getSeconds();
+    dataTime = `${yy}-${mm}-${dd} ${hh}:${mf}:${ss}`;
+    return dataTime;
   },
 
   /**
