@@ -1,9 +1,21 @@
 //answer.js
 var util = require("../../utils/util.js");
-
+const links = [
+  {
+    text: "首页",
+    url: "/pages/index/index",
+    openType: "switchTab",
+  },
+  {
+    text: "个人",
+    url: "/pages/home/home",
+    openType: "switchTab",
+  },
+];
 var app = getApp();
 Page({
   data: {
+    links,
     answerList: [],
     answer_length: 0,
     follow: false,
@@ -88,21 +100,21 @@ Page({
       wx.stopPullDownRefresh();
     }, 2000);
   },
-  lower: function (e) {
-    wx.showNavigationBarLoading();
-    var that = this;
-    setTimeout(function () {
-      wx.hideNavigationBarLoading();
-      that.nextLoad();
-    }, 1000);
-    console.log("lower");
-  },
-  refresh0: function () {
-    var index_api = "";
-    util.getData(index_api).then(function (data) {
-      console.log(data);
-    });
-  },
+  // lower: function (e) {
+  //   wx.showNavigationBarLoading();
+  //   var that = this;
+  //   setTimeout(function () {
+  //     wx.hideNavigationBarLoading();
+  //     that.nextLoad();
+  //   }, 1000);
+  //   console.log("lower");
+  // },
+  // refresh0: function () {
+  //   var index_api = "";
+  //   util.getData(index_api).then(function (data) {
+  //     console.log(data);
+  //   });
+  // },
   getData: function () {
     var that = this;
     wx.request({
@@ -239,25 +251,6 @@ Page({
           answerList: that.data.answerList.concat(next_data),
           answer_length: that.data.answer_length + next_data.length,
         });
-      },
-    });
-  },
-  followQuestion: function () {
-    this.setData({
-      follow: !this.data.follow,
-    });
-    wx.request({
-      url: "",
-      data: { follow: this.data.follow },
-      method: "Post",
-      header: {
-        "Content-Type": "application/json",
-      },
-      success: function (res) {
-        console.log(res.data);
-      },
-      fail: function (res) {
-        console.log("fail");
       },
     });
   },

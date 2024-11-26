@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "问题"
+  "navigationBarTitleText": "问题",
+  "usingComponents": {
+    "wux-footer": "../../components/footer/index",
+    "wux-divider": "../../components/divider/index",
+    "wux-pagination":"../../components/pagination/index"
+  }
 }
