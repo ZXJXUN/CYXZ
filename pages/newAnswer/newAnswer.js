@@ -21,6 +21,7 @@ Page({
     question_title: "如何学？",
     question_id: 1,
     imageList: [],
+    images: [],
     content: "",
     fileList: [],
     push_loading: false,
@@ -28,8 +29,8 @@ Page({
     save_image: 1,
     nowtime: "",
     headers: {
-      username: "1",
-      token: "94044544-8a07-46fb-9cc8-d5efbe4a1a03",
+      username: "ab",
+      token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
     },
   },
   onChange(e) {
@@ -155,67 +156,7 @@ Page({
       content: child.data.inputValue,
       imageList: this.data.fileList.map((n) => n.url),
     });
-    // for (var i = 0, len = this.data.imageList.length; i < len; i++) {
-    //   wx.uploadFile({
-    //     filePath: this.data.imageList[i],
-    //     name: "file",
-    //     url: "https://47.120.26.83:8000/oss/upload",
-    //     header: {
-    //       username: "ab",
-    //       token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
-    //     },
-
-    //     success: (res) => {
-    //       console.log(res.data);
-    //     },
-    //     fail: (err) => {
-    //       console.log(err);
-    //     },
-    //   });
-    // }
-
-    const connectedString = this.data.imageList.join(",");
-    console.log(connectedString);
-    console.log(this.data.question_id);
-    console.log(this.data.content);
-    console.log(this.data.question_id);
-
-    wx.request({
-      url: "https://47.120.26.83:8000/api/answerly/v1/answer",
-      header: {
-        username: "ab",
-        token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      data: {
-        content: this.data.content,
-        question_id: this.data.question_id,
-        images: connectedString,
-      },
-      success: (res) => {
-        console.log(res);
-        wx.hideLoading();
-        wx.showToast({
-          title: "发布成功",
-          icon: "success",
-          time: 1500,
-        });
-        // setTimeout(() => {
-        //   wx.navigateTo({
-        //     url: "/pages/answer/answer",
-        //   });
-        // }, 1800);
-      },
-      fail: (err) => {
-        console.log(err);
-        wx.hideLoading();
-        wx.showToast({
-          title: "发布失败",
-          icon: "error",
-        });
-      },
-    });
+    this.uploadAndRequest();
   },
   back() {
     wx.navigateBack({
@@ -329,4 +270,98 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
+
+  uploadAndRequest: function () {
+    const imageList = this.data.imageList;
+
+    // 定义一个函数来执行上传任务
+    function uploadFile(task) {
+      return new Promise((resolve, reject) => {
+        console.log(task);
+        wx.uploadFile({
+          url: "https://nurl.top:8000/oss/upload",
+          header: {
+            username: "ab",
+            token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+          },
+          filePath: task,
+          name: "file",
+          success(res) {
+            console.log("上传成功", res);
+            console.log(res.data);
+            //获取res.data中的data属性
+            const data = JSON.parse(res.data);
+            console.log(data);
+            const resData = data.data;
+            console.log(resData);
+
+            resolve(res);
+          },
+          fail(err) {
+            reject(err);
+          },
+        });
+      });
+    }
+
+    // 定义一个函数来发起请求
+    function request(url, method, data) {
+      return new Promise((resolve, reject) => {
+        wx.request({
+          url: url,
+          method: method,
+          data: data,
+          header: {
+            username: "ab",
+            token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+            "Content-Type": "application/json",
+          },
+          success(res) {
+            resolve(res);
+            wx.hideLoading();
+            wx.showToast({
+              title: "发布成功",
+              icon: "success",
+              time: 1500,
+            });
+            setTimeout(() => {
+              wx.navigateTo({
+                url: "/pages/question/question",
+              });
+            }, 1800);
+          },
+          fail(err) {
+            reject(err);
+            wx.hideLoading();
+            wx.showToast({
+              title: "发布失败,请检查网络",
+              icon: "error",
+              time: 1500,
+            });
+          },
+        });
+      });
+    }
+    // 使用 Promise.all 来并行执行所有上传任务
+    Promise.all(imageList.map((task) => uploadFile(task)))
+      .then((results) => {
+        console.log("所有上传任务完成");
+        var test = results.map((res) => JSON.parse(res.data).data);
+        console.log(test);
+        // 所有上传任务完成后，发起一次请求
+        const connectedString = test.join(",");
+        console.log(connectedString);
+        return request("https://nurl.top:8000/api/answerly/v1/answer", "POST", {
+          content: this.data.content,
+          question_id: this.data.question_id,
+          images: connectedString,
+        });
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 });
