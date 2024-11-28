@@ -20,18 +20,25 @@ App({
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
   },
+  
   globalData: {
     userInfo: null,
     token: null,
     name: '请先登录',
     isLoggedIn: false
+  },
+
+  check: function() {
+    var expirationTime = wx.getStorageSync('expirationTime');
+    if (Date.now() > expirationTime) {
+      // token过期，重新登录
+      this.reLogin();
+    }
+  },
+
+  reLogin: function(){
+    // 清空本地缓存的所有数据
+    wx.clearStorageSync();
   }
 })

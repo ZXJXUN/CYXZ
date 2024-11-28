@@ -33,7 +33,7 @@ Page({
     
     if (this.data.password && this.data.account) {
       wx.request({
-        url: 'https://47.120.26.83:8000/api/answerly/v1/user/login',
+        url: 'https://nurl.top:8000/api/answerly/v1/user/login',
         method: 'POST',
         data: {
           username: this.data.account,
@@ -43,36 +43,42 @@ Page({
         success: (res) => {
           
           if (res.data.success === true) {
-            console.log('登录成功');
-            console.log(res.data);
             app.globalData.isLoggedIn = true;
             wx.showToast({
               title: '登录成功',
               icon: 'success'
             });
             setTimeout(() => {
-              wx.navigateBack({
-                url: '../index/index',
-              });
+              wx.navigateBack();
           }, 500);
           
           const token = res.data.data.token;
           const name = this.data.account;
-
+          wx.setStorageSync('token', token);//11.27_token
+          wx.setStorageSync('name', name);
+          wx.setStorageSync('isLoggedIn', true);
           app.globalData.token = token;  
           app.globalData.name = name;
           console.log(app.globalData.token);
+          // 设置token有效期为30天，将30天换算成秒数
+          var expiresInSeconds = 30 * 24 * 60 * 60;
+
+          // 计算过期时间，以当前时间加上有效期的秒数得到过期时间戳
+          var expirationTime = Date.now() + expiresInSeconds * 1000;
+          wx.setStorageSync('expirationTime', expirationTime);
+
           } else if(res.data.code === 'A000203') {
             app.globalData.isLoggedIn = true;
+            const name = this.data.account;
+            wx.setStorageSync('name', name);
             wx.showToast({
               title: '登录成功',
               icon: 'success'
             });
             setTimeout(() => {
-              wx.navigateBack({
-                url: '../index/index',
-              });
-          }, 500);
+              wx.navigateBack(
+              );
+          }, 300);
           }
           else {
             wx.showToast({
