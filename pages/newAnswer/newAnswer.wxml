@@ -29,6 +29,7 @@
     listType="picture-card"
     max="9"
     count="9"
+    uploaded="false"
     url="http://47.120.26.83:8000/oss/upload"
     bind:change="onChange"
     bind:success="onSuccess"
@@ -39,14 +40,6 @@
   >
     <text style="font-size: 30rpx">上传照片</text>
   </wux-upload>
-
-  <!-- <wux-footer
-    theme="positive"
-    label="源智答"
-    content="@2024 yuanhzida.com All rights reserved"
-    links="{{ links }}"
-    bind:linkClick="onlinkClick"
-  /> -->
   <view class="footer">
     <view class="save"
       ><view class="image_save_view"

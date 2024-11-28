@@ -117,8 +117,9 @@
 }
 
 .container {
-  height: 1500px;
+  height: auto;
   display: flex;
+  overflow: visible;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -190,8 +191,8 @@
 .container .feed-item .feed-source .avatar image {
   /*position: absolute;*/
   display: inline-block;
-  width: 45rpx;
-  height: 45rpx;
+  width: 50rpx;
+  height: 50rpx;
   border-radius: 45rpx;
   top: 10rpx;
   vertical-align: middle;
@@ -201,9 +202,67 @@
   width: 45rpx;
   height: 45rpx;
   border-radius: 45rpx;
-  left: 500rpx;
+  left: 550rpx;
   vertical-align: middle;
 }
+.more {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  top: -45rpx;
+  height: 70rpx;
+  width: 250rpx;
+  background-color: #ffffff;
+  justify-content: space-between;
+  transition: right 1s;
+  text-align: center;
+  transition: opacity 2s;
+  opacity: 1;
+}
+.more-delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70rpx;
+  height: 100%;
+  background-color: #ffffff;
+  color: #ff0000;
+  font-size: 20rpx;
+}
+.more-delete image {
+  width: 45rpx;
+  height: 50rpx;
+}
+.more-modify {
+  display: flex;
+  width: 70rpx;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  background-color: #ffffff;
+
+  color: #2e87da;
+  font-size: 20rpx;
+}
+.more-modify image {
+  width: 45rpx;
+  height: 50rpx;
+}
+.more-copy {
+  display: flex;
+  flex-direction: column;
+  width: 70rpx;
+  align-items: center;
+  height: 100%;
+  background-color: #ffffff;
+  color: #424242;
+  font-size: 20rpx;
+}
+.more-copy image {
+  width: 45rpx;
+  height: 50rpx;
+}
+
 .answer-content {
   height: 120rpx;
   overflow: hidden;
@@ -249,7 +308,7 @@
   font-size: 28rpx;
   font-weight: 600px;
   line-height: 40rpx;
-  text-space: 5rpx;
+  letter-spacing: 5rpx;
 }
 .container .feed-item .feed-content .answer-body {
   padding: 10rpx 0 0 0;
@@ -306,7 +365,7 @@
   line-height: 40rpx;
   letter-spacing: 3rpx;
   margin-bottom: 20rpx;
-  margin-top: 20rpx;
+  margin-top: 35rpx;
   padding-left: 10rpx;
 }
 .show-content-footer {

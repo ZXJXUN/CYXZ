@@ -21,7 +21,7 @@
           </view>
         </block>
        
-      </view>>
+      </view>
       <view class="que-footer">
         <view class="show-content-footer-time"
               >编辑于 2024-11-23 16:05:10</view
@@ -33,14 +33,14 @@
     </view>
   </view>
   <view class="answer-feed">
-    <block wx:for="{{ answerList }}" wx:for-index="index" wx:for-item="item">
+    <block wx:for="{{ answerList }}"  wx:if="{{index>=(current_page-1)*size&&index<current_page*size}}"  wx:for-index="index" wx:for-item="item">
       <view class="feed-item">
         <view class="feed-source">
           <a class="" bindTap="">
             <view class="avatar">
-              <image src="{{ item.answer_image_path }}"></image>
+              <image src="{{ item.avater }}"></image>
             </view>
-            <text>{{ item.answer_name }}</text>
+            <text>{{item.name}}</text>
           </a>
           <image
             class="show_icon"
@@ -48,18 +48,24 @@
             bindtap="show"
             data-index="{{ index }}"
           />
+          <view class="more" bindTap="show_more" data-index="{{ index }}"style="right: {{item.imageContainerRight}}rpx" >
+            <view class="more-delete"  hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}" ><image src="../../images/删除.png"/><view class="more-delete-text">删除</view></view>
+            <view class="more-modify" hidden="{{item.is_modify}}"><image src="../../images/修改1.png"/><view class="more-modify-text">修改</view></view>
+            <view class="more-copy" bindtap="copy" data-index="{{ index }}" ><image src="../../images/复制.png"/><view class="more-copy-text">复制</view></view>
+
+          </view>
         </view>
-        <view class="feed-content" hidden="{{ item.isShow == true }}">
+        <view class="feed-content" hidden="{{ item.is_show == true }}">
           <view class="answer-body">
             <view class="answer-content">
-              <text class="answer-txt">{{ item.answer_content }} </text>
+              <text class="answer-txt">{{ item.content }} </text>
             </view>
             <view class="answer-actions">
               <view class="like dot">
-                <a>{{ item.like_num }}赞同 </a>
+                <a>{{ item.like }}赞同 </a>
               </view>
               <view class="comments dot">
-                <a>{{ item.comment_num }} 评论 </a>
+                <a>{{ item.comment }} 评论 </a>
               </view>
               <view class="time">
                 <a>{{ item.time }}</a>
@@ -67,20 +73,20 @@
             </view>
           </view>
         </view>
-        <view class="feed-content-show" hidden="{{ item.isShow == false }}">
+        <view class="feed-content-show" hidden="{{ item.is_show == false }}">
           <view class="show-content-text">
-            {{ item.answer_content }} 
+            {{ item.content }} 
           </view>
           <view class="show-content-image">
-             <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item" > 
-          <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}">
-            <image   class="que-image" src="{{ item }}" mode="aspectFill"/>
+             <block wx:for="{{item.images}}" wx:for-index="i" wx:for-item="item_image" > 
+          <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}" data-i="{{ i }}" >
+            <image   class="que-image" src="{{item_image}}" mode="aspectFill"/>
           </view>
         </block>
           </view>
           <view class="show-content-footer">
             <view class="show-content-footer-time"
-              >编辑于 2024-11-23 16:05:10</view
+              >{{item.time}}</view
             >
             <view class="show-content-footer-main-icon">
               <view class="show-content-footer-write">
@@ -89,12 +95,12 @@
               </view>
               <view class="show-content-footer-like">
                 <image class="show-content-footer-like-icon" src="../../images/赞同1.png"/>
-                <view class="like-num">{{item.like_num}}</view>
+                <view class="like-num">{{item.like}}</view>
                 
               </view>
               <view class="show-content-footer-comment">
                 <image class="show-content-footer-comment-icon" src="../../images/评论.png"/>
-                <view class="comment-num">{{item.comment_num}}</view>
+                <view class="comment-num">{{item.comment}}</view>
               </view>
               <view class="show-content-footer-store">
                 <image class="show-content-footer-store-icon" src="../../images/收藏2.png"/>
@@ -119,7 +125,7 @@
   </view>
   <wux-pagination
       defaultCurrent="1"
-      total="99"
+      total="{{page_num}}"
       bind:prev="onPrev"
       bind:next="onNext"
     >
@@ -129,7 +135,7 @@
   <wux-footer
     theme="positive"
     label="源智答"
-    content="@2024 yuanhzida.com All rights reserved"
+    content="@2024 yuanzhida.com All rights reserved"
     links="{{ links }}"
   />
 </scroll-view>

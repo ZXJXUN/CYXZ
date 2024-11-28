@@ -19,7 +19,7 @@ Page({
     links,
     linksNoLinkData: links.map((v) => ({ text: v.text })),
     question_title: "如何学？",
-    question_id: "123",
+    question_id: 1,
     imageList: [],
     content: "",
     fileList: [],
@@ -28,8 +28,8 @@ Page({
     save_image: 1,
     nowtime: "",
     headers: {
-      username: "ab",
-      token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+      username: "1",
+      token: "94044544-8a07-46fb-9cc8-d5efbe4a1a03",
     },
   },
   onChange(e) {
@@ -155,36 +155,43 @@ Page({
       content: child.data.inputValue,
       imageList: this.data.fileList.map((n) => n.url),
     });
-    for (var i = 0, len = this.data.imageList.length; i < len; i++) {
-      wx.uploadFile({
-        filePath: this.data.imageList[i],
-        name: "file",
-        url: "http://47.120.26.83:8000/oss/upload",
-        header: {
-          username: "ab",
-          token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
-        },
+    // for (var i = 0, len = this.data.imageList.length; i < len; i++) {
+    //   wx.uploadFile({
+    //     filePath: this.data.imageList[i],
+    //     name: "file",
+    //     url: "https://47.120.26.83:8000/oss/upload",
+    //     header: {
+    //       username: "ab",
+    //       token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+    //     },
 
-        success: (res) => {
-          console.log(res.data);
-        },
-        fail: (err) => {
-          console.log(err);
-        },
-      });
-    }
+    //     success: (res) => {
+    //       console.log(res.data);
+    //     },
+    //     fail: (err) => {
+    //       console.log(err);
+    //     },
+    //   });
+    // }
+
+    const connectedString = this.data.imageList.join(",");
+    console.log(connectedString);
+    console.log(this.data.question_id);
+    console.log(this.data.content);
+    console.log(this.data.question_id);
+
     wx.request({
-      url: "http://47.120.26.83:8000/api/answerly/v1/answer",
+      url: "https://47.120.26.83:8000/api/answerly/v1/answer",
       header: {
         username: "ab",
-        token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+        token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
         "Content-Type": "application/json",
       },
       method: "POST",
       data: {
         content: this.data.content,
         question_id: this.data.question_id,
-        pictures: this.data.imageList,
+        images: connectedString,
       },
       success: (res) => {
         console.log(res);
@@ -194,11 +201,11 @@ Page({
           icon: "success",
           time: 1500,
         });
-        setTimeout(() => {
-          wx.navigateTo({
-            url: "/pages/answer/answer",
-          });
-        }, 1800);
+        // setTimeout(() => {
+        //   wx.navigateTo({
+        //     url: "/pages/answer/answer",
+        //   });
+        // }, 1800);
       },
       fail: (err) => {
         console.log(err);
@@ -225,10 +232,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({
-      question_id: wx.getStorageSync("question_id"),
-      question_title: wx.getStorageSync("question_title"),
-    });
+    // this.setData({
+    //   question_id: wx.getStorageSync("question_id"),
+    //   question_title: wx.getStorageSync("question_title"),
+    // });
     console.log(this.data.content.length);
     console.log(this.data.imageList.length);
     console.log(this.data.save_content);
