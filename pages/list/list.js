@@ -5,45 +5,15 @@ Page({
     // 默认feed数据，用于在未获取到后端数据时占位
     feed: [
       {
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
+        title: '这是一个问题',
+        content: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       }
     ],
     feed_length: 1, // 默认数据的条目数量
     // 当前页码，用于分页请求
-    currentPage: 0,
+    currentPage: 1,
     // 分类ID，可根据实际需求修改
     category: 0,
     // 是否已解决的标识，0表示未解决
@@ -72,12 +42,12 @@ Page({
         categoryId: 0,
         solvedFlag: that.solvedFlag,
         size: 10,
-        current: that.page
+        current: that.currentPage
       },
       success(res) {
         wx.hideLoading();
-        if (res.statusCode === 200 && res.data ) {
-          let newFeed = page === 0 ? res.data : that.data.feed.concat(res.data); // 如果是第一页，替换数据；否则追加数据
+        if (res.statusCode === 200 && res.data.records) {
+          let newFeed = page === 0 ? res.records : that.data.feed.concat(res.records); // 如果是第一页，替换数据；否则追加数据
           that.setData({
             feed: newFeed,
             feed_length: newFeed.length,
