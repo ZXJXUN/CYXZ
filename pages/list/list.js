@@ -11,7 +11,6 @@ Page({
         comment_num: 0
       }
     ],
-    feed_length: 1, // 默认数据的条目数量
     // 当前页码，用于分页请求
     currentPage: 1,
     // 分类ID，可根据实际需求修改
@@ -40,17 +39,20 @@ Page({
       },
       data: {
         categoryId: 0,
-        solvedFlag: that.solvedFlag,
+        solvedFlag: 2,
         size: 10,
-        current: that.currentPage
+        current: 1,
       },
       success(res) {
         wx.hideLoading();
-        if (res.statusCode === 200 && res.data.records) {
-          let newFeed = page === 0 ? res.records : that.data.feed.concat(res.records); // 如果是第一页，替换数据；否则追加数据
+        if (res.statusCode === 200) {
+          console.log("list get success");
+          console.log(res.data);
+          console.log(res);
+          console.log(res.data.data.records);
+          let newFeed = page === 0 ? res.data.data.records : that.data.feed.concat(res.data.data.records); // 如果是第一页，替换数据；否则追加数据
           that.setData({
             feed: newFeed,
-            feed_length: newFeed.length,
             currentPage: page
           });
         } else {
