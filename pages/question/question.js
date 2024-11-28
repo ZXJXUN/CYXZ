@@ -46,6 +46,10 @@ Page({
     });
   },
   to_write_answer: function () {
+    wx.navigateTo({
+      url: "../newAnswer/newAnswer", //验证成功至新问题界面
+    });
+
     wx.setStorageSync("question_id", this.data.question.id);
     wx.setStorageSync("question_title", this.data.question.title);
     // wx.navigateTo({
@@ -100,7 +104,7 @@ Page({
     var data0 = {
       title: "默认标题",
       images: [
-        "../../images/源智答小程序.png",
+        "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/28/8ec59bda-8ef3-47d9-b554-4da0e3f10c51.gif",
         "../../images/源智答小程序.png",
         "../../images/源智答小程序.png",
       ], //问题图片
@@ -132,6 +136,9 @@ Page({
           title: "网络连接失败",
           icon: "none",
           duration: 2000,
+        });
+        that.setData({
+          question: data0,
         });
       },
     });
@@ -183,7 +190,10 @@ Page({
 
           console.log(formattedDate);
           item.time = formattedDate;
-          item.images = tempimages[index];
+          //拼接两个字符串
+          item.images =
+            "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
+            tempimages[index];
           item.comment = 0;
           item.imageContainerRight = -800;
           console.log(that.data.username);
@@ -369,7 +379,7 @@ Page({
     if (new_page > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: "https://47.120.26.83:8000/api/answerly/v1/answer/page",
+        url: "https://nurl.top:8000/api/answerly/v1/answer/page",
         method: "GET",
         data: {
           id: this.data.question_id,
@@ -391,6 +401,16 @@ Page({
             //将逗号分割的图片字符串，转化为图片数组
             return item.images.split(",");
           });
+          console.log("tempimages");
+          console.log(tempimages);
+          tempimages = tempimages.map((item) => {
+            //加上../../images/前缀
+            return item.map((item) => {
+              return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+            });
+          });
+          console.log("tempimages加上前缀");
+          console.log(tempimages);
           var tempanswerList = temp.map((item) => {
             if (item.avatar == null) {
               item.avatar = "../../images/默认头像.png";
