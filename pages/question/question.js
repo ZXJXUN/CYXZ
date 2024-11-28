@@ -1,5 +1,6 @@
 //answer.js
 var util = require("../../utils/util.js");
+var isLoggedIn = wx.getStorageSync('isLoggeIn');
 const links = [
   {
     text: "首页",
@@ -51,7 +52,7 @@ Page({
     //   url: "../newAnswer/newAnswer", //验证成功至新问题界面
     // });
     //以下是校验token部分，检验成功跳转至writeanswer界面
-    if (app.globalData.isLoggedIn) {
+    if (isLoggedIn) {
       console.log("检验成功");
       wx.showToast({
         title: "已登录",

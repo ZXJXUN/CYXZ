@@ -7,12 +7,13 @@ Page({
     onShow: function () {
         // 在页面显示时更新name的值为app.js里的name
         this.setData({
-            name: app.globalData.name
+            name: wx.getStorageSync('name'),
+            isLoggedIn: wx.getStorageSync('isLoggedIn')
         });
     },
     // 事件处理函数
     goToLogin() {
-        if (!app.globalData.isLoggedIn) {
+        if (!isLoggedIn) {
             wx.navigateTo({
                 url: '../login/login'
             });
@@ -21,8 +22,8 @@ Page({
             this.setData({
                 isLoggedIn: false
             });
-            wx.reLaunch({
-                url: '../index/index'
+            wx.redirectTo({
+              url: '../index/index',
             });
         }
     }

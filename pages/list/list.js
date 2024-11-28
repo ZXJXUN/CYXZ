@@ -1,4 +1,5 @@
 var app = getApp();
+var isLoggedIn = wx.getStorageSync('isLoggedIn');
 Page({
   data: {
     // 默认feed数据，用于在未获取到后端数据时占位
@@ -156,7 +157,7 @@ Page({
 
   // 发布问题的跳转
   publishQuestion: function() {    
-        if (app.globalData.isLoggedIn) {
+        if (isLoggedIn) {
           console.log('检验成功');
           wx.showToast({
             title: '已登录',
@@ -173,8 +174,8 @@ Page({
           wx.showToast({
             title: '提问题请先登录哦~',
             icon: 'none'});
-            console.log(app.globalData.name, app.globalData.token)
-          console.log('未登录');
+            console.log(app.globalData.name, app.globalData.token);
+            console.log(app.globalData.isLoggedIn);
           setTimeout(() => {
             console.log('Navigating to login page...');
             wx.navigateTo({
