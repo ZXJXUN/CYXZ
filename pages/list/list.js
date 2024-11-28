@@ -38,10 +38,10 @@ Page({
         "username": "ab", // 请求头中的username
       },
       data: {
-        categoryId: 0,
-        solvedFlag: 2,
+        categoryId: that.data.category,
+        solvedFlag: that.data.solved_flag,
         size: 10,
-        current: 1,
+        current: that.data.currentPage,
       },
       success(res) {
         wx.hideLoading();
