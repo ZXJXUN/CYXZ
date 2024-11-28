@@ -9,6 +9,10 @@ Page({
     name: '',
     key: '',
     lastSendTime: null, // 上一次发送验证码的时间
+    isCodeButtonDisabled: false, // 控制按钮禁用状态
+    countDownText: '发送验证码', // 显示的按钮文本
+    countdown: 30, // 倒计时初始值
+    countdownInterval: null // 保存倒计时定时器
   },
 
   onInputEmail: function(e) {
@@ -36,7 +40,35 @@ Page({
       const dataToSend = {
         mail: this.data.email
       };
-      console.log(this.data);
+      // 禁用按钮并开始倒计时
+      that.setData({
+        isCodeButtonDisabled: true,
+        countdown: 30,
+        countDownText: '30秒后重试'
+      });
+
+      // 开始倒计时
+      const countdownInterval = setInterval(() => {
+        let countdown = that.data.countdown;
+        countdown--;
+        that.setData({
+          countdown: countdown,
+          countDownText: `${countdown}秒后重试`
+        });
+
+        if (countdown <= 0) {
+          clearInterval(that.data.countdownInterval); // 清除倒计时
+          that.setData({
+            isCodeButtonDisabled: false, // 启用按钮
+            countDownText: '发送验证码' // 重置按钮文本
+          });
+        }
+      }, 1000);
+
+      that.setData({
+        countdownInterval: countdownInterval, // 保存定时器
+        lastSendTime: Date.now() // 更新最后发送时间
+      });
       wx.request({
         url: 'https://47.120.26.83:8000/api/answerly/v1/user/send-code', 
         method: 'POST',

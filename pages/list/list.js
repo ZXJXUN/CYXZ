@@ -5,54 +5,36 @@ Page({
     // 默认feed数据，用于在未获取到后端数据时占位
     feed: [
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
         question: '这是一个问题',
         answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
         question: '这是一个问题',
         answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
         question: '这是一个问题',
         answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
         question: '这是一个问题',
         answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
         question: '这是一个问题',
         answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       },
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
         question: '这是一个问题',
         answer_ctnt: '这是问题的详情的缩略',
         good_num: 0,
@@ -65,7 +47,7 @@ Page({
     // 分类ID，可根据实际需求修改
     category: 0,
     // 是否已解决的标识，0表示未解决
-    solved_flag: 0
+    solved_flag: 2
   },  
 
   onLoad: function () {
@@ -80,15 +62,17 @@ Page({
       title: '加载中...',
     });
     wx.request({
-      url: '', // API地址
-      method: 'GET',
-      data: {
-        category: that.data.category,
-        page: page,
-        solved_flag: that.data.solved_flag // 可选参数，根据需求设置
-      },
+      url: "https://nurl.top:8000/api/answerly/v1/question/page", // 基础URL，不带参数
+      method: 'GET', // 请求方法
       header: {
-        'Content-Type': 'application/json'
+        "token": "29b04146-b2de-4733-b0f5-fba06f7b45fe", // 请求头中的token
+        "username": "ab", // 请求头中的username
+      },
+      data: {
+        categoryId: 0,
+        solvedFlag: that.solvedFlag,
+        size: 10,
+        current: that.page
       },
       success(res) {
         wx.hideLoading();
