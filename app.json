@@ -9,7 +9,8 @@
     "pages/newQuestion/newQuestion",
     "pages/newAnswer/newAnswer",
     "pages/register/register",
-    "pages/draft/draft"
+    "pages/draft/draft",
+    "pages/MyQuestion/MyQuestion"
   ],
   "window": {
     "navigationBarTextStyle": "white",
