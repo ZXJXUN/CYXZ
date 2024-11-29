@@ -151,7 +151,7 @@ Page({
       title: "发布中",
     });
     const child = this.selectComponent("#ans_content");
-    console.log(child);
+    console.log(child.data.inputValue); // 获取内容
     this.setData({
       content: child.data.inputValue,
       imageList: this.data.fileList.map((n) => n.url),
@@ -186,34 +186,33 @@ Page({
       this.data.save_image != this.data.imageList.length
     ) {
       wx.enableAlertBeforeUnload({
-        message: "您是否需要保存当前内容",
+        message: "您的内容尚未保存草稿箱，确定要离开吗？",
         success: function (res) {
-          console.log("保存成功：", res);
+          console.log("未保存离开：", res);
         },
         fail: function (errMsg) {
-          console.log("未保存：", errMsg);
+          console.log("返回保存：", errMsg);
         },
       });
     }
   },
   clearContent() {
-    var nowtime = this.getNowTime();
-    this.setData({
-      nowtime: nowtime,
-    });
     wx.showModal({
-      title: "提示",
-      content: "是否保存草稿",
+      title: "是否清空内容",
       success: (res) => {
         if (res.confirm) {
-          wx.setStorageSync("save_content", this.data.content);
-          wx.setStorageSync("save_image", this.data.imageList);
-          wx.setStorageSync("save_time", nowtime);
-          wx.showToast({
-            title: "已保存",
+          console.log("用户点击确定");
+          console.log("清除内容");
+          const child = this.selectComponent("#ans_content");
+          child.onClear();
+          const images_upload = this.selectComponent("#images_upload");
+          images_upload.clearAll();
+          this.setData({
+            fileList: [],
           });
-        } else if (res.cancel)
-          wx.showToast("已取消保存，草稿将不会保留", wx.navigateBack);
+        } else if (res.cancel) {
+          console.log("用户点击取消,不清除内容");
+        }
       },
     });
   },
@@ -363,5 +362,14 @@ Page({
       .catch((err) => {
         console.log(err);
       });
+  },
+  saveContent() {
+    //调用存草稿接口
+
+    wx.showToast({
+      title: "功能还在开发中",
+      icon: "error",
+      duration: 2000,
+    });
   },
 });

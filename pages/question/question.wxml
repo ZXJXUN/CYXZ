@@ -27,7 +27,7 @@
               >编辑于 2024-11-23 16:05:10</view
             >
             <view class="que-footer-store" >
-                <image class="que-footer-store-icon" src="{{ store_icon }}"bindtap="store" />       
+                <image class="que-footer-store-icon" src="{{ question.collect ? '../../images/收藏1.png' : '../../images/收藏2.png'}}"bindtap="store" />       
             </view>
       </view>
     </view>
@@ -94,7 +94,7 @@
                 <input placeholder="发表你的看法" class="show-content-footer-write-input" bindinput="input" data-index="{{ index }}"></input>
               </view>
               <view class="show-content-footer-like">
-                <image class="show-content-footer-like-icon" src="../../images/赞同1.png"/>
+                <image class="show-content-footer-like-icon" src="{{item.is_like?'../../images/赞同2.png':'../../images/赞同1.png'}}" bindtap="like_answer" data-index="{{ index }}"/>
                 <view class="like-num">{{item.like}}</view>
                 
               </view>
@@ -102,8 +102,8 @@
                 <image class="show-content-footer-comment-icon" src="../../images/评论.png"/>
                 <view class="comment-num">{{item.comment}}</view>
               </view>
-              <view class="show-content-footer-store">
-                <image class="show-content-footer-store-icon" src="../../images/收藏2.png"/>
+              <view class="show-content-footer-store"  bindtap="collect_answer" data-index="{{ index }}">
+                <image class="show-content-footer-store-icon" src="{{item.collect?'../../images/收藏1.png':'../../images/收藏2.png'}}"/>
                 <view class="store-num"></view>
               </view>
                </view>
@@ -123,11 +123,16 @@
       </view>
     </block>
   </view>
+  <view class="no_answer" hidden="{{answer_num != 0}}">
+    <image class="no_answer_image" src="../../images/无回答蓝.png" />
+    <view class="no_answer_text" >暂无回答</view>
+  </view>
   <wux-pagination
       defaultCurrent="1"
       total="{{page_num}}"
       bind:prev="onPrev"
       bind:next="onNext"
+      id="pagination"
     >
       <view slot="prev">上一页</view>
       <view slot="next">下一页</view>

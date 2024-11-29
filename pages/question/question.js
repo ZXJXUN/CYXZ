@@ -27,8 +27,10 @@ Page({
       collect: 0, //1为收藏，0为未收藏
       collect_icon: "../../images/收藏2.png",
     },
+    collect_icon: ["../../images/收藏2.png", "../../images/收藏1.png"],
     current_page: 1,
     size: 4,
+
     answer_num: 0,
     page_num: 0, //总页数
     load_max_page: 1, //已经加载到第几页
@@ -176,6 +178,7 @@ Page({
             avater: item.avatar,
             content: item.content,
             like: item.likeCount,
+
             useful: item.useful,
             is_show: false,
             show_icon: "../../images/收起.png",
@@ -186,7 +189,17 @@ Page({
         tempanswerList.forEach((item, index) => {
           const isoString = temp[index].createTime;
           const date = new Date(isoString);
-          const formattedDate = date.toLocaleString();
+          const formattedDate = date
+            .toLocaleDateString("zh-CN", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: false,
+            })
+            .replace(/\//g, "-");
 
           console.log(formattedDate);
           item.time = formattedDate;
@@ -195,6 +208,7 @@ Page({
             "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
             tempimages[index];
           item.comment = 0;
+          item.is_like = false;
           item.imageContainerRight = -800;
           console.log(that.data.username);
           if (that.data.username == item.name) {
@@ -211,7 +225,7 @@ Page({
         that.setData({
           answerList: tempanswerList,
           answer_num: res.data.data.total,
-          page_num: res.data.data.pages,
+          page_num: res.data.data.pages == 0 ? 1 : res.data.data.pages,
         });
       },
       fail: function (error) {
@@ -300,26 +314,73 @@ Page({
     });
   },
   store() {
+    var que = this.data.question;
+    console.log(que);
+    que.collect = !que.collect;
     this.setData({
-      isStore: !this.data.isStore,
+      question: que,
     });
-    if (this.data.isStore == true) {
-      this.setData({
-        store_icon: "../../images/收藏1.png",
-      });
+    if (this.data.question.collect == true) {
       wx.showToast({
         title: "收藏成功",
         icon: "success",
         duration: 1000,
       });
     } else {
-      this.setData({
-        store_icon: "../../images/收藏2.png",
-      });
       wx.showToast({
         title: "取消收藏",
         icon: "none",
         duration: 1000,
+      });
+    }
+  },
+  collect_answer(e) {
+    console.log("collect_answer");
+    var index = e.currentTarget.dataset.index;
+    var answer = this.data.answerList[index];
+    answer.collect = !answer.collect;
+    this.setData({
+      answerList: this.data.answerList,
+    });
+    if (answer.collect == true) {
+      wx.showToast({
+        title: "收藏成功",
+        icon: "success",
+        duration: 1000,
+      });
+      //收藏成功，调用收藏接口
+    } else {
+      wx.showToast({
+        title: "取消收藏",
+        icon: "none",
+        duration: 1000,
+      });
+    }
+  },
+  like_answer(e) {
+    console.log("like_answer");
+    var index = e.currentTarget.dataset.index;
+    var answer = this.data.answerList[index];
+    answer.is_like = !answer.is_like;
+
+    if (answer.is_like == true) {
+      // wx.showToast({
+      //   title: "点赞成功",
+      //   icon: "success",
+      // });
+      answer.like++;
+      this.setData({
+        answerList: this.data.answerList,
+      });
+      //点赞成功，调用点赞接口
+    } else {
+      // wx.showToast({
+      //   title: "取消点赞",
+      //   icon: "none",
+      // });
+      answer.like--;
+      this.setData({
+        answerList: this.data.answerList,
       });
     }
   },
@@ -432,7 +493,17 @@ Page({
           tempanswerList.forEach((item, index) => {
             const isoString = temp[index].createTime;
             const date = new Date(isoString);
-            const formattedDate = date.toLocaleString();
+            const formattedDate = date
+              .toLocaleDateString("zh-CN", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false,
+              })
+              .replace(/\//g, "-");
             item.time = formattedDate;
 
             item.images = tempimages[index];
@@ -481,7 +552,7 @@ Page({
         console.log(that.data.token);
         if (res.confirm) {
           wx.request({
-            url: "https://47.120.26.83:8000/api/answerly/v1/answer",
+            url: "https://nurl.top:8000/api/answerly/v1/answer",
             header: {
               username: that.data.username,
               token: that.data.token,
@@ -504,6 +575,10 @@ Page({
                   that.setData({
                     load_max_page: that.data.load_max_page,
                   });
+                  //获取组件实例
+                  const pagination = this.selectComponent("#pagination");
+                  //调用组件方法
+                  pagination.onPrev();
                 }
               }
               that.data.answer_num--;

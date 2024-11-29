@@ -2,11 +2,11 @@
 <view class="container">
   <view class="question_tlitle">
     <view class="question_title">{{ question_title }}</view>
-    <view class="clear_content">
+    <view class="clear_content" bindtap="clearContent">
       <view class="clear_image_view">
         <image src="../../images/清空.png" class="image_clear"></image>
       </view>
-      <view class="clear_text" bindtap="clearContent">清空</view>
+      <view class="clear_text">清空</view>
     </view>
   </view>
   <wux-cell-group title="">
@@ -19,7 +19,6 @@
         cursorSpacing="80"
         placeholder="请输入回答内容"
         disableed="false"
-        clear="true"
         bind:clear="onClear"
         id="ans_content"
       />
@@ -37,11 +36,12 @@
     bind:complete="onComplete"
     bind:preview="onPreview"
     header="{{ headers }}"
+    id="images_upload"
   >
     <text style="font-size: 30rpx">上传照片</text>
   </wux-upload>
   <view class="footer">
-    <view class="save"
+    <view class="save" bindtap="saveContent"
       ><view class="image_save_view"
         ><image src="../../images/草稿箱.png" class="image_save"></image
       ></view>

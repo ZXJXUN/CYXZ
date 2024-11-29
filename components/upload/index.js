@@ -417,6 +417,13 @@ baseComponent({
         this.onChange(info);
       }
     },
+    //清除所有文件
+    clearAll() {
+      this.setData({
+        fileList: [],
+        uploadFileList: [],
+      });
+    },
     /**
      * 中断上传任务
      * @param {String} uid 文件唯一标识

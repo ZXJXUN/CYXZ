@@ -505,3 +505,22 @@
   width: 220rpx;
   height: 220rpx;
 }
+.no_answer {
+  width: 100%;
+  height: 650rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.no_answer_image {
+  width: 400rpx;
+  height: 400rpx;
+}
+.no_answer_text {
+  text-align: center;
+  padding: 50rpx;
+  vertical-align: middle;
+  font-size: 40rpx;
+  color: #a0acac;
+}
