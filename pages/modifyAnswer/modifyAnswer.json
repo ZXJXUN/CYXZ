@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "wux-upload": "../../components/upload/index",
+    "wux-cell-group": "../../components/cell-group/index",
+    "wux-cell": "../../components/cell/index",
+    "wux-textarea": "../../components/textarea/index",
+    "wux-footer": "../../components/footer/index",
+    "wux-divider": "../../components/divider/index"
+  }
+}

@@ -19,13 +19,13 @@ Page({
     username: "ab",
     answerList: [],
     question_id: 1,
+    question_id_str: "1862440654170472449",
     question: {
       title: "",
       images: [], //问题图片
       time: "", //问题发布时间
       content: "",
       collect: 0, //1为收藏，0为未收藏
-      collect_icon: "../../images/收藏2.png",
     },
     collect_icon: ["../../images/收藏2.png", "../../images/收藏1.png"],
     current_page: 1,
@@ -115,8 +115,13 @@ Page({
       collect: 0, //1为收藏，0为未收藏
       collect_icon: "../../images/收藏2.png",
     };
+    let url =
+      "https://nurl.top:8000/api/answerly/v1/question/" +
+      this.data.question_id_str;
+    console.log("url");
+    console.log(url);
     wx.request({
-      url: "https://47.120.26.83:8000/api/answerly/v1/question/?id=this.data.question_id",
+      url: url,
       method: "GET",
       header: {
         "content-type": "application/json",
@@ -127,8 +132,23 @@ Page({
         console.log("question get success");
         console.log(res.data);
         console.log(res);
+        var tempquestion = {};
+        tempquestion.title = res.data.data.title;
+        tempquestion.images = res.data.data.images
+          ? res.data.data.images.split(",")
+          : [];
+        for (var i = 0; i < tempquestion.images.length; i++) {
+          tempquestion.images[i] =
+            "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
+            tempquestion.images[i];
+        }
+        tempquestion.time = res.data.data.createTime;
+        tempquestion.content = res.data.data.content;
+        tempquestion.collect = 0;
+        console.log("tempquestion");
+        console.log(tempquestion);
         that.setData({
-          question: data0,
+          question: tempquestion,
         });
       },
       fail: function (error) {
@@ -168,6 +188,22 @@ Page({
           //将逗号分割的图片字符串，转化为图片数组
           return item.images.split(",");
         });
+        console.log("tempimages");
+        console.log(tempimages);
+        tempimages = tempimages.map((item) => {
+          //加上../../images/前缀
+          return item.map((item) => {
+            //没有前缀的图片加上前缀，有前缀的图片保持不变
+            if (
+              item.indexOf("https://oss-symbol.oss-cn-beijing.aliyuncs.com/") ==
+              -1
+            ) {
+              return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+            } else {
+              return item;
+            }
+          });
+        });
         var tempanswerList = temp.map((item) => {
           if (item.avatar == null) {
             item.avatar = "../../images/默认头像.png";
@@ -203,10 +239,9 @@ Page({
 
           console.log(formattedDate);
           item.time = formattedDate;
+
           //拼接两个字符串
-          item.images =
-            "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
-            tempimages[index];
+          item.images = tempimages[index];
           item.comment = 0;
           item.is_like = false;
           item.imageContainerRight = -800;
@@ -467,7 +502,16 @@ Page({
           tempimages = tempimages.map((item) => {
             //加上../../images/前缀
             return item.map((item) => {
-              return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+              //没有前缀的图片加上前缀，有前缀的图片保持不变
+              if (
+                item.indexOf(
+                  "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+                ) == -1
+              ) {
+                return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+              } else {
+                return item;
+              }
             });
           });
           console.log("tempimages加上前缀");
@@ -593,6 +637,18 @@ Page({
           });
         }
       },
+    });
+  },
+  modify(e) {
+    console.log("modify");
+    let index = e.currentTarget.dataset.index;
+    wx.setStorageSync("modify_id", this.data.answerList[index].id);
+    wx.setStorageSync("modify_content", this.data.answerList[index].content);
+    wx.setStorageSync("modify_images", this.data.answerList[index].images);
+    wx.setStorageSync("modify_question_id", this.data.question_id);
+    wx.setStorageSync("modify_question_title", this.data.question.title);
+    wx.navigateTo({
+      url: "../modifyAnswer/modifyAnswer",
     });
   },
 });

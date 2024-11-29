@@ -1,0 +1,53 @@
+<!--pages/newAnswer/newAnswer.wxml-->
+<view class="container">
+  <view class="question_tlitle">
+    <view class="question_title">{{ question_title }}</view>
+    <view class="clear_content" bindtap="clearContent">
+      <view class="clear_image_view">
+        <image src="../../images/清空.png" class="image_clear"></image>
+      </view>
+      <view class="clear_text">清空</view>
+    </view>
+  </view>
+  <wux-cell-group title="">
+    <wux-cell hover-class="none">
+      <wux-textarea
+        hasCount
+        rows="3"
+        maxlength="1000"
+        placeholder-class="placeholder_class"
+        cursorSpacing="80"
+        placeholder="请输入回答内容"
+        disableed="false"
+        bind:clear="onClear"
+        id="ans_content"
+      />
+    </wux-cell>
+  </wux-cell-group>
+  <wux-upload
+    listType="picture-card"
+    max="9"
+    count="9"
+    uploaded="false"
+    url="https://47.120.26.83:8000/oss/upload"
+    bind:change="onChange"
+    bind:success="onSuccess"
+    bind:fail="onFail"
+    bind:complete="onComplete"
+    bind:preview="onPreview"
+    header="{{ headers }}"
+    id="images_upload"
+    defaultFileList="{{ modify_fileList }}"
+  >
+    <text style="font-size: 30rpx">上传照片</text>
+  </wux-upload>
+  <view class="footer">
+    <view class="save" bindtap="saveContent"
+      ><view class="image_save_view"
+        ><image src="../../images/草稿箱.png" class="image_save"></image
+      ></view>
+      <view class="save_text">存草稿</view>
+    </view>
+    <view class="submit" bindtap="submit">修改回答</view>
+  </view>
+</view>

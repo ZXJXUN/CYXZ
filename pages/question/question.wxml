@@ -24,7 +24,7 @@
       </view>
       <view class="que-footer">
         <view class="show-content-footer-time"
-              >编辑于 2024-11-23 16:05:10</view
+              >编辑于 {{ question.time }}</view
             >
             <view class="que-footer-store" >
                 <image class="que-footer-store-icon" src="{{ question.collect ? '../../images/收藏1.png' : '../../images/收藏2.png'}}"bindtap="store" />       
@@ -50,7 +50,7 @@
           />
           <view class="more" bindTap="show_more" data-index="{{ index }}"style="right: {{item.imageContainerRight}}rpx" >
             <view class="more-delete"  hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}" ><image src="../../images/删除.png"/><view class="more-delete-text">删除</view></view>
-            <view class="more-modify" hidden="{{item.is_modify}}"><image src="../../images/修改1.png"/><view class="more-modify-text">修改</view></view>
+            <view class="more-modify" hidden="{{item.is_modify}}" bindtap="modify" data-index="{{ index }}" ><image src="../../images/修改1.png"/><view class="more-modify-text">修改</view></view>
             <view class="more-copy" bindtap="copy" data-index="{{ index }}" ><image src="../../images/复制.png"/><view class="more-copy-text">复制</view></view>
 
           </view>

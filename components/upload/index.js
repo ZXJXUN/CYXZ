@@ -462,6 +462,7 @@ baseComponent({
   attached() {
     const { defaultFileType, defaultFileList, fileList, controlled } =
       this.data;
+    console.log(defaultFileType, defaultFileList, fileList, controlled);
     const uploadFileList = controlled ? fileList : defaultFileList;
     const isVideo = defaultFileType === "video";
 
@@ -472,5 +473,10 @@ baseComponent({
    */
   detached() {
     this.abort();
+  },
+  changeUploadFileList(e) {
+    this.setData({
+      uploadFileList: e,
+    });
   },
 });
