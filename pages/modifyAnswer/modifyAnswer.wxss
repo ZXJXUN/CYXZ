@@ -42,7 +42,10 @@
 .question_tlitle {
   display: flex;
   width: 100%;
-  height: 120rpx;
+  padding-bottom: 20rpx;
+  padding-top: 20rpx;
+  height: auto;
+  overflow: visible;
   background: #fff;
   align-items: center;
   box-sizing: border-box;
@@ -50,8 +53,11 @@
   border-bottom: 1rpx solid #ccc;
   font-size: 40rpx;
   border-bottom: 1rpx solid #697171;
-  text-align: center;
-  line-height: 100rpx;
+  text-align: left;
+  padding-left: 20rpx;
+  line-height: 45rpx;
+
+  font-weight: bold;
 }
 
 .answer_content textarea {
@@ -211,9 +217,11 @@
   height: 60rpx;
   border-radius: 12rpx;
   background: #ebf0f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .image_clear {
-  margin: auto;
   height: 50rpx;
   width: 45rpx;
 }

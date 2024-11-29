@@ -18,7 +18,7 @@ Page({
   data: {
     links,
     linksNoLinkData: links.map((v) => ({ text: v.text })),
-    question_title: "如何学？",
+    question_title: "这是默认的测试问题标题",
     question_id: 1,
     imageList: [],
     images: [],
