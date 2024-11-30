@@ -45,7 +45,7 @@ Page({
       },
       success(res) {
         wx.hideLoading();
-        if (res.statusCode === 200) {
+        if (res.statusCode === 200 && res.data.data.records.length) {
           console.log("list get success");
           console.log(res.data);
           console.log(res);
@@ -54,6 +54,13 @@ Page({
           that.setData({
             feed: newFeed,
             currentPage: page
+          });
+        } else if (res.statusCode === 200 && res.data.data.records.length == 0) {
+          console.error("数据库为空", res);
+          wx.showToast({
+            title: '暂无问题',
+            icon: 'none',
+            duration: 2000
           });
         } else {
           console.error("获取数据失败：", res);
