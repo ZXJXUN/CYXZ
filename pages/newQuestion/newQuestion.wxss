@@ -1,4 +1,4 @@
-.question-picture{
+/* .question-picture{
   width: 80px;
   height: 80px;
   margin: 5px;
@@ -36,4 +36,91 @@
 }
 .submit-buttons .button{
   margin: 5px;
+} */
+
+
+
+.container {
+  padding: 30rpx;
+}
+
+.title-box {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40rpx;
+}
+
+.title-text {
+  margin-right: 20rpx;
+  padding-bottom: 2rpx;
+}
+
+.title-input {
+  border-bottom: black 1px solid;
+  flex: 1;
+  margin-right: 80rpx;
+  padding-bottom: 2rpx;
+}
+.content-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.content-text{
+  margin-right: 25rpx;
+}
+.content-input{
+  flex: 1;
+  line-height: 30px;
+  border-left: 1px solid black;
+  padding-left: 25rpx;
+  margin-bottom: 60rpx;
+}
+.subject-buttons{
+  margin-bottom: 60rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.subject-text{
+  margin-bottom: 25rpx;
+}
+button{
+  padding:0;
+  margin:0;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 180rpx;
+  margin-right: 15rpx;
+  margin-bottom: 15rpx;
+}
+.image{
+  width: 65px;
+  height: 65px;
+}
+.images-box{
+  margin-bottom: 40rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.image-box{
+  margin-right: 15px;
+  margin-bottom: 15px;
+  position:relative;
+  width: 65px;
+  height: 65px;
+}
+.delete-image{
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.button-box{
+  display: flex;
+  flex-direction: row;
 }

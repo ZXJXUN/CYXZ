@@ -1,4 +1,4 @@
-<van-notify id="van-notify"></van-notify>
+<!-- <van-notify id="van-notify"></van-notify>
 <van-cell-group>
 
   <van-cell title="题目"></van-cell>
@@ -6,13 +6,10 @@
 
   <van-cell title="科目" is-link bind:click="showSubjectPicker" border="{{true}}" value="">{{subjectList[choosedSubject]}}
   </van-cell>
-  <!-- <van-overlay show="{{isShowSubjectPicker}}">
-    <van-picker columns="{{ subjectList }}" bind:change="subjectChoose" />
-  </van-overlay> -->
 
 
 <van-popup show="{{ isShowSubjectPicker }}" position="bottom">
-  <van-picker columns="{{ subjectList }}" bind:confirm="subjectChoose" show-toolbar>
+  <van-picker columns="{{ subjectList }}" bind:cancel="subjectCancel" bind:confirm="subjectChoose" show-toolbar>
   </van-picker>
 </van-popup>
 
@@ -22,17 +19,44 @@
   <van-field type="textarea" autosize model:value="{{content}}"></van-field>
   <van-cell title="图片"></van-cell>
   <view class="question-pictures" >
-    <view wx:for="{{tempPictures}}" wx:for-index="pictureIndex" wx:for-item="pictureItem" class="picture-container">
+    <view wx:for="{{tempPictures}}" wx:for-index="pictureIndex" wx:for-key="pictureItem" wx:for-item="pictureItem" class="picture-container">
       <image bindtap="previewPicture" data-pictures="{{tempPictures}}" data-picture="{{pictureItem}}" class="question-picture" src="{{pictureItem}}" mode="aspectFill">
       </image>
       <view class="delete-button" bindtap="deletePicture" data-index="{{pictureIndex}}">x</view>
     </view>
     <view class="add-button" bindtap="addPicture">+</view>
     
-    <!-- <van-uploader file-list="{{ tempPictures }}" bind:after-read="addPic" bind:delete="deletePic" multiple/> -->
   </view>
 </van-cell-group>
 <view class="submit-buttons">
   <button class="button" type="info" bind:tap="submitToDraft">保存草稿</button>
   <button class="button" type="info" bind:tap="submit">提交</button>
+</view> -->
+<view class="container">
+  <view class="title-box">
+    <view class="title-text">题目:</view>
+    <input type="text" value="{{title}}" bindinput="titleInput" class="title-input" />
+  </view>
+  <view class="subject-box">
+    <view class="subject-text">科目: {{subjectList[choosedSubject].name}}</view>
+    <view class="subject-buttons">
+      <button wx:for="{{subjectList}}" wx:for-item="subjectItem" wx:for-index="subjectIndex" catchtap="chooseSubject" data-subject-index="{{subjectIndex}}" class="subject-button">{{subjectItem.name}}</button>
+    </view>
+  </view>
+  <view class="content-box">
+    <view class="content-text">内容:</view>
+      <textarea bindinput="contentInput" value="{{content}}" auto-height class="content-input" maxlength="-1"></textarea>
+  </view>
+  <view class="images-box">
+    <view class="image-box" wx:for="{{tempPictures}}" wx:for-item="tempPicturesItem" wx:for-index="tempPicturesIndex" >
+      <image bindtap="previewPicture" data-picture="{{tempPicturesItem}}" src="{{tempPicturesItem}}" mode="" class="image" />
+      <image class="delete-image" src="https://www.helloimg.com/i/2024/11/29/6749c5a7b046a.png" mode="" bindtap="deletePicture" data-index="{{pictureIndex}}"></image>
+    </view>
+    <image src="https://www.helloimg.com/i/2024/11/30/674ae5c0071cd.png" mode="" class="image" bindtap="addPicture"/>
+    
+  </view>
+  <view class="button-box">
+    <!-- <button class="draft-button" bind:tap="submitToDraft">存入草稿</button> -->
+    <button class="submit-button" bind:tap="submit">提交问题</button>
+  </view>
 </view>
