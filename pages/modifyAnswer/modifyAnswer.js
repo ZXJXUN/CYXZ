@@ -1,4 +1,3 @@
-// pages/newAnswer/newAnswer.js
 const links = [
   {
     text: "首页",
@@ -18,20 +17,19 @@ Page({
   data: {
     links,
     linksNoLinkData: links.map((v) => ({ text: v.text })),
-    question_title: "这是默认的测试问题标题",
+    question_title: "默认问题标题",
     question_id: 1,
+    answer_id: 1,
     imageList: [],
-    images: [],
     content: "",
     fileList: [],
     push_loading: false,
-    save_content: 1,
-    save_image: 1,
     nowtime: "",
     headers: {
       username: "ab",
       token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
     },
+    modify_fileList: [],
   },
   onChange(e) {
     console.log("onChange", e);
@@ -126,15 +124,6 @@ Page({
       },
     });
   },
-  removeChooseImage(e) {
-    let imgs = this.data.imageList;
-
-    imgs.splice(e.currentTarget.dataset.index, 1);
-    this.setData({
-      "form.ossUrl": imgs,
-      imageList: imgs,
-    });
-  },
   // 预览图片
   previewBigImage(e) {
     let imgs = this.data.imageList;
@@ -177,24 +166,46 @@ Page({
     //   question_id: wx.getStorageSync("question_id"),
     //   question_title: wx.getStorageSync("question_title"),
     // });
-    console.log(this.data.content.length);
-    console.log(this.data.imageList.length);
-    console.log(this.data.save_content);
-    console.log(this.data.save_image);
-    if (
-      this.data.save_content != this.data.content.length ||
-      this.data.save_image != this.data.imageList.length
-    ) {
-      wx.enableAlertBeforeUnload({
-        message: "您的内容尚未保存草稿箱，确定要离开吗？",
-        success: function (res) {
-          console.log("未保存离开：", res);
-        },
-        fail: function (errMsg) {
-          console.log("返回保存：", errMsg);
-        },
+    let modify_question_title = wx.getStorageSync("modify_question_title");
+    let modify_question_id = wx.getStorageSync("modify_question_id");
+    let modify_id = wx.getStorageSync("modify_id");
+    let modify_content = wx.getStorageSync("modify_content");
+    let modify_images = wx.getStorageSync("modify_images");
+    console.log(modify_content);
+    //modify_images添加属性
+    var i = 0;
+    var modify_images_new = [];
+    for (i = 0; i < modify_images.length; i++) {
+      modify_images_new.push({
+        url: modify_images[i],
+        status: "done",
+        uid: i,
       });
     }
+    console.log(modify_images);
+    this.setData({
+      content: modify_content,
+      fileList: modify_images_new,
+      modify_fileList: modify_images_new,
+      answer_id: modify_id,
+      question_title: modify_question_title,
+      question_id: modify_question_id,
+    });
+    const images_upload = this.selectComponent("#images_upload");
+    //修改组件的数据
+    images_upload.setData({
+      uploadFileList: modify_images_new,
+    });
+
+    // wx.enableAlertBeforeUnload({
+    //   message: "您的内容尚未保存草稿箱，确定要离开吗？",
+    //   success: function (res) {
+    //     console.log("未保存离开：", res);
+    //   },
+    //   fail: function (errMsg) {
+    //     console.log("返回保存：", errMsg);
+    //   },
+    // });
   },
   clearContent() {
     wx.showModal({
@@ -217,27 +228,6 @@ Page({
     });
   },
 
-  getNowTime() {
-    var dataTime;
-    var yy = new Date().getFullYear();
-    var mm = new Date().getMonth() + 1;
-    var dd = new Date().getDate();
-    var hh = new Date().getHours();
-    var mf =
-      new Date().getMinutes() < 10
-        ? "0" + new Date().getMinutes()
-        : new Date().getMinutes();
-    var ss =
-      new Date().getSeconds() < 10
-        ? "0" + new Date().getSeconds()
-        : new Date().getSeconds();
-    dataTime = `${yy}-${mm}-${dd} ${hh}:${mf}:${ss}`;
-    return dataTime;
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady() {},
 
   /**
@@ -271,7 +261,18 @@ Page({
   onShareAppMessage() {},
 
   uploadAndRequest: function () {
-    const imageList = this.data.imageList;
+    //获取imageList当中符号条件的图片
+    let right_images = [];
+    for (let i = 0; i < this.data.imageList.length; i++) {
+      if (
+        this.data.imageList[i].indexOf(
+          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+        ) == -1
+      ) {
+        right_images.push(this.data.imageList[i]);
+      }
+    }
+    console.log(right_images);
 
     // 定义一个函数来执行上传任务
     function uploadFile(task) {
@@ -319,14 +320,17 @@ Page({
             resolve(res);
             wx.hideLoading();
             wx.showToast({
-              title: "发布成功",
+              title: "修改成功",
               icon: "success",
               time: 1500,
             });
+            wx.removeStorageSync("modify_question_title");
+            wx.removeStorageSync("modify_question_id");
+            wx.removeStorageSync("modify_id");
+            wx.removeStorageSync("modify_content");
+            wx.removeStorageSync("modify_images");
             setTimeout(() => {
-              wx.navigateTo({
-                url: "/pages/question/question",
-              });
+              wx.navigateBack;
             }, 1800);
           },
           fail(err) {
@@ -342,17 +346,36 @@ Page({
       });
     }
     // 使用 Promise.all 来并行执行所有上传任务
-    Promise.all(imageList.map((task) => uploadFile(task)))
+    Promise.all(right_images.map((task) => uploadFile(task)))
       .then((results) => {
         console.log("所有上传任务完成");
         var test = results.map((res) => JSON.parse(res.data).data);
         console.log(test);
+        let test2 = [];
+        var j = 0;
+        for (let i = 0; i < this.data.imageList.length; i++) {
+          if (
+            this.data.imageList[i].indexOf(
+              "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+            ) == -1
+          ) {
+            test2.push(test[j]);
+            j++;
+          } else {
+            test2.push(this.data.imageList[i]);
+          }
+        }
+        console.log("test2");
+        console.log(test2);
+        console.log("connectedString");
         // 所有上传任务完成后，发起一次请求
-        const connectedString = test.join(",");
+        const connectedString = test2.join(",");
         console.log(connectedString);
+        console.log(this.data.content);
+        console.log(this.data.answer_id);
         return request("https://nurl.top:8000/api/answerly/v1/answer", "POST", {
           content: this.data.content,
-          question_id: this.data.question_id,
+          id: this.data.answer_id,
           images: connectedString,
         });
       })

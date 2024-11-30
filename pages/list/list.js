@@ -5,67 +5,18 @@ Page({
     // 默认feed数据，用于在未获取到后端数据时占位
     feed: [
       {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
-        good_num: 0,
-        comment_num: 0
-      },
-      {
-        feed_source_img: '../../images/default_avatar.png', // 默认头像
-        feed_source_name: '默认用户',
-        feed_source_txt: '未知内容',
-        question: '这是一个问题',
-        answer_ctnt: '这是问题的详情的缩略',
+        title: '这是一个问题',
+        content: '这是问题的详情的缩略',
         good_num: 0,
         comment_num: 0
       }
     ],
-    feed_length: 1, // 默认数据的条目数量
     // 当前页码，用于分页请求
-    currentPage: 0,
+    currentPage: 1,
     // 分类ID，可根据实际需求修改
     category: 0,
     // 是否已解决的标识，0表示未解决
-    solved_flag: 0
+    solved_flag: 2
   },  
 
   onLoad: function () {
@@ -80,23 +31,28 @@ Page({
       title: '加载中...',
     });
     wx.request({
-      url: '', // API地址
-      method: 'GET',
-      data: {
-        category: that.data.category,
-        page: page,
-        solved_flag: that.data.solved_flag // 可选参数，根据需求设置
-      },
+      url: "https://nurl.top:8000/api/answerly/v1/question/page", // 基础URL，不带参数
+      method: 'GET', // 请求方法
       header: {
-        'Content-Type': 'application/json'
+        "token": "29b04146-b2de-4733-b0f5-fba06f7b45fe", // 请求头中的token
+        "username": "ab", // 请求头中的username
+      },
+      data: {
+        categoryId: that.data.category,
+        solvedFlag: that.data.solved_flag,
+        size: 10,
+        current: that.data.currentPage,
       },
       success(res) {
         wx.hideLoading();
-        if (res.statusCode === 200 && res.data ) {
-          let newFeed = page === 0 ? res.data : that.data.feed.concat(res.data); // 如果是第一页，替换数据；否则追加数据
+        if (res.statusCode === 200) {
+          console.log("list get success");
+          console.log(res.data);
+          console.log(res);
+          console.log(res.data.data.records);
+          let newFeed = page === 0 ? res.data.data.records : that.data.feed.concat(res.data.data.records); // 如果是第一页，替换数据；否则追加数据
           that.setData({
             feed: newFeed,
-            feed_length: newFeed.length,
             currentPage: page
           });
         } else {

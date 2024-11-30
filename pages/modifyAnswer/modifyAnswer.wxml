@@ -37,6 +37,7 @@
     bind:preview="onPreview"
     header="{{ headers }}"
     id="images_upload"
+    defaultFileList="{{ modify_fileList }}"
   >
     <text style="font-size: 30rpx">上传照片</text>
   </wux-upload>
@@ -47,6 +48,6 @@
       ></view>
       <view class="save_text">存草稿</view>
     </view>
-    <view class="submit" bindtap="submit">发布回答</view>
+    <view class="submit" bindtap="submit">修改回答</view>
   </view>
 </view>

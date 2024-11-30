@@ -5,8 +5,14 @@
 
   <view class="verification-section">
     <input class="verification-input" placeholder="输入北航邮箱" bindinput="onInputEmail" />
-    <button class="send-code-button" bindtap="sendVerificationCode" style="position: relative; left: 0rpx; top: -1rpx">发送验证码</button>
+    <!-- 发送验证码按钮 -->
+    <button 
+      class="send-code-button" 
+      bindtap="sendVerificationCode" 
+      style="position: relative; left: 0rpx; top: -1rpx"
+      disabled="{{isCodeButtonDisabled}}">{{isCodeButtonDisabled ? countDownText : '发送验证码'}}</button>
   </view>
+  
 
   <view wx:if="{{showCodeInput}}" class="input-container">
     <input class="code-input" placeholder="输入验证码" bindinput="onInputCode" />

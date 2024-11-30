@@ -417,6 +417,13 @@ baseComponent({
         this.onChange(info);
       }
     },
+    //清除所有文件
+    clearAll() {
+      this.setData({
+        fileList: [],
+        uploadFileList: [],
+      });
+    },
     /**
      * 中断上传任务
      * @param {String} uid 文件唯一标识
@@ -455,6 +462,7 @@ baseComponent({
   attached() {
     const { defaultFileType, defaultFileList, fileList, controlled } =
       this.data;
+    console.log(defaultFileType, defaultFileList, fileList, controlled);
     const uploadFileList = controlled ? fileList : defaultFileList;
     const isVideo = defaultFileType === "video";
 
@@ -465,5 +473,10 @@ baseComponent({
    */
   detached() {
     this.abort();
+  },
+  changeUploadFileList(e) {
+    this.setData({
+      uploadFileList: e,
+    });
   },
 });
