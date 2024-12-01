@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/newAnswer/newAnswer",
+          "pathName": "pages/newAnswer/newAnswer",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/draft/draft",
           "pathName": "pages/draft/draft",
           "query": "",
