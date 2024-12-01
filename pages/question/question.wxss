@@ -354,7 +354,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 690rpx;
   background-color: #ffffff;
 }
@@ -365,8 +364,11 @@
   line-height: 40rpx;
   letter-spacing: 3rpx;
   margin-bottom: 20rpx;
-  margin-top: 35rpx;
+  margin-top: 15rpx;
   padding-left: 10rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  cursor: default;
 }
 .show-content-footer {
   width: 100%;

@@ -28,10 +28,11 @@ Page({
     save_content: 1,
     save_image: 1,
     nowtime: "",
-    headers: {
-      username: "ab",
-      token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
-    },
+
+    username: "ab",
+    token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+
+    is_post: false,
   },
   onChange(e) {
     console.log("onChange", e);
@@ -173,18 +174,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // this.setData({
-    //   question_id: wx.getStorageSync("question_id"),
-    //   question_title: wx.getStorageSync("question_title"),
-    // });
+    wx.setStorageSync("is_post", false);
+    console.log(wx.getStorageSync("NewAnswer_question_id"));
+    this.setData({
+      question_id: wx.getStorageSync("NewAnswer_question_id"),
+      question_title: wx.getStorageSync("NewAnswer_question_title"),
+    });
+    if (
+      wx.getStorageSync("username") == "" ||
+      wx.getStorageSync("username") == NULL ||
+      wx.getStorageSync("username") == undefined
+    ) {
+      if (
+        wx.getStorageSync("token") == "" ||
+        wx.getStorageSync("token") == NULL ||
+        wx.getStorageSync("token") == undefined
+      ) {
+        wx.showToast({
+          title: "获取登录信息错误,使用默认账户ab进行测试",
+          icon: "none",
+          duration: 3000,
+        });
+      }
+    } else {
+      this.setData({
+        username: wx.getStorageSync("username"),
+        token: wx.getStorageSync("token"),
+      });
+    }
     console.log(this.data.content.length);
     console.log(this.data.imageList.length);
-    console.log(this.data.save_content);
-    console.log(this.data.save_image);
-    if (
-      this.data.save_content != this.data.content.length ||
-      this.data.save_image != this.data.imageList.length
-    ) {
+    if (this.data.is_post) {
       wx.enableAlertBeforeUnload({
         message: "您的内容尚未保存草稿箱，确定要离开吗？",
         success: function (res) {
@@ -272,16 +292,22 @@ Page({
 
   uploadAndRequest: function () {
     const imageList = this.data.imageList;
+    const now_username = this.data.username;
+    const now_token = this.data.token;
+    var that = this;
+    this.setData({
+      is_post: true,
+    });
 
     // 定义一个函数来执行上传任务
-    function uploadFile(task) {
+    function uploadFile(task, username, token, that) {
       return new Promise((resolve, reject) => {
         console.log(task);
         wx.uploadFile({
           url: "https://nurl.top:8000/oss/upload",
           header: {
-            username: "ab",
-            token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+            username: username,
+            token: token,
           },
           filePath: task,
           name: "file",
@@ -304,29 +330,32 @@ Page({
     }
 
     // 定义一个函数来发起请求
-    function request(url, method, data) {
+    function request(url, method, data, username, token, that) {
+      //var that = this;
       return new Promise((resolve, reject) => {
         wx.request({
           url: url,
           method: method,
           data: data,
           header: {
-            username: "ab",
-            token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+            username: username,
+            token: token,
             "Content-Type": "application/json",
           },
           success(res) {
             resolve(res);
             wx.hideLoading();
+            wx.removeStorageSync("NewAnswer_question_id");
+            wx.removeStorageSync("NewAnswer_question_title");
             wx.showToast({
               title: "发布成功",
               icon: "success",
               time: 1500,
             });
+
+            wx.setStorageSync("is_post", "true");
             setTimeout(() => {
-              wx.navigateTo({
-                url: "/pages/question/question",
-              });
+              wx.navigateBack();
             }, 1800);
           },
           fail(err) {
@@ -342,7 +371,9 @@ Page({
       });
     }
     // 使用 Promise.all 来并行执行所有上传任务
-    Promise.all(imageList.map((task) => uploadFile(task)))
+    Promise.all(
+      imageList.map((task) => uploadFile(task, now_username, now_token, that))
+    )
       .then((results) => {
         console.log("所有上传任务完成");
         var test = results.map((res) => JSON.parse(res.data).data);
@@ -350,11 +381,17 @@ Page({
         // 所有上传任务完成后，发起一次请求
         const connectedString = test.join(",");
         console.log(connectedString);
-        return request("https://nurl.top:8000/api/answerly/v1/answer", "POST", {
-          content: this.data.content,
-          question_id: this.data.question_id,
-          images: connectedString,
-        });
+        return request(
+          "https://nurl.top:8000/api/answerly/v1/answer",
+          "POST",
+          {
+            content: this.data.content,
+            question_id: this.data.question_id,
+            images: connectedString,
+          },
+          now_username,
+          now_token
+        );
       })
       .then((res) => {
         console.log(res.data);

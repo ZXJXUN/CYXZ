@@ -25,10 +25,10 @@ Page({
     fileList: [],
     push_loading: false,
     nowtime: "",
-    headers: {
-      username: "ab",
-      token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
-    },
+
+    username: "ab",
+    token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+
     modify_fileList: [],
   },
   onChange(e) {
@@ -196,6 +196,10 @@ Page({
     images_upload.setData({
       uploadFileList: modify_images_new,
     });
+    const child = this.selectComponent("#ans_content");
+    child.setData({
+      inputValue: modify_content,
+    });
 
     // wx.enableAlertBeforeUnload({
     //   message: "您的内容尚未保存草稿箱，确定要离开吗？",
@@ -273,16 +277,18 @@ Page({
       }
     }
     console.log(right_images);
-
+    const now_username = this.data.username;
+    const now_token = this.data.token;
+    var that = this;
     // 定义一个函数来执行上传任务
-    function uploadFile(task) {
+    function uploadFile(task, username, token, that) {
       return new Promise((resolve, reject) => {
         console.log(task);
         wx.uploadFile({
           url: "https://nurl.top:8000/oss/upload",
           header: {
-            username: "ab",
-            token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
+            username: username,
+            token: token,
           },
           filePath: task,
           name: "file",
@@ -305,15 +311,15 @@ Page({
     }
 
     // 定义一个函数来发起请求
-    function request(url, method, data) {
+    function request(url, method, data, username, token, that) {
       return new Promise((resolve, reject) => {
         wx.request({
           url: url,
           method: method,
           data: data,
           header: {
-            username: "ab",
-            token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+            username: username,
+            token: token,
             "Content-Type": "application/json",
           },
           success(res) {
@@ -324,13 +330,14 @@ Page({
               icon: "success",
               time: 1500,
             });
+
             wx.removeStorageSync("modify_question_title");
             wx.removeStorageSync("modify_question_id");
             wx.removeStorageSync("modify_id");
             wx.removeStorageSync("modify_content");
             wx.removeStorageSync("modify_images");
             setTimeout(() => {
-              wx.navigateBack;
+              wx.navigateBack();
             }, 1800);
           },
           fail(err) {
@@ -346,7 +353,11 @@ Page({
       });
     }
     // 使用 Promise.all 来并行执行所有上传任务
-    Promise.all(right_images.map((task) => uploadFile(task)))
+    Promise.all(
+      right_images.map((task) =>
+        uploadFile(task, now_username, now_token, that)
+      )
+    )
       .then((results) => {
         console.log("所有上传任务完成");
         var test = results.map((res) => JSON.parse(res.data).data);
@@ -373,7 +384,7 @@ Page({
         console.log(connectedString);
         console.log(this.data.content);
         console.log(this.data.answer_id);
-        return request("https://nurl.top:8000/api/answerly/v1/answer", "POST", {
+        return request("https://nurl.top:8000/api/answerly/v1/answer", "PUT", {
           content: this.data.content,
           id: this.data.answer_id,
           images: connectedString,

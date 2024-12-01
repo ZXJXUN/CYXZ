@@ -18,8 +18,8 @@ Page({
     token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
     username: "ab",
     answerList: [],
-    question_id: 1,
-    question_id_str: "1862440654170472449",
+    question_id: 926370865360,
+
     question: {
       title: "",
       images: [], //问题图片
@@ -29,8 +29,7 @@ Page({
     },
     collect_icon: ["../../images/收藏2.png", "../../images/收藏1.png"],
     current_page: 1,
-    size: 4,
-
+    size: 5,
     answer_num: 0,
     page_num: 0, //总页数
     load_max_page: 1, //已经加载到第几页
@@ -48,12 +47,11 @@ Page({
     });
   },
   to_write_answer: function () {
+    wx.setStorageSync("NewAnswer_question_id", this.data.question_id);
+    wx.setStorageSync("NewAnswer_question_title", this.data.question.title);
     wx.navigateTo({
       url: "../newAnswer/newAnswer", //验证成功至新问题界面
     });
-
-    wx.setStorageSync("question_id", this.data.question.id);
-    wx.setStorageSync("question_title", this.data.question.title);
     // wx.navigateTo({
     //   url: "../newAnswer/newAnswer", //验证成功至新问题界面
     // });
@@ -94,6 +92,35 @@ Page({
     console.log("onLoad");
     var globalData = getApp().globalData;
     console.log(globalData);
+    if (
+      wx.getStorageSync("username") == "" ||
+      wx.getStorageSync("username") == NULL ||
+      wx.getStorageSync("username") == undefined
+    ) {
+      if (
+        wx.getStorageSync("token") == "" ||
+        wx.getStorageSync("token") == NULL ||
+        wx.getStorageSync("token") == undefined
+      ) {
+        if (
+          wx.getStorageSync("question_id") == "" ||
+          wx.getStorageSync("question_id") == NULL ||
+          wx.getStorageSync("question_id") == undefined
+        ) {
+          wx.showToast({
+            title: "获取登录信息错误，使用默认账户ab进行测试",
+            icon: "none",
+            duration: 3000,
+          });
+        }
+      }
+    } else {
+      this.setData({
+        //username: wx.getStorageSync("username"),
+        //token: wx.getStorageSync("token"),
+        question_id: wx.getStorageSync("question_id"),
+      });
+    }
     this.getData();
   },
   getData: function () {
@@ -116,8 +143,7 @@ Page({
       collect_icon: "../../images/收藏2.png",
     };
     let url =
-      "https://nurl.top:8000/api/answerly/v1/question/" +
-      this.data.question_id_str;
+      "https://nurl.top:8000/api/answerly/v1/question/" + this.data.question_id;
     console.log("url");
     console.log(url);
     wx.request({
@@ -125,8 +151,8 @@ Page({
       method: "GET",
       header: {
         "content-type": "application/json",
-        token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
-        username: "ab",
+        token: this.data.token,
+        username: this.data.username,
       },
       success: function (res) {
         console.log("question get success");
@@ -190,20 +216,23 @@ Page({
         });
         console.log("tempimages");
         console.log(tempimages);
+
         tempimages = tempimages.map((item) => {
           //加上../../images/前缀
           return item.map((item) => {
             //没有前缀的图片加上前缀，有前缀的图片保持不变
             if (
               item.indexOf("https://oss-symbol.oss-cn-beijing.aliyuncs.com/") ==
-              -1
+                -1 &&
+              item != ""
             ) {
               return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
-            } else {
+            } else if (item != "") {
               return item;
             }
           });
         });
+
         var tempanswerList = temp.map((item) => {
           if (item.avatar == null) {
             item.avatar = "../../images/默认头像.png";
@@ -241,7 +270,11 @@ Page({
           item.time = formattedDate;
 
           //拼接两个字符串
-          item.images = tempimages[index];
+          if (tempimages[index] == "") {
+            item.images = [];
+          } else {
+            item.images = tempimages[index];
+          }
           item.comment = 0;
           item.is_like = false;
           item.imageContainerRight = -800;
@@ -403,9 +436,42 @@ Page({
       //   title: "点赞成功",
       //   icon: "success",
       // });
+      console.log("进行点赞操作");
       answer.like++;
       this.setData({
         answerList: this.data.answerList,
+      });
+      console.log(this.data.answerList[index].id);
+      var like_id = this.data.answerList[index].id;
+      console.log(this.data.token);
+      console.log(this.data.username);
+      var like_url =
+        "https://nurl.top:8000/api/answerly/v1/answer/like?id=" + like_id;
+      wx.request({
+        url: like_url,
+        method: "POST",
+        // data: {
+        //   id: like_id,
+        // },
+        header: {
+          "content-type": "application/json",
+          token: this.data.token,
+          username: this.data.username,
+        },
+        success: function (res) {
+          console.log(res);
+          console.log("点赞成功");
+
+          // success
+        },
+        fail: function (err) {
+          console.log(err);
+          console.log("点赞失败");
+          // fail
+        },
+        complete: function () {
+          // complete
+        },
       });
       //点赞成功，调用点赞接口
     } else {
@@ -413,6 +479,7 @@ Page({
       //   title: "取消点赞",
       //   icon: "none",
       // });
+      console.log("取消点赞");
       answer.like--;
       this.setData({
         answerList: this.data.answerList,
@@ -497,23 +564,28 @@ Page({
             //将逗号分割的图片字符串，转化为图片数组
             return item.images.split(",");
           });
-          console.log("tempimages");
+
+          console.log("继续加载tempimages");
           console.log(tempimages);
+
           tempimages = tempimages.map((item) => {
             //加上../../images/前缀
             return item.map((item) => {
               //没有前缀的图片加上前缀，有前缀的图片保持不变
+              //为空的元素去除
               if (
                 item.indexOf(
                   "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
-                ) == -1
+                ) == -1 &&
+                item != ""
               ) {
                 return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
-              } else {
+              } else if (item != "") {
                 return item;
               }
             });
           });
+
           console.log("tempimages加上前缀");
           console.log(tempimages);
           var tempanswerList = temp.map((item) => {
@@ -549,8 +621,13 @@ Page({
               })
               .replace(/\//g, "-");
             item.time = formattedDate;
+            if (tempimages[index] == "") {
+              item.images = [];
+            } else {
+              item.images = tempimages[index];
+            }
 
-            item.images = tempimages[index];
+            //item.images = tempimages[index];
             item.comment = 0;
             item.imageContainerRight = -800;
             console.log(that.data.username);
@@ -594,9 +671,12 @@ Page({
         console.log(that.data.answerList[index].id);
         console.log(that.data.username);
         console.log(that.data.token);
+        var delete_url =
+          "https://nurl.top:8000/api/answerly/v1/answer?id=" +
+          that.data.answerList[index].id;
         if (res.confirm) {
           wx.request({
-            url: "https://nurl.top:8000/api/answerly/v1/answer",
+            url: delete_url,
             header: {
               username: that.data.username,
               token: that.data.token,
@@ -638,6 +718,126 @@ Page({
         }
       },
     });
+    if (this.data.current_page + 1 > this.data.load_max_page) {
+      var that = this;
+      wx.request({
+        url: "https://nurl.top:8000/api/answerly/v1/answer/page",
+        method: "GET",
+        data: {
+          id: this.data.question_id,
+          size: this.data.size,
+          current: this.data.current_page,
+        },
+        header: {
+          "content-type": "application/json",
+          token: this.data.token,
+          username: this.data.username,
+        },
+        success: function (res) {
+          console.log("success");
+          console.log(res.data);
+          console.log(res);
+          var temp = res.data.data.records;
+          console.log(temp);
+          var tempimages = temp.map((item) => {
+            //将逗号分割的图片字符串，转化为图片数组
+            return item.images.split(",");
+          });
+
+          console.log("继续加载tempimages");
+          console.log(tempimages);
+
+          tempimages = tempimages.map((item) => {
+            //加上../../images/前缀
+            return item.map((item) => {
+              //没有前缀的图片加上前缀，有前缀的图片保持不变
+              //为空的元素去除
+              if (
+                item.indexOf(
+                  "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+                ) == -1 &&
+                item != ""
+              ) {
+                return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+              } else if (item != "") {
+                return item;
+              }
+            });
+          });
+
+          console.log("tempimages加上前缀");
+          console.log(tempimages);
+          var tempanswerList = temp.map((item) => {
+            if (item.avatar == null) {
+              item.avatar = "../../images/默认头像.png";
+            }
+            return {
+              id: item.id,
+              name: item.username,
+              avater: item.avatar,
+              content: item.content,
+              time: item.createTime,
+              like: item.likeCount,
+              useful: item.useful,
+              is_show: false,
+              show_icon: "../../images/收起.png",
+              collect: 0,
+            };
+          });
+          console.log(tempanswerList);
+          tempanswerList.forEach((item, index) => {
+            const isoString = temp[index].createTime;
+            const date = new Date(isoString);
+            const formattedDate = date
+              .toLocaleDateString("zh-CN", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false,
+              })
+              .replace(/\//g, "-");
+            item.time = formattedDate;
+            if (tempimages[index] == "") {
+              item.images = [];
+            } else {
+              item.images = tempimages[index];
+            }
+
+            //item.images = tempimages[index];
+            item.comment = 0;
+            item.imageContainerRight = -800;
+            console.log(that.data.username);
+            if (that.data.username == item.name) {
+              item.is_delete = false;
+              item.is_modify = false;
+            } else {
+              item.is_delete = true;
+              item.is_modify = true;
+            }
+          });
+          console.log(tempanswerList);
+          console.log(res.data.data.pages);
+
+          that.setData({
+            answerList: that.data.answerList.concat(tempanswerList),
+
+            page_num: res.data.data.pages,
+            load_max_page: that.data.load_max_page + 1,
+          });
+        },
+        fail: function (error) {
+          console.log(error);
+          wx.showToast({
+            title: "网络连接失败",
+            icon: "none",
+            duration: 2000,
+          });
+        },
+      });
+    }
   },
   modify(e) {
     console.log("modify");

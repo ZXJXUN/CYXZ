@@ -52,7 +52,6 @@
             <view class="more-delete"  hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}" ><image src="../../images/删除.png"/><view class="more-delete-text">删除</view></view>
             <view class="more-modify" hidden="{{item.is_modify}}" bindtap="modify" data-index="{{ index }}" ><image src="../../images/修改1.png"/><view class="more-modify-text">修改</view></view>
             <view class="more-copy" bindtap="copy" data-index="{{ index }}" ><image src="../../images/复制.png"/><view class="more-copy-text">复制</view></view>
-
           </view>
         </view>
         <view class="feed-content" hidden="{{ item.is_show == true }}">
@@ -74,9 +73,9 @@
           </view>
         </view>
         <view class="feed-content-show" hidden="{{ item.is_show == false }}">
-          <view class="show-content-text">
+          <text class="show-content-text">
             {{ item.content }} 
-          </view>
+          </text>
           <view class="show-content-image">
              <block wx:for="{{item.images}}" wx:for-index="i" wx:for-item="item_image" > 
           <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}" data-i="{{ i }}" >

@@ -30,7 +30,7 @@
   height: 300rpx;
   min-height: 1.47058824em;
   line-height: 1.47058824;
-  font-size: 30rpx;
+  font-size: 40rpx;
 }
 .wux-textarea__extra {
   color: rgba(0, 0, 0, 0.45);
