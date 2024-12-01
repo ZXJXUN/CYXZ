@@ -27,7 +27,7 @@
   width: 80px;
   height: 80px;
   font-size: 70px;
-  border: black 1px solid;
+  border: rgba(100, 100, 100, .15) 1px solid;
 }
 .submit-buttons{
   display: flex;
@@ -40,44 +40,50 @@
 
 
 
-.container {
-  padding: 30rpx;
-}
 
 .title-box {
   display: flex;
   flex-direction: row;
-  margin-bottom: 40rpx;
+  align-items: center;
+  border-bottom: 1px solid rgba(100, 100, 100, .15);
+  padding: 40rpx 0;
 }
 
 .title-text {
-  margin-right: 20rpx;
-  padding-bottom: 2rpx;
+  margin-left: 20rpx;
+  font-size: 40rpx;
 }
 
 .title-input {
-  border-bottom: black 1px solid;
+  margin-left: 20rpx;
+  font-size: 40rpx;
   flex: 1;
   margin-right: 80rpx;
-  padding-bottom: 2rpx;
 }
 .content-box{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(100, 100, 100, .15);
 }
-.content-text{
+/* .content-text{
   margin-right: 25rpx;
-}
+  margin-left: 10rpx;
+} */
 .content-input{
+  padding: 0 20px;
+  /* width: 100%; */
   flex: 1;
+  height: 600rpx;
   line-height: 30px;
-  border-left: 1px solid black;
-  padding-left: 25rpx;
-  margin-bottom: 60rpx;
+}
+.subject-box{
+  padding:20px 0;
+  border-bottom: 1px solid rgba(100, 100, 100, .15);
 }
 .subject-buttons{
-  margin-bottom: 60rpx;
+  margin-left: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -85,7 +91,9 @@
   align-items: flex-start;
 }
 .subject-text{
-  margin-bottom: 25rpx;
+  font-size: 20px;
+  margin: 0 10px;
+  margin-bottom: 20rpx;
 }
 button{
   padding:0;
@@ -96,15 +104,22 @@ button{
   margin-right: 15rpx;
   margin-bottom: 15rpx;
 }
-.image{
+.image,.add-block{
   width: 65px;
   height: 65px;
+}
+.add-block{
+  line-height: 65px;
+  text-align: center;
+  border: 1px solid rgba(100, 100, 100, .15);
 }
 .images-box{
   margin-bottom: 40rpx;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 10px;
+  background-color: rgba(100, 100, 100, .15);
 }
 .image-box{
   margin-right: 15px;
@@ -122,5 +137,13 @@ button{
 }
 .button-box{
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
+  height: 100px;
+}
+.submit-button{
+  border-radius: 25px;
+  width: 200px;
+  margin-right: 20px;
+  background-color: blue;
+  color: white;
 }

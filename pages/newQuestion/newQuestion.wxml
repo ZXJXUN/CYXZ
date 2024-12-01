@@ -35,7 +35,7 @@
 <view class="container">
   <view class="title-box">
     <view class="title-text">题目:</view>
-    <input type="text" value="{{title}}" bindinput="titleInput" class="title-input" />
+    <input type="text" placeholder="请输入标题" value="{{title}}" bindinput="titleInput" class="title-input" />
   </view>
   <view class="subject-box">
     <view class="subject-text">科目: {{subjectList[choosedSubject].name}}</view>
@@ -43,17 +43,17 @@
       <button wx:for="{{subjectList}}" wx:for-item="subjectItem" wx:for-index="subjectIndex" catchtap="chooseSubject" data-subject-index="{{subjectIndex}}" class="subject-button">{{subjectItem.name}}</button>
     </view>
   </view>
+  <!-- <view class="content-text">内容:</view> -->
   <view class="content-box">
-    <view class="content-text">内容:</view>
-      <textarea bindinput="contentInput" value="{{content}}" auto-height class="content-input" maxlength="-1"></textarea>
+    <textarea placeholder="请输入内容" bindinput="contentInput" value="{{content}}" class="content-input" maxlength="-1"></textarea>
   </view>
   <view class="images-box">
     <view class="image-box" wx:for="{{tempPictures}}" wx:for-item="tempPicturesItem" wx:for-index="tempPicturesIndex" >
       <image bindtap="previewPicture" data-picture="{{tempPicturesItem}}" src="{{tempPicturesItem}}" mode="" class="image" />
       <image class="delete-image" src="https://www.helloimg.com/i/2024/11/29/6749c5a7b046a.png" mode="" bindtap="deletePicture" data-index="{{pictureIndex}}"></image>
     </view>
-    <image src="https://www.helloimg.com/i/2024/11/30/674ae5c0071cd.png" mode="" class="image" bindtap="addPicture"/>
-    
+    <!-- <image src="https://www.helloimg.com/i/2024/11/30/674ae5c0071cd.png" mode="" class="image" bindtap="addPicture"/> -->
+    <div class="add-block" bindtap="addPicture">添加图片</div>
   </view>
   <view class="button-box">
     <!-- <button class="draft-button" bind:tap="submitToDraft">存入草稿</button> -->

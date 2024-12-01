@@ -282,6 +282,7 @@ Page({
         'username': wx.getStorageSync('name')
       },
       success: (res) => {
+        console.log(res.data);
         this.setData({
           subjectList: res.data.data
         })
