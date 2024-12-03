@@ -11,7 +11,8 @@
     "pages/register/register",
     "pages/draft/draft",
     "pages/MyQuestion/MyQuestion",
-    "pages/modifyAnswer/modifyAnswer"
+    "pages/modifyAnswer/modifyAnswer",
+    "pages/rules&us/rules&us"
   ],
   "window": {
     "navigationBarTextStyle": "white",

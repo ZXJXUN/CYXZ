@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="header">
+    <text class="title">社区公约</text>
+  </view>
+  <scroll-view class="rules" scroll-y>
+    <view class="rule-item" wx:for="{{rules}}" wx:key="index">
+      <text class="rule-title">{{item.title}}</text>
+      <text class="rule-content">{{item.content}}</text>
+    </view>
+    <view class="thanks-section">
+      <text class="thanks-title">关于我们</text>
+      <text class="thanks-content">这里是人员名单</text>
+      <text class="thanks-content">特别感谢传源书院大力支持</text>
+      <text class="thanks-footer">—— “源智答”小程序团队</text>
+    </view>
+  </scroll-view>
+</view>
