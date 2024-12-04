@@ -15,11 +15,11 @@
         bindtap="toggleShowPassword" />
     </view>
   </view>
-  <button class="login-button" bindtap="onLogin" disabled="{{!account||!password}}">登录</button>
+  <button class="login-button" bindtap="onLogin" disabled="{{!account||!password}}"  style="width: 291rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx; height: 102rpx">登录</button>
   <view class="register-link" bindtap="onRegister">
     <text>没有账号？点击注册</text>
   </view>
   <view class="Contact-link" bindtap="onContact">
-    <text>联系我们</text>
+    <text>社区公约 & 联系我们</text>
   </view>
 </view>

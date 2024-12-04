@@ -112,5 +112,11 @@ Page({
     wx.navigateTo({
       url: '../register/register'
     });
+  },
+
+  onContact: function () {
+    wx.navigateTo({
+      url: '../rules&us/rules&us',
+    })
   }
 })

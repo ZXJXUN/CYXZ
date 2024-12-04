@@ -51,12 +51,12 @@
 }
 
 .login-button {
-  background-color: #007aff; 
+  background-color: #007aff;
   color: #ffffff;
-  padding: 12rpx 24rpx; /* 内边距 */
-  border-radius: 6rpx; /* 圆角 */
-  text-align: center; /* 文本居中 */
-  font-size: 36rpx; /* 字体大小 */
+  padding: 12rpx 24rpx;
+  border-radius: 6rpx;
+  text-align: center;
+  font-size: 36rpx;
   margin-top: 30rpx;
 }
 
