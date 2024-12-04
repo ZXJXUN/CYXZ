@@ -4,8 +4,8 @@
           <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
 
       </view>
-      <view class="user-info flex-item">
-          <text class="userinfo-nickname" style="position: relative; left: -95rpx; top: -10rpx">{{name}}</text>
+      <view class="user-info flex-item" style="height: 102rpx; display: flex; box-sizing: border-box">
+          <text class="userinfo-nickname" style="position: relative; left: -43rpx; top: -19rpx; width: 437rpx; height: 164rpx; display: block; box-sizing: border-box">{{name}}</text>
       </view>
   </view>
   <view class="my" style="height: 945rpx; display: block; box-sizing: border-box">
@@ -13,7 +13,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/eye.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToAttention">
               <text>我的关注</text>
           </view>
       </view>
@@ -21,7 +21,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/star.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToCollection">
               <text>我的收藏</text>
           </view>
       </view>
@@ -29,7 +29,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/draft.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToDraft">
               <text>我的草稿</text>
           </view>
       </view>
@@ -37,7 +37,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/recent.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToBrowsed">
               <text>最近浏览</text>
           </view>
       </view>
@@ -45,7 +45,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/book.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToMyQuestion">
               <text>我的问题</text>
           </view>
       </view>
@@ -53,7 +53,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/live.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToMessage">
               <text>我的消息</text>
           </view>
       </view>
@@ -61,7 +61,7 @@
           <view class="myitem-icon flex-item">
               <image src="../../images/zhi.png"></image>
           </view>
-          <view class="myitem-name flex-item">
+          <view class="myitem-name flex-item" bindtap="goToMyAnswer">
               <text>我的回答</text>
           </view>
       </view>

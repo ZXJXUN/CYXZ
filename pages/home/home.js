@@ -12,23 +12,58 @@ Page({
             isLoggedIn: wx.getStorageSync('isLoggedIn')
         });
     },
-    // 事件处理函数
-    // 事件处理函数
-goToLogin() {
-  // 通过this.data来访问isLoggedIn属性
-  if (this.data.isLoggedIn === false) {
+    goToMyQuestion: function () {
+      // 使用wx.navigateTo实现页面跳转
       wx.navigateTo({
-          url: '../login/login'
+          url: '../MyQuestion/MyQuestion',
       });
-  } else {
-      app.globalData.isLoggedIn = false;
-      // 通过this.setData来更新data中的isLoggedIn属性
-      this.setData({
-          isLoggedIn: false
-      });
-      wx.redirectTo({
-          url: '../index/index',
-      });
-  }
-}
+    }, 
+
+    goToDraft: function (){
+      wx.navigateTo({
+        url: '../draft/draft',
+      })
+    },
+    goToAttention: function(){
+      wx.showToast({
+        title: '敬请期待 ^_',
+      })
+    },
+    goToCollection: function(){
+      wx.showToast({
+        title: '敬请期待 ^_',
+      })
+    },
+    goToBrowsed: function(){
+      wx.showToast({
+        title: '敬请期待 ^_',
+      })
+    },
+    goToMessage: function(){
+      wx.showToast({
+        title: '敬请期待 ^_',
+      })
+    },
+    goToMyAnswer: function(){
+      wx.showToast({
+        title: '敬请期待 ^_',
+      })
+    },
+    goToLogin() {
+      // 通过this.data来访问isLoggedIn属性
+      if (this.data.isLoggedIn === false) {
+          wx.navigateTo({
+              url: '../login/login'
+          });
+      } else {
+          app.globalData.isLoggedIn = false;
+          // 通过this.setData来更新data中的isLoggedIn属性
+          this.setData({
+              isLoggedIn: false
+          });
+          wx.redirectTo({
+              url: '../index/index',
+          });
+      }
+    }
 })

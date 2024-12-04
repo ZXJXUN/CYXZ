@@ -131,7 +131,7 @@
 .user {
   width: 725rpx;
   background: #ffffff;
-  padding: 30rpx 25rpx 30rpx 0;
+  
   margin: 15rpx 0 0 0;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #dcdcdc;
@@ -152,8 +152,8 @@
   display: block;
 }
 .user .user-info .userinfo-nickname{
-  padding: 8rpx 0 10rpx 0;
-  font-size: 30rpx;
+  padding: 15rpx 0 10rpx 0;
+  font-size: 60rpx;
   color: #818A8F;
 }
 .user .user-info .edit{
@@ -198,6 +198,7 @@
   border-bottom: none;
 }
 .register-button {
+  width: 250rpx;
   background-color: #007aff; 
   color: #ffffff;
   padding: 12rpx 24rpx; /* 内边距 */
