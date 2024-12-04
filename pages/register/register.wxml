@@ -9,7 +9,6 @@
     <button 
       class="send-code-button" 
       bindtap="sendVerificationCode" 
-      style="position: relative; left: 0rpx; top: -1rpx"
       disabled="{{isCodeButtonDisabled}}">{{isCodeButtonDisabled ? countDownText : '发送验证码'}}</button>
   </view>
   

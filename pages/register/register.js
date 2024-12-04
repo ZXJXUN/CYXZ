@@ -22,7 +22,7 @@ Page({
   },
 
   sendVerificationCode: function() {
-    const emailPattern = /^[a-zA-Z0-9]+@buaa.edu.cn$/; 
+    const emailPattern = /^.*@buaa.edu.cn$/; 
     const that = this;
     const currentTime = Date.now(); // 当前时间戳
     const lastSendTime = that.data.lastSendTime || 0; // 上次发送时间，默认为 0
