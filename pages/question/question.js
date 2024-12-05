@@ -114,23 +114,17 @@ Page({
         wx.getStorageSync("token") == NULL ||
         wx.getStorageSync("token") == undefined
       ) {
-        if (
-          wx.getStorageSync("question_id") == "" ||
-          wx.getStorageSync("question_id") == NULL ||
-          wx.getStorageSync("question_id") == undefined
-        ) {
-          wx.showToast({
-            title: "获取登录信息错误，使用默认账户ab进行测试",
-            icon: "none",
-            duration: 3000,
-          });
-        }
+        wx.showToast({
+          title: "获取登录信息错误，使用默认账户ab进行测试",
+          icon: "none",
+          duration: 3000,
+        });
       }
     } else {
       this.setData({
-        //username: wx.getStorageSync("username"),
-        //token: wx.getStorageSync("token"),
-        question_id: wx.getStorageSync("question_id"),
+        username: wx.getStorageSync("username"),
+        token: wx.getStorageSync("token"),
+        question_id: qu_id,
       });
     }
     this.getData();
