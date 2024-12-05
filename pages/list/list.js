@@ -154,7 +154,9 @@ Page({
   },
 
   // 跳转到问题详情页
-  bindQueTap: function () {
+  bindQueTap: function (event) {
+    const selectedQuestion = event.currentTarget.dataset.question; // 获取点击的科目名称
+    console.log(selectedQuestion);
     wx.navigateTo({
       url: "../question/question",
     });
