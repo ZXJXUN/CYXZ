@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f4f4f5;
+  /* background-color: #f4f4f5; */
   min-height: 100vh;
 }
 
@@ -12,8 +12,17 @@
   object-fit: contain; /* 不变形，保持图片比例 */
   margin-bottom: 70rpx; /* logo下方间距 */
 }
+.backgroud{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
 
 .grid {
+  margin-top: 70rpx; /* logo下方间距 */
   display: grid;
   grid-template-columns: repeat(2, 300rpx);
   gap: 50rpx;
@@ -22,26 +31,28 @@
   opacity: 0.8;
 }
 
-.background-img {
+/* .background-img {
   position: absolute;
   top: 650rpx;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.5; /* 设置整体背景透明度 */
+  opacity: 0.5;
   z-index: -1;
-}
+} */
 
+.grid-item-image {
+  height: 100%;
+  border-radius: 15rpx;
+}
 .grid-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #007aff;
   color: white;
   font-size: 40rpx;
   font-weight: bold;
-  border-radius: 15rpx;
   height: 180rpx;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;

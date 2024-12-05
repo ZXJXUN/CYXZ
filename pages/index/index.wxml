@@ -1,27 +1,27 @@
 <view class="container">
   <!-- 项目logo -->
-  <image src="../../images/源智答小程序.png" class="logo" />
-
+  <!-- <image src="../../images/源智答小程序.png" class="logo" /> -->
+  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="" class="backgroud"/>
   <!-- 科目图标列表 -->
   <view class="grid">
-    <image src="../../images/星球蓝.png" class="background-img" mode="aspectFill"/>
-      <view class="grid-item" catch:tap="onNavigate" data-subject="数学分析">
-          <text>数学分析</text>
-      </view>
-      <view class="grid-item" catch:tap="onNavigate" data-subject="高等代数">
-          <text>高等代数</text>
-      </view>
-      <view class="grid-item" catch:tap="onNavigate" data-subject="程序设计">
-          <text>程序设计</text>
-      </view>
-      <view class="grid-item" catch:tap="onNavigate" data-subject="基础物理">
-          <text>基础物理</text>
-      </view>
-      <view class="grid-item" catch:tap="onNavigate" data-subject="数据结构">
-          <text>数据结构</text>
-      </view>
-      <view class="grid-item" catch:tap="onNavigate" data-subject="离散数学">
-          <text>离散数学</text>
-      </view>
+    <!-- <image src="../../images/星球蓝.png" class="background-img" mode="aspectFill" /> -->
+    <view class="grid-item" wx:for="{{subjects}}" wx:for-item="subject" bind:tap="onNavigate" data-subject="{{subject.id}}">
+      <image class="grid-item-image" src="{{'https://oss-symbol.oss-cn-beijing.aliyuncs.com/'+subject.image}}" mode="aspectFill"></image>
+    </view>
+    <!-- <view class="grid-item" catch:tap="onNavigate" data-subject="高等代数">
+      <text>高等代数</text>
+    </view>
+    <view class="grid-item" catch:tap="onNavigate" data-subject="程序设计">
+      <text>程序设计</text>
+    </view>
+    <view class="grid-item" catch:tap="onNavigate" data-subject="基础物理">
+      <text>基础物理</text>
+    </view>
+    <view class="grid-item" catch:tap="onNavigate" data-subject="数据结构">
+      <text>数据结构</text>
+    </view>
+    <view class="grid-item" catch:tap="onNavigate" data-subject="离散数学">
+      <text>离散数学</text>
+    </view> -->
   </view>
 </view>

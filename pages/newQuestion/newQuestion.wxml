@@ -50,7 +50,7 @@
   <view class="images-box">
     <view class="image-box" wx:for="{{tempPictures}}" wx:for-item="tempPicturesItem" wx:for-index="tempPicturesIndex" >
       <image bindtap="previewPicture" data-picture="{{tempPicturesItem}}" src="{{tempPicturesItem}}" mode="" class="image" />
-      <image class="delete-image" src="https://www.helloimg.com/i/2024/11/29/6749c5a7b046a.png" mode="" bindtap="deletePicture" data-index="{{pictureIndex}}"></image>
+      <image class="delete-image" src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/243a76c1-0657-40b0-811b-f7d779368e9d.png" mode="" bindtap="deletePicture" data-index="{{pictureIndex}}"></image>
     </view>
     <!-- <image src="https://www.helloimg.com/i/2024/11/30/674ae5c0071cd.png" mode="" class="image" bindtap="addPicture"/> -->
     <div class="add-block" bindtap="addPicture">添加图片</div>
