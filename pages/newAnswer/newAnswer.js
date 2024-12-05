@@ -180,25 +180,27 @@ Page({
       question_id: wx.getStorageSync("NewAnswer_question_id"),
       question_title: wx.getStorageSync("NewAnswer_question_title"),
     });
+    console.log("name: ");
+    console.log(wx.getStorageSync("name"));
+    console.log("token: ");
+    console.log(wx.getStorageSync("token"));
+    var tempname = wx.getStorageSync("name");
     if (
-      wx.getStorageSync("username") == "" ||
-      wx.getStorageSync("username") == NULL ||
-      wx.getStorageSync("username") == undefined
+      tempname == "" ||
+      tempname == null ||
+      tempname == undefined ||
+      temptoken.length == 0 ||
+      temptoken == null ||
+      temptoken == undefined
     ) {
-      if (
-        wx.getStorageSync("token") == "" ||
-        wx.getStorageSync("token") == NULL ||
-        wx.getStorageSync("token") == undefined
-      ) {
-        wx.showToast({
-          title: "获取登录信息错误,使用默认账户ab进行测试",
-          icon: "none",
-          duration: 3000,
-        });
-      }
+      wx.showToast({
+        title: "获取登录信息错误,使用默认账户ab进行测试",
+        icon: "none",
+        duration: 3000,
+      });
     } else {
       this.setData({
-        username: wx.getStorageSync("username"),
+        username: wx.getStorageSync("name"),
         token: wx.getStorageSync("token"),
       });
     }

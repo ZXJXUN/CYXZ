@@ -35,6 +35,8 @@ Page({
     answer_num: 0,
     page_num: 0, //总页数
     load_max_page: 1, //已经加载到第几页
+    is_less_answer: 0, //是否还有更多回答
+    height: 0,
   },
   //事件处理函数
   publishAnswer: function () {
@@ -51,9 +53,9 @@ Page({
   to_write_answer: function () {
     wx.setStorageSync("NewAnswer_question_id", this.data.question_id);
     wx.setStorageSync("NewAnswer_question_title", this.data.question.title);
-    wx.navigateTo({
-      url: "../newAnswer/newAnswer", //验证成功至新问题界面
-    });
+    // wx.navigateTo({
+    //   url: "../newAnswer/newAnswer", //验证成功至新问题界面
+    // });
     // wx.navigateTo({
     //   url: "../newAnswer/newAnswer", //验证成功至新问题界面
     // });
@@ -94,9 +96,12 @@ Page({
     console.log("onLoad");
     console.log("传参测试");
     console.log(options);
-    console.log(options.question_id);
-    var qu_id = options.question_id;
+    console.log(options.id);
+    var qu_id = options.id;
     console.log(qu_id);
+    this.setData({
+      question_id: qu_id,
+    });
     if (app.globalData.isLoggedIn) {
       this.setData({
         more_class: "more1",
@@ -104,27 +109,30 @@ Page({
     }
     var globalData = getApp().globalData;
     console.log(globalData);
+    console.log("name: ");
+    console.log(wx.getStorageSync("name"));
+    console.log("token: ");
+    console.log(wx.getStorageSync("token"));
+    var tempname = wx.getStorageSync("name");
+    var temptoken = wx.getStorageSync("token");
     if (
-      wx.getStorageSync("username") == "" ||
-      wx.getStorageSync("username") == NULL ||
-      wx.getStorageSync("username") == undefined
+      app.globalData.isLoggedIn &&
+      (tempname == "" ||
+        tempname == null ||
+        tempname == undefined ||
+        temptoken.length == 0 ||
+        temptoken == null ||
+        temptoken == undefined)
     ) {
-      if (
-        wx.getStorageSync("token") == "" ||
-        wx.getStorageSync("token") == NULL ||
-        wx.getStorageSync("token") == undefined
-      ) {
-        wx.showToast({
-          title: "获取登录信息错误，使用默认账户ab进行测试",
-          icon: "none",
-          duration: 3000,
-        });
-      }
+      wx.showToast({
+        title: "获取登录信息错误,使用默认账户ab进行测试",
+        icon: "none",
+        duration: 3000,
+      });
     } else {
       this.setData({
-        username: wx.getStorageSync("username"),
+        username: wx.getStorageSync("name"),
         token: wx.getStorageSync("token"),
-        question_id: qu_id,
       });
     }
     this.getData();
@@ -311,6 +319,32 @@ Page({
         });
       },
     });
+    // wx.createSelectorQuery()
+    //   .in(this)
+    //   .select(".container")
+    //   .boundingClientRect((rect) => {
+    //     const containerHeight = rect.height;
+    //     console.log(containerHeight);
+    //     wx.createSelectorQuery()
+    //       .in(this)
+    //       .select(".answer-feed")
+    //       .boundingClientRect((rects) => {
+    //         let totalListHeight = rects.height;
+    //         const fillerHeight =
+    //           977 > totalListHeight ? 977 - totalListHeight : 0;
+    //         var less_answer =
+    //           977 > totalListHeight && this.data.answer_num > 0 ? 1 : 0;
+    //         console.log(less_answer);
+    //         this.setData({
+    //           is_less_answer: less_answer,
+    //           height: fillerHeight,
+    //         });
+    //         console.log(fillerHeight);
+    //         console.log(totalListHeight);
+    //       })
+    //       .exec();
+    //   })
+    //   .exec();
   },
   upper: function () {
     wx.showNavigationBarLoading();
@@ -758,7 +792,7 @@ Page({
         data: {
           id: this.data.question_id,
           size: this.data.size,
-          current: this.data.current_page,
+          current: this.data.current_page + 1,
         },
         header: {
           "content-type": "application/json",

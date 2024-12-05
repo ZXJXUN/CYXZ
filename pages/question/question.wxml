@@ -125,7 +125,10 @@
     <image class="no_answer_image" src="../../images/无回答蓝.png" />
     <view class="no_answer_text" >暂无回答</view>
   </view>
-  <wux-pagination
+  <view class="less_answer" hidden="{{answer_num-(current_page-1)*size!=1}}" >
+    <view class="less_answer_text" >没有更多回答了</view>
+  </view>
+  <view class="footer"><wux-pagination
       defaultCurrent="1"
       total="{{page_num}}"
       bind:prev="onPrev"
@@ -140,5 +143,6 @@
     label="源智答"
     content="@2024 yuanzhida.com All rights reserved"
     links="{{ links }}"
-  />
+  /></view>
+  
 </scroll-view>
