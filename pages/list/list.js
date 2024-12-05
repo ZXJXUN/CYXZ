@@ -19,12 +19,16 @@ Page({
     solved_flag: 2,
   },
 
-  onLoad: function () {
+  onLoad: function (options) {
     console.log("页面加载中");
+    const selectedSubject = options.id;
+    console.log({selectedSubject});
+    this.setData(
+      {
+        category: selectedSubject
+      }
+    );
     this.getFeedData(0); // 初次加载第一页的数据
-    wx.navigateTo({
-      url: "/pages/question/question",
-    });
   },
 
   // 获取问答数据
@@ -33,6 +37,9 @@ Page({
     wx.showLoading({
       title: "加载中...",
     });
+    console.log(that.data.category);
+    console.log(that.data.solved_flag);
+    console.log(that.data.currentPage);
     wx.request({
       url: "https://nurl.top:8000/api/answerly/v1/question/page", // 基础URL，不带参数
       method: "GET", // 请求方法
