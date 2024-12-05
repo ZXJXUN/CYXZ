@@ -1,19 +1,26 @@
 Page({
-  data:{
-    subjects:[]
+  data: {
+    subjects: [],
   },
-  onReady:function () {
+  onReady: function () {
     wx.request({
-      url: 'https://nurl.top:8000/api/answerly/v1/category',
+      url: "https://nurl.top:8000/api/answerly/v1/category",
+      method: "GET",
       header: {
-        'token': "884bb5d6-b524-4f31-83c4-bf9243c89bf0",
-        'username': "aaa"
+        token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+        username: "ab",
       },
-      success:(res)=>{
-        console.log(res.data.data);
-        this.setData({subjects:res.data.data})
-      }
-    })
+      success: (res) => {
+        console.log("success");
+        console.log(res);
+        this.setData({
+          subjects: res.data.data,
+        });
+      },
+      failure: (err) => {
+        console.log(err);
+      },
+    });
   },
   // 处理点击科目跳转
   onNavigate: function (event) {
@@ -30,5 +37,5 @@ Page({
     //     url: '/pages/list/list', // 这里是跳转的目标页面
     //   });
     // }
-  }
+  },
 });
