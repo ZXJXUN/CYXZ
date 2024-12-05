@@ -28,15 +28,12 @@ Page({
         category: selectedSubject
       }
     );
-    this.getFeedData(0); // 初次加载第一页的数据
+    this.getFeedData(1); // 初次加载第一页的数据
   },
 
   // 获取问答数据
   getFeedData: function (page) {
     let that = this;
-    wx.showLoading({
-      title: "加载中...",
-    });
     console.log(that.data.category);
     console.log(that.data.solved_flag);
     console.log(that.data.currentPage);
@@ -51,17 +48,14 @@ Page({
         categoryId: that.data.category,
         solvedFlag: that.data.solved_flag,
         size: 10,
-        current: that.data.currentPage,
+        current: page,
       },
       success(res) {
-        wx.hideLoading();
-        if (res.statusCode === 200 && res.data.data.records.length) {
+        if (res.statusCode === 200 && res.data.data.records) {
           console.log("list get success");
-          console.log(res.data);
-          console.log(res);
           console.log(res.data.data.records);
           let newFeed =
-            page === 0
+            page === 1
               ? res.data.data.records
               : that.data.feed.concat(res.data.data.records); // 如果是第一页，替换数据；否则追加数据
           that.setData({
@@ -100,38 +94,33 @@ Page({
   },
 
   // 下拉刷新
-  refresh: function () {
+  upper: function () {
     wx.showToast({
       title: "刷新中",
       icon: "loading",
-      duration: 3000,
     });
-    this.getFeedData(0); // 刷新时重新加载第一页数据
-    setTimeout(() => {
-      wx.showToast({
-        title: "刷新成功",
-        icon: "success",
-        duration: 2000,
-      });
-    }, 3000);
+    this.getFeedData(1); // 刷新时重新加载第一页数据
+    wx.hideLoading();
+    wx.showToast({
+      title: "刷新成功",
+      icon: "success",
+      duration: 2000,
+    });
   },
 
   // 加载更多数据
-  nextLoad: function () {
+  lower: function () {
     wx.showToast({
       title: "加载中",
       icon: "loading",
-      duration: 4000,
     });
-    let nextPage = this.data.currentPage + 1; // 计算下一页页码
-    this.getFeedData(nextPage); // 获取下一页数据
-    setTimeout(() => {
-      wx.showToast({
-        title: "加载成功",
-        icon: "success",
-        duration: 2000,
-      });
-    }, 3000);
+    this.getFeedData(this.data.currentPage + 1); // 获取下一页数据
+    wx.hideLoading();
+    wx.showToast({
+      title: "加载成功",
+      icon: "success",
+      duration: 2000,
+    });
   },
 
   // 发布问题的跳转
@@ -165,12 +154,6 @@ Page({
   },
 
   // 跳转到问题详情页
-  bindItemTap: function () {
-    wx.navigateTo({
-      url: "../question/question",
-    });
-  },
-
   bindQueTap: function () {
     wx.navigateTo({
       url: "../question/question",
