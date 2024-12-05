@@ -17,9 +17,11 @@ Page({
     links,
     token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
     username: "ab",
+    //token: "",
+    //username: "",
     answerList: [],
     question_id: 926370865360,
-
+    more_class: "more2",
     question: {
       title: "",
       images: [], //问题图片
@@ -88,8 +90,18 @@ Page({
       url: "../newAnswer/newAnswer",
     });
   },
-  onLoad: function () {
+  onLoad: function (options) {
     console.log("onLoad");
+    console.log("传参测试");
+    console.log(options);
+    console.log(options.question_id);
+    var qu_id = options.question_id;
+    console.log(qu_id);
+    if (app.globalData.isLoggedIn) {
+      this.setData({
+        more_class: "more1",
+      });
+    }
     var globalData = getApp().globalData;
     console.log(globalData);
     if (
@@ -384,19 +396,27 @@ Page({
   store() {
     var que = this.data.question;
     console.log(que);
-    que.collect = !que.collect;
-    this.setData({
-      question: que,
-    });
-    if (this.data.question.collect == true) {
-      wx.showToast({
-        title: "收藏成功",
-        icon: "success",
-        duration: 1000,
+    if (app.globalData.isLoggedIn) {
+      que.collect = !que.collect;
+      this.setData({
+        question: que,
       });
+      if (this.data.question.collect == true) {
+        wx.showToast({
+          title: "收藏成功",
+          icon: "success",
+          duration: 1000,
+        });
+      } else {
+        wx.showToast({
+          title: "取消收藏",
+          icon: "none",
+          duration: 1000,
+        });
+      }
     } else {
       wx.showToast({
-        title: "取消收藏",
+        title: "请先登录",
         icon: "none",
         duration: 1000,
       });
@@ -404,22 +424,31 @@ Page({
   },
   collect_answer(e) {
     console.log("collect_answer");
-    var index = e.currentTarget.dataset.index;
-    var answer = this.data.answerList[index];
-    answer.collect = !answer.collect;
-    this.setData({
-      answerList: this.data.answerList,
-    });
-    if (answer.collect == true) {
-      wx.showToast({
-        title: "收藏成功",
-        icon: "success",
-        duration: 1000,
+    //校验是否已经登录
+    if (app.globalData.isLoggedIn) {
+      var index = e.currentTarget.dataset.index;
+      var answer = this.data.answerList[index];
+      answer.collect = !answer.collect;
+      this.setData({
+        answerList: this.data.answerList,
       });
-      //收藏成功，调用收藏接口
+      if (answer.collect == true) {
+        wx.showToast({
+          title: "收藏成功",
+          icon: "success",
+          duration: 1000,
+        });
+        //收藏成功，调用收藏接口
+      } else {
+        wx.showToast({
+          title: "取消收藏",
+          icon: "none",
+          duration: 1000,
+        });
+      }
     } else {
       wx.showToast({
-        title: "取消收藏",
+        title: "请先登录",
         icon: "none",
         duration: 1000,
       });
@@ -427,62 +456,71 @@ Page({
   },
   like_answer(e) {
     console.log("like_answer");
-    var index = e.currentTarget.dataset.index;
-    var answer = this.data.answerList[index];
-    answer.is_like = !answer.is_like;
+    //校验是否已经登录
+    if (app.globalData.isLoggedIn) {
+      var index = e.currentTarget.dataset.index;
+      var answer = this.data.answerList[index];
+      answer.is_like = !answer.is_like;
 
-    if (answer.is_like == true) {
-      // wx.showToast({
-      //   title: "点赞成功",
-      //   icon: "success",
-      // });
-      console.log("进行点赞操作");
-      answer.like++;
-      this.setData({
-        answerList: this.data.answerList,
-      });
-      console.log(this.data.answerList[index].id);
-      var like_id = this.data.answerList[index].id;
-      console.log(this.data.token);
-      console.log(this.data.username);
-      var like_url =
-        "https://nurl.top:8000/api/answerly/v1/answer/like?id=" + like_id;
-      wx.request({
-        url: like_url,
-        method: "POST",
-        // data: {
-        //   id: like_id,
-        // },
-        header: {
-          "content-type": "application/json",
-          token: this.data.token,
-          username: this.data.username,
-        },
-        success: function (res) {
-          console.log(res);
-          console.log("点赞成功");
+      if (answer.is_like == true) {
+        // wx.showToast({
+        //   title: "点赞成功",
+        //   icon: "success",
+        // });
+        console.log("进行点赞操作");
+        answer.like++;
+        this.setData({
+          answerList: this.data.answerList,
+        });
+        console.log(this.data.answerList[index].id);
+        var like_id = this.data.answerList[index].id;
+        console.log(this.data.token);
+        console.log(this.data.username);
+        var like_url =
+          "https://nurl.top:8000/api/answerly/v1/answer/like?id=" + like_id;
+        wx.request({
+          url: like_url,
+          method: "POST",
+          // data: {
+          //   id: like_id,
+          // },
+          header: {
+            "content-type": "application/json",
+            token: this.data.token,
+            username: this.data.username,
+          },
+          success: function (res) {
+            console.log(res);
+            console.log("点赞成功");
 
-          // success
-        },
-        fail: function (err) {
-          console.log(err);
-          console.log("点赞失败");
-          // fail
-        },
-        complete: function () {
-          // complete
-        },
-      });
-      //点赞成功，调用点赞接口
+            // success
+          },
+          fail: function (err) {
+            console.log(err);
+            console.log("点赞失败");
+            // fail
+          },
+          complete: function () {
+            // complete
+          },
+        });
+        //点赞成功，调用点赞接口
+      } else {
+        // wx.showToast({
+        //   title: "取消点赞",
+        //   icon: "none",
+        // });
+        console.log("取消点赞");
+        answer.like--;
+        this.setData({
+          answerList: this.data.answerList,
+        });
+      }
     } else {
-      // wx.showToast({
-      //   title: "取消点赞",
-      //   icon: "none",
-      // });
-      console.log("取消点赞");
-      answer.like--;
-      this.setData({
-        answerList: this.data.answerList,
+      wx.showToast({
+        title: "请先登录",
+        icon: "none",
+        duration: 1000,
       });
     }
   },
