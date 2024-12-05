@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 项目logo -->
   <!-- <image src="../../images/源智答小程序.png" class="logo" /> -->
-  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="" class="backgroud"/>
+  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="backgroud"/>
   <!-- 科目图标列表 -->
   <view class="grid">
     <!-- <image src="../../images/星球蓝.png" class="background-img" mode="aspectFill" /> -->

@@ -14,7 +14,6 @@
 }
 .backgroud{
   width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +21,7 @@
 }
 
 .grid {
-  margin-top: 70rpx; /* logo下方间距 */
+  margin-top: 550rpx; /* logo下方间距 */
   display: grid;
   grid-template-columns: repeat(2, 300rpx);
   gap: 50rpx;
