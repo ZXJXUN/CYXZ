@@ -185,6 +185,7 @@ Page({
     console.log("token: ");
     console.log(wx.getStorageSync("token"));
     var tempname = wx.getStorageSync("name");
+    var temptoken = wx.getStorageSync("token");
     if (
       tempname == "" ||
       tempname == null ||
