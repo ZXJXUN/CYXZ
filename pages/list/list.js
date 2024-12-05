@@ -158,7 +158,7 @@ Page({
     const selectedQuestion = event.currentTarget.dataset.question; // 获取点击的科目名称
     console.log(selectedQuestion);
     wx.navigateTo({
-      url: "../question/question",
+      url: `../question/question?id=${selectedQuestion}`,
     });
   },
 });
