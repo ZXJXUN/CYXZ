@@ -200,6 +200,31 @@ Page({
     child.setData({
       inputValue: modify_content,
     });
+    console.log("name: ");
+    console.log(wx.getStorageSync("name"));
+    console.log("token: ");
+    console.log(wx.getStorageSync("token"));
+    var tempname = wx.getStorageSync("name");
+    var temptoken = wx.getStorageSync("token");
+    if (
+      tempname == "" ||
+      tempname == null ||
+      tempname == undefined ||
+      temptoken.length == 0 ||
+      temptoken == null ||
+      temptoken == undefined
+    ) {
+      wx.showToast({
+        title: "获取登录信息错误,使用默认账户ab进行测试",
+        icon: "none",
+        duration: 3000,
+      });
+    } else {
+      this.setData({
+        username: wx.getStorageSync("name"),
+        token: wx.getStorageSync("token"),
+      });
+    }
 
     // wx.enableAlertBeforeUnload({
     //   message: "您的内容尚未保存草稿箱，确定要离开吗？",
@@ -278,7 +303,9 @@ Page({
     }
     console.log(right_images);
     const now_username = this.data.username;
+
     const now_token = this.data.token;
+
     var that = this;
     // 定义一个函数来执行上传任务
     function uploadFile(task, username, token, that) {
@@ -312,6 +339,10 @@ Page({
 
     // 定义一个函数来发起请求
     function request(url, method, data, username, token, that) {
+      console.log("发起请求");
+      console.log(data);
+      console.log(username);
+      console.log(token);
       return new Promise((resolve, reject) => {
         wx.request({
           url: url,
@@ -384,11 +415,18 @@ Page({
         console.log(connectedString);
         console.log(this.data.content);
         console.log(this.data.answer_id);
-        return request("https://nurl.top:8000/api/answerly/v1/answer", "PUT", {
-          content: this.data.content,
-          id: this.data.answer_id,
-          images: connectedString,
-        });
+        return request(
+          "https://nurl.top:8000/api/answerly/v1/answer",
+          "PUT",
+          {
+            content: this.data.content,
+            id: this.data.answer_id,
+            images: connectedString,
+          },
+
+          now_username,
+          now_token
+        );
       })
       .then((res) => {
         console.log(res.data);

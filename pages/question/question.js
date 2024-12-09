@@ -182,7 +182,18 @@ Page({
             "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
             tempquestion.images[i];
         }
-        tempquestion.time = res.data.data.createTime;
+        const inputTime = res.data.data.createTime;
+        const date = new Date(inputTime);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        const seconds = String(date.getSeconds()).padStart(2, "0");
+        const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+        console.log(formattedTime);
+
+        tempquestion.time = formattedTime;
         tempquestion.content = res.data.data.content;
         tempquestion.collect = 0;
         console.log("tempquestion");
@@ -266,22 +277,18 @@ Page({
         });
         console.log(tempanswerList);
         tempanswerList.forEach((item, index) => {
-          const isoString = temp[index].createTime;
-          const date = new Date(isoString);
-          const formattedDate = date
-            .toLocaleDateString("zh-CN", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit",
-              hour12: false,
-            })
-            .replace(/\//g, "-");
+          const inputTime = temp[index].createTime;
+          const date = new Date(inputTime);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          const hours = String(date.getHours()).padStart(2, "0");
+          const minutes = String(date.getMinutes()).padStart(2, "0");
+          const seconds = String(date.getSeconds()).padStart(2, "0");
+          const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+          console.log(formattedTime);
 
-          console.log(formattedDate);
-          item.time = formattedDate;
+          item.time = formattedTime;
 
           //拼接两个字符串
           if (tempimages[index] == "") {
@@ -673,20 +680,18 @@ Page({
           });
           console.log(tempanswerList);
           tempanswerList.forEach((item, index) => {
-            const isoString = temp[index].createTime;
-            const date = new Date(isoString);
-            const formattedDate = date
-              .toLocaleDateString("zh-CN", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: false,
-              })
-              .replace(/\//g, "-");
-            item.time = formattedDate;
+            const inputTime = temp[index].createTime;
+            const date = new Date(inputTime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+            const hours = String(date.getHours()).padStart(2, "0");
+            const minutes = String(date.getMinutes()).padStart(2, "0");
+            const seconds = String(date.getSeconds()).padStart(2, "0");
+            const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            console.log(formattedTime);
+
+            item.time = formattedTime;
             if (tempimages[index] == "") {
               item.images = [];
             } else {
@@ -852,20 +857,18 @@ Page({
           });
           console.log(tempanswerList);
           tempanswerList.forEach((item, index) => {
-            const isoString = temp[index].createTime;
-            const date = new Date(isoString);
-            const formattedDate = date
-              .toLocaleDateString("zh-CN", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: false,
-              })
-              .replace(/\//g, "-");
-            item.time = formattedDate;
+            const inputTime = temp[index].createTime;
+            const date = new Date(inputTime);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+            const hours = String(date.getHours()).padStart(2, "0");
+            const minutes = String(date.getMinutes()).padStart(2, "0");
+            const seconds = String(date.getSeconds()).padStart(2, "0");
+            const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            console.log(formattedTime);
+
+            item.time = formattedTime;
             if (tempimages[index] == "") {
               item.images = [];
             } else {
