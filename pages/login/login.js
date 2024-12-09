@@ -69,8 +69,8 @@ Page({
 
           } else if(res.data.code === 'A000203') {
             app.globalData.isLoggedIn = true;
-            const name = this.data.account;
-            wx.setStorageSync('name', name);
+            wx.setStorageSync('name', this.data.account);
+            wx.setStorageSync('token', res.data.data.token);
             wx.showToast({
               title: '登录成功',
               icon: 'success'
