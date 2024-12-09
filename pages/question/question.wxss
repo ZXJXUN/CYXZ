@@ -188,6 +188,7 @@
   display: inline-block;
   height: 40rpx;
 }
+
 .container .feed-item .feed-source .avatar image {
   /*position: absolute;*/
   display: inline-block;
@@ -202,7 +203,7 @@
   width: 45rpx;
   height: 45rpx;
   border-radius: 45rpx;
-  left: 550rpx;
+  left: 270rpx;
   vertical-align: middle;
 }
 .more1 {
@@ -303,6 +304,7 @@
   /*position: absolute;*/
   display: inline-block;
   height: 40rpx;
+  width: 300rpx;
   line-height: 40rpx;
   vertical-align: middle;
   margin: 0 0 0 15rpx;

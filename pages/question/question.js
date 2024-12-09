@@ -21,7 +21,6 @@ Page({
     //username: "",
     answerList: [],
     question_id: 926370865360,
-    more_class: "more2",
     question: {
       title: "",
       images: [], //问题图片
@@ -102,11 +101,6 @@ Page({
     this.setData({
       question_id: qu_id,
     });
-    if (app.globalData.isLoggedIn) {
-      this.setData({
-        more_class: "more1",
-      });
-    }
     var globalData = getApp().globalData;
     console.log(globalData);
     console.log("name: ");
@@ -303,9 +297,11 @@ Page({
           if (that.data.username == item.name) {
             item.is_delete = false;
             item.is_modify = false;
+            item.more_class = "more1";
           } else {
             item.is_delete = true;
             item.is_modify = true;
+            item.more_class = "more2";
           }
         });
         console.log(tempanswerList);
@@ -705,9 +701,11 @@ Page({
             if (that.data.username == item.name) {
               item.is_delete = false;
               item.is_modify = false;
+              item.more_class = "more1";
             } else {
               item.is_delete = true;
               item.is_modify = true;
+              item.more_class = "more2";
             }
           });
           console.log(tempanswerList);
@@ -882,9 +880,11 @@ Page({
             if (that.data.username == item.name) {
               item.is_delete = false;
               item.is_modify = false;
+              item.more_class = "more1";
             } else {
               item.is_delete = true;
               item.is_modify = true;
+              item.more_class = "more2";
             }
           });
           console.log(tempanswerList);

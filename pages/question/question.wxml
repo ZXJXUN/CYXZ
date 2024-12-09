@@ -39,7 +39,7 @@
             <view class="avatar">
               <image src="{{ item.avater }}"></image>
             </view>
-            <text>{{item.name}}</text>
+            <text class="username">{{item.name}}</text>
           </a>
           <image
             class="show_icon"
@@ -47,7 +47,7 @@
             bindtap="show"
             data-index="{{ index }}"
           />
-          <view class="{{more_class}}" bindTap="show_more" data-index="{{ index }}"style="right: {{item.imageContainerRight}}rpx" >
+          <view class="{{item.more_class}}" bindTap="show_more" data-index="{{ index }}"style="right: {{item.imageContainerRight}}rpx" >
             <view class="more-delete"  hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}" ><image src="../../images/删除.png"/><view class="more-delete-text">删除</view></view>
             <view class="more-modify" hidden="{{item.is_modify}}" bindtap="modify" data-index="{{ index }}" ><image src="../../images/修改1.png"/><view class="more-modify-text">修改</view></view>
             <view class="more-copy" bindtap="copy" data-index="{{ index }}" ><image src="../../images/复制.png"/><view class="more-copy-text">复制</view></view>
