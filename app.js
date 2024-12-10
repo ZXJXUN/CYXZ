@@ -18,7 +18,6 @@ App({
   
   onLaunch() {
     // 展示本地存储能力
-    wx.setStorageSync('isLoggedIn', false);
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -28,7 +27,7 @@ App({
     userInfo: null,
     token: null,
     name: '请先登录',
-    isLoggedIn: false
+    isLoggedIn: '',
   },
 
   check: function() {
@@ -41,7 +40,6 @@ App({
 
   reLogin: function(){
     // 清空本地缓存的所有数据
-    wx.clearStorageSync();
     wx.setStorageSync('isLoggedIn', false);
   }
 })

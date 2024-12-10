@@ -50,20 +50,21 @@ Page({
       })
     },
     goToLogin() {
-      // 通过this.data来访问isLoggedIn属性
-      if (this.data.isLoggedIn === false) {
           wx.navigateTo({
               url: '../login/login'
           });
-      } else {
-          app.globalData.isLoggedIn = false;
-          // 通过this.setData来更新data中的isLoggedIn属性
-          this.setData({
-              isLoggedIn: false
-          });
-          wx.redirectTo({
-              url: '../index/index',
-          });
-      }
+      },
+      logout() {
+        app.globalData.isLoggedIn = false;
+        app.globalData.name = '';
+        this.setData({
+            name: '',
+            isLoggedIn: false
+        });
+        wx.setStorageSync('isLoggedIn', false);
+        wx.setStorageSync('name', '');
+        wx.reLaunch({
+            url: '../home/home',
+        });
     }
 })

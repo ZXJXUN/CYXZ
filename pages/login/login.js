@@ -116,7 +116,7 @@ Page({
 
   onContact: function () {
     wx.navigateTo({
-      url: '../rules&us/rules&us',
+      url: '../rulesNus/rulesNus',
     })
   }
 })

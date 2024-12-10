@@ -77,3 +77,10 @@
   font-size: 36rpx; /* 字体大小 */
   margin-top: 30rpx;
 }
+.background{
+  width: 100vw;
+  position: fixed;
+  top: 350rpx;
+  left: 0;
+  z-index: -1;
+}

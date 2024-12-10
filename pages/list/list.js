@@ -123,7 +123,7 @@ Page({
 
   // 发布问题的跳转
   publishQuestion: function () {
-    if (app.globalData.isLoggedIn) {
+    if (wx.getStorageSync('isLoggedIn')) {
       console.log("检验成功");
       wx.showToast({
         title: "已登录",
