@@ -59,7 +59,7 @@ Page({
     //   url: "../newAnswer/newAnswer", //验证成功至新问题界面
     // });
     //以下是校验token部分，检验成功跳转至writeanswer界面
-    if (app.globalData.isLoggedIn) {
+    if (wx.getStorageSync('isLoggedIn')) {
       console.log("检验成功");
       wx.showToast({
         title: "已登录",
