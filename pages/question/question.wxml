@@ -128,7 +128,8 @@
   <view class="less_answer" hidden="{{answer_num-(current_page-1)*size!=1}}" >
     <view class="less_answer_text" >没有更多回答了</view>
   </view>
-  <view class="footer"><wux-pagination
+  <view class="footer">
+    <wux-pagination
       defaultCurrent="1"
       total="{{page_num}}"
       bind:prev="onPrev"
@@ -138,11 +139,12 @@
       <view slot="prev">上一页</view>
       <view slot="next">下一页</view>
     </wux-pagination>
-  <wux-footer
+  <!-- <wux-footer
     theme="positive"
     label="源智答"
     content="@2024 yuanzhida.com All rights reserved"
     links="{{ links }}"
-  /></view>
+  /> -->
+  </view>
   
 </scroll-view>

@@ -3,6 +3,7 @@
 
 .answer-feed {
   padding: 0;
+  padding-bottom: 150rpx;
   font-size: 14rpx;
   background: #f0f4f3;
   color: #000;
@@ -126,6 +127,7 @@
   /*padding: 200rpx 0;*/
   box-sizing: border-box;
   background: #f0f4f3;
+  min-height: 100vh;
 }
 
 .container.withtab {
@@ -161,20 +163,21 @@
   color: #ffffff;
   border-bottom: solid 2px #ffffff;
 }
-.container {
-  padding: 0;
-  font-size: 14rpx;
-  color: #000;
-}
+
 .container .feed-item {
-  width: 690rpx;
-  padding: 30rpx 30rpx 5rpx;
-  margin: 7rpx 0 6rpx 0;
+  width: 90%;
+  padding: 20rpx;
+  margin: 20rpx auto;
   background: #ffffff;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-  box-shadow: 0 2px 5px #eeeeee;
+  border-radius: 20rpx;
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
+
+.container .feed-item:hover {
+  transform: scale(1.02); /* 鼠标悬浮时轻微放大 */
+}
+
 .container .feed-item .feed-source {
   width: 690rpx;
   left: 0;
@@ -558,3 +561,30 @@
   font-size: 40rpx;
   color: #a0acac;
 }
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #fff;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+}
+
+.wux-pagination {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.wux-pagination view {
+  font-size: 14px;
+  color: #007aff;
+  cursor: pointer;
+  border-radius: 25px;
+  background-color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
