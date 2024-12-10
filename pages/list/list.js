@@ -22,12 +22,10 @@ Page({
   onLoad: function (options) {
     console.log("页面加载中");
     const selectedSubject = options.id;
-    console.log({selectedSubject});
-    this.setData(
-      {
-        category: selectedSubject
-      }
-    );
+    console.log({ selectedSubject });
+    this.setData({
+      category: selectedSubject,
+    });
     this.getFeedData(1); // 初次加载第一页的数据
   },
 
@@ -125,7 +123,7 @@ Page({
 
   // 发布问题的跳转
   publishQuestion: function () {
-    if (isLoggedIn) {
+    if (app.globalData.isLoggedIn) {
       console.log("检验成功");
       wx.showToast({
         title: "已登录",
@@ -143,7 +141,7 @@ Page({
         icon: "none",
       });
       console.log(app.globalData.name, app.globalData.token);
-      console.log(app.globalData.isLoggedIn);
+      console.log("未登录");
       setTimeout(() => {
         console.log("Navigating to login page...");
         wx.navigateTo({
