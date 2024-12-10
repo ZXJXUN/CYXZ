@@ -72,7 +72,7 @@ Page({
       });
   
       wx.request({
-        url: 'https://47.120.26.83:8000/api/answerly/v1/user/send-code',
+        url: 'https://nurl.top:8000/api/answerly/v1/user/send-code',
         method: 'POST',
         data: dataToSend,
         header: {
@@ -160,7 +160,7 @@ Page({
   confirmKey: function() {
     if (this.data.key) {
       wx.request({
-        url: 'https://47.120.26.83:8000/api/answerly/v1/user',
+        url: 'https://nurl.top:8000/api/answerly/v1/user',
         method: 'POST',
         data: {
           username: this.data.name,
