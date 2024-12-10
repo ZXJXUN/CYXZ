@@ -184,9 +184,12 @@ Page({
     for (let i = 0; i < pictures.length; i++) {
       let element = pictures[i];
       if (element.split(':')[0] == 'https') {
+        submitPictures = this.data.submitPictures
         submitPictures.push(element)
+        this.setData({submitPictures:submitPictures})
       } else {
         promises.push(new Promise((resolve, reject) => {
+          submitPictures = this.data.submitPictures
           wx.uploadFile({
             filePath: element,
             name: 'file',
@@ -197,6 +200,7 @@ Page({
             },
             success: (res) => {
               // submitPictures.push('https://oss-symbol.oss-cn-beijing.aliyuncs.com/' + (JSON.parse(res.data)).data)
+              console.log(res.data);
               submitPictures.push((JSON.parse(res.data)).data)
               this.setData({
                 submitPictures: submitPictures
@@ -240,6 +244,7 @@ Page({
             wx.showToast({
               title: '发布成功',
             })
+            console.log(this.data.submitPictures);
             this.setData({
               isShowSubjectPicker: false,
               tempPictures: [],
