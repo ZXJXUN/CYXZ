@@ -31,6 +31,10 @@ Page({
 
     username: "ab",
     token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+    header: {
+      username: "ab",
+      token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+    },
 
     is_post: false,
   },

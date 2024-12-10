@@ -324,6 +324,7 @@ baseComponent({
     onProgress(file, res) {
       const fileList = [...this.data.uploadFileList];
       const index = fileList.map((item) => item.uid).indexOf(file.uid);
+      console.log("index", index);
 
       if (index !== -1) {
         const targetItem = {
@@ -357,13 +358,21 @@ baseComponent({
       if (!url || !filePath || disabled) return;
 
       this.onStart(file);
+      console.log("file", file);
+      console.log("url", url);
+      console.log("name", name);
+      console.log("header", header);
+      console.log("formData", formData);
+      console.log("disabled", disabled);
+      console.log("progress", progress);
+      console.log("filePath", filePath);
 
-      this.uploadTask[uid] = uploadFile({
-        url,
-        filePath,
-        name,
-        header,
-        formData,
+      this.uploadTask[uid] = wx.uploadFile({
+        url: url,
+        filePath: filePath,
+        name: name,
+        header: header,
+        formData: formData,
         success: (res) => this.onSuccess(file, res),
         fail: (res) => this.onFail(file, res),
         complete: (res) => {
