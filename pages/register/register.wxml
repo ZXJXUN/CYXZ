@@ -11,7 +11,6 @@
       bindtap="sendVerificationCode" 
       disabled="{{isCodeButtonDisabled}}">{{isCodeButtonDisabled ? countDownText : '发送验证码'}}</button>
   </view>
-  
 
   <view wx:if="{{showCodeInput}}" class="input-container">
     <input class="code-input" placeholder="输入验证码" bindinput="onInputCode" />
@@ -27,7 +26,7 @@
     <input class="key-input" placeholder="输入密码" bindinput="onInputKey" />
     <button class="key-button" bindtap="confirmKey" style="position: relative; left: 0rpx; top: -1rpx">注册</button>
   </view>
-  
+
   <view wx:if="{{userInfo}}" class="welcome-section">
     <text class="welcome-text">欢迎, {{userInfo.nickName}}!</text>
     <image src="{{userInfo.avatarUrl}}" class="avatar-image"></image>

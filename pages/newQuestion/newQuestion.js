@@ -173,6 +173,11 @@ Page({
       })
       return
     }
+    wx.showToast({
+      title: '正在提交，请稍等',
+      mask:true,
+      icon:'success'
+    })
     let promises = [];
     const pictures = this.data.tempPictures
     let submitPictures = this.data.submitPictures
@@ -218,8 +223,8 @@ Page({
         data: {
           "content": this.data.content,
           "title": this.data.title,
-          // "categoryId": this.data.subjectList[this.data.choosedSubject],
-          "categoryId": '1862378922353868801',
+          "categoryId": this.data.subjectList[this.data.choosedSubject].id,
+          // "categoryId": '1862378922353868801',
           "images": this.data.submitPictures.join(',')
         },
         success: (res) => {

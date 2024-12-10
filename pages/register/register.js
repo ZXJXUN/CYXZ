@@ -22,32 +22,33 @@ Page({
   },
 
   sendVerificationCode: function() {
-    const emailPattern = /^.*@buaa.edu.cn$/; 
+    const emailPattern = /^.*@buaa.edu.cn$/;
     const that = this;
-    const currentTime = Date.now(); // 当前时间戳
-    const lastSendTime = that.data.lastSendTime || 0; // 上次发送时间，默认为 0
-    const timeDiff = 30000 - (currentTime - lastSendTime); // 剩余时间
-
+    const currentTime = Date.now();
+    const lastSendTime = that.data.lastSendTime || 0;
+    const timeDiff = 30000 - (currentTime - lastSendTime);
+  
     if (timeDiff > 0) {
       wx.showToast({
         title: `请${Math.ceil(timeDiff / 1000)}秒后再试`,
         icon: 'none'
       });
-      return; // 阻止发送请求
+      return; // Prevent sending request
     }
-
+  
     if (this.data.email && emailPattern.test(this.data.email)) {
       const dataToSend = {
         mail: this.data.email
       };
-      // 禁用按钮并开始倒计时
+      
+      // Disable button and start countdown
       that.setData({
         isCodeButtonDisabled: true,
         countdown: 30,
         countDownText: '30秒后重试'
       });
-
-      // 开始倒计时
+  
+      // Start countdown
       const countdownInterval = setInterval(() => {
         let countdown = that.data.countdown;
         countdown--;
@@ -55,33 +56,33 @@ Page({
           countdown: countdown,
           countDownText: `${countdown}秒后重试`
         });
-
+  
         if (countdown <= 0) {
-          clearInterval(that.data.countdownInterval); // 清除倒计时
+          clearInterval(countdownInterval); // Clear countdown
           that.setData({
-            isCodeButtonDisabled: false, // 启用按钮
-            countDownText: '发送验证码' // 重置按钮文本
+            isCodeButtonDisabled: false, // Enable button
+            countDownText: '发送验证码' // Reset button text
           });
         }
       }, 1000);
-
+  
       that.setData({
-        countdownInterval: countdownInterval, // 保存定时器
-        lastSendTime: Date.now() // 更新最后发送时间
+        countdownInterval: countdownInterval,
+        lastSendTime: Date.now() // Update last send time
       });
+  
       wx.request({
-        url: 'https://47.120.26.83:8000/api/answerly/v1/user/send-code', 
+        url: 'https://47.120.26.83:8000/api/answerly/v1/user/send-code',
         method: 'POST',
         data: dataToSend,
         header: {
-          'Content-Type': 'application/x-www-form-urlencoded' 
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-
         success(res) {
           if (res.statusCode === 200) {
             that.setData({
               showCodeInput: true,
-              lastSendTime: Date.now() // 更新最后发送时间
+              lastSendTime: Date.now() // Update last send time
             });
             wx.showToast({
               title: '发送成功',
@@ -98,13 +99,13 @@ Page({
         },
         fail(err) {
           wx.showToast({
-            title: res.data.message,
+            title: '发送失败，请重试',
             icon: 'none'
           });
           console.log('验证码发送请求失败：', err);
         }
-      })
-    }else{
+      });
+    } else {
       wx.showToast({
         title: '请输入正确的北航邮箱',
         icon: 'none'

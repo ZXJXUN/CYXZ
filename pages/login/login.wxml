@@ -1,4 +1,5 @@
 <view class="container">
+  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="background"/>
   <view class="login-header">
     <text class="header-title">登录</text>
   </view>
@@ -15,7 +16,7 @@
         bindtap="toggleShowPassword" />
     </view>
   </view>
-  <button class="login-button" bindtap="onLogin" disabled="{{!account||!password}}"  style="width: 291rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx; height: 102rpx">登录</button>
+  <button class="login-button" bindtap="onLogin" disabled="{{!account||!password}}" style="width: 291rpx;">登录</button>
   <view class="register-link" bindtap="onRegister">
     <text>没有账号？点击注册</text>
   </view>
