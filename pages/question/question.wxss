@@ -3,7 +3,7 @@
 
 .answer-feed {
   padding: 0;
-  padding-bottom: 150rpx;
+  padding-bottom: 20rpx;
   font-size: 14rpx;
   background: #f0f4f3;
   color: #000;
@@ -562,7 +562,7 @@
   color: #a0acac;
 }
 
-.footer {
+/* .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -586,5 +586,4 @@
   border-radius: 25px;
   background-color: #fff;
   transition: background-color 0.3s, color 0.3s;
-}
-
+} */

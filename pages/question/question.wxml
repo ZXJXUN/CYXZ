@@ -139,12 +139,12 @@
       <view slot="prev">上一页</view>
       <view slot="next">下一页</view>
     </wux-pagination>
-  <!-- <wux-footer
+  <wux-footer
     theme="positive"
     label="源智答"
     content="@2024 yuanzhida.com All rights reserved"
     links="{{ links }}"
-  /> -->
+  />
   </view>
   
 </scroll-view>

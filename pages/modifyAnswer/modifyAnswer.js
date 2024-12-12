@@ -25,6 +25,10 @@ Page({
     fileList: [],
     push_loading: false,
     nowtime: "",
+    header: {
+      username: "ab",
+      token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+    },
 
     username: "ab",
     token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
@@ -38,7 +42,10 @@ Page({
       this.setData({
         progress: 0,
       });
-      wx.showLoading();
+      wx.showLoading({
+        title: "上传中",
+        mask: true,
+      });
     } else if (file.status === "done") {
       this.setData({
         imageUrl: file.url,
@@ -221,8 +228,12 @@ Page({
       });
     } else {
       this.setData({
-        username: wx.getStorageSync("name"),
-        token: wx.getStorageSync("token"),
+        username: tempname,
+        token: temptoken,
+        header: {
+          username: tempname,
+          token: temptoken,
+        },
       });
     }
 
@@ -288,153 +299,211 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-
   uploadAndRequest: function () {
-    //获取imageList当中符号条件的图片
-    let right_images = [];
-    for (let i = 0; i < this.data.imageList.length; i++) {
+    var fileList = [];
+    for (let i = 0; i < this.data.fileList.length; i++) {
       if (
-        this.data.imageList[i].indexOf(
+        this.data.fileList[i].url.indexOf(
           "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
         ) == -1
       ) {
-        right_images.push(this.data.imageList[i]);
+        fileList.push(JSON.parse(this.data.fileList[i].res.data).data);
+      } else {
+        fileList.push(this.data.fileList[i].url);
       }
     }
-    console.log(right_images);
-    const now_username = this.data.username;
+    const connectedString = fileList.join(",");
+    console.log("fileList:", fileList);
+    console.log("connectedString:", connectedString);
+    wx.request({
+      url: "https://nurl.top:8000/api/answerly/v1/answer",
+      method: "PUT",
+      data: {
+        content: this.data.content,
+        id: this.data.answer_id,
+        images: connectedString,
+      },
+      header: {
+        username: this.data.username,
+        token: this.data.token,
+        "Content-Type": "application/json",
+      },
 
-    const now_token = this.data.token;
-
-    var that = this;
-    // 定义一个函数来执行上传任务
-    function uploadFile(task, username, token, that) {
-      return new Promise((resolve, reject) => {
-        console.log(task);
-        wx.uploadFile({
-          url: "https://nurl.top:8000/oss/upload",
-          header: {
-            username: username,
-            token: token,
-          },
-          filePath: task,
-          name: "file",
-          success(res) {
-            console.log("上传成功", res);
-            console.log(res.data);
-            //获取res.data中的data属性
-            const data = JSON.parse(res.data);
-            console.log(data);
-            const resData = data.data;
-            console.log(resData);
-
-            resolve(res);
-          },
-          fail(err) {
-            reject(err);
-          },
+      success(res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: "修改成功",
+          icon: "success",
+          time: 1500,
         });
-      });
-    }
 
-    // 定义一个函数来发起请求
-    function request(url, method, data, username, token, that) {
-      console.log("发起请求");
-      console.log(data);
-      console.log(username);
-      console.log(token);
-      return new Promise((resolve, reject) => {
-        wx.request({
-          url: url,
-          method: method,
-          data: data,
-          header: {
-            username: username,
-            token: token,
-            "Content-Type": "application/json",
-          },
-          success(res) {
-            resolve(res);
-            wx.hideLoading();
-            wx.showToast({
-              title: "修改成功",
-              icon: "success",
-              time: 1500,
-            });
-
-            wx.removeStorageSync("modify_question_title");
-            wx.removeStorageSync("modify_question_id");
-            wx.removeStorageSync("modify_id");
-            wx.removeStorageSync("modify_content");
-            wx.removeStorageSync("modify_images");
-            setTimeout(() => {
-              wx.navigateBack();
-            }, 1800);
-          },
-          fail(err) {
-            reject(err);
-            wx.hideLoading();
-            wx.showToast({
-              title: "发布失败,请检查网络",
-              icon: "error",
-              time: 1500,
-            });
-          },
+        wx.removeStorageSync("modify_question_title");
+        wx.removeStorageSync("modify_question_id");
+        wx.removeStorageSync("modify_id");
+        wx.removeStorageSync("modify_content");
+        wx.removeStorageSync("modify_images");
+        setTimeout(() => {
+          wx.navigateBack();
+        }, 1800);
+      },
+      fail(err) {
+        wx.hideLoading();
+        wx.showToast({
+          title: "修改失败,请检查网络",
+          icon: "error",
+          time: 1500,
         });
-      });
-    }
-    // 使用 Promise.all 来并行执行所有上传任务
-    Promise.all(
-      right_images.map((task) =>
-        uploadFile(task, now_username, now_token, that)
-      )
-    )
-      .then((results) => {
-        console.log("所有上传任务完成");
-        var test = results.map((res) => JSON.parse(res.data).data);
-        console.log(test);
-        let test2 = [];
-        var j = 0;
-        for (let i = 0; i < this.data.imageList.length; i++) {
-          if (
-            this.data.imageList[i].indexOf(
-              "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
-            ) == -1
-          ) {
-            test2.push(test[j]);
-            j++;
-          } else {
-            test2.push(this.data.imageList[i]);
-          }
-        }
-        console.log("test2");
-        console.log(test2);
-        console.log("connectedString");
-        // 所有上传任务完成后，发起一次请求
-        const connectedString = test2.join(",");
-        console.log(connectedString);
-        console.log(this.data.content);
-        console.log(this.data.answer_id);
-        return request(
-          "https://nurl.top:8000/api/answerly/v1/answer",
-          "PUT",
-          {
-            content: this.data.content,
-            id: this.data.answer_id,
-            images: connectedString,
-          },
-
-          now_username,
-          now_token
-        );
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      },
+    });
   },
+
+  //最后同时上传，异步上传，最终一起请求
+  // uploadAndRequest: function () {
+  //   //获取imageList当中符号条件的图片
+  //   let right_images = [];
+  //   for (let i = 0; i < this.data.imageList.length; i++) {
+  //     if (
+  //       this.data.imageList[i].indexOf(
+  //         "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+  //       ) == -1
+  //     ) {
+  //       right_images.push(this.data.imageList[i]);
+  //     }
+  //   }
+  //   console.log(right_images);
+  //   const now_username = this.data.username;
+
+  //   const now_token = this.data.token;
+
+  //   var that = this;
+  //   // 定义一个函数来执行上传任务
+  //   function uploadFile(task, username, token, that) {
+  //     return new Promise((resolve, reject) => {
+  //       console.log(task);
+  //       wx.uploadFile({
+  //         url: "https://nurl.top:8000/oss/upload",
+  //         header: {
+  //           username: username,
+  //           token: token,
+  //         },
+  //         filePath: task,
+  //         name: "file",
+  //         success(res) {
+  //           console.log("上传成功", res);
+  //           console.log(res.data);
+  //           //获取res.data中的data属性
+  //           const data = JSON.parse(res.data);
+  //           console.log(data);
+  //           const resData = data.data;
+  //           console.log(resData);
+
+  //           resolve(res);
+  //         },
+  //         fail(err) {
+  //           reject(err);
+  //         },
+  //       });
+  //     });
+  //   }
+
+  //   // 定义一个函数来发起请求
+  //   function request(url, method, data, username, token, that) {
+  //     console.log("发起请求");
+  //     console.log(data);
+  //     console.log(username);
+  //     console.log(token);
+  //     return new Promise((resolve, reject) => {
+  //       wx.request({
+  //         url: url,
+  //         method: method,
+  //         data: data,
+  //         header: {
+  //           username: username,
+  //           token: token,
+  //           "Content-Type": "application/json",
+  //         },
+  //         success(res) {
+  //           resolve(res);
+  //           wx.hideLoading();
+  //           wx.showToast({
+  //             title: "修改成功",
+  //             icon: "success",
+  //             time: 1500,
+  //           });
+
+  //           wx.removeStorageSync("modify_question_title");
+  //           wx.removeStorageSync("modify_question_id");
+  //           wx.removeStorageSync("modify_id");
+  //           wx.removeStorageSync("modify_content");
+  //           wx.removeStorageSync("modify_images");
+  //           setTimeout(() => {
+  //             wx.navigateBack();
+  //           }, 1800);
+  //         },
+  //         fail(err) {
+  //           reject(err);
+  //           wx.hideLoading();
+  //           wx.showToast({
+  //             title: "发布失败,请检查网络",
+  //             icon: "error",
+  //             time: 1500,
+  //           });
+  //         },
+  //       });
+  //     });
+  //   }
+  //   // 使用 Promise.all 来并行执行所有上传任务
+  //   Promise.all(
+  //     right_images.map((task) =>
+  //       uploadFile(task, now_username, now_token, that)
+  //     )
+  //   )
+  //     .then((results) => {
+  //       console.log("所有上传任务完成");
+  //       var test = results.map((res) => JSON.parse(res.data).data);
+  //       console.log(test);
+  //       let test2 = [];
+  //       var j = 0;
+  //       for (let i = 0; i < this.data.imageList.length; i++) {
+  //         if (
+  //           this.data.imageList[i].indexOf(
+  //             "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+  //           ) == -1
+  //         ) {
+  //           test2.push(test[j]);
+  //           j++;
+  //         } else {
+  //           test2.push(this.data.imageList[i]);
+  //         }
+  //       }
+  //       console.log("test2");
+  //       console.log(test2);
+  //       console.log("connectedString");
+  //       // 所有上传任务完成后，发起一次请求
+  //       const connectedString = test2.join(",");
+  //       console.log(connectedString);
+  //       console.log(this.data.content);
+  //       console.log(this.data.answer_id);
+  //       return request(
+  //         "https://nurl.top:8000/api/answerly/v1/answer",
+  //         "PUT",
+  //         {
+  //           content: this.data.content,
+  //           id: this.data.answer_id,
+  //           images: connectedString,
+  //         },
+
+  //         now_username,
+  //         now_token
+  //       );
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // },
   saveContent() {
     //调用存草稿接口
 
