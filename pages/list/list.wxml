@@ -6,10 +6,15 @@
   <view class="search flex-wrp">
     <view class="search-left flex-item">
       <image src="../../images/search.png"></image>
-      <input placeholder="搜索问题" placeholder-class="search-placeholder" />
+      <input 
+        type="text" 
+        placeholder="输入关键字搜索问题..." 
+        bindinput="onSearchInput" 
+        value="{{keyword}}"
+      />
     </view>
-    <view class="search-right flex-item" bindtap="upper">
-      <image src="../../images/lighting.png"></image>
+    <view class="search-right flex-item">
+      <button bindtap="searchQuestions">搜索</button>
     </view>
   </view>
   <block wx:for="{{feed}}" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}">

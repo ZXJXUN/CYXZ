@@ -53,7 +53,7 @@
   background: #2A8CE5;
 }
 .container .search-left {
-  flex: 8;
+  flex: 5;
   background: #4EA3E7;
   text-align: left;
 }
@@ -75,10 +75,14 @@
 .container .search .search-right {
   flex: 1;
 }
-.container .search .search-right image {
-  width: 45rpx;
-  height: 45rpx;
-  padding: 10rpx;
+.container .search .search-right button {
+  width: 110rpx;
+  height: 70rpx;
+  padding: 0;
+  color: #edf2f3;
+  background-color: #3ea4ec;
+  line-height: 70rpx;
+  text-align: center;
 }
 
 .floating-button {

@@ -17,6 +17,8 @@ Page({
     category: 0,
     // 是否已解决的标识，0表示未解决
     solved_flag: 2,
+    //搜索
+    keyword: "",
   },
 
   onLoad: function (options) {
@@ -32,9 +34,10 @@ Page({
   // 获取问答数据
   getFeedData: function (page) {
     let that = this;
-    console.log(that.data.category);
-    console.log(that.data.solved_flag);
-    console.log(that.data.currentPage);
+    console.log("category:", that.data.category);
+    console.log("solved_flag:", that.data.solved_flag);
+    console.log("currentPage:", that.data.currentPage);
+    console.log("keyword:", that.data.keyword);
     wx.request({
       url: "https://nurl.top:8000/api/answerly/v1/question/page", // 基础URL，不带参数
       method: "GET", // 请求方法
@@ -47,6 +50,7 @@ Page({
         solvedFlag: that.data.solved_flag,
         size: 10,
         current: page,
+        search: that.data.keyword,
       },
       success(res) {
         if (res.statusCode === 200 && res.data.data.records) {
@@ -158,5 +162,17 @@ Page({
     wx.navigateTo({
       url: `../question/question?id=${selectedQuestion}`,
     });
+  },
+
+  onSearchInput: function (e) {
+    this.setData({
+      keyword: e.detail.value,
+    });
+  },
+
+  // 点击搜索按钮或回车触发搜索
+  searchQuestions: function () {
+    // 搜索时重新从第一页获取数据
+    this.getFeedData(1);
   },
 });
