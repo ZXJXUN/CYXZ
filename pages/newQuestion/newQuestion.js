@@ -1,114 +1,35 @@
 Page({
+
+  // 预览图片
   previewPicture: function (event) {
     wx.previewImage({
       urls: this.data.tempPictures,
       current: event.currentTarget.dataset.picture,
     });
   },
+
+  // 选择科目
   chooseSubject: function (event) {
     this.setData({
       choosedSubject: event.currentTarget.dataset.subjectIndex,
     });
   },
+
+  // 标题输入
   titleInput: function (event) {
     this.setData({
       title: event.detail.value,
     });
   },
+
+  // 内容输入
   contentInput: function (event) {
     this.setData({
       content: event.detail.value,
     });
   },
-  submitToDraft: async function () {
-    let promises = [];
-    const pictures = this.data.tempPictures;
-    let submitPictures = this.data.submitPictures;
-    for (let i = 0; i < pictures.length; i++) {
-      let element = pictures[i];
-      if (element.split(":")[0] == "https") {
-        submitPictures.push(element);
-      } else {
-        promises.push(
-          new Promise((resolve, reject) => {
-            wx.uploadFile({
-              filePath: element,
-              name: "file",
-              url: "http://47.120.26.83:8000/oss/upload",
-              header: {
-                username: wx.getStorageSync("name"),
-                token: wx.getStorageSync("token"),
-              },
-              success: (res) => {
-                submitPictures.push(
-                  "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
-                    JSON.parse(res.data).data
-                );
-                resolve(res);
-              },
-              fail: (err) => {
-                console.log(err);
-                reject(err);
-              },
-            });
-          })
-        );
-      }
-    }
-    await Promise.all(promises).then(() => {
-      //没弄好
-      return;
-      wx.request({
-        url: "http://47.120.26.83:8000/api/answerly/v1/question",
-        // url: 'http://127.0.0.1:3000',
-        header: {
-          username: "ab",
-          token: "6927fe4d-a141-47e6-9e11-faf68d2ab601",
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        data: {
-          content: this.data.content,
-          title: this.data.title,
-          user_id: 0,
-          category: this.data.choosedSubject,
-          pictures: this.data.submitPictures,
-        },
-        success: (res) => {
-          // console.log(res.data)
-          Notify({
-            type: "success",
-            message: "提交成功",
-            selector: "#van-notify",
-            context: this,
-          });
-          this.setData({
-            isShowSubjectPicker: false,
-            tempPictures: [],
-            choosedSubject: 0,
-            content: "",
-            title: "",
-            submitPictures: [],
-          });
-          Notify({
-            type: "success",
-            message: "提交成功",
-            selector: "#van-notify",
-            context: this,
-          });
-        },
-        fail: (err) => {
-          console.log(err);
-          Notify({
-            type: "warning",
-            message: "提交失败",
-            selector: "#van-notify",
-            context: this,
-          });
-        },
-      });
-    });
-  },
+
+  // 增加图片
   addPicture: function () {
     wx.chooseMedia({
       count: 9,
@@ -122,44 +43,63 @@ Page({
             ...result.tempFiles.map((file) => file.tempFilePath),
           ],
         });
+        if (this.data.tempPictures.length>9) {
+          wx.showToast({
+            title: '图片过多',
+            icon: "error",
+          })
+          this.setData({tempPictures:this.data.tempPictures.slice(0,9)})
+        }
       },
     });
   },
+
+  // 删除图片
   deletePicture: function (event) {
-    const { tempPictures } = this.data;
+    const {
+      tempPictures
+    } = this.data;
     let index = event.currentTarget.dataset.index;
     tempPictures.splice(index, 1);
     this.setData({
       tempPictures: tempPictures,
     });
   },
-  addPic: function (event) {
-    const { file: pics } = event.detail;
-    const { tempPictures } = this.data;
-    for (let i = 0; i < pics.length; i++) {
-      tempPictures.push({
-        url: pics[i].url,
+
+  // 上传一个图片
+  uploadImg: async function (filePath) {
+    return new Promise((resolve, reject) => {
+      wx.uploadFile({
+        url: 'https://nurl.top:8000/oss/upload',
+        filePath: filePath,
+        name: 'file',
+        header: {
+          username: wx.getStorageSync("name"),
+          token: wx.getStorageSync("token"),
+        },
+        success: (res) => {
+          let submitPictures = this.data.submitPictures;
+          submitPictures.push(JSON.parse(res.data).data);
+          this.setData({
+            submitPictures: submitPictures,
+          });
+          resolve(res)
+        },
+        fail: (err) => {
+          wx.showToast({
+            title: '上传出现错误',
+            icon: "error",
+          })
+          console.log(err);
+          reject(err);
+        },
       });
-    }
-    this.setData({
-      tempPictures,
     });
   },
-  // validate: function (title, message) {
-  //   await new Promise((resolve,reject)=>{
-  //     if (!this.data[title]) {
-  //       wx.showToast({
-  //         title: message,
-  //       })
-  //     }
-  //   })
-  //   return Promise.resolve()
-  // },
+
+  // 提交问题
   submit: async function () {
-    // await this.validate('title','标题为空')
-    // await this.validate('content','内容为空')
     if (!this.data.title) {
-      console.log(this.data.title);
       wx.showToast({
         title: "题目为空",
         icon: "error",
@@ -173,118 +113,81 @@ Page({
       });
       return;
     }
-    wx.showToast({
-      title: "正在提交，请稍等",
-      mask: true,
-      icon: "success",
+    wx.showLoading({
+      title: "正在提交，稍等",
+      mask: true
     });
-    let promises = [];
     const pictures = this.data.tempPictures;
-    let submitPictures = this.data.submitPictures;
-    for (let i = 0; i < pictures.length; i++) {
-      let element = pictures[i];
-      if (element.split(":")[0] == "https") {
-        submitPictures = this.data.submitPictures;
-        submitPictures.push(element);
-        this.setData({ submitPictures: submitPictures });
-      } else {
-        promises.push(
-          new Promise((resolve, reject) => {
-            submitPictures = this.data.submitPictures;
-            wx.uploadFile({
-              filePath: element,
-              name: "file",
-              url: "https://nurl.top:8000/oss/upload",
-              header: {
-                username: wx.getStorageSync("name"),
-                token: wx.getStorageSync("token"),
-              },
-              success: (res) => {
-                // submitPictures.push('https://oss-symbol.oss-cn-beijing.aliyuncs.com/' + (JSON.parse(res.data)).data)
-                console.log(res.data);
-                submitPictures.push(JSON.parse(res.data).data);
-                this.setData({
-                  submitPictures: submitPictures,
-                });
-                resolve(res);
-              },
-              fail: (err) => {
-                console.log(err);
-                reject(err);
-              },
-            });
-          })
-        );
-      }
+    for (const picture of pictures) {
+      await this.uploadImg(picture)
     }
-    await Promise.all(promises).then(() => {
-      wx.request({
-        // url: 'http://localhost:4000',
-        url: "https://nurl.top:8000/api/answerly/v1/question",
-        header: {
-          token: wx.getStorageSync("token"),
-          username: wx.getStorageSync("name"),
-        },
-        method: "POST",
-        data: {
-          content: this.data.content,
-          title: this.data.title,
-          categoryId: this.data.subjectList[this.data.choosedSubject].id,
-          // "categoryId": '1862378922353868801',
-          images: this.data.submitPictures.join(","),
-        },
-        success: (res) => {
-          console.log(res.data);
-          if (res.data.code !== "0") {
-            wx.showToast({
-              title: "发布失败",
-              icon: "error",
-            });
-          } else {
-            wx.showToast({
-              title: "发布成功",
-            });
-            console.log(this.data.submitPictures);
-            this.setData({
-              isShowSubjectPicker: false,
-              tempPictures: [],
-              choosedSubject: 0,
-              content: "",
-              title: "",
-              submitPictures: [],
-            });
-          }
-        },
-        fail: (err) => {
-          if (res.data.code) {
-            wx.showToast({
-              title: "发布失败",
-              icon: "error",
-            });
-          }
-          console.log(err);
-        },
-      });
+    wx.request({
+      url: "https://nurl.top:8000/api/answerly/v1/question",
+      header: {
+        token: wx.getStorageSync("token"),
+        username: wx.getStorageSync("name"),
+      },
+      method: "POST",
+      data: {
+        content: this.data.content,
+        title: this.data.title,
+        categoryId: this.data.subjectList[this.data.choosedSubject].id,
+        images: this.data.submitPictures.join(","),
+      },
+      success: (res) => {
+        if (res.data.code !== "0") {
+          wx.showToast({
+            title: "发布失败",
+            icon: "error",
+          });
+        } else {
+          wx.showToast({
+            title: "发布成功",
+          });
+          this.setData({
+            isShowSubjectPicker: false,
+            tempPictures: [],
+            choosedSubject: 0,
+            content: "",
+            title: "",
+            submitPictures: [],
+          });
+        }
+      },
+      fail: (err) => {
+        if (res.data.code) {
+          wx.showToast({
+            title: "发布失败",
+            icon: "error",
+          });
+        }
+        console.log(err);
+      },
     });
   },
+  // 页面 data
   data: {
     tempPictures: [],
-    subjectList: [],
+    subjectList: [{id:4654}],
     choosedSubject: 0,
     content: "",
     title: "",
     submitPictures: [],
   },
   onLoad: function (options) {
-    if (Object.keys(options).length !== 0) {
-      let draft = JSON.parse(options.draft);
-      this.setData({
-        choosedSubject: draft.draft_category,
-        title: draft.draft_title,
-        content: draft.draft_content,
-        tempPictures: draft.draft_pictures,
-      });
-    }
+
+    // 后续的草稿功能
+    // if (Object.keys(options).length !== 0) {
+    //   let draft = JSON.parse(options.draft);
+    //   this.setData({
+    //     choosedSubject: draft.draft_category,
+    //     title: draft.draft_title,
+    //     content: draft.draft_content,
+    //     tempPictures: draft.draft_pictures,
+    //   });
+    // }
+
+    // 获取科目
     wx.request({
       url: "https://nurl.top:8000/api/answerly/v1/category",
       header: {
@@ -292,13 +195,16 @@ Page({
         username: wx.getStorageSync("name"),
       },
       success: (res) => {
-        console.log(res.data);
         this.setData({
           subjectList: res.data.data,
         });
       },
       fail: (err) => {
         console.log("err: " + err);
+        wx.showToast({
+          title: "科目获取失败",
+          icon: "error",
+        });
       },
     });
   },
