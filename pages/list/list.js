@@ -56,10 +56,19 @@ Page({
         if (res.statusCode === 200 && res.data.data.records) {
           console.log("list get success");
           console.log(res.data.data.records);
-          let newFeed =
-            page === 1
-              ? res.data.data.records
-              : that.data.feed.concat(res.data.data.records); // 如果是第一页，替换数据；否则追加数据
+          let records = res.data.data.records.map(item => {
+            // 保留HTML标签
+            if (item.title) {
+              item.title = item.title.replace(/<mark>/g, '<b>').replace(/<\/mark>/g, '</b>');
+            }
+            if (item.content) {
+              item.content = item.content.replace(/<mark>/g, '<b>').replace(/<\/mark>/g, '</b>');
+            }
+            return item;
+          });
+          
+          
+          let newFeed = page === 1 ? records : that.data.feed.concat(records);
           that.setData({
             feed: newFeed,
             currentPage: page,

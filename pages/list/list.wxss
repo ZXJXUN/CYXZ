@@ -29,10 +29,9 @@
 .container .feed-item:hover {
   transform: scale(1.02); /* 鼠标悬浮时轻微放大 */
 }
-.container .feed-item .feed-content .question text {
+.container .feed-item .feed-content .question{
   font-size: 32rpx;
   line-height: 48rpx;
-  font-weight: bold;
   color: #333333;
 }
 .container .feed-item .feed-content .answer-body {
