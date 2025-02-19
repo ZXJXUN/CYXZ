@@ -70,7 +70,7 @@ Page({
   uploadImg: async function (filePath) {
     return new Promise((resolve, reject) => {
       wx.uploadFile({
-        url: 'https://nurl.top:8000/oss/upload',
+        url: 'https://yuanzhida.top:8000/oss/upload',
         filePath: filePath,
         name: 'file',
         header: {
@@ -99,6 +99,11 @@ Page({
 
   // 提交问题
   submit: async function () {
+    wx.showShareMenu({
+      withShareTicket: true,
+      menus: ['shareAppMessage', 'shareTimeline']
+    })
+    return
     if (!this.data.title) {
       wx.showToast({
         title: "题目为空",
@@ -122,7 +127,7 @@ Page({
       await this.uploadImg(picture)
     }
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/question",
+      url: "https://yuanzhida.top:8000/api/answerly/v1/question",
       header: {
         token: wx.getStorageSync("token"),
         username: wx.getStorageSync("name"),
@@ -144,14 +149,9 @@ Page({
           wx.showToast({
             title: "发布成功",
           });
-          this.setData({
-            isShowSubjectPicker: false,
-            tempPictures: [],
-            choosedSubject: 0,
-            content: "",
-            title: "",
-            submitPictures: [],
-          });
+          wx.redirectTo({
+            url: '/pages/list/list?id='+this.data.subjectList[this.data.choosedSubject].id,
+          })
         }
       },
       fail: (err) => {
@@ -168,7 +168,7 @@ Page({
   // 页面 data
   data: {
     tempPictures: [],
-    subjectList: [{id:4654}],
+    subjectList: [],
     choosedSubject: 0,
     content: "",
     title: "",
@@ -186,10 +186,10 @@ Page({
     //     tempPictures: draft.draft_pictures,
     //   });
     // }
-
+    
     // 获取科目
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/category",
+      url: "https://yuanzhida.top:8000/api/answerly/v1/category",
       header: {
         token: wx.getStorageSync("token"),
         username: wx.getStorageSync("name"),
