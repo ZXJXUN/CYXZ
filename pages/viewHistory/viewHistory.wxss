@@ -1,9 +1,9 @@
-/* pages/myQuestions/myQuestions.wxss */
+/* pages/viewHistory/viewHistory.wxss */
 .container {
   padding: 20rpx;
 }
 
-.question-item {
+.history-item {
   background-color: #fff;
   border-radius: 10rpx;
   padding: 20rpx;
@@ -11,29 +11,27 @@
   box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.1);
 }
 
-.question-title {
+.history-title {
   font-weight: bold;
   margin-bottom: 10rpx;
 }
 
-.question-content {
+.history-content {
   color: #666;
   margin-bottom: 10rpx;
-  /* 文本超出两行用省略号显示 */
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
-.question-info {
-  display: flex;
-  justify-content: space-between;
+.history-info {
   color: #999;
   font-size: 24rpx;
 }
 
-.loading, .no-more {
+.loading,
+.no-more {
   text-align: center;
   padding: 20rpx;
   color: #999;

@@ -12,7 +12,9 @@
     "pages/draft/draft",
     "pages/MyQuestion/MyQuestion",
     "pages/modifyAnswer/modifyAnswer",
-    "pages/rulesNus/rulesNus"
+    "pages/rulesNus/rulesNus",
+    "pages/viewHistory/viewHistory",
+    "pages/myComments/myComments"
   ],
   "window": {
     "navigationBarTextStyle": "white",

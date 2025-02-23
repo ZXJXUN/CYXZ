@@ -10,6 +10,27 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/myComments/myComments",
+          "pathName": "pages/myComments/myComments",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/viewHistory/viewHistory",
+          "pathName": "pages/viewHistory/viewHistory",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/MyQuestion/MyQuestion",
+          "pathName": "pages/MyQuestion/MyQuestion",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/newAnswer/newAnswer",
           "pathName": "pages/newAnswer/newAnswer",
           "query": "",

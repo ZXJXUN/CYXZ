@@ -1,0 +1,23 @@
+<!-- pages/myComments/myComments.wxml -->
+<wxs src="../../utils/formatDate.wxs" module="format" />
+
+<view class="container">
+  <view class="comment-list">
+    <block wx:for="{{comments}}" wx:key="id">
+      <view class="comment-item">
+        <view class="comment-header">
+          <image class="avatar" src="{{item.avatar}}" mode="aspectFill" />
+          <view class="user-info">
+            <view class="username">{{item.username}}</view>
+            <view class="comment-time">发表于：{{format.formatDate(item.createTime)}}</view>
+          </view>
+        </view>
+        <view class="comment-content">{{item.content}}</view>
+        <image wx:if="{{item.images}}" class="comment-image" src="{{item.images}}" mode="aspectFill" />
+      </view>
+    </block>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+</view>

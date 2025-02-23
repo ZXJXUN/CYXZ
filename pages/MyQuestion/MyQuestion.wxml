@@ -1,19 +1,22 @@
-<!--index.wxml-->
-<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-  <block wx:for="{{drafts}}" wx:for-index="index" wx:for-item="item">
-    <view class="draft-item">
-      <view class="draft-title">题目: {{item.draft_title}}</view>
-      <view class="draft-category">科目: {{item.draft_category}}</view>
-      <view class="draft-content">内容: {{item.draft_content}}</view>
-      <view class="draft-pictures" >
-        <image bindtap="previewPicture" data-pictures="{{item.draft_pictures}}" data-picture="{{pictureItem}}" wx:for="{{item.draft_pictures}}" wx:for-item="pictureItem" class="draft-picture" src="{{pictureItem}}" mode="aspectFill">
-        </image>
-      </view>
-      <view class="button">
-        <button class="delete-button" bindtap="delete" data-index="{{index}}">删除</button>
-      </view>
-    </view>
-  </block>
-</scroll-view>
-<custom-tabbar currentPage="index"></custom-tabbar><!--pages/MyQuestion.wxml-->
-<text>pages/MyQuestion.wxml</text>
+<!-- pages/myQuestions/myQuestions.wxml -->
+<wxs src="../../utils/formatDate.wxs" module="format" />
+<view class="container">
+  <view class="question-list">
+      <block wx:for="{{questions}}" wx:key="id">
+          <view class="question-item" bindtap="navigateToDetail" data-id="{{item.id}}">
+              <view class="question-title">{{item.title}}</view>
+              <view class="question-content">{{item.content}}</view>
+              <view class="question-info">
+                  <text>查看：{{item.viewCount}}</text>
+                  <text>点赞：{{item.likeCount}}</text>
+                  <text>评论：{{item.commentCount}}</text>
+                  <text>{{item.solvedFlag === 0 ? '未解决' : '已解决'}}</text>
+                  <text>{{format.formatDate(item.createTime)}}</text>
+              </view>
+          </view>
+      </block>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+</view>
