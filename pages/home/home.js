@@ -20,8 +20,8 @@ Page({
     }, 
 
     goToDraft: function (){
-      wx.navigateTo({
-        url: '../draft/draft',
+      wx.showToast({
+        title: '敬请期待 ^_',
       })
     },
     goToAttention: function(){
@@ -35,8 +35,8 @@ Page({
       })
     },
     goToBrowsed: function(){
-      wx.showToast({
-        title: '敬请期待 ^_',
+      wx.navigateTo({
+        url: '../viewHistory/viewHistory',
       })
     },
     goToMessage: function(){
@@ -45,8 +45,8 @@ Page({
       })
     },
     goToMyAnswer: function(){
-      wx.showToast({
-        title: '敬请期待 ^_',
+      wx.navigateTo({
+        url: '../myComments/myComments',
       })
     },
     goToLogin() {
