@@ -99,11 +99,6 @@ Page({
 
   // 提交问题
   submit: async function () {
-    wx.showShareMenu({
-      withShareTicket: true,
-      menus: ['shareAppMessage', 'shareTimeline']
-    })
-    return
     if (!this.data.title) {
       wx.showToast({
         title: "题目为空",
@@ -155,6 +150,7 @@ Page({
         }
       },
       fail: (err) => {
+        console.log(res.data);
         if (res.data.code) {
           wx.showToast({
             title: "发布失败",

@@ -1,25 +1,55 @@
 <view class="container">
-  <view class="title-box">
-    <view class="title-text">题目:</view>
-    <input type="text" placeholder="请输入标题" value="{{title}}" bindinput="titleInput" class="title-input" />
-  </view>
-  <view class="subject-box">
-    <view class="subject-text">科目: {{subjectList[choosedSubject].name}}</view>
-    <view class="subject-buttons">
-      <button wx:key="id" wx:for="{{subjectList}}" wx:for-item="subjectItem" wx:for-index="subjectIndex" catchtap="chooseSubject" data-subject-index="{{subjectIndex}}" class="subject-button">{{subjectItem.name}}</button>
+  <view class="card">
+    <view class="card-header">
+      <text class="card-title">问题提问</text>
     </view>
-  </view>
-  <view class="content-box">
-    <textarea placeholder="请输入内容" bindinput="contentInput" value="{{content}}" class="content-input" maxlength="-1"></textarea>
-  </view>
-  <view class="images-box">
-    <view class="image-box" wx:key="*this" wx:for="{{tempPictures}}" wx:for-item="tempPicturesItem" wx:for-index="tempPicturesIndex" >
-      <image bindtap="previewPicture" data-picture="{{tempPicturesItem}}" src="{{tempPicturesItem}}" mode="" class="image" />
-      <image class="delete-image" src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/243a76c1-0657-40b0-811b-f7d779368e9d.png" mode="" bindtap="deletePicture" data-index="{{tempPicturesIndex}}"></image>
+
+    <view class="form-group inline">
+      <label class="form-label">标题:</label>
+      <input type="text" value="{{title}}" bindinput="titleInput" class="form-input title-input" />
     </view>
-    <div class="add-block" bindtap="addPicture">添加图片</div>
-  </view>
-  <view class="button-box">
+
+
+    <view class="form-group">
+      <label class="form-label">科目:</label>
+      <view class="subject-selector">
+        <scroll-view scroll-x class="subject-scroll">
+          <button
+            wx:key="id"
+            wx:for="{{subjectList}}"
+            wx:for-item="subjectItem"
+            wx:for-index="subjectIndex"
+            catchtap="chooseSubject"
+            data-subject-index="{{subjectIndex}}"
+            class="subject-button {{choosedSubject == subjectIndex ? 'active' : ''}}"
+          >
+            {{subjectItem.name}}
+          </button>
+        </scroll-view>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <label class="form-label">内容:</label>
+      <textarea placeholder="请输入内容" bindinput="contentInput" value="{{content}}" class="form-textarea" maxlength="-1"></textarea>
+    </view>
+
+    <view class="form-group">
+      <label class="form-label">图片:</label>
+      <view class="image-grid">
+        <block wx:for="{{tempPictures}}" wx:key="*this" wx:for-item="tempPicturesItem" wx:for-index="tempPicturesIndex">
+          <view class="image-container">
+            <image bindtap="previewPicture" data-picture="{{tempPicturesItem}}" src="{{tempPicturesItem}}" mode="aspectFill" class="image" />
+            <view class="delete-image" bindtap="deletePicture" data-index="{{tempPicturesIndex}}"></view>
+          </view>
+        </block>
+        <view class="add-image-button" bindtap="addPicture">
+          <text>+</text>
+          <text>添加图片</text>
+        </view>
+      </view>
+    </view>
+
     <button class="submit-button" bind:tap="submit">提交问题</button>
   </view>
 </view>

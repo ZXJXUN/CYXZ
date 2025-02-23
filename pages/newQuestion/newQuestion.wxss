@@ -1,106 +1,195 @@
-.title-box {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 1px solid rgba(100, 100, 100, .15);
-  padding: 40rpx 0;
+.container {
+  padding: 20rpx;
+  background-color: #f8f8f8;
+  min-height: 100vh; /* 让 container 占据整个视口高度 */
+  box-sizing: border-box;
 }
 
-.title-text {
-  margin-left: 20rpx;
-  font-size: 40rpx;
+.card {
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-header {
+  margin-bottom: 30rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.card-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+/* 关键：让 label 和 input 并排显示 */
+.form-group.inline {
+  display: flex;           /* 使用 flex 布局 */
+  align-items: center;     /* 垂直居中对齐 */
+}
+
+/* 关键：限制 label 的宽度，防止占据太多空间 */
+.form-group.inline .form-label {
+  width: 70rpx;         /* 或者你需要的宽度 */
+  flex-shrink: 0;         /* 防止 label 宽度被压缩 */
+  margin-bottom: 0;       /* 清除 label 原本的 margin-bottom */
+  text-align: right;      /* 可选：如果需要 label 文字右对齐 */
+  padding-right: 10rpx;  /* 可选：label 和 input 之间加点间距 */
+}
+
+/* 关键：设置 input 占据剩余空间 */
+.form-group.inline .form-input {
+  flex: 1;                 /* 让 input 占据剩余宽度 */
+  width: auto;             /* 宽度设置为 auto，由 flex 控制 */
 }
 
 .title-input {
-  margin-left: 20rpx;
-  font-size: 40rpx;
-  flex: 1;
-  margin-right: 80rpx;
+  height: 80rpx;          /* 保持高度 */
+  line-height: 80rpx;     /* 设置 line-height 和 height 相同 */
 }
-.content-box{
+
+.form-input,
+.form-textarea {
+  border: 1rpx solid #ccc;
+  border-radius: 5rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  height: 200rpx;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.subject-selector {
+  margin-top: 10rpx;
+}
+
+.subject-scroll {
+  white-space: nowrap;
   display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(100, 100, 100, .15);
 }
-/* .content-text{
-  margin-right: 25rpx;
-  margin-left: 10rpx;
-} */
-.content-input{
-  padding: 0 20px;
-  /* width: 100%; */
-  flex: 1;
-  height: 600rpx;
-  line-height: 30px;
+
+.subject-button {
+  background-color: #f2f2f2;
+  color: #666;
+  font-size: 26rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
+  border: none;
+  display: inline-block;
 }
-.subject-box{
-  padding:20px 0;
-  border-bottom: 1px solid rgba(100, 100, 100, .15);
+
+.subject-button.active {
+  background-color: #007bff;
+  color: #fff;
 }
-.subject-buttons{
-  margin-left: 10px;
+
+.image-grid {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  margin-top: 10rpx;
 }
-.subject-text{
-  font-size: 20px;
-  margin: 0 10px;
+
+.image-container {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
   margin-bottom: 20rpx;
 }
-button{
-  padding:0;
-  margin:0;
-  height: 80rpx;
-  line-height: 80rpx;
-  width: 180rpx;
-  margin-right: 15rpx;
-  margin-bottom: 15rpx;
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 5rpx;
 }
-.image,.add-block{
-  width: 65px;
-  height: 65px;
-}
-.add-block{
-  line-height: 65px;
-  text-align: center;
-  border: 1px solid rgba(100, 100, 100, .15);
-}
-.images-box{
-  margin-bottom: 40rpx;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 10px;
-  background-color: rgba(100, 100, 100, .15);
-}
-.image-box{
-  margin-right: 15px;
-  margin-bottom: 15px;
-  position:relative;
-  width: 65px;
-  height: 65px;
-}
-.delete-image{
-  width: 18px;
-  height: 18px;
+
+.delete-image {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -10rpx;
+  right: -10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  cursor: pointer;
+  z-index: 10;
 }
-.button-box{
+
+.add-image-button {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx dashed #ccc;
+  border-radius: 5rpx;
   display: flex;
-  flex-direction: row-reverse;
-  height: 100px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  font-size: 24rpx;
+  cursor: pointer;
 }
-.submit-button{
-  border-radius: 25px;
-  width: 200px;
-  margin-right: 20px;
-  background-color: blue;
-  color: white;
+
+.add-image-button text:first-child {
+  font-size: 48rpx;
+  line-height: 1;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 32rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 10rpx;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+/* 你的其他样式... */
+
+.delete-image {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.7); /* 黑色半透明背景 */
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  font-weight: bold;        /* 加粗 */
+  cursor: pointer;
+  z-index: 10;
+  box-sizing: border-box; /* 避免 padding 影响尺寸 */
+  padding: 0;           /* 移除默认 padding */
+}
+
+.delete-image::before {
+  content: "×";          /* 使用 Unicode 乘号作为删除符号 */
+  display: block;
 }
