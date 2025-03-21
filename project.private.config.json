@@ -10,6 +10,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/newAnswer/newAnswer",
+          "pathName": "pages/newAnswer/newAnswer",
+          "query": "id=24",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/question/question",
+          "pathName": "pages/question/question",
+          "query": "id=24",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
           "query": "",

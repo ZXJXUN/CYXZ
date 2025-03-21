@@ -803,18 +803,11 @@ Page({
           username: this.data.username,
         },
         success: function (res) {
-          console.log("success");
-          console.log(res.data);
-          console.log(res);
           var temp = res.data.data.records;
-          console.log(temp);
           var tempimages = temp.map((item) => {
             //将逗号分割的图片字符串，转化为图片数组
             return item.images.split(",");
           });
-
-          console.log("继续加载tempimages");
-          console.log(tempimages);
 
           tempimages = tempimages.map((item) => {
             //加上../../images/前缀
@@ -834,8 +827,6 @@ Page({
             });
           });
 
-          console.log("tempimages加上前缀");
-          console.log(tempimages);
           var tempanswerList = temp.map((item) => {
             if (item.avatar == null) {
               item.avatar = "../../images/默认头像.png";
@@ -853,7 +844,6 @@ Page({
               collect: 0,
             };
           });
-          console.log(tempanswerList);
           tempanswerList.forEach((item, index) => {
             const inputTime = temp[index].createTime;
             const date = new Date(inputTime);
@@ -864,8 +854,6 @@ Page({
             const minutes = String(date.getMinutes()).padStart(2, "0");
             const seconds = String(date.getSeconds()).padStart(2, "0");
             const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-            console.log(formattedTime);
-
             item.time = formattedTime;
             if (tempimages[index] == "") {
               item.images = [];
@@ -887,7 +875,6 @@ Page({
               item.more_class = "more2";
             }
           });
-          console.log(tempanswerList);
           console.log(res.data.data.pages);
 
           that.setData({

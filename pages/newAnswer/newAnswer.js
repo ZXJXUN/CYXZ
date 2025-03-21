@@ -312,15 +312,18 @@ Page({
     }
     const connectedString = fileList.join(",");
     wx.request({
-      url: app.globalData.backend+"/api/answerly/v1/answer",
+      url: app.globalData.backend+"/api/answerly/v1/comment",
       method: "POST",
       data: {
         content: this.data.content,
-        question_id: this.data.question_id,
+        questionId: this.data.question_id,
         images: connectedString,
+        parentCommentId:0,
+        topCommentId:0
       },
+        
       header: {
-        header: app.getRequestHeader(),
+        ...app.getRequestHeader(),
         "Content-Type": "application/json",
       },
       success(res) {
