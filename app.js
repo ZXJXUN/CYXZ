@@ -30,6 +30,12 @@ App({
     isLoggedIn: '',
     "backend":"https://yuanzhida.top:8000"
   },
+  getRequestHeader: function () {
+    return {
+      token: wx.getStorageSync("token"),
+      username: wx.getStorageSync("name"),
+    };
+  },
 
   check: function() {
     var expirationTime = wx.getStorageSync('expirationTime');

@@ -1,15 +1,13 @@
+const app = getApp();
 Page({
   data: {
     subjects: [],
   },
   onReady: function () {
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/category",
+      url: app.globalData.backend+"/api/answerly/v1/category",
       method: "GET",
-      header: {
-        token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
-        username: "ab",
-      },
+      header: app.getRequestHeader(),
       success: (res) => {
         console.log("success");
         console.log(res);

@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
 
   data: {
@@ -33,7 +34,7 @@ Page({
       const res = await new Promise((resolve, reject) => {
         wx.request({
           url: `${this.data.baseUrl}/category`,
-          header: this.getRequestHeader(),
+          header: app.getRequestHeader(),
           success: (res) => {
             resolve(res); // 请求成功，resolve Promise
           },
@@ -69,13 +70,6 @@ Page({
     }
   },
 
-  // 获取请求头
-  getRequestHeader: function () {
-    return {
-      token: wx.getStorageSync("token"),
-      username: wx.getStorageSync("name"),
-    };
-  },
 
   // 预览图片
   previewPicture: function (event) {
@@ -143,7 +137,7 @@ Page({
         url: this.data.uploadUrl,
         filePath: filePath,
         name: 'file',
-        header: this.getRequestHeader(),
+        header: app.getRequestHeader(),
         success: (res) => {
           const responseData = JSON.parse(res.data);
           if (res.statusCode !== 200 || !responseData.data) {
@@ -206,7 +200,7 @@ Page({
         wx.request({
           url: apiUrl,
           method: "POST",
-          header: this.getRequestHeader(),
+          header: app.getRequestHeader(),
           data: {
             content: this.data.content,
             title: this.data.title,
