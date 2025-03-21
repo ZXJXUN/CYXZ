@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/home/home",
     "pages/list/list",
+    "pages/old_list/old_list",
     "pages/login/login",
     "pages/old_login/old_login",
     "pages/answer/answer",

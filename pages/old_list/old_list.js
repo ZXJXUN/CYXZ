@@ -22,7 +22,9 @@ Page({
   },
 
   onLoad: function (options) {
+    console.log("页面加载中");
     const selectedSubject = options.id;
+    console.log({ selectedSubject });
     this.setData({
       category: selectedSubject,
     });
@@ -37,9 +39,12 @@ Page({
     console.log("currentPage:", that.data.currentPage);
     console.log("keyword:", that.data.keyword);
     wx.request({
-      url: app.globalData.backend+"/api/answerly/v1/question/page", // 基础URL，不带参数
+      url: "https://nurl.top:8000/api/answerly/v1/question/page", // 基础URL，不带参数
       method: "GET", // 请求方法
-      header:  app.getRequestHeader(),
+      header: {
+        token: "29b04146-b2de-4733-b0f5-fba06f7b45fe", // 请求头中的token
+        username: "ab", // 请求头中的username
+      },
       data: {
         categoryId: that.data.category,
         solvedFlag: that.data.solved_flag,
