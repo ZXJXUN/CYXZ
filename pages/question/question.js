@@ -210,7 +210,7 @@ Page({
       },
     });
     wx.request({
-      url: app.globalData.backend+"/api/answerly/v1/answer/page",
+      url: app.globalData.backend+"/api/answerly/v1/comment/page",
       method: "GET",
       data: {
         id: this.data.question_id,
@@ -223,12 +223,8 @@ Page({
         username: this.data.username,
       },
       success: function (res) {
-        console.log("success");
-        console.log("res.data");
-        console.log(res.data);
         console.log(res);
         var temp = res.data.data.records;
-        console.log(temp);
         var tempimages = temp.map((item) => {
           //将逗号分割的图片字符串，转化为图片数组
           return item.images.split(",");
@@ -508,7 +504,7 @@ Page({
         console.log(this.data.token);
         console.log(this.data.username);
         var like_url =
-          app.globalData.backend+"/api/answerly/v1/answer/like?id=" + like_id;
+          app.globalData.backend+"/api/answerly/v1/comment/like?id=" + like_id;
         wx.request({
           url: like_url,
           method: "POST",
@@ -611,7 +607,7 @@ Page({
     if (new_page > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: app.globalData.backend+"/api/answerly/v1/answer/page",
+        url: app.globalData.backend+"/api/answerly/v1/comment/page",
         method: "GET",
         data: {
           id: this.data.question_id,
@@ -741,7 +737,7 @@ Page({
         console.log(that.data.username);
         console.log(that.data.token);
         var delete_url =
-          app.globalData.backend+"/api/answerly/v1/answer?id=" +
+          app.globalData.backend+"/api/answerly/v1/comment?id=" +
           that.data.answerList[index].id;
         if (res.confirm) {
           wx.request({
@@ -790,7 +786,7 @@ Page({
     if (this.data.current_page + 1 > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: app.globalData.backend+"/api/answerly/v1/answer/page",
+        url: app.globalData.backend+"/api/answerly/v1/comment/page",
         method: "GET",
         data: {
           id: this.data.question_id,
