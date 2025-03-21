@@ -12,8 +12,12 @@
       <text class="input-label">密码：</text>
       <input type="password" bindinput="onInputPassword" placeholder="请输入密码"
         password="{{!showPassword}}" />
-      <image class="password-toggle" src="{{showPassword? '../../images/eye-open.png' : '../../images/eye-close.png'}}"
-        bindtap="toggleShowPassword" />
+        <!-- 图片没准备好
+      <image class="password-toggle" src="{{showPassword? '../../images/eye-open.png' : '../../images/eye-close.png'}}" bindtap="toggleShowPassword" /> -->
+    </view> <view class="input-item">
+      <text class="input-label">验证码：</text>
+      <input type="password" bindinput="onInputCaptcha" placeholder="请输入验证码" />
+    <image bindtap="refreshCaptcha" id="captcha-image" src="{{captchaTempFile}}"/>
     </view>
   </view>
   <button class="login-button" bindtap="onLogin" disabled="{{!account||!password}}" style="width: 291rpx;">登录</button>

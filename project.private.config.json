@@ -10,6 +10,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/lxz_login/lxz_login",
+          "pathName": "pages/lxz_login/lxz_login",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/myComments/myComments",
           "pathName": "pages/myComments/myComments",
           "query": "",

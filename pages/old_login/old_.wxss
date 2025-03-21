@@ -1,0 +1,91 @@
+/* pages/login/login.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: 100px;
+}
+
+.background {
+  width: 100vw;
+  position: fixed;
+  top: 900rpx;
+  left: 0;
+  z-index: 1;
+}
+
+.login-header {
+  margin-bottom: 30px;
+  z-index: 1; /* Ensure this is above the background */
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007aff;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  z-index: 1; /* Ensure this is above the background */
+}
+
+.input-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-label {
+  width: 80px;
+  font-size: 16px;
+  color: #007aff;
+}
+
+.input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+.password-toggle {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+
+.login-button {
+  background-color: #007aff;
+  color: #ffffff;
+  padding: 12rpx 24rpx;
+  border-radius: 6rpx;
+  text-align: center;
+  font-size: 36rpx;
+  margin-top: 30rpx;
+  z-index: 1; /* Ensure this is above the background */
+}
+
+.register-link {
+  margin-top: 10px;
+  z-index: 1; /* Ensure this is above the background */
+}
+
+.register-link text {
+  color: #007aff;
+  text-decoration: underline;
+}
+
+.Contact-link {
+  margin-top: 10px;
+  z-index: 1; /* Ensure this is above the background */
+}
+
+.Contact-link text {
+  color: #007aff;
+  text-decoration: underline;
+}

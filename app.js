@@ -28,6 +28,7 @@ App({
     token: null,
     name: '请先登录',
     isLoggedIn: '',
+    "backend":"https://yuanzhida.top:8000"
   },
 
   check: function() {

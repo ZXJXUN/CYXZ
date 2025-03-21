@@ -89,3 +89,9 @@
   color: #007aff;
   text-decoration: underline;
 }
+
+
+#captcha-image{
+  width: 200rpx;
+  height: 80rpx;
+}

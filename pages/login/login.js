@@ -3,7 +3,9 @@ Page({
   data: {
     account: '',
     password: '',
-    showPassword: false
+    showPassword: false,
+    captchaTempFile:'',
+    cookie:''
   },
 
   // 监听账号输入框的输入事件
@@ -20,6 +22,12 @@ Page({
       password: e.detail.value
     });
   },
+  // 监听验证码输入框的输入事件
+  onInputCaptcha: function (e) {
+    this.setData({
+      captcha: e.detail.value
+    });
+  },
 
   // 切换密码显示状态（显示/隐藏）
   toggleShowPassword: function () {
@@ -33,15 +41,17 @@ Page({
     
     if (this.data.password && this.data.account) {
       wx.request({
-        url: 'https://nurl.top:8000/api/answerly/v1/user/login',
+        url: app.globalData.backend+'/api/answerly/v1/user/login',
         method: 'POST',
+        header:{cookie:this.data.cookie},
         data: {
           username: this.data.account,
           password: this.data.password,
+          code:this.data.captcha
         },
         
         success: (res) => {
-          
+        
           if (res.data.success === true) {
             app.globalData.isLoggedIn = true;
             wx.showToast({
@@ -85,6 +95,7 @@ Page({
               title: res.data.message,
               icon: 'none'});
               const app = getApp();
+              this.refreshCaptcha()
             console.log('上传失败，错误信息：', res.data);
             console.log(app.globalData.token);
           }
@@ -118,5 +129,20 @@ Page({
     wx.navigateTo({
       url: '../rulesNus/rulesNus',
     })
+  },
+  refreshCaptcha:function () {
+    wx.downloadFile({
+      url: app.globalData.backend+'/api/answerly/v1/user/captcha',
+      success:(res)=>{
+       this.setData({captchaTempFile:res.tempFilePath,cookie:res.header["Set-Cookie"]})
+      },
+      fail:(err)=>{
+        wx.showToast({ title: '获取验证码失败', icon: 'error' });
+        console.log(err);
+      }
+    })
+  },
+  onLoad:function () {
+    this.refreshCaptcha()
   }
 })
