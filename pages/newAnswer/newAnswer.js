@@ -1,4 +1,5 @@
 // pages/newAnswer/newAnswer.js
+var app = getApp();
 const links = [
   {
     text: "首页",
@@ -310,10 +311,8 @@ Page({
       fileList.push(JSON.parse(this.data.fileList[i].res.data).data);
     }
     const connectedString = fileList.join(",");
-    console.log("fileList:", fileList);
-    console.log("connectedString:", connectedString);
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/answer",
+      url: app.globalData.backend+"/api/answerly/v1/answer",
       method: "POST",
       data: {
         content: this.data.content,
@@ -321,11 +320,11 @@ Page({
         images: connectedString,
       },
       header: {
-        username: this.data.username,
-        token: this.data.token,
+        header: app.getRequestHeader(),
         "Content-Type": "application/json",
       },
       success(res) {
+        console.log(res.data);
         wx.hideLoading();
         wx.removeStorageSync("NewAnswer_question_id");
         wx.removeStorageSync("NewAnswer_question_title");

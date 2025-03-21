@@ -151,7 +151,7 @@ Page({
       collect_icon: "../../images/收藏2.png",
     };
     let url =
-      "https://nurl.top:8000/api/answerly/v1/question/" + this.data.question_id;
+      app.globalData.backend+"/api/answerly/v1/question/" + this.data.question_id;
     console.log("url");
     console.log(url);
     wx.request({
@@ -210,7 +210,7 @@ Page({
       },
     });
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/answer/page",
+      url: app.globalData.backend+"/api/answerly/v1/answer/page",
       method: "GET",
       data: {
         id: this.data.question_id,
@@ -508,7 +508,7 @@ Page({
         console.log(this.data.token);
         console.log(this.data.username);
         var like_url =
-          "https://nurl.top:8000/api/answerly/v1/answer/like?id=" + like_id;
+          app.globalData.backend+"/api/answerly/v1/answer/like?id=" + like_id;
         wx.request({
           url: like_url,
           method: "POST",
@@ -611,7 +611,7 @@ Page({
     if (new_page > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: "https://nurl.top:8000/api/answerly/v1/answer/page",
+        url: app.globalData.backend+"/api/answerly/v1/answer/page",
         method: "GET",
         data: {
           id: this.data.question_id,
@@ -741,7 +741,7 @@ Page({
         console.log(that.data.username);
         console.log(that.data.token);
         var delete_url =
-          "https://nurl.top:8000/api/answerly/v1/answer?id=" +
+          app.globalData.backend+"/api/answerly/v1/answer?id=" +
           that.data.answerList[index].id;
         if (res.confirm) {
           wx.request({
@@ -790,7 +790,7 @@ Page({
     if (this.data.current_page + 1 > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: "https://nurl.top:8000/api/answerly/v1/answer/page",
+        url: app.globalData.backend+"/api/answerly/v1/answer/page",
         method: "GET",
         data: {
           id: this.data.question_id,
