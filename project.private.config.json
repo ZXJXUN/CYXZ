@@ -10,6 +10,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/register/register",
+          "pathName": "pages/register/register",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/old_register/old_register",
+          "pathName": "pages/old_register/old_register",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/lxz_login/lxz_login",
           "pathName": "pages/lxz_login/lxz_login",
           "query": "",

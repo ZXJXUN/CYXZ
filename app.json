@@ -10,6 +10,7 @@
     "pages/newQuestion/newQuestion",
     "pages/newAnswer/newAnswer",
     "pages/register/register",
+    "pages/old_register/old_register",
     "pages/draft/draft",
     "pages/MyQuestion/MyQuestion",
     "pages/modifyAnswer/modifyAnswer",

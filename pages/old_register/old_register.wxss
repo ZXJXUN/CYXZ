@@ -1,0 +1,86 @@
+/* 整体容器样式 */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f4f4; /* 淡灰色背景，体现商务简洁感 */
+  padding: 20rpx;
+}
+
+/* 标题区域样式 */
+.title-section {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 54rpx;
+  font-weight: bold;
+  color: #007aff; /* 深灰色文字，稳重商务风 */
+}
+
+/* 验证区域样式 */
+.verification-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.verification-input {
+  height: 80rpx;
+  border: 1rpx solid #ccc; /* 浅灰色边框，简洁风格 */
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: #666; /* 中灰色文字，体现理工的低调感 */
+}
+
+.send-code-button {
+  background-color: #007aff; 
+  color: #ffffff;
+  padding: 12rpx 24rpx; /* 内边距 */
+  border-radius: 6rpx; /* 圆角 */
+  text-align: center; /* 文本居中 */
+  font-size: 36rpx; /* 字体大小 */
+  margin-top: 30rpx;
+}
+
+/* 输入容器通用样式 */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.code-input,
+.name-input,
+.key-input {
+  height: 80rpx;
+  border: 1rpx solid #ccc;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.confirm-button,
+.name-button,
+.key-button {
+  background-color: #007aff; 
+  color: #ffffff;
+  padding: 12rpx 24rpx; /* 内边距 */
+  border-radius: 6rpx; /* 圆角 */
+  text-align: center; /* 文本居中 */
+  font-size: 36rpx; /* 字体大小 */
+  margin-top: 30rpx;
+}
+.background{
+  width: 100vw;
+  position: fixed;
+  top: 350rpx;
+  left: 0;
+  z-index: -1;
+}
