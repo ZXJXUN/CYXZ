@@ -33,7 +33,7 @@ Page({
     
     if (this.data.password && this.data.account) {
       wx.request({
-        url: 'https://nurl.top:8000/api/answerly/v1/user/login',
+        url: app.globalData.backend + "/api/answerly/v1/user/login",
         method: 'POST',
         data: {
           username: this.data.account,

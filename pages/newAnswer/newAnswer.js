@@ -38,6 +38,7 @@ Page({
     },
 
     is_post: false,
+    uploadUrl: '',
   },
   onChange(e) {
     console.log("onChange", e);
@@ -187,6 +188,7 @@ Page({
     this.setData({
       question_id: wx.getStorageSync("NewAnswer_question_id"),
       question_title: wx.getStorageSync("NewAnswer_question_title"),
+      uploadUrl: app.globalData.backend + '/oss/upload',
     });
     console.log("name: ");
     console.log(wx.getStorageSync("name"));

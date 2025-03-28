@@ -28,7 +28,7 @@
     listType="picture-card"
     max="9"
     count="9"
-    url="https://nurl.top:8000/oss/upload"
+    url="{{uploadUrl}}"
     bind:change="onChange"
     bind:success="onSuccess"
     bind:fail="onFail"

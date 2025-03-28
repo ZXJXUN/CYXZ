@@ -45,7 +45,7 @@ Page({
         solvedFlag: that.data.solved_flag,
         size: 10,
         current: page,
-        search: that.data.keyword,
+        keyword: that.data.keyword,
       },
       success(res) {
         if (res.statusCode === 200 && res.data.data.records) {

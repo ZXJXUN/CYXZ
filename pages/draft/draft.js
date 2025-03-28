@@ -180,8 +180,9 @@ Page({
 
   // 发布问题的跳转
   publishQuestion: function () {
+    // 先校验登录状态
     wx.request({
-      url: 'http://47.120.26.83:8000/api/answerly/v1/user/check-login',
+      url: app.globalData.backend + '/api/answerly/v1/user/check-login',
       method: 'POST',
       data: {
         name: app.globalData.name,

@@ -34,6 +34,7 @@ Page({
     token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
 
     modify_fileList: [],
+    uploadUrl: '',
   },
   onChange(e) {
     console.log("onChange", e);
@@ -197,6 +198,7 @@ Page({
       answer_id: modify_id,
       question_title: modify_question_title,
       question_id: modify_question_id,
+      uploadUrl: app.globalData.backend + '/oss/upload',
     });
     const images_upload = this.selectComponent("#images_upload");
     //修改组件的数据
@@ -316,7 +318,7 @@ Page({
     console.log("fileList:", fileList);
     console.log("connectedString:", connectedString);
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/answer",
+      url: app.globalData.backend + "/api/answerly/v1/answer",
       method: "PUT",
       data: {
         content: this.data.content,

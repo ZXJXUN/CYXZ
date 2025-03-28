@@ -29,7 +29,7 @@
     max="9"
     count="9"
     uploaded="false"
-    url="https://nurl.top:8000/oss/upload"
+    url="{{uploadUrl}}"
     bind:change="onChange"
     bind:success="onSuccess"
     bind:fail="onFail"

@@ -8,8 +8,8 @@ Page({
     content: "",
     title: "",
     submitPictures: [],
-    uploadUrl: 'https://yuanzhida.top:8000/oss/upload',
-    baseUrl: "https://yuanzhida.top:8000/api/answerly/v1", // API 基地址
+    uploadUrl: app.globalData.backend + '/oss/upload',
+    baseUrl: app.globalData.backend + "/api/answerly/v1", // API 基地址
   },
 
   onLoad: async function (options) {

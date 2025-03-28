@@ -39,7 +39,7 @@ Page({
     console.log("currentPage:", that.data.currentPage);
     console.log("keyword:", that.data.keyword);
     wx.request({
-      url: "https://nurl.top:8000/api/answerly/v1/question/page", // 基础URL，不带参数
+      url: app.globalData.backend + "/api/answerly/v1/question/page", // 基础URL，不带参数
       method: "GET", // 请求方法
       header: {
         token: "29b04146-b2de-4733-b0f5-fba06f7b45fe", // 请求头中的token

@@ -29,7 +29,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: "http://localhost:8080/answer/getAnswerById",
+      url: app.globalData.backend + "/api/answer/getAnswerById",
       data: {
         answer_id: that.data.answer_imf.answer_id,
       },
