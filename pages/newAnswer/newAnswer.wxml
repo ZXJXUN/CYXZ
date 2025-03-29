@@ -11,44 +11,22 @@
   </view>
   <wux-cell-group title="">
     <wux-cell hover-class="none">
-      <wux-textarea
-        hasCount
-        rows="3"
-        maxlength="1000"
-        placeholder-class="placeholder_class"
-        cursorSpacing="80"
-        placeholder="请输入回答内容"
-        disableed="false"
-        bind:clear="onClear"
-        id="ans_content"
-      />
+      <wux-textarea hasCount rows="3" maxlength="1000" placeholder-class="placeholder_class" cursorSpacing="80"
+        placeholder="请输入回答内容" disableed="false" bind:clear="onClear" id="ans_content" />
     </wux-cell>
   </wux-cell-group>
-  <wux-upload
-    listType="picture-card"
-    max="9"
-    count="9"
-    url="{{uploadUrl}}"
-    bind:change="onChange"
-    bind:success="onSuccess"
-    bind:fail="onFail"
-    bind:complete="onComplete"
-    bind:preview="onPreview"
-    bind:progress="onProgress"
-    header="{{ header }}"
-    progress="true"
-    id="images_upload"
-  >
+  <wux-upload listType="picture-card" max="9" count="9" url="{{uploadUrl}}" bind:change="onChange"
+    bind:success="onSuccess" bind:fail="onFail" bind:complete="onComplete" bind:preview="onPreview"
+    bind:progress="onProgress" header="{{ header }}" progress="true" id="images_upload">
     <text style="font-size: 30rpx">上传照片</text>
   </wux-upload>
   <view class="footer">
-    <view class="save" bindtap="saveContent"
-      ><view class="image_save_view"
-        ><image src="../../images/草稿箱.png" class="image_save"></image
-      ></view>
+    <view class="save" bindtap="saveContent">
+      <view class="image_save_view">
+        <image src="../../images/草稿箱.png" class="image_save"></image>
+      </view>
       <view class="save_text">存草稿</view>
     </view>
     <view class="submit" bindtap="submit">发布回答</view>
   </view>
-  <custom-tabbar></custom-tabbar>
 </view>

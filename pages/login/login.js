@@ -64,9 +64,11 @@ Page({
           
           const token = res.data.data.token;
           const name = this.data.account;
-          wx.setStorageSync('token', token);//11.27_token
-          wx.setStorageSync('name', name);
-          wx.setStorageSync('isLoggedIn', true);
+          app.globalData.token=token
+          app.globalData.name=name
+          // wx.setStorageSync('token', token);//11.27_token
+          // wx.setStorageSync('name', name);
+          // wx.setStorageSync('isLoggedIn', true);
           app.globalData.token = token;  
           app.globalData.name = name;
           console.log(app.globalData.token);
