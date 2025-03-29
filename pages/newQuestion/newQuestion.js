@@ -17,6 +17,14 @@ Page({
     try {
       // 获取科目列表
       await this.getSubjectList();
+      
+      // 处理传入的科目ID
+      if (options.categoryId) {
+        const categoryId = Number(options.categoryId);
+        // 在科目列表加载完成后设置选择的科目
+        this.setSelectedCategory(categoryId);
+      }
+      
       // 草稿功能（暂不启用，保留代码）
       // this.loadDraft(options);
     } catch (error) {
@@ -225,5 +233,23 @@ Page({
       throw error; // 继续抛出错误，让外层处理
     }
   
+  },
+
+  // 根据categoryId设置选中的科目
+  setSelectedCategory: function(categoryId) {
+    if (!categoryId || !this.data.subjectList || this.data.subjectList.length === 0) {
+      return;
+    }
+    
+    // 查找传入的categoryId在科目列表中对应的索引
+    const subjectIndex = this.data.subjectList.findIndex(subject => subject.id === categoryId);
+    
+    // 如果找到了，设置为当前选中的科目
+    if (subjectIndex !== -1) {
+      this.setData({
+        choosedSubject: subjectIndex
+      });
+      console.log('自动选择科目:', this.data.subjectList[subjectIndex].name);
+    }
   },
 });

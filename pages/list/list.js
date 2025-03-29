@@ -140,7 +140,7 @@ Page({
       setTimeout(() => {
         console.log("Navigating to new page...");
         wx.navigateTo({
-          url: "../newQuestion/newQuestion", //验证成功至新问题界面
+          url: `../newQuestion/newQuestion?categoryId=${this.data.category}`, // 传递当前科目ID
         });
       }, 500);
     } else {
