@@ -52,4 +52,5 @@
     </view>
     <view class="submit" bindtap="submit">修改回答</view>
   </view>
+  <custom-tabbar></custom-tabbar>
 </view>

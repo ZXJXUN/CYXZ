@@ -52,4 +52,5 @@
 
     <button class="submit-button" bind:tap="submit">提交问题</button>
   </view>
+  <custom-tabbar></custom-tabbar>
 </view>

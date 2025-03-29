@@ -46,3 +46,4 @@
     <button wx:else class="register-button" bindtap="logout">退出账号</button>
   </view>
 </view>
+<custom-tabbar></custom-tabbar>

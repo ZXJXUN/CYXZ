@@ -92,21 +92,21 @@ Page({
     });
   },
   onLoad: function (options) {
-    console.log("onLoad");
-    console.log("传参测试");
-    console.log(options);
-    console.log(options.id);
+    // console.log("onLoad");
+    // console.log("传参测试");
+    // console.log(options);
+    // console.log(options.id);
     var qu_id = options.id;
-    console.log(qu_id);
+    // console.log(qu_id);
     this.setData({
       question_id: qu_id,
     });
     var globalData = getApp().globalData;
-    console.log(globalData);
-    console.log("name: ");
-    console.log(wx.getStorageSync("name"));
-    console.log("token: ");
-    console.log(wx.getStorageSync("token"));
+    // console.log(globalData);
+    // console.log("name: ");
+    // console.log(wx.getStorageSync("name"));
+    // console.log("token: ");
+    // console.log(wx.getStorageSync("token"));
     var tempname = wx.getStorageSync("name");
     var temptoken = wx.getStorageSync("token");
     if (

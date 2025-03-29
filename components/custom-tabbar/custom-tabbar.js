@@ -1,20 +1,14 @@
 Component({
-  properties: {
-    currentPage: {
-      type: String,
-      value: ""
-    }
-  },
+  properties: {},
   methods: {
-    navigateToIndex() {
-      wx.navigateTo({
-        url: '/pages/index/index'
-      });
-    },
-    navigateToHome() {
-      wx.navigateTo({
-        url: '/pages/home/home'
-      });
+    navigate(e) {
+      const path = e.target.dataset.path
+      const pages = getCurrentPages()
+      if (pages[pages.length - 1].route != `pages/${path}/${path}`) {
+        wx.navigateTo({
+          url: `/pages/${path}/${path}`
+        })
+      }
     }
   }
-});
+})

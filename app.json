@@ -27,22 +27,8 @@
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
-  "tabBar": {
-    "color": "#ffffff",
-    "selectedColor": "#ffffff",
-    "backgroundColor": "#0070f3",
-    "borderStyle": "white",
-    "position": "bottom",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/home/home",
-        "text": "个人"
-      }
-    ]
-  },
-  "appid": "wxc4b91c1b5d199a5b"
+  "appid": "wxc4b91c1b5d199a5b",
+  "usingComponents":{
+    "custom-tabbar":"components/custom-tabbar/custom-tabbar"
+  }
 }

@@ -16,4 +16,5 @@
 
     <view class="loading" wx:if="{{loading}}">加载中...</view>
     <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+    <custom-tabbar></custom-tabbar>
 </view>

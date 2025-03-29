@@ -146,6 +146,7 @@
     content="@2024 yuanzhida.com All rights reserved"
     links="{{ links }}"
   />
+  <custom-tabbar></custom-tabbar>
   </view>
   
 </scroll-view>

@@ -28,7 +28,8 @@ App({
     token: null,
     name: '请先登录',
     isLoggedIn: '',
-    backend:"https://yuanzhida.top:8000"
+    backend:"https://yuanzhida.top:8000",
+    ossPrefix:"https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
   },
   getRequestHeader: function () {
     return {

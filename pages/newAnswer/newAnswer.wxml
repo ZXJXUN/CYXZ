@@ -50,4 +50,5 @@
     </view>
     <view class="submit" bindtap="submit">发布回答</view>
   </view>
+  <custom-tabbar></custom-tabbar>
 </view>

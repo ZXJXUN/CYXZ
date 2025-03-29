@@ -32,4 +32,5 @@
     <text class="welcome-text">欢迎, {{userInfo.nickName}}!</text>
     <image src="{{userInfo.avatarUrl}}" class="avatar-image"></image>
   </view>
+  <custom-tabbar></custom-tabbar>
 </view>

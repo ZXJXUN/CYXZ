@@ -1,8 +1,8 @@
-<view class="tabbar" hidden="true">
-  <view class="tabbar-item" bindtap="navigateToIndex" data-page="index" data-current="{{currentPage === 'index'}}">
+<view class="tabbar">
+  <view class="tabbar-item" data-path="index" bindtap="navigate">
     首页
   </view>
-  <view class="tabbar-item" bindtap="navigateToHome" data-page="home" data-current="{{currentPage === 'home'}}">
+  <view class="tabbar-item" data-path="home" bindtap="navigate">
     个人
   </view>
 </view>

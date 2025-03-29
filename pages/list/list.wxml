@@ -42,4 +42,4 @@
     </view>
   </block>
 </scroll-view>
-<custom-tabbar currentPage="index"></custom-tabbar>
+<custom-tabbar></custom-tabbar>
