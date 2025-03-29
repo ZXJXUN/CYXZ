@@ -56,10 +56,13 @@
 .input-item-right{
   margin-left: 10px;
 }
-.input-item-left,.input-item-right{
+.input-item-left{
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 7px;
+}
+.input-item-right{
+  height: 100%;
 }
 
 .input-icon {
