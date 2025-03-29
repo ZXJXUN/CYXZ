@@ -33,7 +33,8 @@
           </view>
           <view class="answer-actions">
             <view class="like dot">
-              <a>{{item.good_num}} 赞同 </a>
+              <!-- TODO: 由于后端问题，点赞功能暂时不可用，这里只是显示数据 -->
+              <a>{{item.likeCount || 0}} 赞同</a>
             </view>
           </view>
         </view>

@@ -31,12 +31,9 @@
 }
 .que-footer {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  padding-left: 20rpx;
-  padding-right: 30rpx;
   align-items: center;
+  margin-top: 20rpx;
 }
 .question-item .que-title {
   text-align: center;
@@ -586,3 +583,24 @@
   background-color: #fff;
   transition: background-color 0.3s, color 0.3s;
 } */
+
+.que-footer-time {
+  font-size: 24rpx;
+  color: #8a8a8a;
+}
+
+.que-footer-like {
+  display: flex;
+  align-items: center;
+}
+
+.que-footer-like-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+.like-num {
+  font-size: 26rpx;
+  color: #4ea3e7;
+}

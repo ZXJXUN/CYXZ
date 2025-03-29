@@ -26,9 +26,9 @@ Page({
       images: [], //问题图片
       time: "", //问题发布时间
       content: "",
-      collect: 0, //1为收藏，0为未收藏
+      likeCount: 0, // 问题点赞数
+      is_liked: false, // 当前用户是否点赞
     },
-    collect_icon: ["../../images/收藏2.png", "../../images/收藏1.png"],
     current_page: 1,
     size: 5,
     answer_num: 0,
@@ -189,7 +189,8 @@ Page({
 
         tempquestion.time = formattedTime;
         tempquestion.content = res.data.data.content;
-        tempquestion.collect = 0;
+        tempquestion.likeCount = res.data.data.likeCount || 0;
+        tempquestion.is_liked = res.data.data.isLiked || false;
         console.log("tempquestion");
         console.log(tempquestion);
         that.setData({
@@ -420,34 +421,96 @@ Page({
       answerList: nowanswerList,
     });
   },
-  store() {
-    var que = this.data.question;
-    console.log(que);
-    if (app.globalData.isLoggedIn) {
-      que.collect = !que.collect;
-      this.setData({
-        question: que,
-      });
-      if (this.data.question.collect == true) {
-        wx.showToast({
-          title: "收藏成功",
-          icon: "success",
-          duration: 1000,
-        });
-      } else {
-        wx.showToast({
-          title: "取消收藏",
-          icon: "none",
-          duration: 1000,
-        });
-      }
-    } else {
+  likeQuestion() {
+    var that = this;
+    var questionData = this.data.question;
+    
+    // TODO: 后端实现有问题，提问者ID无法获取，点赞功能暂时不可用
+    // 判断是否已登录
+    if (!app.globalData.isLoggedIn) {
       wx.showToast({
         title: "请先登录",
         icon: "none",
         duration: 1000,
       });
+      return;
     }
+    
+    // 更新UI状态
+    questionData.is_liked = !questionData.is_liked;
+    if (questionData.is_liked) {
+      questionData.likeCount += 1;
+    } else {
+      questionData.likeCount = Math.max(0, questionData.likeCount - 1);
+    }
+    
+    this.setData({
+      question: questionData
+    });
+    
+    // 发送点赞请求到后端
+    wx.request({
+      url: app.globalData.backend + "/api/answerly/v1/question/like",
+      method: "POST",
+      header: {
+        "content-type": "application/json",
+        token: this.data.token,
+        username: this.data.username
+      },
+      data: {
+        id: this.data.question_id,
+        entityUserId: 0  // TODO: 这里的 entityUserId 无法在当前框架下获取，需要后端调整API
+      },
+      success: function(res) {
+        console.log("点赞操作响应:", res.data);
+        if (res.data.code !== "0") {
+          // 如果请求失败，回滚UI状态
+          wx.showToast({
+            title: "操作失败",
+            icon: "none",
+            duration: 1000
+          });
+          
+          questionData.is_liked = !questionData.is_liked;
+          if (questionData.is_liked) {
+            questionData.likeCount += 1;
+          } else {
+            questionData.likeCount = Math.max(0, questionData.likeCount - 1);
+          }
+          
+          that.setData({
+            question: questionData
+          });
+        } else {
+          // 操作成功提示
+          wx.showToast({
+            title: questionData.is_liked ? "点赞成功" : "取消点赞",
+            icon: questionData.is_liked ? "success" : "none",
+            duration: 1000
+          });
+        }
+      },
+      fail: function(err) {
+        console.error("点赞请求失败:", err);
+        // 请求失败，回滚UI状态
+        wx.showToast({
+          title: "网络错误",
+          icon: "none",
+          duration: 1000
+        });
+        
+        questionData.is_liked = !questionData.is_liked;
+        if (questionData.is_liked) {
+          questionData.likeCount += 1;
+        } else {
+          questionData.likeCount = Math.max(0, questionData.likeCount - 1);
+        }
+        
+        that.setData({
+          question: questionData
+        });
+      }
+    });
   },
   collect_answer(e) {
     console.log("collect_answer");
@@ -483,6 +546,7 @@ Page({
   },
   like_answer(e) {
     console.log("like_answer");
+    // TODO: 后端实现有问题，回答点赞功能暂时不可用，目前只是前端模拟效果
     //校验是否已经登录
     if (app.globalData.isLoggedIn) {
       var index = e.currentTarget.dataset.index;
@@ -533,6 +597,7 @@ Page({
         });
         //点赞成功，调用点赞接口
       } else {
+        // TODO: 取消点赞的API不存在，只能前端模拟效果
         // wx.showToast({
         //   title: "取消点赞",
         //   icon: "none",
