@@ -125,111 +125,158 @@
   content: "•";
 }
 
+/**
+ * 个人主页样式
+ */
 
+/* 主容器 */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background: #F0F4F3;
+}
 
+.flex-wrp{
+  display: flex;
+}
 
+.flex-item{
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* 主容器扩展样式 */
+.container.more {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 20rpx 0 40rpx 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* 用户信息卡片 */
 .user {
   width: 725rpx;
   background: #ffffff;
-  
-  margin: 15rpx 0 0 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #dcdcdc;
-  box-shadow: 0 2px 5px #eeeeee;
-}
-.user .userinfo-avatar{
-  flex: 1;
-  display: inline-block;
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 80rpx;
-}
-.user .user-info{
-  flex: 5;
-  text-align: left;
-}
-.user .user-info text{
-  display: block;
-}
-.user .user-info .userinfo-nickname{
-  padding: 15rpx 0 10rpx 0;
-  font-size: 60rpx;
-  color: #818A8F;
-}
-.user .user-info .edit{
-  font-size: 30rpx;
-  color: #bababa;
-  line-height: 34rpx;
-}
-.login{
-  width: 750rpx;
-  background: #ffffff;
-  padding: 0
+  padding: 25rpx 0;
+  margin: 15rpx 0 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 12rpx 12rpx 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.my{
-  margin: 15rpx 0 0 0;
-  border-top: solid 1px #ebebeb;
-  border-bottom: solid 2px #ebebeb;
+.user .user-info {
+  text-align: center;
 }
-.my .my-item{
-  width: 750rpx;
+
+.user .user-info .userinfo-nickname {
+  padding: 10rpx 0;
+  font-size: 46rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+/* 功能菜单区域 */
+.my {
+  width: 725rpx;
+  margin: 0;
+  border-radius: 0 0 12rpx 12rpx;
+  overflow: hidden;
   background: #ffffff;
-  padding: 0
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  z-index: 10;
 }
-.my .my-item .myitem-icon{
+
+/* 菜单项 */
+.my .my-item {
+  width: 725rpx;
+  background: #ffffff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 120rpx;
+  min-height: 120rpx;
+  transition: background-color 0.2s;
+}
+
+.my .my-item:active {
+  background-color: #f9f9f9;
+}
+
+/* 菜单图标 */
+.my .my-item .myitem-icon {
+  flex: 0 0 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40rpx;
+}
+
+.my .my-item .myitem-icon image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 菜单文本 */
+.my .my-item .myitem-name {
   flex: 1;
-}
-.my .my-item .myitem-icon image{
-  width: 45rpx;
-  height: 45rpx;
-  padding: 37.5rpx 0;
-}
-.my .my-item .myitem-name{
-  flex: 5;
   text-align: left;
-  font-size: 34rpx;
-  color: #6d6d6d;
-  line-height: 60rpx;
-  padding: 30rpx 0;
-  border-bottom: solid 1px #ebebeb;
+  font-size: 36rpx;
+  color: #333333;
+  margin-left: 25rpx;
+  display: flex;
+  align-items: center;
 }
-.my .my-item:last-child .myitem-name{
-  border-bottom: none;
+
+/* 菜单分隔线 */
+.my .my-item:not(:last-child):after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 120rpx;
+  right: 40rpx;
+  height: 1rpx;
+  background: #f0f0f0;
 }
+
+/* 登录/退出按钮区域 */
+.login {
+  width: 725rpx;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 按钮样式 */
 .register-button {
-  width: 250rpx;
-  background-color: #007aff; 
+  width: 650rpx;
+  background-color: #4285f4; 
   color: #ffffff;
-  padding: 12rpx 24rpx; /* 内边距 */
-  border-radius: 6rpx; /* 圆角 */
-  text-align: center; /* 文本居中 */
-  font-size: 36rpx; /* 字体大小 */
-  margin-top: 20rpx;
+  padding: 25rpx 0;
+  border-radius: 45rpx;
+  text-align: center;
+  font-size: 36rpx;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);
+  letter-spacing: 2rpx;
+  font-weight: 500;
+  transition: all 0.3s;
 }
 
-.register-button:hover {
-  background-color: #005bb5; /* 悬停时背景颜色 */
-}
-.avatar {
-  display: flex;
-  flex-direction: column; /* 让子元素垂直排列 */
-  align-items: center;    /* 水平居中 */
+.register-button:active {
+  background-color: #3367d6;
+  transform: scale(0.98);
 }
 
-.userinfo-avatar {
-  width: 80px;           /* 根据需求设置头像宽度 */
-  height: 80px;          /* 根据需求设置头像高度 */
-  border-radius: 50%;    /* 圆形头像 */
-}
-
-.userinfo-nickname {
-  margin-top: 10px;      /* 设置头像与昵称之间的间距 */
-  font-size: auto;       /* 设置昵称文字大小 */
-  color: #333;           /* 设置文字颜色 */
-}
-.user-info.flex-item {
-  display: flex;
-  flex-direction: column; /* 让子元素垂直排列 */
-  align-items: center;    /* 水平居中 */
+/* 删除多余样式 */
+.avatar, .userinfo-nickname, .user-info.flex-item {
+  /* 这些选择器保留但内容置空，防止之前的样式干扰 */
 }
