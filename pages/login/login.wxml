@@ -1,31 +1,31 @@
 <view class="container">
-  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="background"/>
+  <!-- 有点丑
+  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="background"/> -->
   <view class="login-header">
     <text class="header-title">登录</text>
   </view>
   <view class="input-group">
     <view class="input-item">
-      <text class="input-label">账号：</text>
+      <image src="/images/user.svg" class="input-icon"/>
       <input bindinput="onInputAccount" placeholder="请输入用户名" />
     </view>
     <view class="input-item">
-      <text class="input-label">密码：</text>
-      <input type="password" bindinput="onInputPassword" placeholder="请输入密码"
-        password="{{!showPassword}}" />
-        <!-- 图片没准备好
-      <image class="password-toggle" src="{{showPassword? '../../images/eye-open.png' : '../../images/eye-close.png'}}" bindtap="toggleShowPassword" /> -->
-    </view> <view class="input-item">
-      <text class="input-label">验证码：</text>
+      <image src="/images/lock.svg" class="input-icon"/>
+      <input type="password" bindinput="onInputPassword" placeholder="请输入密码" password="{{!showPassword}}" />
+      <image class="password-toggle" src="{{showPassword? '/images/eye-open.svg' : '/images/eye-close.svg'}}" bindtap="toggleShowPassword" />
+    </view>
+    <view class="input-item">
+      <image src="/images/key.svg" class="input-icon"/>
       <input type="password" bindinput="onInputCaptcha" placeholder="请输入验证码" />
-    <image bindtap="refreshCaptcha" id="captcha-image" src="{{captchaTempFile}}"/>
+      <image bindtap="refreshCaptcha" id="captcha-image" src="{{captchaTempFile}}" />
     </view>
   </view>
-  <button class="login-button" bindtap="onLogin" disabled="{{!account||!password}}" style="width: 291rpx;">登录</button>
+  <button class="login-button" bindtap="onLogin" disabled="{{!account||!password||!captcha}}">登录</button>
   <view class="register-link" bindtap="onRegister">
     <text>没有账号？点击注册</text>
   </view>
   <view class="Contact-link" bindtap="onContact">
     <text>社区公约 & 联系我们</text>
   </view>
-  <custom-tabbar></custom-tabbar>
 </view>
+<custom-tabbar></custom-tabbar>

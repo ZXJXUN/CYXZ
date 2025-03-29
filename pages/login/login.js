@@ -3,10 +3,10 @@ Page({
   data: {
     account: '',
     password: '',
-    // 图片没有准备好
-    // showPassword: false,
+    showPassword: false,
     captchaTempFile: '',
-    cookie: ''
+    cookie: '',
+    captcha:''
   },
 
   // 监听账号输入框的输入事件
@@ -31,12 +31,11 @@ Page({
   },
 
   // 切换密码显示状态（显示/隐藏）
-  // 图片没有准备好
-  // toggleShowPassword: function () {
-  //   this.setData({
-  //     showPassword:!this.data.showPassword
-  //   });
-  // },
+  toggleShowPassword: function () {
+    this.setData({
+      showPassword:!this.data.showPassword
+    });
+  },
 
   // 处理登录按钮点击事件
   onLogin: function () {
