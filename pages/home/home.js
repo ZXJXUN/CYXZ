@@ -18,32 +18,13 @@ Page({
           url: '../MyQuestion/MyQuestion',
       });
     }, 
-
-    goToDraft: function (){
-      wx.showToast({
-        title: '敬请期待 ^_',
-      })
-    },
-    goToAttention: function(){
-      wx.showToast({
-        title: '敬请期待 ^_',
-      })
-    },
-    goToCollection: function(){
-      wx.showToast({
-        title: '敬请期待 ^_',
-      })
-    },
+    
     goToBrowsed: function(){
       wx.navigateTo({
         url: '../viewHistory/viewHistory',
       })
     },
-    goToMessage: function(){
-      wx.showToast({
-        title: '敬请期待 ^_',
-      })
-    },
+    
     goToMyAnswer: function(){
       wx.navigateTo({
         url: '../myComments/myComments',
