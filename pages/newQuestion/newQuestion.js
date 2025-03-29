@@ -186,10 +186,67 @@ Page({
       // 2. 提交问题
       await this.submitQuestion();
 
+      // 3. 处理成功发布后的导航
       wx.showToast({ title: "发布成功" });
-      wx.redirectTo({
-        url: `/pages/list/list?id=${this.data.subjectList[this.data.choosedSubject].id}`,
-      });
+      
+      // 获取当前选中科目的ID
+      const currentCategoryId = this.data.subjectList[this.data.choosedSubject].id;
+      console.log("提交成功，选中科目ID:", currentCategoryId);
+      
+      // 获取页面栈
+      const pages = getCurrentPages();
+      console.log("当前页面栈:", pages.map(p => p.route || p.__route__));
+      
+      // 查找是否有列表页在页面栈中（检查多种可能的路由格式）
+      let listPageIndex = -1;
+      for (let i = pages.length - 1; i >= 0; i--) {
+        const pageRoute = pages[i].route || pages[i].__route__ || '';
+        console.log(`检查页面[${i}]:`, pageRoute);
+        // 兼容不同的路由格式
+        if (pageRoute === 'pages/list/list' || pageRoute.endsWith('/list/list')) {
+          listPageIndex = i;
+          break;
+        }
+      }
+      
+      if (listPageIndex !== -1) {
+        // 如果列表页存在于页面栈中
+        const listPage = pages[listPageIndex];
+        console.log("找到列表页，位置:", listPageIndex);
+        
+        try {
+          // 设置列表页需要刷新
+          if (typeof listPage.setNeedRefresh === 'function') {
+            listPage.setNeedRefresh();
+            console.log("已设置列表页需要刷新");
+          } else {
+            console.warn("列表页没有setNeedRefresh方法");
+            // 尝试直接设置needRefresh变量
+            listPage.needRefresh = true;
+          }
+          
+          // 如果科目不同，需要更新列表页的科目ID
+          if (listPage.data.category != currentCategoryId) {
+            listPage.setData({ category: currentCategoryId });
+            console.log("已更新列表页科目ID为:", currentCategoryId);
+          }
+        } catch (e) {
+          console.error("设置列表页属性失败:", e);
+        }
+        
+        // 返回到列表页，并确保返回后会刷新
+        const delta = pages.length - 1 - listPageIndex;
+        console.log(`返回${delta}页到列表页`);
+        wx.navigateBack({
+          delta: delta
+        });
+      } else {
+        // 如果列表页不在页面栈中，直接使用reLaunch而不是redirectTo
+        console.log("列表页不在页面栈中，重新加载到列表页");
+        wx.reLaunch({
+          url: `/pages/list/list?id=${currentCategoryId}&refresh=true&t=${Date.now()}`,
+        });
+      }
 
     } catch (error) {
       console.error("提交失败:", error);
