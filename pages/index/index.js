@@ -6,11 +6,8 @@ Page({
   onReady: function () {
     wx.request({
       url: app.globalData.backend+"/api/answerly/v1/category",
-      method: "GET",
       header: app.getRequestHeader(),
       success: (res) => {
-        console.log("success");
-        console.log(res);
         this.setData({
           subjects: res.data.data,
         });
@@ -26,12 +23,5 @@ Page({
       wx.navigateTo({
         url: `/pages/list/list?id=${selectedSubject}`, // 这里是跳转的目标页面
       });
-
-    // 根据选中的科目跳转
-    // if (selectedSubject === '数学分析' || selectedSubject === '高等代数' || selectedSubject === '程序设计' || selectedSubject === '基础物理' || selectedSubject === '数据结构' || selectedSubject === '离散数学') {
-    //   wx.navigateTo({
-    //     url: '/pages/list/list', // 这里是跳转的目标页面
-    //   });
-    // }
   },
 });

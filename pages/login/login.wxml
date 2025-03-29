@@ -6,18 +6,27 @@
   </view>
   <view class="input-group">
     <view class="input-item">
-      <image src="/images/user.svg" class="input-icon"/>
-      <input bindinput="onInputAccount" placeholder="请输入用户名" />
+      <view class="input-item-left">
+        <input bindinput="onInputAccount" placeholder="请输入用户名" />
+      </view>
     </view>
+
     <view class="input-item">
-      <image src="/images/lock.svg" class="input-icon"/>
-      <input type="password" bindinput="onInputPassword" placeholder="请输入密码" password="{{!showPassword}}" />
-      <image class="password-toggle" src="{{showPassword? '/images/eye-open.svg' : '/images/eye-close.svg'}}" bindtap="toggleShowPassword" />
+      <view class="input-item-left">
+        <input type="password" bindinput="onInputPassword" placeholder="请输入密码" password="{{!showPassword}}" />
+      </view>
+      <view class="input-item-right">
+        <image class="password-toggle" src="{{showPassword? '/images/eye-open.svg' : '/images/eye-close.svg'}}"
+          bindtap="toggleShowPassword" />
+      </view>
     </view>
-    <view class="input-item">
-      <image src="/images/key.svg" class="input-icon"/>
-      <input type="password" bindinput="onInputCaptcha" placeholder="请输入验证码" />
-      <image bindtap="refreshCaptcha" id="captcha-image" src="{{captchaTempFile}}" />
+    <view class=" input-item">
+      <view class="input-item-left">
+        <input type="password" bindinput="onInputCaptcha" placeholder="请输入验证码" />
+      </view>
+      <view class="input-item-right">
+        <image bindtap="refreshCaptcha" id="captcha-image" src="{{captchaTempFile}}" />
+      </view>
     </view>
   </view>
   <button class="login-button" bindtap="onLogin" disabled="{{!account||!password||!captcha}}">登录</button>
