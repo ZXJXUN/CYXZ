@@ -108,9 +108,9 @@
             </view>
           </view> -->
           <view class="show-content-noshow-container">
-            <view class="show-content-noshow">
-              <image class="show-content-noshow-icon" src="{{ item.show_icon }}" bindtap="show"
-                data-index="{{ index }}" />
+            <view class="show-content-noshow"  data-index="{{ index }}" bindtap="show">
+              <image class="show-content-noshow-icon" src="{{ item.show_icon }}" 
+                />
               <view class="show-content-noshow-text">收起</view>
             </view>
           </view>
