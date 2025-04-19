@@ -24,13 +24,17 @@ page {
   --font-size-lg: 36rpx;
   --font-size-xl: 42rpx;
   --box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  --tabbar-height: 112rpx; /* 56px = 112rpx */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .container {
-  height: 100%;
+  height: 100vh;
   padding: 0;
+  padding-bottom: calc(var(--tabbar-height) + var(--safe-bottom));
   background: var(--background-color);
   color: var(--text-primary);
+  box-sizing: border-box;
 }
 
 .flex-wrp {
@@ -149,7 +153,7 @@ page {
 /* 优化浮动按钮 */
 .floating-button {
   position: fixed;
-  bottom: 120rpx;
+  bottom: calc(var(--tabbar-height) + var(--safe-bottom) + 20rpx);
   right: 40rpx;
   width: 100rpx;
   height: 100rpx;
@@ -177,6 +181,7 @@ page {
   padding: var(--spacing-xl) 0;
   color: var(--text-hint);
   font-size: var(--font-size-md);
+  min-height: 300rpx; /* 确保内容少时也有足够高度触发滚动 */
 }
 .empty-state image, .loading-state image {
   width: 200rpx;
