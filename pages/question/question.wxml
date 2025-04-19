@@ -36,7 +36,7 @@
           </a>
           <image class="show_icon" src="{{ item.show_icon }}" bindtap="show" data-index="{{ index }}" />
           <view class="{{item.more_class}}" bindTap="show_more" data-index="{{ index }}"
-            style="right: {{item.imageContainerRight}}rpx">
+            :style="right: {{item.imageContainerRight}}rpx">
             <view class="more-delete" hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}">
               <image src="../../images/删除.png" />
               <view class="more-delete-text">删除</view>
