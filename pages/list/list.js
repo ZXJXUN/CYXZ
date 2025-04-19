@@ -21,7 +21,9 @@ Page({
     //搜索
     keyword: "",
     // 标记是否已初始化
-    isInitialized: false
+    isInitialized: false,
+    // 添加加载状态
+    isLoading: false
   },
 
   onLoad: function (options) {
@@ -90,6 +92,10 @@ Page({
     // console.log("- keyword:", that.data.keyword);
 
     // 显示加载提示
+    that.setData({
+      isLoading: true
+    });
+    
     wx.showLoading({
       title: '加载中...',
       mask: true
@@ -114,6 +120,9 @@ Page({
       success(res) {
         // 隐藏加载提示
         wx.hideLoading();
+        that.setData({
+          isLoading: false
+        });
 
         if (res.statusCode === 200 && res.data.code == 0 && res.data.data && res.data.data.records) {
           // console.log("列表数据获取成功, 状态码:", res.statusCode);
@@ -189,6 +198,9 @@ Page({
       },
       fail(err) {
         wx.hideLoading();
+        that.setData({
+          isLoading: false
+        });
         console.error("请求失败:", err);
 
         wx.showToast({
@@ -200,6 +212,9 @@ Page({
       complete() {
         // 完成时也隐藏加载提示，确保不会出现加载提示无法关闭的情况
         wx.hideLoading();
+        that.setData({
+          isLoading: false
+        });
       }
     });
   },

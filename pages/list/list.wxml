@@ -17,29 +17,39 @@
       <button bindtap="searchQuestions">搜索</button>
     </view>
   </view>
-  <block wx:for="{{feed}}" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}">
-    <view class="feed-item" bindtap="bindQueTap" data-question="{{item.id}}">
-      <view class="feed-content">
-        <view class="question" qid="{{question_id}}">
-          <a class="question-link">
-            <!-- 修改 text 为 rich-text -->
+  
+  <!-- 问题列表 -->
+  <block wx:if="{{feed && feed.length > 0}}">
+    <block wx:for="{{feed}}" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}">
+      <view class="feed-item" bindtap="bindQueTap" data-question="{{item.id}}">
+        <view class="feed-content">
+          <view class="question">
             <rich-text class="question-title" nodes="{{item.title}}"></rich-text>
-          </a>
-        </view>
-        <view class="answer-body">
-          <view>
-            <!-- 修改 text 为 rich-text -->
-            <rich-text class="answer-txt" nodes="{{item.content}}"></rich-text>
           </view>
-          <view class="answer-actions">
-            <view class="like dot">
-              <!-- TODO: 由于后端问题，点赞功能暂时不可用，这里只是显示数据 -->
-              <a>{{item.likeCount || 0}} 赞同</a>
+          <view class="answer-body">
+            <view>
+              <rich-text class="answer-txt" nodes="{{item.content}}"></rich-text>
+            </view>
+            <view class="answer-actions">
+              <view class="like dot">
+                <a>{{item.likeCount || 0}} 赞同</a>
+              </view>
             </view>
           </view>
-        </view>
-      </view>      
-    </view>
+        </view>      
+      </view>
+    </block>
   </block>
+  
+  <!-- 空状态显示 -->
+  <view class="empty-state" wx:if="{{!feed || feed.length === 0}}">
+    <image src="../../images/无回答蓝.png"></image>
+    <view>暂无问题，快去提问吧</view>
+  </view>
+  
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{isLoading}}">
+    <view>加载中...</view>
+  </view>
 </scroll-view>
 <custom-tabbar></custom-tabbar>
