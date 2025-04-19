@@ -71,6 +71,7 @@ Page({
               console.log("set localstorage fail when login",e);
             }
             // 设置token有效期为30天，将30天换算成秒数
+            // 就是一个月
             var expiresInSeconds = 30 * 24 * 60 * 60;
 
             // 计算过期时间，以当前时间加上有效期的秒数得到过期时间戳

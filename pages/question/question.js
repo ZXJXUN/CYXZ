@@ -416,7 +416,7 @@ Page({
     
     // TODO: 后端实现有问题，提问者ID无法获取，点赞功能暂时不可用
     // 判断是否已登录
-    if (!app.globalData.isLoggedIn) {
+    if (wx.getStorageSync('isLoggedIn')!=true) {
       wx.showToast({
         title: "请先登录",
         icon: "none",
@@ -443,8 +443,7 @@ Page({
       method: "POST",
       header: {
         "content-type": "application/json",
-        token: this.data.token,
-        username: this.data.username
+        ...app.getRequestHeader()
       },
       data: {
         id: this.data.question_id,
