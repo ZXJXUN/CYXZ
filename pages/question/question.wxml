@@ -1,39 +1,31 @@
 <!--question.wxml-->
-<scroll-view
-  scroll-y="true"
-  class="container"
-  bindscrolltoupper="upper"
-  upper-threshold="10"
-  lower-threshold="5"
-  bindscrolltolower="lower"
-  scroll-into-view="{{ toView }}"
-  scroll-top="{{ scrollTop }}"
->
+<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5"
+  bindscrolltolower="lower" scroll-into-view="{{ toView }}" scroll-top="{{ scrollTop }}">
   <view class="floating-button" bindtap="to_write_answer">+</view>
   <view class="question-wrp">
     <view class="question-item">
       <view class="que-title"> {{ question.title }} </view>
       <view class="que-content">{{ question.content }} </view>
       <view class="que-image-container {{question.images.length === 1 ? 'single-image' : ''}}">
-        <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item" > 
+        <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item">
           <view class="que-image-item" bindtap="preview_que_Image" data-index="{{ index }}">
-            <image class="que-image" src="{{ item }}" mode="aspectFill"/>
+            <image class="que-image" src="{{ item }}" mode="aspectFill" />
           </view>
         </block>
       </view>
       <view class="que-footer">
-        <view class="show-content-footer-time"
-              >编辑于 {{ question.time }}</view
-            >
-            <view class="que-footer-like">
-                <image class="que-footer-like-icon" src="{{ question.is_liked ? '../../images/赞同2.png' : '../../images/赞同1.png'}}" bindtap="likeQuestion" />
-                <view class="like-num">{{question.likeCount || 0}}</view>    
-            </view>
+        <view class="show-content-footer-time">编辑于 {{ question.time }}</view>
+        <view class="que-footer-like">
+          <image class="que-footer-like-icon"
+            src="{{ question.is_liked ? '../../images/赞同2.png' : '../../images/赞同1.png'}}" bindtap="likeQuestion" />
+          <view class="like-num">{{question.likeCount || 0}}</view>
+        </view>
       </view>
     </view>
   </view>
   <view class="answer-feed">
-    <block wx:for="{{ answerList }}"  wx:if="{{index>=(current_page-1)*size&&index<current_page*size}}"  wx:for-index="index" wx:for-item="item">
+    <block wx:for="{{ answerList }}" wx:if="{{index>=(current_page-1)*size&&index<current_page*size}}"
+      wx:for-index="index" wx:for-item="item">
       <view class="feed-item">
         <view class="feed-source">
           <a class="" bindTap="">
@@ -42,16 +34,21 @@
             </view>
             <text class="username">{{item.name}}</text>
           </a>
-          <image
-            class="show_icon"
-            src="{{ item.show_icon }}"
-            bindtap="show"
-            data-index="{{ index }}"
-          />
-          <view class="{{item.more_class}}" bindTap="show_more" data-index="{{ index }}"style="right: {{item.imageContainerRight}}rpx" >
-            <view class="more-delete"  hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}" ><image src="../../images/删除.png"/><view class="more-delete-text">删除</view></view>
-            <view class="more-modify" hidden="{{item.is_modify}}" bindtap="modify" data-index="{{ index }}" ><image src="../../images/修改1.png"/><view class="more-modify-text">修改</view></view>
-            <view class="more-copy" bindtap="copy" data-index="{{ index }}" ><image src="../../images/复制.png"/><view class="more-copy-text">复制</view></view>
+          <image class="show_icon" src="{{ item.show_icon }}" bindtap="show" data-index="{{ index }}" />
+          <view class="{{item.more_class}}" bindTap="show_more" data-index="{{ index }}"
+            style="right: {{item.imageContainerRight}}rpx">
+            <view class="more-delete" hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}">
+              <image src="../../images/删除.png" />
+              <view class="more-delete-text">删除</view>
+            </view>
+            <view class="more-modify" hidden="{{item.is_modify}}" bindtap="modify" data-index="{{ index }}">
+              <image src="../../images/修改1.png" />
+              <view class="more-modify-text">修改</view>
+            </view>
+            <view class="more-copy" bindtap="copy" data-index="{{ index }}">
+              <image src="../../images/复制.png" />
+              <view class="more-copy-text">复制</view>
+            </view>
           </view>
         </view>
         <view class="feed-content" hidden="{{ item.is_show == true }}">
@@ -74,49 +71,48 @@
         </view>
         <view class="feed-content-show" hidden="{{ item.is_show == false }}">
           <text class="show-content-text">
-            {{ item.content }} 
+            {{ item.content }}
           </text>
           <view class="show-content-image">
-             <block wx:for="{{item.images}}" wx:for-index="i" wx:for-item="item_image" > 
-          <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}" data-i="{{ i }}" >
-            <image   class="que-image" src="{{item_image}}" mode="aspectFill"/>
+            <block wx:for="{{item.images}}" wx:for-index="i" wx:for-item="item_image">
+              <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}"
+                data-i="{{ i }}">
+                <image class="que-image" src="{{item_image}}" mode="aspectFill" />
+              </view>
+            </block>
           </view>
-        </block>
-          </view>
-          <view class="show-content-footer">
-            <view class="show-content-footer-time"
-              >{{item.time}}</view
-            >
+          <!-- <view class="show-content-footer">
+            <view class="show-content-footer-time">{{item.time}}</view>
             <view class="show-content-footer-main-icon">
               <view class="show-content-footer-write">
-                <image class="show-content-footer-wirte-icon" src="../../images/agora_写.png"/>
-                <input placeholder="发表你的看法" class="show-content-footer-write-input" bindinput="input" data-index="{{ index }}"></input>
+                <image class="show-content-footer-wirte-icon" src="../../images/agora_写.png" />
+                <input placeholder="发表你的看法" class="show-content-footer-write-input" bindinput="input"
+                  data-index="{{ index }}"></input>
               </view>
               <view class="show-content-footer-like">
-                <image class="show-content-footer-like-icon" src="{{item.is_like?'../../images/赞同2.png':'../../images/赞同1.png'}}" bindtap="like_answer" data-index="{{ index }}"/>
+                <image class="show-content-footer-like-icon"
+                  src="{{item.is_like?'../../images/赞同2.png':'../../images/赞同1.png'}}" bindtap="like_answer"
+                  data-index="{{ index }}" />
                 <view class="like-num">{{item.like}}</view>
-                
+
               </view>
               <view class="show-content-footer-comment">
-                <image class="show-content-footer-comment-icon" src="../../images/评论.png"/>
+                <image class="show-content-footer-comment-icon" src="../../images/评论.png" />
                 <view class="comment-num">{{item.comment}}</view>
               </view>
-              <view class="show-content-footer-store"  bindtap="collect_answer" data-index="{{ index }}">
-                <image class="show-content-footer-store-icon" src="{{item.collect?'../../images/收藏1.png':'../../images/收藏2.png'}}"/>
+              <view class="show-content-footer-store" bindtap="collect_answer" data-index="{{ index }}">
+                <image class="show-content-footer-store-icon"
+                  src="{{item.collect?'../../images/收藏1.png':'../../images/收藏2.png'}}" />
                 <view class="store-num"></view>
               </view>
-               </view>
-          </view>
-        <view class="show-content-noshow-container">
-          <view class="show-content-noshow">
-            <image
-              class="show-content-noshow-icon"
-              src="{{ item.show_icon }}"
-              bindtap="show"
-              data-index="{{ index }}"
-            />
-            <view class="show-content-noshow-text">收起</view>
-          </view>
+            </view>
+          </view> -->
+          <view class="show-content-noshow-container">
+            <view class="show-content-noshow">
+              <image class="show-content-noshow-icon" src="{{ item.show_icon }}" bindtap="show"
+                data-index="{{ index }}" />
+              <view class="show-content-noshow-text">收起</view>
+            </view>
           </view>
         </view>
       </view>
@@ -124,23 +120,17 @@
   </view>
   <view class="no_answer" hidden="{{answer_num != 0}}">
     <image class="no_answer_image" src="../../images/无回答蓝.png" />
-    <view class="no_answer_text" >暂无回答</view>
+    <view class="no_answer_text">暂无回答</view>
   </view>
-  <view class="less_answer" hidden="{{answer_num-(current_page-1)*size!=1}}" >
-    <view class="less_answer_text" >没有更多回答了</view>
+  <view class="less_answer" hidden="{{answer_num-(current_page-1)*size!=1}}">
+    <view class="less_answer_text">没有更多回答了</view>
   </view>
   <view class="footer">
-    <wux-pagination
-      defaultCurrent="1"
-      total="{{page_num}}"
-      bind:prev="onPrev"
-      bind:next="onNext"
-      id="pagination"
-    >
+    <wux-pagination defaultCurrent="1" total="{{page_num}}" bind:prev="onPrev" bind:next="onNext" id="pagination">
       <view slot="prev">上一页</view>
       <view slot="next">下一页</view>
     </wux-pagination>
     <custom-tabbar></custom-tabbar>
   </view>
-  
+
 </scroll-view>

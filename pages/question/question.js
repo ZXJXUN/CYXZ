@@ -503,7 +503,7 @@ Page({
   collect_answer(e) {
     console.log("collect_answer");
     //校验是否已经登录
-    if (app.globalData.isLoggedIn) {
+    if (wx.getStorageSync('isLoggedIn')==true) {
       var index = e.currentTarget.dataset.index;
       var answer = this.data.answerList[index];
       answer.collect = !answer.collect;
@@ -533,10 +533,9 @@ Page({
     }
   },
   like_answer(e) {
-    console.log("like_answer");
     // TODO: 后端实现有问题，回答点赞功能暂时不可用，目前只是前端模拟效果
     //校验是否已经登录
-    if (app.globalData.isLoggedIn) {
+    if (wx.getStorageSync('isLoggedIn')==true) {
       var index = e.currentTarget.dataset.index;
       var answer = this.data.answerList[index];
       answer.is_like = !answer.is_like;
