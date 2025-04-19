@@ -282,18 +282,12 @@ page {
 
 .upload-button {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.upload-icon {
-  width: 48rpx;
-  height: 48rpx;
-  margin-bottom: var(--spacing-xs);
+  height: 100%;
 }
 
 .upload-button text {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   color: var(--text-secondary);
 }

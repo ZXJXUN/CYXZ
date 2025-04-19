@@ -1,8 +1,10 @@
 <view class="tabbar">
-  <view class="tabbar-item" data-path="index" bindtap="navigate">
-    首页
+  <view class="tabbar-item {{active === 'index' ? 'active' : ''}}" data-path="index" bindtap="navigate">
+    <image class="tabbar-icon" src="../../images/{{active === 'index' ? 'index_focus' : 'index'}}.png"></image>
+    <text class="tabbar-text">首页</text>
   </view>
-  <view class="tabbar-item" data-path="home" bindtap="navigate">
-    个人
+  <view class="tabbar-item {{active === 'home' ? 'active' : ''}}" data-path="home" bindtap="navigate">
+    <image class="tabbar-icon" src="../../images/{{active === 'home' ? 'burger_focus' : 'burger'}}.png"></image>
+    <text class="tabbar-text">个人</text>
   </view>
 </view>
