@@ -7,7 +7,7 @@
   /* background-color: #f4f4f5; */
   min-height: 100vh;
 }
-
+/* 下面是没用到的 */
 .logo {
   width: 100%; /* 宽度撑满父容器 */
   object-fit: contain; /* 不变形，保持图片比例 */
@@ -20,7 +20,7 @@
   left: 0;
   z-index: -1;
 }
-
+/* 上面是没用到的 */
 .grid {
   margin-top: 550rpx; /* logo下方间距 */
   display: grid;
