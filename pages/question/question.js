@@ -1,20 +1,8 @@
 //answer.js
 const app = getApp();
-const links = [
-  {
-    text: "首页",
-    url: "/pages/index/index",
-    openType: "switchTab",
-  },
-  {
-    text: "个人",
-    url: "/pages/home/home",
-    openType: "switchTab",
-  },
-];
+
 Page({
   data: {
-    links,
     token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
     username: "ab",
     //token: "",
