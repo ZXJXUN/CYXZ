@@ -51,15 +51,15 @@ Page({
         draft_title: 'title1', // 默认头像
         draft_content: 'content',
         draft_pictures: [
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png"
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png",
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png"
 
         ],
         draft_time: "time",
@@ -69,7 +69,7 @@ Page({
         draft_title: 'title2', // 默认头像
         draft_content: 'content',
         draft_pictures: [
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png"
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/23/a56df95c-de3c-4c63-8470-ab0a0f567fa3.png"
         ],
         draft_time: "time",
         draft_category: 0

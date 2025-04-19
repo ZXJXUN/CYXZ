@@ -306,7 +306,7 @@ Page({
     for (let i = 0; i < this.data.fileList.length; i++) {
       if (
         this.data.fileList[i].url.indexOf(
-          "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+          "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
         ) == -1
       ) {
         fileList.push(JSON.parse(this.data.fileList[i].res.data).data);
@@ -366,7 +366,7 @@ Page({
   //   for (let i = 0; i < this.data.imageList.length; i++) {
   //     if (
   //       this.data.imageList[i].indexOf(
-  //         "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+  //         "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
   //       ) == -1
   //     ) {
   //       right_images.push(this.data.imageList[i]);
@@ -469,7 +469,7 @@ Page({
   //       for (let i = 0; i < this.data.imageList.length; i++) {
   //         if (
   //           this.data.imageList[i].indexOf(
-  //             "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+  //             "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
   //           ) == -1
   //         ) {
   //           test2.push(test[j]);

@@ -141,7 +141,7 @@ Page({
     var data0 = {
       title: "默认标题",
       images: [
-        "https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/11/28/8ec59bda-8ef3-47d9-b554-4da0e3f10c51.gif",
+        "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/28/8ec59bda-8ef3-47d9-b554-4da0e3f10c51.gif",
         "../../images/源智答小程序.png",
         "../../images/源智答小程序.png",
       ], //问题图片
@@ -173,7 +173,7 @@ Page({
           : [];
         for (var i = 0; i < tempquestion.images.length; i++) {
           tempquestion.images[i] =
-            "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" +
+            "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" +
             tempquestion.images[i];
         }
         const inputTime = res.data.data.createTime;
@@ -238,11 +238,11 @@ Page({
           return item.map((item) => {
             //没有前缀的图片加上前缀，有前缀的图片保持不变
             if (
-              item.indexOf("https://oss-symbol.oss-cn-beijing.aliyuncs.com/") ==
+              item.indexOf("https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/") ==
                 -1 &&
               item != ""
             ) {
-              return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+              return "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" + item;
             } else if (item != "") {
               return item;
             }
@@ -705,11 +705,11 @@ Page({
               //为空的元素去除
               if (
                 item.indexOf(
-                  "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+                  "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
                 ) == -1 &&
                 item != ""
               ) {
-                return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+                return "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" + item;
               } else if (item != "") {
                 return item;
               }
@@ -877,11 +877,11 @@ Page({
               //为空的元素去除
               if (
                 item.indexOf(
-                  "https://oss-symbol.oss-cn-beijing.aliyuncs.com/"
+                  "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
                 ) == -1 &&
                 item != ""
               ) {
-                return "https://oss-symbol.oss-cn-beijing.aliyuncs.com/" + item;
+                return "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" + item;
               } else if (item != "") {
                 return item;
               }

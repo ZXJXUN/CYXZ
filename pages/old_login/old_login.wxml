@@ -1,5 +1,5 @@
 <view class="container">
-  <image src="https://oss-symbol.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="background"/>
+  <image src="https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="background"/>
   <view class="login-header">
     <text class="header-title">登录</text>
   </view>
