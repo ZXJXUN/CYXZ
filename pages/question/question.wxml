@@ -34,20 +34,27 @@
             </view>
             <text class="username">{{item.name}}</text>
           </a>
-          <image class="show_icon" src="{{ item.show_icon }}" bindtap="show" data-index="{{ index }}" />
-          <view class="{{item.more_class}}" bindTap="show_more" data-index="{{ index }}"
-            :style="right: {{item.imageContainerRight}}rpx">
-            <view class="more-delete" hidden="{{item.is_delete}}" bindtap="delete" data-index="{{ index }}">
-              <image src="../../images/删除.png" />
-              <view class="more-delete-text">删除</view>
+          <view class="action-menu-wrapper">
+            <view class="action-menu-icon" bindtap="toggleActionMenu" data-index="{{ index }}">
+              <view class="dot-container">
+                <view class="dot"></view>
+                <view class="dot"></view>
+                <view class="dot"></view>
+              </view>
             </view>
-            <view class="more-modify" hidden="{{item.is_modify}}" bindtap="modify" data-index="{{ index }}">
-              <image src="../../images/修改1.png" />
-              <view class="more-modify-text">修改</view>
-            </view>
-            <view class="more-copy" bindtap="copy" data-index="{{ index }}">
-              <image src="../../images/复制.png" />
-              <view class="more-copy-text">复制</view>
+            <view class="action-menu {{item.showActionMenu ? 'action-menu-show' : ''}}" catchtap="stopPropagation">
+              <view class="action-menu-item {{item.is_delete ? 'hidden' : ''}}" bindtap="delete" data-index="{{ index }}">
+                <image src="../../images/删除.png" />
+                <text>删除</text>
+              </view>
+              <view class="action-menu-item {{item.is_modify ? 'hidden' : ''}}" bindtap="modify" data-index="{{ index }}">
+                <image src="../../images/修改1.png" />
+                <text>修改</text>
+              </view>
+              <view class="action-menu-item" bindtap="copy" data-index="{{ index }}">
+                <image src="../../images/复制.png" />
+                <text>复制</text>
+              </view>
             </view>
           </view>
         </view>
@@ -81,32 +88,6 @@
               </view>
             </block>
           </view>
-          <!-- <view class="show-content-footer">
-            <view class="show-content-footer-time">{{item.time}}</view>
-            <view class="show-content-footer-main-icon">
-              <view class="show-content-footer-write">
-                <image class="show-content-footer-wirte-icon" src="../../images/agora_写.png" />
-                <input placeholder="发表你的看法" class="show-content-footer-write-input" bindinput="input"
-                  data-index="{{ index }}"></input>
-              </view>
-              <view class="show-content-footer-like">
-                <image class="show-content-footer-like-icon"
-                  src="{{item.is_like?'../../images/赞同2.png':'../../images/赞同1.png'}}" bindtap="like_answer"
-                  data-index="{{ index }}" />
-                <view class="like-num">{{item.like}}</view>
-
-              </view>
-              <view class="show-content-footer-comment">
-                <image class="show-content-footer-comment-icon" src="../../images/评论.png" />
-                <view class="comment-num">{{item.comment}}</view>
-              </view>
-              <view class="show-content-footer-store" bindtap="collect_answer" data-index="{{ index }}">
-                <image class="show-content-footer-store-icon"
-                  src="{{item.collect?'../../images/收藏1.png':'../../images/收藏2.png'}}" />
-                <view class="store-num"></view>
-              </view>
-            </view>
-          </view> -->
           <view class="show-content-noshow-container">
             <view class="show-content-noshow"  data-index="{{ index }}" bindtap="show">
               <image class="show-content-noshow-icon" src="{{ item.show_icon }}" 

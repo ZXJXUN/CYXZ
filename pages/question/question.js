@@ -118,6 +118,17 @@ Page({
       });
     }
     this.getData();
+    
+    // 添加页面点击事件监听
+    wx.createSelectorQuery()
+      .select('.container')
+      .boundingClientRect()
+      .exec((res) => {
+        if (res && res[0]) {
+          const container = res[0];
+          container.addEventListener('tap', this.onTapPage);
+        }
+      });
   },
   getData: function () {
     console.log(this.data.question_id);
@@ -253,6 +264,7 @@ Page({
             is_show: false,
             show_icon: "../../images/收起.png",
             collect: 0,
+            showActionMenu: false, // 添加菜单显示状态属性，默认不显示
           };
         });
         console.log(tempanswerList);
@@ -289,6 +301,9 @@ Page({
             item.is_modify = true;
             item.more_class = "more2";
           }
+          
+          // 初始化菜单显示状态
+          item.showActionMenu = false;
         });
         console.log(tempanswerList);
         console.log(res.data.data.pages);
@@ -401,11 +416,6 @@ Page({
       nowanswerList[index].show_icon = "../../images/收起.png";
     }
 
-    if (nowanswerList[index].imageContainerRight === -360) {
-      nowanswerList[index].imageContainerRight = -800;
-    } else {
-      nowanswerList[index].imageContainerRight = -360;
-    }
     this.setData({
       answerList: nowanswerList,
     });
@@ -954,5 +964,62 @@ Page({
     wx.navigateTo({
       url: "../modifyAnswer/modifyAnswer",
     });
+  },
+  // 添加新的交互方法
+  toggleActionMenu(e) {
+    const index = e.currentTarget.dataset.index;
+    const answerList = this.data.answerList;
+    
+    // 关闭其他可能打开的菜单
+    answerList.forEach((item, idx) => {
+      if (idx !== index && item.showActionMenu) {
+        item.showActionMenu = false;
+      }
+    });
+    
+    // 切换当前选中项的菜单显示状态
+    answerList[index].showActionMenu = !answerList[index].showActionMenu;
+    
+    this.setData({
+      answerList: answerList
+    });
+  },
+  
+  // 添加阻止事件冒泡的方法
+  stopPropagation() {
+    // 阻止冒泡，防止点击菜单时触发外部的点击事件
+    return;
+  },
+  
+  // 添加点击页面任意位置关闭菜单的方法
+  onTapPage() {
+    const answerList = this.data.answerList;
+    let needUpdate = false;
+    
+    answerList.forEach(item => {
+      if (item.showActionMenu) {
+        item.showActionMenu = false;
+        needUpdate = true;
+      }
+    });
+    
+    if (needUpdate) {
+      this.setData({
+        answerList: answerList
+      });
+    }
+  },
+  
+  onUnload: function() {
+    // 页面卸载时移除事件监听
+    wx.createSelectorQuery()
+      .select('.container')
+      .boundingClientRect()
+      .exec((res) => {
+        if (res && res[0]) {
+          const container = res[0];
+          container.removeEventListener('tap', this.onTapPage);
+        }
+      });
   },
 });

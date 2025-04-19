@@ -25,6 +25,8 @@ page {
   --font-size-lg: 36rpx;
   --font-size-xl: 42rpx;
   --box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  --animation-duration: 0.3s;
+  --danger-color: #ff4d4f;
 }
 
 .answer-feed {
@@ -323,27 +325,11 @@ page {
 }
 
 .show_icon {
-  position: relative;
-  width: 45rpx;
-  height: 45rpx;
-  border-radius: 45rpx;
-  left: 270rpx;
-  vertical-align: middle;
+  display: none;
 }
 
 .more1, .more2 {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  top: 0;
-  right: 0;
-  height: auto;
-  background-color: var(--card-color);
-  border-radius: var(--border-radius-md);
-  box-shadow: var(--box-shadow);
-  z-index: 10;
-  padding: var(--spacing-xs);
-  transition: opacity 0.3s, transform 0.3s;
+  display: none;
 }
 
 .more-delete, .more-modify, .more-copy {
@@ -613,4 +599,103 @@ page {
 .like-num {
   font-size: var(--font-size-sm);
   color: var(--primary-color);
+}
+
+/* 新的操作菜单样式 */
+.action-menu-wrapper {
+  position: relative;
+  margin-left: auto;
+  z-index: 100;
+}
+
+.action-menu-icon {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  transition: background-color var(--animation-duration);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 32rpx;
+}
+
+.dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+.action-menu-icon:active {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.dots {
+  display: none;
+}
+
+.action-menu {
+  position: absolute;
+  top: 60rpx;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
+  width: 180rpx;
+  transform: scale(0.8);
+  transform-origin: top right;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform var(--animation-duration), 
+              opacity var(--animation-duration),
+              visibility var(--animation-duration);
+  z-index: 101;
+}
+
+.action-menu-show {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.action-menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--spacing-md);
+  transition: background-color 0.2s;
+}
+
+.action-menu-item:active {
+  background-color: rgba(0,0,0,0.05);
+}
+
+.action-menu-item image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: var(--spacing-sm);
+}
+
+.action-menu-item text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.action-menu-item:first-child text {
+  color: var(--danger-color);
+}
+
+.hidden {
+  display: none;
 }
