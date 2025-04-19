@@ -1,5 +1,6 @@
 <view class="container">
-  <image src="https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="backgroud"/>
+  <!-- 图片暂时没有 -->
+  <!-- <image src="https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="backgroud"/> -->
   <!-- 科目图标列表 -->
   <view class="grid">
     <view class="grid-item" wx:key="id" wx:for="{{subjects}}" wx:for-item="subject" bind:tap="onNavigate" data-subject="{{subject.id}}">
