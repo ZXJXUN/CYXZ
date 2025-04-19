@@ -2,27 +2,27 @@
   <!-- 有点丑
   <image src="https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="background"/> -->
   <view class="login-header">
-    <text class="header-title">登录</text>
+    <text class="header-title">登录账号</text>
   </view>
   <view class="input-group">
     <view class="input-item">
       <view class="input-item-left">
-        <input bindinput="onInputAccount" placeholder="请输入用户名" />
+        <input bindinput="onInputAccount" placeholder="请输入用户名" placeholder-class="placeholder" />
       </view>
     </view>
 
     <view class="input-item">
       <view class="input-item-left">
-        <input type="password" bindinput="onInputPassword" placeholder="请输入密码" password="{{!showPassword}}" />
+        <input type="password" bindinput="onInputPassword" placeholder="请输入密码" password="{{!showPassword}}" placeholder-class="placeholder" />
       </view>
       <view class="input-item-right">
         <image class="password-toggle" src="{{showPassword? '/images/eye-open.svg' : '/images/eye-close.svg'}}"
           bindtap="toggleShowPassword" />
       </view>
     </view>
-    <view class=" input-item">
+    <view class="input-item">
       <view class="input-item-left">
-        <input type="password" bindinput="onInputCaptcha" placeholder="请输入验证码" />
+        <input bindinput="onInputCaptcha" placeholder="请输入验证码" placeholder-class="placeholder" />
       </view>
       <view class="input-item-right">
         <image bindtap="refreshCaptcha" id="captcha-image" src="{{captchaTempFile}}" />

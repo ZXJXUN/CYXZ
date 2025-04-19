@@ -1,13 +1,70 @@
 /* pages/login/login.wxss */
+/* 定义全局变量，统一设计语言 */
+page {
+  --primary-color: #4285f4;  /* 更新为与home页面一致的蓝色 */
+  --primary-dark: #3367d6;
+  --primary-light: #eef2ff;
+  --secondary-color: #6c63ff; /* 添加辅助色 */
+  --accent-color: #ff6b6b; /* 添加强调色 */
+  --background-color: #f8f9fd;
+  --card-color: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #596275;
+  --text-hint: #8395a7;
+  --border-radius-sm: 8rpx;
+  --border-radius-md: 16rpx;
+  --border-radius-lg: 24rpx;
+  --spacing-xs: 10rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  --font-size-xs: 24rpx;
+  --font-size-sm: 28rpx;
+  --font-size-md: 32rpx;
+  --font-size-lg: 36rpx;
+  --font-size-xl: 48rpx;
+  --box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.05);
+}
+
 .container {
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* min-height: 100vh; */
   justify-content: center;
-  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-color: var(--background-color);
+  background-image: linear-gradient(to bottom, #ffffff, #f8f9fd);  /* 更柔和的背景 */
+  padding: var(--spacing-lg);
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 添加装饰元素 */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -150rpx;
+  right: -150rpx;
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(82, 113, 255, 0.1), rgba(108, 99, 255, 0.1));
+  z-index: 0;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  bottom: -150rpx;
+  left: -150rpx;
+  width: 350rpx;
+  height: 350rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(255, 107, 107, 0.03));
+  z-index: 0;
 }
 
 /* .background {
@@ -19,49 +76,94 @@
 } */
 
 .login-header {
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-xl);
   z-index: 1;
-  /* Ensure this is above the background */
+  text-align: center;
 }
 
 .header-title {
-  font-size: 24px;
+  font-size: var(--font-size-xl);
   font-weight: bold;
-  color: #007aff;
+  color: var(--text-primary);  /* 更改为深色文字 */
+  letter-spacing: 4rpx;
+  position: relative;
+  display: inline-block;
+}
+
+/* 为标题添加装饰下划线 */
+.header-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 6rpx;
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  border-radius: 3rpx;
 }
 
 .input-group {
+  width: 100%;
+  max-width: 650rpx;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  background-color: var(--card-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  box-shadow: var(--box-shadow);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  z-index: 2;
+  border: 1rpx solid rgba(0, 0, 0, 0.03);
 }
 
-
 .input-item {
-  margin-bottom: 10px;
-  width:80vw;
-  height: 40px;
+  margin-bottom: var(--spacing-lg);
+  height: 88rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
-.input-item-left input{
-  padding:   0 10px ;
-  height: 100%;
-  line-height: 100%;
+
+.input-item:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
 }
-.input-item-left{
+
+.input-item:focus-within {
+  border-bottom: 1rpx solid var(--primary-color);
+}
+
+.input-item-left {
   flex: 1;
-}
-.input-item-right{
-  margin-left: 10px;
-}
-.input-item-left{
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 7px;
+  background-color: transparent;
+  border-radius: var(--border-radius-sm);
 }
-.input-item-right{
+
+.input-item-left input {
+  height: 100%;
+  width: 100%;
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+}
+
+.placeholder {
+  color: var(--text-hint);
+  font-size: var(--font-size-sm);
+}
+
+.input-item-right {
+  margin-left: var(--spacing-sm);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-item-right {
   height: 100%;
 }
 
@@ -86,47 +188,73 @@
 } */
 
 .password-toggle {
-  width: 35px;
-  height: 35px;
+  width: 48rpx;
+  height: 48rpx;
+  padding: var(--spacing-xs);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.password-toggle:active {
+  opacity: 1;
 }
 
 .login-button {
-  background-color: #007aff;
+  width: 650rpx;
+  background-color: var(--primary-color);  /* 改为纯色，与home页面一致 */
   color: #ffffff;
-  padding: 12rpx 24rpx;
-  border-radius: 6rpx;
-  text-align: center;
-  width: 291rpx;
-  font-size: 36rpx;
-  margin-top: 30rpx;
-  z-index: 1;
-  /* Ensure this is above the background */
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  padding: 25rpx 0;
+  border-radius: 45rpx;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);  /* 更新为与home页面一致的阴影 */
+  margin-top: var(--spacing-xl);
+  transition: all 0.3s ease;
+  letter-spacing: 2rpx;
+  position: relative;
+  z-index: 2;
 }
 
-.register-link {
-  margin-top: 10px;
-  z-index: 1;
-  /* Ensure this is above the background */
+.login-button:active {
+  transform: scale(0.98);
+  background-color: var(--primary-dark);  /* 使用primary-dark变量 */
+  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.15);
 }
 
-.register-link text {
-  color: #007aff;
-  text-decoration: underline;
+.login-button[disabled] {
+  background: #e0e0e0;
+  color: #a0a0a0;
+  box-shadow: none;
 }
 
+.register-link, 
 .Contact-link {
-  margin-top: 10px;
-  z-index: 1;
-  /* Ensure this is above the background */
+  margin-top: var(--spacing-md);
+  position: relative;
+  z-index: 2;
 }
 
+.register-link text, 
 .Contact-link text {
-  color: #007aff;
-  text-decoration: underline;
+  color: var(--text-secondary);  /* 更改为深色文字 */
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
+.register-link:active text, 
+.Contact-link:active text {
+  color: var(--primary-color);
+}
 
 #captcha-image {
-  width: 200rpx;
-  height: 80rpx;
+  width: 180rpx;
+  height: 70rpx;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+#captcha-image:active {
+  transform: scale(0.98);
 }
