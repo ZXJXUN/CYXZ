@@ -191,6 +191,7 @@ Page({
         tempquestion.content = res.data.data.content;
         tempquestion.likeCount = res.data.data.likeCount || 0;
         tempquestion.is_liked = res.data.data.isLiked || false;
+        tempquestion.authorUserId = res.data.data.userId;
         console.log("tempquestion");
         console.log(tempquestion);
         that.setData({
@@ -459,7 +460,7 @@ Page({
       },
       data: {
         id: this.data.question_id,
-        entityUserId: 0  // TODO: 这里的 entityUserId 无法在当前框架下获取，需要后端调整API
+        entityUserId: this.data.question.authorUserId
       },
       success: function(res) {
         console.log("点赞操作响应:", res.data);
