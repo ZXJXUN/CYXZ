@@ -64,12 +64,6 @@
               <text class="answer-txt">{{ item.content }} </text>
             </view>
             <view class="answer-actions">
-              <view class="like dot">
-                <a>{{ item.like }}赞同 </a>
-              </view>
-              <view class="comments dot">
-                <a>{{ item.comment }} 评论 </a>
-              </view>
               <view class="time">
                 <a>{{ item.time }}</a>
               </view>
