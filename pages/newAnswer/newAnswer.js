@@ -339,7 +339,34 @@ Page({
           time: 1500,
         });
 
+        // 设置发布成功标志
         wx.setStorageSync("is_post", "true");
+        
+        // 尝试设置父页面的刷新标志（如果在页面栈中）
+        const pages = getCurrentPages();
+        console.log("当前页面栈:", pages.map(p => p.route || p.__route__));
+        
+        // 检查是否有问题页在页面栈中
+        for (let i = pages.length - 2; i >= 0; i--) {
+          const page = pages[i];
+          const pageRoute = page.route || page.__route__ || '';
+          console.log(`检查页面[${i}]:`, pageRoute);
+          
+          if (pageRoute === 'pages/question/question' || pageRoute.endsWith('/question/question')) {
+            console.log("找到问题页面，设置需要刷新");
+            if (typeof page.setNeedRefresh === 'function') {
+              page.setNeedRefresh();
+              console.log("已设置问题页面需要刷新");
+            } else {
+              console.warn("问题页面没有setNeedRefresh方法");
+              // 尝试直接设置needRefresh变量
+              page.needRefresh = true;
+              console.log("已直接设置页面needRefresh=true");
+            }
+            break;
+          }
+        }
+
         setTimeout(() => {
           wx.navigateBack();
         }, 1800);

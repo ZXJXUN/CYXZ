@@ -189,6 +189,9 @@ Page({
       // 3. 处理成功发布后的导航
       wx.showToast({ title: "发布成功" });
       
+      // 设置全局刷新标记
+      wx.setStorageSync("is_post", "true");
+      
       // 获取当前选中科目的ID
       const currentCategoryId = this.data.subjectList[this.data.choosedSubject].id;
       console.log("提交成功，选中科目ID:", currentCategoryId);

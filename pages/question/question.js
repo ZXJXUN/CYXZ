@@ -1,5 +1,7 @@
 //answer.js
 const app = getApp();
+// 添加全局变量，用于控制问题详情是否需要刷新
+var needRefresh = false;
 
 Page({
   data: {
@@ -117,6 +119,10 @@ Page({
         token: wx.getStorageSync("token"),
       });
     }
+    
+    // 将needRefresh变量挂载到页面实例上，方便外部访问
+    this.needRefresh = needRefresh;
+    
     this.getData();
     
     // 添加页面点击事件监听
@@ -1021,5 +1027,40 @@ Page({
           container.removeEventListener('tap', this.onTapPage);
         }
       });
+  },
+  // 设置需要刷新的标志
+  setNeedRefresh: function () {
+    console.log("设置问题页面需要刷新标志");
+    needRefresh = true;
+    this.needRefresh = true; // 同时设置实例变量
+  },
+  
+  // 添加onShow方法，检查是否需要刷新
+  onShow: function () {
+    console.log("问题页面显示, needRefresh=", needRefresh, "this.needRefresh=", this.needRefresh, "is_post=", wx.getStorageSync("is_post"));
+    
+    // 检查全局变量、实例变量或Storage中的发布标志
+    if (needRefresh || this.needRefresh || wx.getStorageSync("is_post") === "true") {
+      console.log("需要刷新问题数据");
+      
+      // 清除Storage中的发布标志
+      if (wx.getStorageSync("is_post") === "true") {
+        wx.setStorageSync("is_post", false);
+      }
+      
+      // 延迟刷新，确保后端数据已更新
+      setTimeout(() => {
+        this.getData(); // 重新加载数据
+        needRefresh = false; // 重置全局标志
+        this.needRefresh = false; // 重置实例标志
+        
+        // 刷新成功提示
+        wx.showToast({
+          title: '刷新成功',
+          icon: 'success',
+          duration: 1500
+        });
+      }, 800);
+    }
   },
 });
