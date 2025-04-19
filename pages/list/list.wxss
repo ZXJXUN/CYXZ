@@ -1,11 +1,36 @@
 /** index.wxss **/
 
+/* 定义全局变量，统一设计语言 */
+page {
+  --primary-color: #3a7bd5;
+  --primary-light: #e8f0fd;
+  --primary-dark: #2c5fa8;
+  --background-color: #f5f7fa;
+  --card-color: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-hint: #999999;
+  --border-radius-sm: 8rpx;
+  --border-radius-md: 16rpx;
+  --border-radius-lg: 24rpx;
+  --spacing-xs: 10rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  --font-size-xs: 24rpx;
+  --font-size-sm: 28rpx;
+  --font-size-md: 32rpx;
+  --font-size-lg: 36rpx;
+  --font-size-xl: 42rpx;
+  --box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
 .container {
-  height: 1500rpx;
+  height: 100%;
   padding: 0;
-  font-size: 14rpx;
-  background: #F0F4F3;
-  color: #000;
+  background: var(--background-color);
+  color: var(--text-primary);
 }
 
 .flex-wrp {
@@ -17,85 +42,144 @@
 }
 
 .container .feed-item {
-  width: 90%;
-  margin: 20rpx auto;
-  padding: 30rpx;
-  padding-bottom: 15rpx;
-  background: #ffffff;
-  border-radius: 20rpx;
-  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  width: 92%;
+  margin: var(--spacing-xs) auto;
+  padding: var(--spacing-md) var(--spacing-md);
+  background: var(--card-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
 }
-.container .feed-item:hover {
-  transform: scale(1.02); /* 鼠标悬浮时轻微放大 */
+.container .feed-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
 }
 .container .feed-item .feed-content .question{
-  font-size: 32rpx;
-  line-height: 48rpx;
-  color: #333333;
+  margin-bottom: var(--spacing-xs);
+}
+.container .feed-item .feed-content .question-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+  /* 限制标题最多显示2行 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .container .feed-item .feed-content .answer-body {
-  font-size: 26rpx;
-  line-height: 48rpx;
-  color: #666666;
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--text-secondary);
+  margin: var(--spacing-xs) 0 var(--spacing-sm);
+}
+.container .feed-item .feed-content .answer-txt {
+  /* 限制内容最多显示2行 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .container .feed-item .feed-content .answer-actions {
-  color: #4ea3e7;
-  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  margin-top: var(--spacing-xs);
+  padding-top: var(--spacing-xs);
+  border-top: 1rpx solid rgba(0,0,0,0.05);
+  color: var(--primary-color);
+  font-size: var(--font-size-xs);
 }
 
-
+/* 搜索栏样式优化 */
 .container .search {
-  width: 735rpx;
-  height: 65rpx;
-  padding: 12.5rpx 0 12.5rpx 15rpx;
-  background: #2A8CE5;
+  width: 100%;
+  height: auto;
+  padding: var(--spacing-sm);
+  background: var(--primary-color);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
 }
 .container .search-left {
   flex: 5;
-  background: #4EA3E7;
-  text-align: left;
+  background: var(--card-color);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-sm);
+  margin-right: var(--spacing-sm);
+  height: 66rpx;
 }
 .container .search-left input {
-  display: inline-block;
-  height: 65rpx;
-  font-size: 26rpx;
+  flex: 1;
+  height: 66rpx;
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
 }
 .search-placeholder {
-  color: #8CCEFD;
-  line-height: 20rpx;
+  color: var(--text-hint);
+  font-size: var(--font-size-sm);
 }
 .container .search .search-left image {
-  display: inline-block;
-  width: 35rpx;
-  height: 35rpx;
-  padding: 15rpx 15rpx 15rpx 20rpx;
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: var(--spacing-sm);
 }
 .container .search .search-right {
-  flex: 1;
+  flex: 1.2;
 }
 .container .search .search-right button {
-  width: 110rpx;
-  height: 70rpx;
+  width: 100%;
+  height: 66rpx;
   padding: 0;
-  color: #edf2f3;
-  background-color: #3ea4ec;
-  line-height: 70rpx;
+  color: white;
+  background-color: var(--primary-dark);
+  line-height: 66rpx;
   text-align: center;
+  font-size: var(--font-size-md);
+  border-radius: var(--border-radius-md);
+  border: none;
 }
 
+/* 优化浮动按钮 */
 .floating-button {
   position: fixed;
-  bottom: 70rpx;
-  right: 50rpx;
+  bottom: 120rpx;
+  right: 40rpx;
   width: 100rpx;
   height: 100rpx;
-  background-color: #0070f3;
-  color: #ffffff;
+  background-color: var(--primary-color);
+  color: white;
   font-size: 60rpx;
-  line-height: 95rpx;
+  line-height: 90rpx;
   border-radius: 50%;
   text-align: center;
-  box-shadow: 0 8rpx 16rpx rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6rpx 16rpx rgba(58, 123, 213, 0.3);
   z-index: 999;
+  transition: all 0.3s ease;
+}
+.floating-button:active {
+  transform: scale(0.9);
+  box-shadow: 0 2rpx 8rpx rgba(58, 123, 213, 0.2);
+}
+
+/* 添加空状态和加载状态样式 */
+.empty-state, .loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) 0;
+  color: var(--text-hint);
+  font-size: var(--font-size-md);
+}
+.empty-state image, .loading-state image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: var(--spacing-md);
 }
