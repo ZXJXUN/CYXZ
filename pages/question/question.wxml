@@ -94,17 +94,30 @@
     </block>
   </view>
   <view class="no_answer" hidden="{{answer_num != 0}}">
-    <image class="no_answer_image" src="../../images/无回答蓝.png" />
+    <view class="no_answer_icon">?</view>
     <view class="no_answer_text">暂无回答</view>
+    <view class="no_answer_tip">成为第一个回答这个问题的人吧！</view>
+    <view class="answer-btn" bindtap="to_write_answer">写回答</view>
   </view>
   <view class="less_answer" hidden="{{answer_num-(current_page-1)*size!=1}}">
     <view class="less_answer_text">没有更多回答了</view>
   </view>
   <view class="footer">
-    <wux-pagination defaultCurrent="1" total="{{page_num}}" bind:prev="onPrev" bind:next="onNext" id="pagination">
-      <view slot="prev">上一页</view>
-      <view slot="next">下一页</view>
-    </wux-pagination>
+    <view class="pagination-container">
+      <view class="pagination-item prev {{current_page <= 1 ? 'disabled' : ''}}" bindtap="onPrev">
+        <text class="arrow-icon">←</text>
+        <text>上一页</text>
+      </view>
+      <view class="pagination-info">
+        <text class="current-page">{{current_page}}</text>
+        <text class="page-separator">/</text>
+        <text class="total-pages">{{page_num || 1}}</text>
+      </view>
+      <view class="pagination-item next {{current_page >= page_num ? 'disabled' : ''}}" bindtap="onNext">
+        <text>下一页</text>
+        <text class="arrow-icon">→</text>
+      </view>
+    </view>
     <custom-tabbar></custom-tabbar>
   </view>
 
