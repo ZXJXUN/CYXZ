@@ -1,11 +1,37 @@
 /* pages/newAnswer/newAnswer.wxss */
+/* 定义全局变量，统一设计语言 */
+page {
+  --primary-color: #3a7bd5;
+  --primary-light: #e8f0fd;
+  --primary-dark: #2c5fa8;
+  --background-color: #f5f7fa;
+  --card-color: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-hint: #999999;
+  --border-radius-sm: 8rpx;
+  --border-radius-md: 16rpx;
+  --border-radius-lg: 24rpx;
+  --spacing-xs: 10rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  --font-size-xs: 24rpx;
+  --font-size-sm: 28rpx;
+  --font-size-md: 32rpx;
+  --font-size-lg: 36rpx;
+  --font-size-xl: 42rpx;
+  --box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
 .container {
-  height: 1500rpx;
+  height: 100%;
   padding: 0;
   width: 100%;
-  font-size: 14rpx;
-  background: #f0f4f3;
-  color: #000;
+  font-size: var(--font-size-md);
+  background: var(--background-color);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   justify-self: flex-start;
@@ -15,10 +41,10 @@
   display: flex;
   width: 100%;
   height: 75rpx;
-  background: #fff;
+  background: var(--card-color);
   align-items: center;
-  border: 3rpx solid #a7a3a3;
-  border-radius: 20rpx;
+  border: 3rpx solid rgba(167, 163, 163, 0.2);
+  border-radius: var(--border-radius-md);
   flex-direction: row;
   justify-content: space-between;
 }
@@ -26,71 +52,59 @@
 .back {
   width: 120rpx;
   height: 75rpx;
-  font-size: 33rpx;
-  color: #0f1010c5;
-  margin-left: 25rpx;
-  margin-top: 25rpx;
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  margin-left: var(--spacing-md);
+  margin-top: var(--spacing-md);
 }
 .push {
   width: 140rpx;
   height: 75rpx;
-  font-size: 33rpx;
-  color: #0f6be4c5;
-  margin-top: 25rpx;
-  margin-right: 25rpx;
+  font-size: var(--font-size-md);
+  color: var(--primary-color);
+  margin-top: var(--spacing-md);
+  margin-right: var(--spacing-md);
 }
 .question_tlitle {
   display: flex;
   width: 100%;
-  padding-bottom: 20rpx;
-  padding-top: 20rpx;
+  padding-bottom: var(--spacing-md);
+  padding-top: var(--spacing-md);
   height: auto;
   overflow: visible;
-  background: #fff;
+  background: var(--card-color);
   align-items: center;
   box-sizing: border-box;
   flex-direction: row;
-  border-bottom: 1rpx solid #ccc;
-  font-size: 40rpx;
-  border-bottom: 1rpx solid #697171;
+  border-bottom: 1rpx solid rgba(105, 113, 113, 0.2);
+  font-size: var(--font-size-lg);
   text-align: left;
-  padding-left: 20rpx;
-  line-height: 45rpx;
-
+  padding-left: var(--spacing-md);
+  line-height: 1.4;
   font-weight: bold;
+  margin-bottom: var(--spacing-sm);
 }
 
 .answer_content textarea {
-  /* font-size: 30rpx;
-  width: 100%;
-  height: 400rpx;
-  padding: 20rpx;
-  box-sizing: border-box;
-  border: 1rpx solid #ccc;
-  border-radius: 20rpx;
- 
-  margin-bottom: 20rpx; */
-  background: #fff;
-  border: 2px solid #bdc3c7;
-  color: #34495e;
-  font-family: "Lato", Helvetica, Arial, sans-serif;
-  font-size: 40rpx;
+  background: var(--card-color);
+  border: 1px solid rgba(189, 195, 199, 0.5);
+  color: var(--text-primary);
+  font-size: var(--font-size-md);
   line-height: 1.467;
-  padding: 8px 12px;
+  padding: var(--spacing-md);
   width: 100%;
   height: 400rpx;
-  border-radius: 6px;
-  box-shadow: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
 }
 .answer_else {
   width: 100%;
   height: 100rpx;
-  background: #fff;
+  background: var(--card-color);
   align-items: center;
   box-sizing: border-box;
-  border-bottom: 1rpx solid #ccc;
-  font-size: 40rpx;
-  border-bottom: 1rpx solid #697171;
+  border-bottom: 1rpx solid rgba(105, 113, 113, 0.2);
+  font-size: var(--font-size-md);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -99,24 +113,22 @@
 .upload_image {
   width: 120rpx;
   height: 100rpx;
-  background: #fff;
+  background: var(--card-color);
   align-items: center;
   box-sizing: border-box;
-  border-bottom: 1rpx solid #ccc;
-  font-size: 30rpx;
-  border-bottom: 1rpx solid #697171;
+  border-bottom: 1rpx solid rgba(105, 113, 113, 0.2);
+  font-size: var(--font-size-sm);
   display: flex;
   flex-direction: row;
 }
 .upload_file {
   width: 250rpx;
   height: 100rpx;
-  background: #fff;
+  background: var(--card-color);
   align-items: center;
   box-sizing: border-box;
-  border-bottom: 1rpx solid #ccc;
-  font-size: 30rpx;
-  border-bottom: 1rpx solid #697171;
+  border-bottom: 1rpx solid rgba(105, 113, 113, 0.2);
+  font-size: var(--font-size-sm);
   display: flex;
   padding: 0 100rpx;
 }
@@ -128,8 +140,8 @@
   justify-content: flex-end;
 }
 .choose_upload_item {
-  margin-left: 38rpx;
-  margin-right: 20rpx;
+  margin-left: var(--spacing-lg);
+  margin-right: var(--spacing-md);
   position: relative;
   width: 100rpx;
   display: flex;
@@ -138,6 +150,7 @@
 .choose_upload_view .choose_upload_img {
   width: 100rpx;
   height: 100rpx;
+  border-radius: var(--border-radius-sm);
 }
 .choose_upload_view .remove_img_icon {
   padding: 4rpx;
@@ -149,11 +162,12 @@
   border-radius: 50%;
 }
 .other_upload {
-  margin-left: 15rpx;
+  margin-left: var(--spacing-sm);
   width: 80rpx;
 }
 .placeholder_class {
-  font-size: 30rpx;
+  font-size: var(--font-size-md);
+  color: var(--text-hint);
 }
 .footer {
   position: fixed;
@@ -161,15 +175,16 @@
   width: 100%;
   height: 165rpx;
   padding-bottom: 45rpx;
-  background: #fff;
+  background: var(--card-color);
   align-items: center;
   box-sizing: border-box;
-  font-size: 40rpx;
+  font-size: var(--font-size-md);
   text-align: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 20rpx;
+  padding: 0 var(--spacing-md);
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
 }
 
 .save {
@@ -183,8 +198,8 @@
   display: flex;
   width: 60rpx;
   height: 60rpx;
-  border-radius: 12rpx;
-  background: #ebf0f3;
+  border-radius: var(--border-radius-sm);
+  background: var(--background-color);
 }
 .image_save {
   margin: auto;
@@ -192,17 +207,22 @@
   width: 45rpx;
 }
 .save_text {
-  font-size: 25rpx;
-  color: #697171;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
 }
 .submit {
   flex: 3;
-  background: #0f6be4c5;
+  background: var(--primary-color);
   height: 70rpx;
   line-height: 70rpx;
   color: #fff;
-  border-radius: 25px;
-  box-shadow: none;
+  border-radius: 35rpx;
+  box-shadow: 0 4rpx 8rpx rgba(58, 123, 213, 0.3);
+  transition: all 0.3s ease;
+}
+.submit:active {
+  transform: scale(0.98);
+  box-shadow: 0 2rpx 4rpx rgba(58, 123, 213, 0.2);
 }
 .clear_content {
   flex: 1;
@@ -215,11 +235,15 @@
 .clear_image_view {
   width: 60rpx;
   height: 60rpx;
-  border-radius: 12rpx;
-  background: #ebf0f3;
+  border-radius: var(--border-radius-sm);
+  background: var(--background-color);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease;
+}
+.clear_image_view:active {
+  background-color: rgba(235, 240, 243, 0.7);
 }
 .image_clear {
   height: 50rpx;
@@ -230,9 +254,46 @@
   line-height: 50rpx;
   text-align: center;
   margin: auto;
-  font-size: 24rpx;
-  color: #697171;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
 }
 .question_title {
   flex: 8;
+  font-size: var(--font-size-lg);
+  line-height: 1.4;
+  color: var(--text-primary);
+  padding-right: var(--spacing-md);
+  /* 限制标题最多显示2行 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 上传照片区域样式 */
+.upload-section {
+  padding: var(--spacing-md);
+  background-color: var(--card-color);
+  margin-top: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow);
+}
+
+.upload-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: var(--spacing-xs);
+}
+
+.upload-button text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
 }

@@ -15,11 +15,16 @@
         placeholder="请输入回答内容" disableed="false" bind:clear="onClear" id="ans_content" />
     </wux-cell>
   </wux-cell-group>
-  <wux-upload listType="picture-card" max="9" count="9" url="{{uploadUrl}}" bind:change="onChange"
-    bind:success="onSuccess" bind:fail="onFail" bind:complete="onComplete" bind:preview="onPreview"
-    bind:progress="onProgress" header="{{ header }}" progress="true" id="images_upload">
-    <text style="font-size: 30rpx">上传照片</text>
-  </wux-upload>
+  <view class="upload-section">
+    <wux-upload listType="picture-card" max="9" count="9" url="{{uploadUrl}}" bind:change="onChange"
+      bind:success="onSuccess" bind:fail="onFail" bind:complete="onComplete" bind:preview="onPreview"
+      bind:progress="onProgress" header="{{ header }}" progress="true" id="images_upload">
+      <view class="upload-button">
+        <image src="../../images/照片.png" class="upload-icon"></image>
+        <text>上传照片</text>
+      </view>
+    </wux-upload>
+  </view>
   <view class="footer">
     <view class="save" bindtap="saveContent">
       <view class="image_save_view">
