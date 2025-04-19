@@ -6,7 +6,7 @@ Page({
     showPassword: false,
     captchaTempFile: '',
     cookie: '',
-    captcha:''
+    captcha: ''
   },
 
   // 监听账号输入框的输入事件
@@ -33,7 +33,7 @@ Page({
   // 切换密码显示状态（显示/隐藏）
   toggleShowPassword: function () {
     this.setData({
-      showPassword:!this.data.showPassword
+      showPassword: !this.data.showPassword
     });
   },
 
@@ -63,9 +63,13 @@ Page({
             setTimeout(() => {
               wx.navigateBack();
             }, 500);
-            wx.setStorageSync('token', res.data.data.cookie);
-            wx.setStorageSync('name', this.data.account);
-            wx.setStorageSync('isLoggedIn', true);
+            try{
+              wx.setStorageSync('token', res.data.data.token);
+              wx.setStorageSync('name', this.data.account);
+              wx.setStorageSync('isLoggedIn', true);
+            }catch(e){
+              console.log("set localstorage fail when login",e);
+            }
             // 设置token有效期为30天，将30天换算成秒数
             var expiresInSeconds = 30 * 24 * 60 * 60;
 
