@@ -67,6 +67,10 @@
               <view class="time">
                 <a>{{ item.time }}</a>
               </view>
+              <view class="show-btn" data-index="{{ index }}" bindtap="show">
+                <image class="show-btn-icon" src="{{ item.show_icon }}" />
+                <text class="show-btn-text">{{ item.is_show ? '收起' : '展开' }}</text>
+              </view>
             </view>
           </view>
         </view>
@@ -86,7 +90,7 @@
             <view class="show-content-noshow"  data-index="{{ index }}" bindtap="show">
               <image class="show-content-noshow-icon" src="{{ item.show_icon }}" 
                 />
-              <view class="show-content-noshow-text">收起</view>
+              <view class="show-content-noshow-text">{{ item.is_show ? '收起' : '展开' }}</view>
             </view>
           </view>
         </view>

@@ -826,3 +826,23 @@ page {
 .hidden {
   display: none;
 }
+
+/* 展开按钮样式 */
+.show-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  padding: 5rpx 10rpx;
+  color: #0068b7;
+  font-size: 28rpx;
+}
+
+.show-btn-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 5rpx;
+}
+
+.show-btn-text {
+  font-size: 28rpx;
+}
