@@ -423,6 +423,10 @@ Page({
     });
   },
   likeQuestion() {
+    wx.showToast({
+      title: '功能未实现',
+      icon:'none'
+    })
     // 没写好
     return
     var that = this;
