@@ -6,7 +6,7 @@ var needRefresh = false;
 Page({
   data: {
     // token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
-    // username: "ab",
+    username: "ab",
     //token: "",
     //username: "",
     answerList: [],
@@ -119,10 +119,10 @@ Page({
     //     duration: 3000,
     //   });
     // } else {
-    // this.setData({
-    //   username: wx.getStorageSync("name"),
-    //   token: wx.getStorageSync("token"),
-    // });
+    // 设置username负责看是不是自己帖子即可
+    this.setData({
+      username: wx.getStorageSync("name"),
+    });
     // }
 
     // 将needRefresh变量挂载到页面实例上，方便外部访问
@@ -131,15 +131,15 @@ Page({
     this.getData();
 
     // 添加页面点击事件监听
-    wx.createSelectorQuery()
-      .select('.container')
-      .boundingClientRect()
-      .exec((res) => {
-        if (res && res[0]) {
-          const container = res[0];
-          container.addEventListener('tap', this.onTapPage);
-        }
-      });
+    // wx.createSelectorQuery()
+    //   .select('.container')
+    //   .boundingClientRect()
+    //   .exec((res) => {
+    //     if (res && res[0]) {
+    //       const container = res[0];
+    //       container.addEventListener('tap', this.onTapPage);
+    //     }
+    //   });
   },
   getData: function () {
     // console.log(this.data.question_id);
@@ -291,7 +291,7 @@ Page({
           item.comment = 0;
           item.is_like = false;
           item.imageContainerRight = -800;
-          console.log(that.data.username);
+          // console.log(that.data.username);
           if (that.data.username == item.name) {
             item.is_delete = false;
             item.is_modify = false;
@@ -406,8 +406,7 @@ Page({
   //   });
   // }，
   // 展开相关的
-  show(e) {
-    // console.log("show");
+  show: function (e) {
     const index = e.currentTarget.dataset.index;
     const nowanswerList = this.data.answerList;
     // console.log(index);
@@ -424,6 +423,8 @@ Page({
     });
   },
   likeQuestion() {
+    // 没写好
+    return
     var that = this;
     var questionData = this.data.question;
 
@@ -454,10 +455,8 @@ Page({
     wx.request({
       url: app.globalData.backend + "/api/answerly/v1/question/like",
       method: "POST",
-      header: {
-        "content-type": "application/json",
-        ...app.getRequestHeader()
-      },
+
+      header: app.getRequestHeader(),
       data: {
         id: this.data.question_id,
         entityUserId: this.data.question.authorUserId
@@ -514,6 +513,8 @@ Page({
     });
   },
   collect_answer(e) {
+    // 目前没用到
+    return
     console.log("collect_answer");
     //校验是否已经登录
     if (wx.getStorageSync('isLoggedIn') == true) {
@@ -546,6 +547,9 @@ Page({
     }
   },
   like_answer(e) {
+    
+    // 目前没用到
+    return
     // TODO: 后端实现有问题，回答点赞功能暂时不可用，目前只是前端模拟效果
     //校验是否已经登录
     if (wx.getStorageSync('isLoggedIn') == true) {
@@ -575,11 +579,8 @@ Page({
           // data: {
           //   id: like_id,
           // },
-          header: {
-            "content-type": "application/json",
-            token: this.data.token,
-            username: this.data.username,
-          },
+
+          header: app.getRequestHeader(),
           success: function (res) {
             console.log(res);
             console.log("点赞成功");
@@ -679,11 +680,8 @@ Page({
           size: this.data.size,
           current: this.data.current_page,
         },
-        header: {
-          "content-type": "application/json",
-          token: this.data.token,
-          username: this.data.username,
-        },
+
+        header: app.getRequestHeader(),
         success: function (res) {
           console.log("success");
           console.log(res.data);
@@ -807,11 +805,8 @@ Page({
         if (res.confirm) {
           wx.request({
             url: delete_url,
-            header: {
-              username: that.data.username,
-              token: that.data.token,
-              "content-type": "application/json",
-            },
+
+            header: app.getRequestHeader(),
             method: "DELETE",
             data: {
               id: that.data.answerList[index].id,
@@ -858,11 +853,8 @@ Page({
           size: this.data.size,
           current: this.data.current_page + 1,
         },
-        header: {
-          "content-type": "application/json",
-          token: this.data.token,
-          username: this.data.username,
-        },
+
+        header: app.getRequestHeader(),
         success: function (res) {
           var temp = res.data.data.records;
           var tempimages = temp.map((item) => {
@@ -987,15 +979,17 @@ Page({
       answerList: answerList
     });
   },
-
+  // 不知道在干嘛，应该用catchtap即可
   // 添加阻止事件冒泡的方法
-  stopPropagation() {
-    // 阻止冒泡，防止点击菜单时触发外部的点击事件
-    return;
-  },
+  // stopPropagation() {
+  // 阻止冒泡，防止点击菜单时触发外部的点击事件
+  // return;
+  // },
 
   // 添加点击页面任意位置关闭菜单的方法
-  onTapPage() {
+  onTapPage(e) {
+    console.log('onTapPage');
+    // console.log(e);
     const answerList = this.data.answerList;
     let needUpdate = false;
 
@@ -1012,19 +1006,19 @@ Page({
       });
     }
   },
-
-  onUnload: function () {
-    // 页面卸载时移除事件监听
-    wx.createSelectorQuery()
-      .select('.container')
-      .boundingClientRect()
-      .exec((res) => {
-        if (res && res[0]) {
-          const container = res[0];
-          container.removeEventListener('tap', this.onTapPage);
-        }
-      });
-  },
+  // 这个改成非冒泡即可
+  // onUnload: function () {
+  //   // 页面卸载时移除事件监听
+  //   wx.createSelectorQuery()
+  //     .select('.container')
+  //     .boundingClientRect()
+  //     .exec((res) => {
+  //       if (res && res[0]) {
+  //         const container = res[0];
+  //         container.removeEventListener('tap', this.onTapPage);
+  //       }
+  //     });
+  // },
   // 设置需要刷新的标志
   setNeedRefresh: function () {
     console.log("设置问题页面需要刷新标志");

@@ -1,14 +1,14 @@
 <!--question.wxml-->
 <!-- 这个好像不是滚动视图 -->
 <!-- <scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5"  bindscrolltolower="lower" scroll-into-view="{{ toView }}" scroll-top="{{ scrollTop }}"> -->
-  <view class="container">
+  <view class="container" bindtap="onTapPage">
   <view class="floating-button" bindtap="to_write_answer">+</view>
   <view class="question-wrp">
     <view class="question-item">
       <view class="que-title"> {{ question.title }} </view>
       <view class="que-content">{{ question.content }} </view>
       <view class="que-image-container {{question.images.length === 1 ? 'single-image' : ''}}">
-        <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item">
+        <block wx:for="{{ question.images }}" wx:for-index="index" wx:for-item="item" wx:key="self">
           <view class="que-image-item" bindtap="preview_que_Image" data-index="{{ index }}">
             <image class="que-image" src="{{ item }}" mode="aspectFill" />
           </view>
@@ -25,7 +25,7 @@
     </view>
   </view>
   <view class="answer-feed">
-    <block wx:for="{{ answerList }}" wx:if="{{index>=(current_page-1)*size&&index<current_page*size}}"
+    <block wx:for="{{ answerList }}" wx:key="id" wx:if="{{index>=(current_page-1)*size&&index<current_page*size}}"
       wx:for-index="index" wx:for-item="item">
       <view class="feed-item">
         <view class="feed-source">
@@ -36,7 +36,7 @@
             <text class="username">{{item.name}}</text>
           </a>
           <view class="action-menu-wrapper">
-            <view class="action-menu-icon" bindtap="toggleActionMenu" data-index="{{ index }}">
+            <view class="action-menu-icon" catchtap="toggleActionMenu" data-index="{{ index }}">
               <view class="dot-container">
                 <view class="dot"></view>
                 <view class="dot"></view>
@@ -80,7 +80,7 @@
             {{ item.content }}
           </text>
           <view class="show-content-image">
-            <block wx:for="{{item.images}}" wx:for-index="i" wx:for-item="item_image">
+            <block wx:for="{{item.images}}" wx:for-index="i" wx:for-item="item_image" wx:key="self">
               <view class="show-content-image-item" bindtap="preview_answer_Image" data-index="{{ index }}"
                 data-i="{{ i }}">
                 <image class="que-image" src="{{item_image}}" mode="aspectFill" />

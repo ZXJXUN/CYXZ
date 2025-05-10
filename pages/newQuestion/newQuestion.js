@@ -67,6 +67,7 @@ Page({
 
   // （草稿功能，暂不启用）
   loadDraft: function (options) {
+    return
     if (Object.keys(options).length !== 0) {
       const draft = JSON.parse(options.draft);
       this.setData({

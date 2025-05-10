@@ -30,6 +30,7 @@ page {
 }
 
 .answer-feed {
+  width: 100%;
   padding: 0;
   padding-bottom: 20rpx;
   font-size: 14rpx;
@@ -37,6 +38,7 @@ page {
   color: var(--text-primary);
 }
 .question-wrp {
+  width: 100%;
   margin: var(--spacing-md) var(--spacing-md) 0;
   border-radius: var(--border-radius-lg);
   overflow: hidden;
