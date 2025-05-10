@@ -181,10 +181,12 @@ page {
   padding: var(--spacing-xl) 0;
   color: var(--text-hint);
   font-size: var(--font-size-md);
-  min-height: 300rpx; /* 确保内容少时也有足够高度触发滚动 */
+  /* 确保内容少时也有足够高度触发滚动 */
+  min-height: 300rpx; 
 }
 .empty-state image, .loading-state image {
-  width: 200rpx;
-  height: 200rpx;
+  /* 保持长宽比 */
+  /* width: 200rpx; */
+  height: 250rpx;
   margin-bottom: var(--spacing-md);
 }

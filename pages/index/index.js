@@ -14,6 +14,10 @@ Page({
       },
       failure: (err) => {
         console.log(err);
+        wx.showToast({
+          title: '请求失败',
+          icon:'error'
+        })
       },
     });
   },

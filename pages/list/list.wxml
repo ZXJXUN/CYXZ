@@ -56,7 +56,7 @@
   
   <!-- 空状态显示 -->
   <view class="empty-state" wx:if="{{!feed || feed.length === 0}}">
-    <image src="../../images/无回答蓝.png"></image>
+    <image src="../../images/noAnswerBlue.png"  mode="aspectFit"></image>
     <view>暂无问题，快去提问吧</view>
   </view>
   

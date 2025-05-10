@@ -7,8 +7,8 @@ Page({
   data: {
     // 默认feed数据，用于在未获取到后端数据时占位
     feed: [{
-      title: "样例问题标题",
-      content: "样例问题内容",
+      title: "当你看到这个时",
+      content: "表示还没加载完成",
       good_num: 0,
       comment_num: 0,
     }, ],
