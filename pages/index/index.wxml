@@ -1,11 +1,12 @@
 <view class="container">
-  <!-- 图片暂时没有 -->
-  <!-- <image src="https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/12/05/be199e26-a45f-4207-a652-c0bac5473ee8.jpg" mode="widthFix" class="backgroud"/> -->
+  <image src="../../images/logo.png" mode="aspectFit" class=" logo"/>
   <!-- 科目图标列表 -->
   <view class="grid">
     <view class="grid-item" wx:key="id" wx:for="{{subjects}}" wx:for-item="subject" bind:tap="onNavigate" data-subject="{{subject.id}}">
       <image class="grid-item-image" src="{{'https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/'+subject.image}}" mode="aspectFill"></image>
     </view>
   </view>
+  <!-- 给tarbbar的空格 -->
+  <view class="tarbbar-blank"></view>
 </view>
 <custom-tabbar></custom-tabbar>
