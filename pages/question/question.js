@@ -5,8 +5,8 @@ var needRefresh = false;
 
 Page({
   data: {
-    token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
-    username: "ab",
+    // token: "29b04146-b2de-4733-b0f5-fba06f7b45fe",
+    // username: "ab",
     //token: "",
     //username: "",
     answerList: [],
@@ -27,19 +27,22 @@ Page({
     is_less_answer: 0, //是否还有更多回答
     height: 0,
   },
+  // 没用到
   //事件处理函数
-  publishAnswer: function () {
-    wx.navigateTo({
-      url: "../newAnswer/newAnswer",
-    });
-  },
-  bindItemTap: function (e) {
-    // 跳转到回答页面,传入回答id
-    wx.navigateTo({
-      url: "../answer/answer",
-    });
-  },
+  // publishAnswer: function () {
+  //   wx.navigateTo({
+  //     url: "../newAnswer/newAnswer",
+  //   });
+  // },
+  // 没用到
+  // bindItemTap: function (e) {
+  //   // 跳转到回答页面,传入回答id
+  //   wx.navigateTo({
+  //     url: "../answer/answer",
+  //   });
+  // },
   to_write_answer: function () {
+    // 目前只传了id和题目，有时间改成加上内容
     wx.setStorageSync("NewAnswer_question_id", this.data.question_id);
     wx.setStorageSync("NewAnswer_question_title", this.data.question.title);
     // wx.navigateTo({
@@ -50,13 +53,13 @@ Page({
     // });
     //以下是校验token部分，检验成功跳转至writeanswer界面
     if (wx.getStorageSync('isLoggedIn')) {
-      console.log("检验成功");
+      // console.log("检验成功");
       wx.showToast({
         title: "已登录",
         icon: "success",
       });
       setTimeout(() => {
-        console.log("Navigating to new page...");
+        // console.log("Navigating to new page...");
         wx.navigateTo({
           url: "../newAnswer/newAnswer", //验证成功至新问题界面
         });
@@ -66,21 +69,21 @@ Page({
         title: "提问题请先登录哦~",
         icon: "none",
       });
-      console.log(app.globalData.name, app.globalData.token);
-      console.log("未登录");
+      // console.log(app.globalData.name, app.globalData.token);
+      // console.log("未登录");
       setTimeout(() => {
-        console.log("Navigating to login page...");
+        // console.log("Navigating to login page...");
         wx.navigateTo({
           url: "../login/login",
         });
       }, 500);
     }
   },
-  to_ask_answer: function () {
-    wx.navigateTo({
-      url: "../newAnswer/newAnswer",
-    });
-  },
+  // to_ask_answer: function () {
+  //   wx.navigateTo({
+  //     url: "../newAnswer/newAnswer",
+  //   });
+  // },
   onLoad: function (options) {
     // console.log("onLoad");
     // console.log("传参测试");
@@ -91,40 +94,42 @@ Page({
     this.setData({
       question_id: qu_id,
     });
-    var globalData = getApp().globalData;
+
+    // 没有必要，没有token也可以请求数据
+    // var globalData = getApp().globalData;
     // console.log(globalData);
     // console.log("name: ");
     // console.log(wx.getStorageSync("name"));
     // console.log("token: ");
     // console.log(wx.getStorageSync("token"));
-    var tempname = wx.getStorageSync("name");
-    var temptoken = wx.getStorageSync("token");
-    if (
-      app.globalData.isLoggedIn &&
-      (tempname == "" ||
-        tempname == null ||
-        tempname == undefined ||
-        temptoken.length == 0 ||
-        temptoken == null ||
-        temptoken == undefined)
-    ) {
-      wx.showToast({
-        title: "获取登录信息错误,使用默认账户ab进行测试",
-        icon: "none",
-        duration: 3000,
-      });
-    } else {
-      this.setData({
-        username: wx.getStorageSync("name"),
-        token: wx.getStorageSync("token"),
-      });
-    }
-    
+    // var tempname = wx.getStorageSync("name");
+    // var temptoken = wx.getStorageSync("token");
+    // if (
+    //   app.globalData.isLoggedIn &&
+    //   (tempname == "" ||
+    //     tempname == null ||
+    //     tempname == undefined ||
+    //     temptoken.length == 0 ||
+    //     temptoken == null ||
+    //     temptoken == undefined)
+    // ) {
+    //   wx.showToast({
+    //     title: "获取登录信息错误,使用默认账户ab进行测试",
+    //     icon: "none",
+    //     duration: 3000,
+    //   });
+    // } else {
+    // this.setData({
+    //   username: wx.getStorageSync("name"),
+    //   token: wx.getStorageSync("token"),
+    // });
+    // }
+
     // 将needRefresh变量挂载到页面实例上，方便外部访问
     this.needRefresh = needRefresh;
-    
+
     this.getData();
-    
+
     // 添加页面点击事件监听
     wx.createSelectorQuery()
       .select('.container')
@@ -137,40 +142,33 @@ Page({
       });
   },
   getData: function () {
-    console.log(this.data.question_id);
-    console.log(this.data.username);
-    console.log(this.data.token);
-    console.log(this.data.size);
-    console.log(this.data.current_page);
+    // console.log(this.data.question_id);
+    // console.log(this.data.username);
+    // console.log(this.data.token);
+    // console.log(this.data.size);
+    // console.log(this.data.current_page);
     var that = this;
     var data0 = {
-      title: "默认标题",
+      title: "当你看到这个时",
       images: [
-        "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/2024/11/28/8ec59bda-8ef3-47d9-b554-4da0e3f10c51.gif",
-        "../../images/源智答小程序.png",
-        "../../images/源智答小程序.png",
       ], //问题图片
       time: "2024-01-01 00:00:00", //问题发布时间
-      content: "默认问题内容",
+      content: "说明请求失败",
       collect: 0, //1为收藏，0为未收藏
       collect_icon: "../../images/收藏2.png",
     };
     let url =
-      app.globalData.backend+"/api/answerly/v1/question/" + this.data.question_id;
-    console.log("url");
-    console.log(url);
+      app.globalData.backend + "/api/answerly/v1/question/" + this.data.question_id;
+    // console.log("url");
+    // console.log(url);
     wx.request({
       url: url,
       method: "GET",
-      header: {
-        "content-type": "application/json",
-        token: this.data.token,
-        username: this.data.username,
-      },
+      header: app.getRequestHeader(),
       success: function (res) {
-        console.log("question get success");
-        console.log(res.data);
-        console.log(res);
+        // console.log("question get success");
+        // console.log(res.data);
+        // console.log(res);
         var tempquestion = {};
         tempquestion.title = res.data.data.title;
         tempquestion.images = res.data.data.images
@@ -178,7 +176,7 @@ Page({
           : [];
         for (var i = 0; i < tempquestion.images.length; i++) {
           tempquestion.images[i] =
-            "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" +
+            app.globalData.ossPrefix +
             tempquestion.images[i];
         }
         const inputTime = res.data.data.createTime;
@@ -190,22 +188,22 @@ Page({
         const minutes = String(date.getMinutes()).padStart(2, "0");
         const seconds = String(date.getSeconds()).padStart(2, "0");
         const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-        console.log(formattedTime);
+        // console.log(formattedTime);
 
         tempquestion.time = formattedTime;
         tempquestion.content = res.data.data.content;
         tempquestion.likeCount = res.data.data.likeCount || 0;
         tempquestion.is_liked = res.data.data.isLiked || false;
         tempquestion.authorUserId = res.data.data.userId;
-        console.log("tempquestion");
-        console.log(tempquestion);
+        // console.log("tempquestion");
+        // console.log(tempquestion);
         that.setData({
           question: tempquestion,
         });
       },
       fail: function (error) {
         console.log(error);
-        console.log("question get fail");
+        // console.log("question get fail");
         wx.showToast({
           title: "网络连接失败",
           icon: "none",
@@ -217,38 +215,34 @@ Page({
       },
     });
     wx.request({
-      url: app.globalData.backend+"/api/answerly/v1/comment/page",
+      url: app.globalData.backend + "/api/answerly/v1/comment/page",
       method: "GET",
       data: {
         id: this.data.question_id,
         size: this.data.size,
         current: this.data.current_page,
       },
-      header: {
-        "content-type": "application/json",
-        token: this.data.token,
-        username: this.data.username,
-      },
+      header: app.getRequestHeader(),
       success: function (res) {
-        console.log(res);
+        // console.log(res);
         var temp = res.data.data.records;
         var tempimages = temp.map((item) => {
           //将逗号分割的图片字符串，转化为图片数组
           return item.images.split(",");
         });
-        console.log("tempimages");
-        console.log(tempimages);
+        // console.log("tempimages");
+        // console.log(tempimages);
 
         tempimages = tempimages.map((item) => {
           //加上../../images/前缀
           return item.map((item) => {
             //没有前缀的图片加上前缀，有前缀的图片保持不变
             if (
-              item.indexOf("https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/") ==
-                -1 &&
+              item.indexOf(app.globalData.ossPrefix) ==
+              -1 &&
               item != ""
             ) {
-              return "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" + item;
+              return app.globalData.ossPrefix + item;
             } else if (item != "") {
               return item;
             }
@@ -257,7 +251,7 @@ Page({
 
         var tempanswerList = temp.map((item) => {
           if (item.avatar == null) {
-            item.avatar = "../../images/默认头像.png";
+            item.avatar = "../../images/defaultAvatar.png";
           }
           return {
             id: item.id,
@@ -268,12 +262,12 @@ Page({
 
             useful: item.useful,
             is_show: false,
-            show_icon: "../../images/收起.png",
+            show_icon: "../../images/close.png",
             collect: 0,
             showActionMenu: false, // 添加菜单显示状态属性，默认不显示
           };
         });
-        console.log(tempanswerList);
+        // console.log(tempanswerList);
         tempanswerList.forEach((item, index) => {
           const inputTime = temp[index].createTime;
           const date = new Date(inputTime);
@@ -284,7 +278,7 @@ Page({
           const minutes = String(date.getMinutes()).padStart(2, "0");
           const seconds = String(date.getSeconds()).padStart(2, "0");
           const formattedTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-          console.log(formattedTime);
+          // console.log(formattedTime);
 
           item.time = formattedTime;
 
@@ -307,12 +301,12 @@ Page({
             item.is_modify = true;
             item.more_class = "more2";
           }
-          
+
           // 初始化菜单显示状态
           item.showActionMenu = false;
         });
-        console.log(tempanswerList);
-        console.log(res.data.data.pages);
+        // console.log(tempanswerList);
+        // console.log(res.data.data.pages);
 
         that.setData({
           answerList: tempanswerList,
@@ -356,15 +350,17 @@ Page({
     //   })
     //   .exec();
   },
-  upper: function () {
-    wx.showNavigationBarLoading();
-    this.refresh();
-    console.log("upper");
-    setTimeout(function () {
-      wx.hideNavigationBarLoading();
-      wx.stopPullDownRefresh();
-    }, 2000);
-  },
+  // 这个不是滚动视图
+  // upper: function () {
+  //   wx.showNavigationBarLoading();
+  // 这个不是没了吗
+  // this.refresh();
+  //   console.log("upper");
+  //   setTimeout(function () {
+  //     wx.hideNavigationBarLoading();
+  //     wx.stopPullDownRefresh();
+  //   }, 2000);
+  // },
   // refresh: function () {
   //   wx.showToast({
   //     title: "刷新中",
@@ -409,17 +405,18 @@ Page({
   //     },
   //   });
   // }，
+  // 展开相关的
   show(e) {
-    console.log("show");
+    // console.log("show");
     const index = e.currentTarget.dataset.index;
     const nowanswerList = this.data.answerList;
-    console.log(index);
+    // console.log(index);
     nowanswerList[index].is_show = !nowanswerList[index].is_show;
-    console.log(nowanswerList[index]);
+    // console.log(nowanswerList[index]);
     if (nowanswerList[index].is_show == true) {
-      nowanswerList[index].show_icon = "../../images/展开.png";
+      nowanswerList[index].show_icon = "../../images/open.png";
     } else {
-      nowanswerList[index].show_icon = "../../images/收起.png";
+      nowanswerList[index].show_icon = "../../images/close.png";
     }
 
     this.setData({
@@ -429,10 +426,10 @@ Page({
   likeQuestion() {
     var that = this;
     var questionData = this.data.question;
-    
+
     // TODO: 后端实现有问题，提问者ID无法获取，点赞功能暂时不可用
     // 判断是否已登录
-    if (wx.getStorageSync('isLoggedIn')!=true) {
+    if (wx.getStorageSync('isLoggedIn') != true) {
       wx.showToast({
         title: "请先登录",
         icon: "none",
@@ -440,7 +437,7 @@ Page({
       });
       return;
     }
-    
+
     // 更新UI状态
     questionData.is_liked = !questionData.is_liked;
     if (questionData.is_liked) {
@@ -448,11 +445,11 @@ Page({
     } else {
       questionData.likeCount = Math.max(0, questionData.likeCount - 1);
     }
-    
+
     this.setData({
       question: questionData
     });
-    
+
     // 发送点赞请求到后端
     wx.request({
       url: app.globalData.backend + "/api/answerly/v1/question/like",
@@ -465,7 +462,7 @@ Page({
         id: this.data.question_id,
         entityUserId: this.data.question.authorUserId
       },
-      success: function(res) {
+      success: function (res) {
         console.log("点赞操作响应:", res.data);
         if (res.data.code !== "0") {
           // 如果请求失败，回滚UI状态
@@ -474,14 +471,14 @@ Page({
             icon: "none",
             duration: 1000
           });
-          
+
           questionData.is_liked = !questionData.is_liked;
           if (questionData.is_liked) {
             questionData.likeCount += 1;
           } else {
             questionData.likeCount = Math.max(0, questionData.likeCount - 1);
           }
-          
+
           that.setData({
             question: questionData
           });
@@ -494,7 +491,7 @@ Page({
           });
         }
       },
-      fail: function(err) {
+      fail: function (err) {
         console.error("点赞请求失败:", err);
         // 请求失败，回滚UI状态
         wx.showToast({
@@ -502,14 +499,14 @@ Page({
           icon: "none",
           duration: 1000
         });
-        
+
         questionData.is_liked = !questionData.is_liked;
         if (questionData.is_liked) {
           questionData.likeCount += 1;
         } else {
           questionData.likeCount = Math.max(0, questionData.likeCount - 1);
         }
-        
+
         that.setData({
           question: questionData
         });
@@ -519,7 +516,7 @@ Page({
   collect_answer(e) {
     console.log("collect_answer");
     //校验是否已经登录
-    if (wx.getStorageSync('isLoggedIn')==true) {
+    if (wx.getStorageSync('isLoggedIn') == true) {
       var index = e.currentTarget.dataset.index;
       var answer = this.data.answerList[index];
       answer.collect = !answer.collect;
@@ -551,7 +548,7 @@ Page({
   like_answer(e) {
     // TODO: 后端实现有问题，回答点赞功能暂时不可用，目前只是前端模拟效果
     //校验是否已经登录
-    if (wx.getStorageSync('isLoggedIn')==true) {
+    if (wx.getStorageSync('isLoggedIn') == true) {
       var index = e.currentTarget.dataset.index;
       var answer = this.data.answerList[index];
       answer.is_like = !answer.is_like;
@@ -571,7 +568,7 @@ Page({
         console.log(this.data.token);
         console.log(this.data.username);
         var like_url =
-          app.globalData.backend+"/api/answerly/v1/comment/like?id=" + like_id;
+          app.globalData.backend + "/api/answerly/v1/comment/like?id=" + like_id;
         wx.request({
           url: like_url,
           method: "POST",
@@ -675,7 +672,7 @@ Page({
     if (new_page > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: app.globalData.backend+"/api/answerly/v1/comment/page",
+        url: app.globalData.backend + "/api/answerly/v1/comment/page",
         method: "GET",
         data: {
           id: this.data.question_id,
@@ -708,11 +705,11 @@ Page({
               //为空的元素去除
               if (
                 item.indexOf(
-                  "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
+                  app.globalData.ossPrefix
                 ) == -1 &&
                 item != ""
               ) {
-                return "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" + item;
+                return app.globalData.ossPrefix + item;
               } else if (item != "") {
                 return item;
               }
@@ -723,7 +720,7 @@ Page({
           console.log(tempimages);
           var tempanswerList = temp.map((item) => {
             if (item.avatar == null) {
-              item.avatar = "../../images/默认头像.png";
+              item.avatar = "../../images/defaultAvatar.png";
             }
             return {
               id: item.id,
@@ -734,7 +731,7 @@ Page({
               like: item.likeCount,
               useful: item.useful,
               is_show: false,
-              show_icon: "../../images/收起.png",
+              show_icon: "../../images/close.png",
               collect: 0,
             };
           });
@@ -805,7 +802,7 @@ Page({
         console.log(that.data.username);
         console.log(that.data.token);
         var delete_url =
-          app.globalData.backend+"/api/answerly/v1/comment?id=" +
+          app.globalData.backend + "/api/answerly/v1/comment?id=" +
           that.data.answerList[index].id;
         if (res.confirm) {
           wx.request({
@@ -854,7 +851,7 @@ Page({
     if (this.data.current_page + 1 > this.data.load_max_page) {
       var that = this;
       wx.request({
-        url: app.globalData.backend+"/api/answerly/v1/comment/page",
+        url: app.globalData.backend + "/api/answerly/v1/comment/page",
         method: "GET",
         data: {
           id: this.data.question_id,
@@ -880,11 +877,11 @@ Page({
               //为空的元素去除
               if (
                 item.indexOf(
-                  "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/"
+                  app.globalData.ossPrefix
                 ) == -1 &&
                 item != ""
               ) {
-                return "https://yuanzhida-oss.oss-cn-beijing.aliyuncs.com/" + item;
+                return app.globalData.ossPrefix + item;
               } else if (item != "") {
                 return item;
               }
@@ -893,7 +890,7 @@ Page({
 
           var tempanswerList = temp.map((item) => {
             if (item.avatar == null) {
-              item.avatar = "../../images/默认头像.png";
+              item.avatar = "../../images/defaultAvatar.png";
             }
             return {
               id: item.id,
@@ -904,7 +901,7 @@ Page({
               like: item.likeCount,
               useful: item.useful,
               is_show: false,
-              show_icon: "../../images/收起.png",
+              show_icon: "../../images/close.png",
               collect: 0,
             };
           });
@@ -975,48 +972,48 @@ Page({
   toggleActionMenu(e) {
     const index = e.currentTarget.dataset.index;
     const answerList = this.data.answerList;
-    
+
     // 关闭其他可能打开的菜单
     answerList.forEach((item, idx) => {
       if (idx !== index && item.showActionMenu) {
         item.showActionMenu = false;
       }
     });
-    
+
     // 切换当前选中项的菜单显示状态
     answerList[index].showActionMenu = !answerList[index].showActionMenu;
-    
+
     this.setData({
       answerList: answerList
     });
   },
-  
+
   // 添加阻止事件冒泡的方法
   stopPropagation() {
     // 阻止冒泡，防止点击菜单时触发外部的点击事件
     return;
   },
-  
+
   // 添加点击页面任意位置关闭菜单的方法
   onTapPage() {
     const answerList = this.data.answerList;
     let needUpdate = false;
-    
+
     answerList.forEach(item => {
       if (item.showActionMenu) {
         item.showActionMenu = false;
         needUpdate = true;
       }
     });
-    
+
     if (needUpdate) {
       this.setData({
         answerList: answerList
       });
     }
   },
-  
-  onUnload: function() {
+
+  onUnload: function () {
     // 页面卸载时移除事件监听
     wx.createSelectorQuery()
       .select('.container')
@@ -1034,26 +1031,26 @@ Page({
     needRefresh = true;
     this.needRefresh = true; // 同时设置实例变量
   },
-  
+
   // 添加onShow方法，检查是否需要刷新
   onShow: function () {
     console.log("问题页面显示, needRefresh=", needRefresh, "this.needRefresh=", this.needRefresh, "is_post=", wx.getStorageSync("is_post"));
-    
+
     // 检查全局变量、实例变量或Storage中的发布标志
     if (needRefresh || this.needRefresh || wx.getStorageSync("is_post") === "true") {
       console.log("需要刷新问题数据");
-      
+
       // 清除Storage中的发布标志
       if (wx.getStorageSync("is_post") === "true") {
         wx.setStorageSync("is_post", false);
       }
-      
+
       // 延迟刷新，确保后端数据已更新
       setTimeout(() => {
         this.getData(); // 重新加载数据
         needRefresh = false; // 重置全局标志
         this.needRefresh = false; // 重置实例标志
-        
+
         // 刷新成功提示
         wx.showToast({
           title: '刷新成功',

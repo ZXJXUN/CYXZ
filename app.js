@@ -30,6 +30,7 @@ App({
     return {
       token: wx.getStorageSync("token"),
       username: wx.getStorageSync("name"),
+      "content-type": "application/json",
     };
   },
   //检查是否过期

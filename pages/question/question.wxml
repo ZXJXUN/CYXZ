@@ -1,6 +1,7 @@
 <!--question.wxml-->
-<scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5"
-  bindscrolltolower="lower" scroll-into-view="{{ toView }}" scroll-top="{{ scrollTop }}">
+<!-- 这个好像不是滚动视图 -->
+<!-- <scroll-view scroll-y="true" class="container" bindscrolltoupper="upper" upper-threshold="10" lower-threshold="5"  bindscrolltolower="lower" scroll-into-view="{{ toView }}" scroll-top="{{ scrollTop }}"> -->
+  <view class="container">
   <view class="floating-button" bindtap="to_write_answer">+</view>
   <view class="question-wrp">
     <view class="question-item">
@@ -124,5 +125,5 @@
     </view>
     <custom-tabbar></custom-tabbar>
   </view>
-
-</scroll-view>
+</view>
+<!-- </scroll-view> -->
