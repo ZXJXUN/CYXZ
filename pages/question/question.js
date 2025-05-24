@@ -18,6 +18,7 @@ Page({
       content: "",
       likeCount: 0, // 问题点赞数
       is_liked: false, // 当前用户是否点赞
+      authorUserId:0
     },
     current_page: 1,
     size: 5,
@@ -141,6 +142,7 @@ Page({
     //     }
     //   });
   },
+  // 题目详情
   getData: function () {
     // console.log(this.data.question_id);
     // console.log(this.data.username);
@@ -194,6 +196,7 @@ Page({
         tempquestion.content = res.data.data.content;
         tempquestion.likeCount = res.data.data.likeCount || 0;
         tempquestion.is_liked = res.data.data.isLiked || false;
+        // question 有 userid
         tempquestion.authorUserId = res.data.data.userId;
         // console.log("tempquestion");
         // console.log(tempquestion);
@@ -423,12 +426,12 @@ Page({
     });
   },
   likeQuestion() {
-    wx.showToast({
-      title: '功能未实现',
-      icon:'none'
-    })
+    // wx.showToast({
+    //   title: '功能未实现',
+    //   icon:'none'
+    // })
     // 没写好
-    return
+    // return
     var that = this;
     var questionData = this.data.question;
 
